@@ -16,6 +16,14 @@ import xwingImage from "figma:asset/681ee2140d8a3dfb23dc398515d8e9539fb56338.png
 import starFoxImage from "figma:asset/55baa85e8789d73e4e943d1a375f594add7941b3.png";
 import morseCodeImage from "figma:asset/df4077de47a65010f0db03b4bde4b1720336789e.png";
 
+// Adicione este bloco em src/types/figma-asset.d.ts ou src/vite-env.d.ts:
+/*
+declare module "figma:asset/*" {
+  const src: string;
+  export default src;
+}
+*/
+
 export default function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
