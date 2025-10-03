@@ -120,13 +120,16 @@
 }
 
 @layer base {
+  /* Removido @apply para evitar erro de compilação.
+     Adicione as classes Tailwind diretamente nos componentes React, por exemplo:
+     <div className="border-border outline-ring/50" />
+     <body className="bg-background text-foreground" />
+  */
   * {
-    @apply border-border outline-ring/50;
+    /* border-border e outline-ring/50 devem ser aplicados via className nos componentes */
   }
 
-  body {
-    @apply bg-background text-foreground;
-  }
+  /* bg-background e text-foreground devem ser aplicados via className nos componentes */
 }
 
 /**
