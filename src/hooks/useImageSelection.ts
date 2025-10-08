@@ -10,14 +10,13 @@ export interface SelectableImage {
 }
 
 export function useImageSelection(allowMultiple: boolean = false) {
-  // Corrigindo o tipo do useState
-  const [selectedImages, setSelectedImages] = useState([]);
+  const [selectedImages, setSelectedImages] = useState<string[]>([]);
 
   const toggleImage = useCallback((imageId: string) => {
-    setSelectedImages((prev: string[]): string[] => {
+    setSelectedImages(prev => {
       if (allowMultiple) {
         return prev.includes(imageId) 
-          ? prev.filter((id: string) => id !== imageId)
+          ? prev.filter(id => id !== imageId)
           : [...prev, imageId];
       } else {
         return prev.includes(imageId) ? [] : [imageId];
@@ -42,3 +41,4 @@ export function useImageSelection(allowMultiple: boolean = false) {
     hasSelection: selectedImages.length > 0
   };
 }
+

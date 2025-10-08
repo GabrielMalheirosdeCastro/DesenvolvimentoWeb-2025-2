@@ -21,6 +21,25 @@ function App() {
     console.log('Seleção atualizada:', { selectedIds, selectedImages });
   };
 
+  // Componente para renderizar cada imagem selecionada
+  const SelectedImageCard = ({ image }: { image: SelectableImage }) => (
+    <div className="flex items-center gap-3 p-3 bg-white rounded-lg shadow-sm">
+      <div className="w-16 h-16 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-md flex items-center justify-center text-white text-2xl">
+        {image.category === 'Combate' && '⚔️'}
+        {image.category === 'Caças Estelares' && '🚀'}
+        {image.category === 'Frotas Militares' && '🛸'}
+        {image.category === 'Comunicações' && '📡'}
+      </div>
+      <div>
+        <h4 className="font-medium text-gray-800">{image.title}</h4>
+        <p className="text-sm text-gray-600">{image.description}</p>
+        <span className="inline-block mt-1 px-2 py-1 bg-indigo-100 text-indigo-700 text-xs rounded">
+          {image.category}
+        </span>
+      </div>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
       <div className="max-w-4xl mx-auto space-y-8">
@@ -72,42 +91,9 @@ function App() {
                   Detalhes das Naves Selecionadas
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  interface SelectedImageCardProps {
-                    image: SelectableImage;
-                  }
-
-                  const SelectedImageCard: React.FC<SelectedImageCardProps> = ({ image }) => (
-                    <div key={image.id} className="flex items-center gap-3 p-3 bg-white rounded-lg shadow-sm">
-                      <div className="w-16 h-16 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-md flex items-center justify-center text-white text-2xl">
-                        {image.category === 'Combate' && '⚔️'}
-                        {image.category === 'Caças Estelares' && '🚀'}
-                        {image.category === 'Frotas Militares' && '🛸'}
-                        {image.category === 'Comunicações' && '📡'}
-                      </div>
-                      <div>
-                        <h4 className="font-medium text-gray-800">{image.title}</h4>
-                        <p className="text-sm text-gray-600">{image.description}</p>
-                        <span className="inline-block mt-1 px-2 py-1 bg-indigo-100 text-indigo-700 text-xs rounded">
-                          {image.category}
-                        </span>
-                      </div>
-                    </div>
-                  );
-
-                  interface SelectedImageListProps {
-                    selectedImageData: SelectableImage[];
-                  }
-
-                  const SelectedImageList: React.FC<SelectedImageListProps> = ({ selectedImageData }) => (
-                    <>
-                      {selectedImageData.map((image) => (
-                        <SelectedImageCard key={image.id} image={image} />
-                      ))}
-                    </>
-                  );
-
-                  // Uso no JSX:
-                  <SelectedImageList selectedImageData={selectedImageData} />
+                  {selectedImageData.map((image) => (
+                    <SelectedImageCard key={image.id} image={image} />
+                  ))}
                 </div>
               </div>
             )}

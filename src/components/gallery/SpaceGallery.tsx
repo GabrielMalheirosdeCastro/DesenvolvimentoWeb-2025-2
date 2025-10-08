@@ -1,6 +1,5 @@
 import React from 'react';
 import { useImageSelection, SelectableImage } from '../../hooks/useImageSelection';
-import { getCategoryIcon } from '../../data/spaceFleetData';
 
 interface SpaceGalleryProps {
   images: SelectableImage[];
@@ -127,7 +126,11 @@ export function SpaceGallery({
               {/* Badge da categoria */}
               {image.category && (
                 <div className="absolute top-3 left-3 bg-black bg-opacity-50 text-white px-2 py-1 rounded text-xs font-medium backdrop-blur-sm">
-                  {getCategoryIcon(image.category)} {image.category}
+                  {image.category === 'Combate' && '⚔️'} 
+                  {image.category === 'Caças Estelares' && '🚀'}
+                  {image.category === 'Frotas Militares' && '🛸'}
+                  {image.category === 'Comunicações' && '📡'}
+                  {' '}{image.category}
                 </div>
               )}
 
@@ -150,35 +153,6 @@ export function SpaceGallery({
           </div>
         ))}
       </div>
-
-      {/* Resumo da seleção */}
-      {hasSelection && (
-        <div className="mt-6 p-4 bg-indigo-50 border border-indigo-200 rounded-lg">
-          <h3 className="text-sm font-semibold text-indigo-800 mb-2">
-            Resumo da Seleção ({selectedCount} {selectedCount === 1 ? 'nave' : 'naves'})
-          </h3>
-          <div className="flex flex-wrap gap-2">
-            {selectedImageData.map((image) => (
-              <span 
-                key={image.id}
-                className="inline-flex items-center px-2 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full"
-              >
-                {image.category && getCategoryIcon(image.category)} {image.title}
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleImage(image.id);
-                  }}
-                  className="ml-1 hover:text-indigo-600"
-                  aria-label={`Remover ${image.title} da seleção`}
-                >
-                  ×
-                </button>
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   );
 }
