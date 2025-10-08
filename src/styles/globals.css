@@ -1,189 +1,189 @@
-/* Novas variáveis CSS para seleção de imagens - adicionadas ao :root existente */
+/* CSS Global Simplificado - Removendo complexidade desnecessária */
+
+/* Variáveis globais simplificadas */
 :root {
-  /* ...existing code... */
-
-  /* Adicionando novas variáveis para funcionalidade de seleção */
-  --image-border-radius: var(--radius);
-  --image-hover-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  --image-selected-shadow: 0 0 0 3px var(--primary);
-  --image-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --selection-indicator-size: 24px;
+  /* Cores principais simplificadas */
+  --primary-blue: #1e40af;
+  --secondary-blue: #3b82f6;
+  --light-blue: #dbeafe;
+  --white: #ffffff;
+  --gray-light: #f8fafc;
+  
+  /* Espacamentos simplificados */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  
+  /* Bordas e sombras simplificadas */
+  --radius: 12px;
+  --shadow-light: 0 2px 8px rgba(59, 130, 246, 0.1);
+  --shadow-medium: 0 4px 12px rgba(59, 130, 246, 0.15);
+  --shadow-strong: 0 8px 20px rgba(59, 130, 246, 0.2);
+  
+  /* Transições simplificadas */
+  --transition: all 0.3s ease;
 }
 
-.dark {
-  /* ...existing code... */
-
-  /* Ajustes para modo escuro das novas variáveis */
-  --image-hover-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+/* Reset e base simplificados */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-/* Novas classes utilitárias para seleção de imagens */
-@layer utilities {
-  .selectable-image {
-    cursor: pointer;
-    border-radius: var(--image-border-radius);
-    transition: var(--image-transition);
-    user-select: none;
-    position: relative;
-    overflow: hidden;
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-  }
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  color: var(--primary-blue);
+  background: linear-gradient(135deg, var(--white) 0%, var(--light-blue) 100%);
+  min-height: 100vh;
+}
 
-  .selectable-image:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--image-hover-shadow);
-  }
+/* Classes utilitárias simplificadas */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-lg);
+}
 
-  .selectable-image:focus-visible {
-    outline-color: var(--ring);
-  }
+.card {
+  background: var(--white);
+  border: 2px solid var(--secondary-blue);
+  border-radius: var(--radius);
+  padding: var(--space-md);
+  box-shadow: var(--shadow-medium);
+  transition: var(--transition);
+}
 
-  .selectable-image:active {
-    transform: translateY(-2px);
-  }
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-strong);
+}
 
-  .selectable-image.selected {
-    box-shadow: var(--image-selected-shadow);
-    transform: translateY(-2px);
-  }
+.grid {
+  display: grid;
+  gap: var(--space-md);
+}
 
-  .selectable-image::after {
-    content: '';
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    width: var(--selection-indicator-size);
-    height: var(--selection-indicator-size);
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.9);
-    opacity: 0;
-    transition: var(--image-transition);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(4px);
-  }
+.grid-auto {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
 
-  .selectable-image.selected::after {
-    opacity: 1;
-    background: var(--primary);
-  }
+.flex {
+  display: flex;
+}
 
-  .selectable-image.selected::before {
-    content: '✓';
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    color: var(--primary-foreground);
-    font-size: 12px;
-    font-weight: bold;
-    z-index: 1;
-  }
+.flex-center {
+  align-items: center;
+  justify-content: center;
+}
 
-  /* Galeria responsiva usando grid */
-  .space-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    width: 100%;
-  }
+.flex-between {
+  align-items: center;
+  justify-content: space-between;
+}
 
-  .space-gallery-item {
-    position: relative;
-    border-radius: 0.75rem;
-    overflow: hidden;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-    aspect-ratio: 16 / 10;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  }
+.text-center {
+  text-align: center;
+}
 
-  .space-gallery-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-  }
+.btn {
+  padding: var(--space-xs) var(--space-sm);
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
 
-  .space-gallery-item:focus {
-    outline: 2px solid #3b82f6;
-    outline-offset: 2px;
-  }
+.btn-primary {
+  background: var(--secondary-blue);
+  color: var(--white);
+}
 
-  .space-gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-  }
+.btn-primary:hover {
+  background: var(--primary-blue);
+  transform: translateY(-1px);
+}
 
-  .space-gallery-item:hover img {
-    transform: scale(1.05);
-  }
+.btn-outline {
+  background: transparent;
+  color: var(--secondary-blue);
+  border: 2px solid var(--secondary-blue);
+}
 
-  /* Overlay de descrição */
-  .space-gallery-description {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-    color: white;
-    padding: 1.5rem;
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
-  }
+.btn-outline:hover {
+  background: var(--secondary-blue);
+  color: var(--white);
+}
 
-  .space-gallery-item:hover .space-gallery-description {
-    transform: translateY(0);
-  }
+/* Classes para galeria simplificadas */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-md);
+}
 
-  /* Estados de seleção */
-  .selectable-image {
-    position: relative;
-  }
+.gallery-item {
+  background: var(--white);
+  border: 2px solid var(--light-blue);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: var(--transition);
+  cursor: pointer;
+}
 
-  .selectable-image::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 3px solid transparent;
-    border-radius: inherit;
-    transition: all 0.2s ease;
-    z-index: 10;
-    pointer-events: none;
-  }
+.gallery-item:hover {
+  border-color: var(--secondary-blue);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-strong);
+}
 
-  .selectable-image.selected::before {
-    border-color: #3b82f6;
-    background-color: rgba(59, 130, 246, 0.1);
-  }
+.gallery-item.selected {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.3);
+}
 
-  .selectable-image.selected::after {
-    content: '✓';
-    position: absolute;
-    top: 0.75rem;
-    right: 0.75rem;
-    width: 2rem;
-    height: 2rem;
-    background-color: #3b82f6;
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    z-index: 20;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
+.gallery-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
 
-  .selectable-image:hover::before {
-    border-color: rgba(59, 130, 246, 0.5);
-    background-color: rgba(59, 130, 246, 0.05);
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+/* Responsividade simplificada */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--space-sm);
   }
+  
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+}
+
+/* Acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Estados de foco */
+.gallery-item:focus,
+.btn:focus {
+  outline: 2px solid var(--secondary-blue);
+  outline-offset: 2px;
+}
+  
 
   /* Responsividade aprimorada */
   @media (max-width: 768px) {
@@ -336,4 +336,4 @@
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
   }
-}
+
