@@ -24,6 +24,10 @@
   
   /* Transições simplificadas */
   --transition: all 0.3s ease;
+
+  /* Link do Portfólio - Alterável via CSS */
+  --portfolio-link: "https://seu-portfolio.vercel.app";
+  --portfolio-text: "🌐 Portfólio Online";
 }
 
 /* Reset e base simplificados */
@@ -336,4 +340,51 @@ body {
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
   }
+
+/* Componente para exibir link do portfólio dinamicamente via CSS */
+.portfolio-link-display::before {
+  content: var(--portfolio-text) ": " var(--portfolio-link);
+  display: block;
+  padding: 0.75rem 1rem;
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border-radius: 0.5rem;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.875rem;
+  text-align: center;
+  margin: 1rem 0;
+  border: 2px solid hsl(var(--border));
+  transition: all 0.3s ease;
+}
+
+.portfolio-link-display:hover::before {
+  background: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.portfolio-link-display {
+  cursor: pointer;
+  user-select: text;
+}
+
+/* Link clicável real (invisível, mas funcional) */
+.portfolio-link-clickable {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.portfolio-link-clickable::after {
+  content: var(--portfolio-link);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  pointer-events: auto;
+}
 
