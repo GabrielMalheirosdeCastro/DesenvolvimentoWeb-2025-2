@@ -25,7 +25,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
-          ui: ['lucide-react']
+          ui: ['@radix-ui/react-slot', 'lucide-react']
         }
       }
     }
@@ -38,5 +38,6 @@ export default defineConfig({
   preview: {
     port: 3000,
     host: true
-  }
+  },
+  base: process.env.NODE_ENV === 'production' ? '/DesenvolvimentoWeb-2025-2/' : '/',
 });
