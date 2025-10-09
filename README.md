@@ -8,50 +8,100 @@ Este é um projeto de portfólio pessoal construído com React + Vite + TypeScri
 
 O link do seu portfólio online é **controlado dinamicamente via CSS** usando propriedades personalizadas. Para alterar o link:
 
-### Como Alterar o Link via CSS
+### 🎯 Como Alterar o Link via CSS
 
-**Abra o arquivo:** `src/styles/globals.css`
+**1. Abra o arquivo:** `src/styles/globals.css`
 
-**Encontre a seção:**
+**2. Encontre a seção:**
 ```css
 :root {
-  /* Link do Portfólio - Alterável via CSS */
-  --portfolio-link: "https://seu-portfolio.vercel.app";
-  --portfolio-text: "🌐 Portfólio Online";
+  /* 🌐 Sistema de Link do Portfólio - Controlado via CSS */
+  --portfolio-url: "https://portfolio-gabriel-malheiros.vercel.app";
+  --portfolio-status: "deployed"; /* deployed | pending | local */
+  --portfolio-platform: "Vercel"; /* Vercel | Netlify | GitHub Pages */
+  --portfolio-display-text: "🌐 Acessar Portfólio Online";
 }
 ```
 
-**Altere apenas a URL entre aspas:**
+**3. Altere as propriedades conforme necessário:**
+
 ```css
+/* ✅ EXEMPLO: Após deploy na Vercel */
 :root {
-  /* Exemplo: depois do deploy na Vercel */
-  --portfolio-link: "https://meu-portfolio-react.vercel.app";
-  
-  /* Exemplo: depois do deploy no Netlify */
-  --portfolio-link: "https://amazing-portfolio-123.netlify.app";
-  
-  /* Exemplo: GitHub Pages */
-  --portfolio-link: "https://gabriel-malheiros.github.io/DesenvolvimentoWeb-2025-2";
+  --portfolio-url: "https://meu-portfolio-react.vercel.app";
+  --portfolio-status: "deployed";
+  --portfolio-platform: "Vercel";
+  --portfolio-display-text: "🌐 Ver Portfólio no Vercel";
+}
+
+/* ✅ EXEMPLO: Após deploy no Netlify */
+:root {
+  --portfolio-url: "https://amazing-portfolio-123.netlify.app";
+  --portfolio-status: "deployed";
+  --portfolio-platform: "Netlify";
+  --portfolio-display-text: "🌐 Ver Portfólio no Netlify";
+}
+
+/* ✅ EXEMPLO: GitHub Pages */
+:root {
+  --portfolio-url: "https://gabriel-malheiros.github.io/DesenvolvimentoWeb-2025-2";
+  --portfolio-status: "deployed";
+  --portfolio-platform: "GitHub Pages";
+  --portfolio-display-text: "🌐 Ver no GitHub Pages";
+}
+
+/* ⏳ EXEMPLO: Deploy em andamento */
+:root {
+  --portfolio-url: "https://deploy-em-andamento.vercel.app";
+  --portfolio-status: "pending";
+  --portfolio-platform: "Vercel";
+  --portfolio-display-text: "⏳ Deploy em andamento...";
 }
 ```
 
-### ✨ Vantagens desta Abordagem
-- **Alteração rápida:** Mude apenas 1 linha no CSS
-- **Sem rebuild:** Funciona instantaneamente após salvar
-- **Centralizado:** Um local para controlar o link em todo o projeto
-- **Flexível:** Pode alterar também o texto exibido
+### 🔧 Estados do Status
+
+| Status | Descrição | Comportamento |
+|--------|-----------|---------------|
+| `"deployed"` | Link ativo e funcionando | ✅ Clicável, abre em nova aba |
+| `"pending"` | Deploy em andamento | ⏳ Não clicável, mostra loading |
+| `"local"` | Apenas desenvolvimento local | 🔧 Não clicável, apenas visual |
 
 ### 🎯 Como Usar o Componente
 
 ```jsx
-// Exibição automática do link (aparece na página)
+// Botão padrão (recomendado)
 <PortfolioLink />
 
-// Como botão clicável
-<PortfolioLink showAsButton={true} />
+// Badge pequeno
+<PortfolioLink variant="badge" />
+
+// Link inline
+<PortfolioLink variant="inline" />
+
+// Com informações de debug (desenvolvimento)
+<PortfolioLink showDebugInfo={true} />
 
 // Com estilo personalizado
-<PortfolioLink className="my-4" />
+<PortfolioLink className="my-4" variant="button" />
+```
+
+### ✨ Funcionalidades do Sistema
+
+- **🔍 Detecção automática:** Identifica URLs inválidas ou placeholder
+- **🎨 Estados visuais:** Diferentes estilos para deployed/pending/local
+- **⚡ Tempo real:** Mudanças no CSS refletem instantaneamente
+- **🛡️ Validação:** Impede cliques em URLs inválidas
+- **🎯 Acessibilidade:** Suporte completo a screen readers
+
+### 🚨 URLs que NÃO funcionam (detectadas automaticamente)
+
+```css
+/* ❌ Estas URLs serão marcadas como inválidas: */
+--portfolio-url: "https://seu-portfolio.vercel.app";           /* Placeholder */
+--portfolio-url: "https://localhost:3000";                    /* Local */
+--portfolio-url: "https://example.com";                       /* Exemplo */
+--portfolio-url: "not-a-valid-url";                          /* Formato inválido */
 ```
 
 ## 🚀 Deploy e Acesso Público
@@ -153,40 +203,54 @@ npm run lint         # Verificar código
 npm run dev  # Testar localmente
 ```
 
-### 2. **Deploy**
-```powershell
-npm run build  # Build de produção
-# Usar Vercel/Netlify/GitHub Pages
-```
-
-### 3. **Atualizar Link via CSS**
+### 2. **Preparar para Deploy**
 ```css
-/* Em src/styles/globals.css */
+/* Em src/styles/globals.css - ANTES do deploy */
 :root {
-  --portfolio-link: "SEU_LINK_AQUI";
+  --portfolio-url: "https://meu-projeto.vercel.app";  /* URL esperada */
+  --portfolio-status: "pending";                       /* Status: pendente */
+  --portfolio-platform: "Vercel";                     /* Plataforma escolhida */
 }
 ```
 
-### 4. **Publicar Mudança**
+### 3. **Fazer Deploy**
+```powershell
+npm run build
+npx vercel --prod  # ou netlify deploy --prod
+```
+
+### 4. **Atualizar com Link Real**
+```css
+/* DEPOIS do deploy - copie o link real */
+:root {
+  --portfolio-url: "https://portfolio-gabriel-123abc.vercel.app";  /* ✅ Link real */
+  --portfolio-status: "deployed";                                  /* ✅ Ativo */
+  --portfolio-platform: "Vercel";
+}
+```
+
+### 5. **Publicar Mudança**
 ```powershell
 git add .
-git commit -m "feat: atualiza link do portfólio"
+git commit -m "feat: atualiza link do portfólio para produção"
 git push origin main
 ```
 
-## 🎯 Exemplo Prático
+### 🎯 Exemplo Prático Completo
 
 **Antes do deploy:**
 ```css
---portfolio-link: "https://seu-portfolio.vercel.app";
+--portfolio-url: "https://meu-portfolio.vercel.app";
+--portfolio-status: "pending";
 ```
+**Resultado:** ⏳ Deploy pendente (Vercel) - não clicável
 
-**Depois do deploy na Vercel:**
+**Depois do deploy:**
 ```css
---portfolio-link: "https://portfolio-gabriel-malheiros.vercel.app";
+--portfolio-url: "https://portfolio-gabriel-abc123.vercel.app";
+--portfolio-status: "deployed";
 ```
-
-**Resultado:** O link aparece automaticamente em todos os lugares onde o componente `PortfolioLink` é usado!
+**Resultado:** 🌐 Acessar Portfólio Online - clicável e funcional!
 
 ## 🎓 Projeto Acadêmico - FAESA
 

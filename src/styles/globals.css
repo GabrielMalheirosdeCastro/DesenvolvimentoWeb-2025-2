@@ -26,8 +26,10 @@
   --transition: all 0.3s ease;
 
   /* Link do Portfólio - Alterável via CSS */
-  --portfolio-link: "https://seu-portfolio.vercel.app";
-  --portfolio-text: "🌐 Portfólio Online";
+  --portfolio-url: "https://portfolio-gabriel-malheiros.vercel.app";
+  --portfolio-status: "deployed"; /* deployed | pending | local */
+  --portfolio-platform: "Vercel"; /* Vercel | Netlify | GitHub Pages */
+  --portfolio-display-text: "🌐 Acessar Portfólio Online";
 }
 
 /* Reset e base simplificados */
@@ -343,7 +345,7 @@ body {
 
 /* Componente para exibir link do portfólio dinamicamente via CSS */
 .portfolio-link-display::before {
-  content: var(--portfolio-text) ": " var(--portfolio-link);
+  content: var(--portfolio-display-text) ": " var(--portfolio-url);
   display: block;
   padding: 0.75rem 1rem;
   background: hsl(var(--primary));
@@ -378,7 +380,7 @@ body {
 }
 
 .portfolio-link-clickable::after {
-  content: var(--portfolio-link);
+  content: var(--portfolio-url);
   position: absolute;
   top: 0;
   left: 0;
@@ -386,5 +388,119 @@ body {
   bottom: 0;
   opacity: 0;
   pointer-events: auto;
+}
+
+@layer base {
+  :root {
+    /* Cores principais simplificadas */
+    --primary-blue: #1e40af;
+    --secondary-blue: #3b82f6;
+    --light-blue: #dbeafe;
+    --white: #ffffff;
+    --gray-light: #f8fafc;
+    
+    /* Espacamentos simplificados */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 1.5rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+    
+    /* Bordas e sombras simplificadas */
+    --radius: 12px;
+    --shadow-light: 0 2px 8px rgba(59, 130, 246, 0.1);
+    --shadow-medium: 0 4px 12px rgba(59, 130, 246, 0.15);
+    --shadow-strong: 0 8px 20px rgba(59, 130, 246, 0.2);
+    
+    /* Transições simplificadas */
+    --transition: all 0.3s ease;
+
+    /* Link do Portfólio - Alterável via CSS */
+    --portfolio-url: "https://portfolio-gabriel-malheiros.vercel.app";
+    --portfolio-status: "deployed"; /* deployed | pending | local */
+    --portfolio-platform: "Vercel"; /* Vercel | Netlify | GitHub Pages */
+    --portfolio-display-text: "🌐 Acessar Portfólio Online";
+  }
+
+  /* 🎯 Estilos para exibição do link do portfólio */
+.portfolio-link-container {
+  --current-url: var(--portfolio-url);
+  --current-status: var(--portfolio-status);
+  --current-platform: var(--portfolio-platform);
+  
+  position: relative;
+  display: inline-block;
+  margin: 1rem 0;
+}
+
+/* Link válido e ativo */
+.portfolio-link-container[data-status="deployed"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Link pendente ou inválido */
+.portfolio-link-container[data-status="pending"] {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Indicador visual do status */
+.portfolio-status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+/* Status: Deploy ativo */
+.portfolio-status-indicator[data-status="deployed"] {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border: 1px solid hsl(var(--primary));
+}
+
+.portfolio-status-indicator[data-status="deployed"]:hover {
+  background: hsl(var(--primary) / 0.9);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px hsl(var(--primary) / 0.3);
+}
+
+/* Status: Pendente */
+.portfolio-status-indicator[data-status="pending"] {
+  background: hsl(var(--muted));
+  color: hsl(var(--muted-foreground));
+  border: 1px solid hsl(var(--border));
+}
+
+/* Animação de carregamento para status pendente */
+.portfolio-status-indicator[data-status="pending"]::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border: 2px solid hsl(var(--muted-foreground));
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* URL display para debug/admin */
+.portfolio-url-debug {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace;
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+  margin-top: 0.25rem;
+  word-break: break-all;
+}
 }
 
