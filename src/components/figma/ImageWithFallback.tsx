@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { useState, type ImgHTMLAttributes } from 'react'
 
 const ERROR_IMG_SRC =
