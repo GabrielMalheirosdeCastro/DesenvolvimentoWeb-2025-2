@@ -26,26 +26,29 @@ export const Localhost3000Link: React.FC<LocalhostLinkProps> = ({
       const protocol = window.location.protocol;
       const port = window.location.port;
 
-      if (hostname === 'localhost' || hostname === '127.0.0.1') {
-        // 🏠 DESENVOLVIMENTO LOCAL (simula gabrielmalheiros.com.br)
-        setEnvironment('local');
-        setCurrentUrl('http://localhost:3000');
-        console.log('🏠 Ambiente: Desenvolvimento Local (simulando gabrielmalheiros.com.br)');
-      } else if (hostname === 'gabrielmalheiros.com.br' || hostname === 'www.gabrielmalheiros.com.br' || hostname.includes('gabrielmalheiros.com.br')) {
-        // 🌐 DOMÍNIO PERSONALIZADO GABRIEL MALHEIROS
+      // 🌐 PRIORIDADE 1: Domínio personalizado
+      if (hostname === 'gabrielmalheiros.com.br' || hostname === 'www.gabrielmalheiros.com.br') {
         setEnvironment('custom-domain');
         setCurrentUrl(`${protocol}//${hostname}`);
-        console.log('🌐 Ambiente: Domínio Personalizado - gabrielmalheiros.com.br');
+        console.log('🌐 Ambiente: Domínio Personalizado - ONLINE');
+        
+      // 📁 PRIORIDADE 2: GitHub Pages (TEMPORÁRIO até configurar domínio)
       } else if (hostname.includes('github.io')) {
-        // 📁 GITHUB PAGES (backup)
         setEnvironment('github');
         setCurrentUrl('https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2');
-        console.log('📁 Ambiente: GitHub Pages (backup)');
+        console.log('📁 Ambiente: GitHub Pages - TEMPORÁRIO');
+        
+      // 🏠 PRIORIDADE 3: Desenvolvimento local
+      } else if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        setEnvironment('local');
+        setCurrentUrl('http://localhost:3000');
+        console.log('🏠 Ambiente: Desenvolvimento Local');
+        
+      // 🌍 FALLBACK: Redirecionar para GitHub Pages
       } else {
-        // 🌍 PRODUÇÃO (default para domínio personalizado)
         setEnvironment('production');
-        setCurrentUrl('https://gabrielmalheiros.com.br');
-        console.log('🌍 Ambiente: Produção (gabrielmalheiros.com.br)');
+        setCurrentUrl('https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2');
+        console.log('🌍 Fallback: GitHub Pages');
       }
     };
 

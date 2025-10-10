@@ -40,10 +40,10 @@ export default defineConfig({
     port: 3000,
     host: true
   },
-  // 🌐 Base path para GitHub Pages
+  // 🌐 Configuração para GitHub Pages
   base: process.env.NODE_ENV === 'production' 
     ? '/DesenvolvimentoWeb-2025-2/' 
-    : './',
+    : '/',
   // 🔧 Otimizações específicas para Windows + Google
   define: {
     __PORTFOLIO_VERSION__: JSON.stringify('1.0.0'),
