@@ -16,7 +16,7 @@ import {
   Image
 } from 'lucide-react';
 import { cn } from './utils';
-import { PortfolioLink } from './portfolio-link';
+import PortfolioLinkUniversal from './portfolio-link-universal';
 import { SpaceGallery } from '../gallery/SpaceGallery';
 import { spaceFleetImages } from '../../data/spaceFleetData';
 
@@ -56,35 +56,56 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
   const extractCSSConfig = useCallback((): UniversalConfig => {
     const style = getComputedStyle(document.documentElement);
     
-    // 🌐 Detecção automática do ambiente
+    // 🌐 Detecção automática do ambiente MELHORADA
     const hostname = window.location.hostname;
     const protocol = window.location.protocol;
     const port = window.location.port;
+    const pathname = window.location.pathname;
     
     let autoUrl = '';
     let autoStatus: UniversalConfig['status'] = 'online';
+    let environment = 'unknown';
     
-    // Detectar ambiente automaticamente
-    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+    // Detectar ambiente automaticamente com mais precisão
+    if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '0.0.0.0') {
       autoUrl = `${protocol}//${hostname}:${port || '3000'}`;
       autoStatus = 'online';
+      environment = 'development';
       document.documentElement.setAttribute('data-environment', 'development');
-    } else if (hostname.includes('github.io')) {
-      autoUrl = `${protocol}//${hostname}${window.location.pathname}`;
+      console.log('🏠 Ambiente detectado: Desenvolvimento Local');
+    } else if (hostname.includes('github.io') || hostname.includes('githubpages.io')) {
+      // Garantir URL correta do GitHub Pages
+      autoUrl = `${protocol}//${hostname}/DesenvolvimentoWeb-2025-2`;
       autoStatus = 'online';
+      environment = 'github-pages';
       document.documentElement.setAttribute('data-environment', 'github-pages');
-    } else if (hostname.includes('vercel.app')) {
+      console.log('🌐 Ambiente detectado: GitHub Pages');
+    } else if (hostname.includes('vercel.app') || hostname.includes('vercel.com')) {
       autoUrl = `${protocol}//${hostname}`;
       autoStatus = 'online';
+      environment = 'vercel';
       document.documentElement.setAttribute('data-environment', 'vercel');
-    } else if (hostname.includes('netlify.app')) {
+      console.log('🚀 Ambiente detectado: Vercel');
+    } else if (hostname.includes('netlify.app') || hostname.includes('netlify.com')) {
       autoUrl = `${protocol}//${hostname}`;
       autoStatus = 'online';
+      environment = 'netlify';
       document.documentElement.setAttribute('data-environment', 'netlify');
+      console.log('📡 Ambiente detectado: Netlify');
     } else {
-      autoUrl = style.getPropertyValue('--portfolio-url').replace(/"/g, '').trim() || 
-                'https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2';
+      // Fallback para URL padrão
+      autoUrl = 'https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2';
+      autoStatus = 'online';
+      environment = 'production';
+      document.documentElement.setAttribute('data-environment', 'production');
+      console.log('🌍 Ambiente detectado: Produção (Fallback)');
     }
+    
+    // Aplicar configurações CSS específicas do ambiente
+    document.documentElement.style.setProperty('--current-environment', `"${environment}"`);
+    document.documentElement.style.setProperty('--current-url', `"${autoUrl}"`);
+    
+    console.log(`🔗 URL configurada: ${autoUrl}`);
     
     return {
       url: autoUrl,
@@ -197,12 +218,16 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
           </p>
         </div>
 
-        {/* Link Principal do Portfólio usando o componente PortfolioLink */}
+        {/* Link Principal do Portfólio usando o componente PortfolioLinkUniversal NOVO */}
         <div className="layout-center">
           <div className="relative">
-            <PortfolioLink 
+            <PortfolioLinkUniversal 
               variant="button" 
-              size="lg"
+              size="xl"
+              showStatus={true}
+              showProvider={true}
+              showEnvironment={true}
+              autoDetect={true}
               className="portfolio-link-universal"
             />
           </div>
@@ -341,8 +366,12 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
                 ))}
               </div>
               
-              <PortfolioLink 
+              <PortfolioLinkUniversal 
                 variant="inline"
+                size="sm"
+                showStatus={false}
+                showProvider={false}
+                customText="🔗 Ver Projeto"
                 className={cn(
                   project.status !== 'online' && "opacity-50 pointer-events-none"
                 )}
@@ -502,7 +531,14 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
                 </ol>
               </div>
               
-              <PortfolioLink variant="card" showDebugInfo={true} />
+              <PortfolioLinkUniversal 
+                variant="card" 
+                size="lg"
+                showStatus={true}
+                showProvider={true}
+                showEnvironment={true}
+                autoDetect={true}
+              />
             </div>
           </div>
 

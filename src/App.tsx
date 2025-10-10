@@ -1,6 +1,7 @@
 import React from 'react';
 import InterfaceUniversal from './components/ui/interface-universal';
 import './styles/globals.css';
+import './styles/super-visible-link.css';
 
 function App() {
   return (
