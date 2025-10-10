@@ -614,41 +614,139 @@ body {
 
 /* 🟦 Tema Clássico - Azul tradicional com fundo neutro */
 [data-theme="classic"] {
-  --brand-primary: #1e3a8a;
-  --brand-secondary: #1e40af;
-  --brand-accent: #3b82f6;
-  --color-bg-primary: #f9fafb;
-  --color-bg-secondary: #f3f4f6;
-  --color-bg-tertiary: #e5e7eb;
-  --color-text-primary: #111827;
-  --color-text-secondary: #374151;
-  --color-text-muted: #6b7280;
+  --brand-primary: #1e3a8a !important;
+  --brand-secondary: #1e40af !important;
+  --brand-accent: #3b82f6 !important;
+  --color-bg-primary: #f9fafb !important;
+  --color-bg-secondary: #f3f4f6 !important;
+  --color-bg-tertiary: #e5e7eb !important;
+  --color-text-primary: #111827 !important;
+  --color-text-secondary: #374151 !important;
+  --color-text-muted: #6b7280 !important;
 }
 
 /* ⚫ Tema Minimalista - Cinza elegante com alto contraste */
 [data-theme="minimal"] {
-  --brand-primary: #374151;
-  --brand-secondary: #4b5563;
-  --brand-accent: #6b7280;
-  --color-bg-primary: #fafafa;
-  --color-bg-secondary: #f5f5f5;
-  --color-bg-tertiary: #eeeeee;
-  --color-text-primary: #1f2937;
-  --color-text-secondary: #374151;
-  --color-text-muted: #6b7280;
+  --brand-primary: #374151 !important;
+  --brand-secondary: #4b5563 !important;
+  --brand-accent: #6b7280 !important;
+  --color-bg-primary: #fafafa !important;
+  --color-bg-secondary: #f5f5f5 !important;
+  --color-bg-tertiary: #eeeeee !important;
+  --color-text-primary: #1f2937 !important;
+  --color-text-secondary: #374151 !important;
+  --color-text-muted: #6b7280 !important;
 }
 
 /* 🟣 Tema Colorido - Roxo criativo com fundo vibrante */
 [data-theme="colorful"] {
-  --brand-primary: #7c3aed;
-  --brand-secondary: #8b5cf6;
-  --brand-accent: #a78bfa;
-  --color-bg-primary: #faf5ff;
-  --color-bg-secondary: #f3e8ff;
-  --color-bg-tertiary: #e9d5ff;
-  --color-text-primary: #581c87;
-  --color-text-secondary: #7c2d92;
-  --color-text-muted: #a855f7;
+  --brand-primary: #7c3aed !important;
+  --brand-secondary: #8b5cf6 !important;
+  --brand-accent: #a78bfa !important;
+  --color-bg-primary: #faf5ff !important;
+  --color-bg-secondary: #f3e8ff !important;
+  --color-bg-tertiary: #e9d5ff !important;
+  --color-text-primary: #581c87 !important;
+  --color-text-secondary: #7c2d92 !important;
+  --color-text-muted: #a855f7 !important;
+}
+
+/* 🚀 SISTEMA DE APLICAÇÃO FORÇADA - Garante que mudanças sejam visíveis */
+
+/* Background principal SEMPRE obedece ao tema */
+[data-theme] body,
+[data-theme] .interface-main {
+  background: linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%) !important;
+  color: var(--color-text-primary) !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Cards e containers SEMPRE se adaptam */
+[data-theme] .bg-white,
+[data-theme] .interface-card,
+[data-theme] .card {
+  background-color: var(--color-bg-primary) !important;
+  color: var(--color-text-primary) !important;
+  border-color: var(--color-bg-tertiary) !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Títulos SEMPRE visíveis */
+[data-theme] h1, 
+[data-theme] h2, 
+[data-theme] h3, 
+[data-theme] h4, 
+[data-theme] h5, 
+[data-theme] h6,
+[data-theme] .interface-title {
+  color: var(--color-text-primary) !important;
+  transition: color 0.3s ease !important;
+}
+
+/* Subtítulos e parágrafos SEMPRE legíveis */
+[data-theme] p,
+[data-theme] .interface-subtitle,
+[data-theme] .interface-description {
+  color: var(--color-text-secondary) !important;
+  transition: color 0.3s ease !important;
+}
+
+/* Textos auxiliares SEMPRE adequados */
+[data-theme] .text-gray-500,
+[data-theme] .text-gray-600,
+[data-theme] .text-muted {
+  color: var(--color-text-muted) !important;
+  transition: color 0.3s ease !important;
+}
+
+/* 🎯 APLICAÇÃO ESPECÍFICA POR TEMA - Força mudança visual */
+
+/* Tema Clássico - Forçar aplicação */
+[data-theme="classic"] body {
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%) !important;
+  color: #111827 !important;
+}
+
+[data-theme="classic"] .interface-main {
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%) !important;
+  color: #111827 !important;
+}
+
+[data-theme="classic"] .bg-white {
+  background-color: #f9fafb !important;
+  color: #111827 !important;
+}
+
+/* Tema Minimalista - Forçar aplicação */
+[data-theme="minimal"] body {
+  background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%) !important;
+  color: #1f2937 !important;
+}
+
+[data-theme="minimal"] .interface-main {
+  background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%) !important;
+  color: #1f2937 !important;
+}
+
+[data-theme="minimal"] .bg-white {
+  background-color: #fafafa !important;
+  color: #1f2937 !important;
+}
+
+/* Tema Colorido - Forçar aplicação */
+[data-theme="colorful"] body {
+  background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%) !important;
+  color: #581c87 !important;
+}
+
+[data-theme="colorful"] .interface-main {
+  background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%) !important;
+  color: #581c87 !important;
+}
+
+[data-theme="colorful"] .bg-white {
+  background-color: #faf5ff !important;
+  color: #581c87 !important;
 }
 
 /* 🔧 Utilitários Universais */

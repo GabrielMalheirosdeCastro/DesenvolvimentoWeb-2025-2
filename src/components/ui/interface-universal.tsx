@@ -66,6 +66,26 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
 
   const [currentScreen, setCurrentScreen] = useState<'main' | 'gallery' | 'figma' | 'settings'>(getInitialScreen());
   const [viewport, setViewport] = useState<'mobile' | 'tablet' | 'desktop'>('desktop');
+  const [forceUpdate, setForceUpdate] = useState(0); // Para forçar re-render quando tema muda
+
+  // 🎨 Hook para monitorar mudanças de tema
+  useEffect(() => {
+    const handleThemeChange = (event: CustomEvent) => {
+      console.log('🎨 Tema alterado, forçando re-render...', event.detail);
+      setForceUpdate(prev => prev + 1);
+      
+      // Forçar atualização do background do body
+      const { config } = event.detail;
+      document.body.style.background = `linear-gradient(135deg, ${config.bgPrimary} 0%, ${config.bgSecondary} 100%)`;
+      document.body.style.color = config.textPrimary;
+    };
+
+    window.addEventListener('theme-changed', handleThemeChange as EventListener);
+    
+    return () => {
+      window.removeEventListener('theme-changed', handleThemeChange as EventListener);
+    };
+  }, []);
 
   // 🔄 Extrair configuração do CSS com detecção automática
   const extractCSSConfig = useCallback((): UniversalConfig => {
@@ -179,11 +199,136 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
     };
   }, [extractCSSConfig, detectViewport]);
 
-  // 🎨 Alterar tema
+  // 🎨 Sistema Inteligente de Temas com Contraste Automático
   const changeTheme = useCallback((newTheme: UniversalConfig['theme']) => {
+    console.log(`🎨 Aplicando tema: ${newTheme}`);
+    
+    // 1. Aplicar atributo de tema no HTML
     document.documentElement.setAttribute('data-theme', newTheme);
     document.documentElement.style.setProperty('--portfolio-theme', `"${newTheme}"`);
-    setConfig(prev => ({ ...prev, theme: newTheme }));
+    
+    // 2. Definir configurações específicas de cada tema
+    const themeConfigs = {
+      modern: {
+        brandPrimary: '#2563eb',
+        brandSecondary: '#1d4ed8', 
+        brandAccent: '#3b82f6',
+        bgPrimary: '#ffffff',
+        bgSecondary: '#f8fafc',
+        bgTertiary: '#f1f5f9',
+        textPrimary: '#0f172a',
+        textSecondary: '#475569',
+        textMuted: '#94a3b8',
+        description: 'Azul vibrante com fundo branco'
+      },
+      classic: {
+        brandPrimary: '#1e3a8a',
+        brandSecondary: '#1e40af',
+        brandAccent: '#3b82f6', 
+        bgPrimary: '#f9fafb',
+        bgSecondary: '#f3f4f6',
+        bgTertiary: '#e5e7eb',
+        textPrimary: '#111827',
+        textSecondary: '#374151',
+        textMuted: '#6b7280',
+        description: 'Azul tradicional com fundo neutro'
+      },
+      minimal: {
+        brandPrimary: '#374151',
+        brandSecondary: '#4b5563',
+        brandAccent: '#6b7280',
+        bgPrimary: '#fafafa',
+        bgSecondary: '#f5f5f5', 
+        bgTertiary: '#eeeeee',
+        textPrimary: '#1f2937',
+        textSecondary: '#374151',
+        textMuted: '#6b7280',
+        description: 'Cinza elegante com alto contraste'
+      },
+      colorful: {
+        brandPrimary: '#7c3aed',
+        brandSecondary: '#8b5cf6',
+        brandAccent: '#a78bfa',
+        bgPrimary: '#faf5ff',
+        bgSecondary: '#f3e8ff',
+        bgTertiary: '#e9d5ff', 
+        textPrimary: '#581c87',
+        textSecondary: '#7c2d92',
+        textMuted: '#a855f7',
+        description: 'Roxo criativo com fundo vibrante'
+      }
+    };
+    
+    const themeConfig = themeConfigs[newTheme];
+    
+    // 3. Aplicar todas as variáveis CSS dinamicamente
+    const root = document.documentElement;
+    
+    // Cores da marca
+    root.style.setProperty('--brand-primary', themeConfig.brandPrimary);
+    root.style.setProperty('--brand-secondary', themeConfig.brandSecondary);
+    root.style.setProperty('--brand-accent', themeConfig.brandAccent);
+    
+    // Cores de fundo
+    root.style.setProperty('--color-bg-primary', themeConfig.bgPrimary);
+    root.style.setProperty('--color-bg-secondary', themeConfig.bgSecondary);
+    root.style.setProperty('--color-bg-tertiary', themeConfig.bgTertiary);
+    
+    // Cores de texto
+    root.style.setProperty('--color-text-primary', themeConfig.textPrimary);
+    root.style.setProperty('--color-text-secondary', themeConfig.textSecondary);
+    root.style.setProperty('--color-text-muted', themeConfig.textMuted);
+    
+    // 4. Forçar re-render de elementos que podem não atualizar automaticamente
+    const forceUpdate = () => {
+      // Atualizar body background
+      document.body.style.background = `linear-gradient(135deg, ${themeConfig.bgPrimary} 0%, ${themeConfig.bgSecondary} 100%)`;
+      document.body.style.color = themeConfig.textPrimary;
+      
+      // Atualizar todos os elementos com classes específicas
+      const elementsToUpdate = [
+        '.interface-main',
+        '.bg-white',
+        '.interface-card',
+        '.card'
+      ];
+      
+      elementsToUpdate.forEach(selector => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach((el: Element) => {
+          const element = el as HTMLElement;
+          if (selector === '.interface-main') {
+            element.style.background = `linear-gradient(135deg, ${themeConfig.bgPrimary} 0%, ${themeConfig.bgSecondary} 100%)`;
+            element.style.color = themeConfig.textPrimary;
+          } else if (selector.includes('bg-white') || selector.includes('card')) {
+            element.style.backgroundColor = themeConfig.bgPrimary;
+            element.style.color = themeConfig.textPrimary;
+            element.style.borderColor = themeConfig.bgTertiary;
+          }
+        });
+      });
+    };
+    
+    // Aplicar mudanças com um pequeno delay para garantir que o CSS tenha processado
+    setTimeout(forceUpdate, 50);
+    
+    // 5. Atualizar estado do componente
+    setConfig(prev => ({ 
+      ...prev, 
+      theme: newTheme 
+    }));
+    
+    // 6. Log para debug
+    console.log(`✅ Tema ${newTheme} aplicado com sucesso!`, {
+      background: themeConfig.bgPrimary,
+      text: themeConfig.textPrimary,
+      brand: themeConfig.brandPrimary
+    });
+    
+    // 7. Disparar evento customizado para outros componentes
+    window.dispatchEvent(new CustomEvent('theme-changed', { 
+      detail: { theme: newTheme, config: themeConfig } 
+    }));
   }, []);
 
   // 🎯 Navegar entre telas com atualização de URL
@@ -557,36 +702,106 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
             </div>
           </div>
 
-          {/* Seletor de Tema */}
-          <div className="bg-white rounded-lg p-6 shadow-lg">
-            <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+          {/* Seletor de Tema Inteligente */}
+          <div className="bg-white rounded-lg p-6 shadow-lg border border-gray-200">
+            <h3 className="text-xl font-semibold mb-4 flex items-center gap-2 text-gray-800">
               <Palette size={20} />
               Tema da Interface
             </h3>
+            <p className="text-sm text-gray-600 mb-6">
+              Escolha um tema que se adapta automaticamente com contraste inteligente
+            </p>
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
-                { id: 'modern', name: 'Moderno', color: '#2563eb', desc: 'Azul vibrante' },
-                { id: 'classic', name: 'Clássico', color: '#1e3a8a', desc: 'Azul tradicional' },
-                { id: 'minimal', name: 'Minimalista', color: '#374151', desc: 'Cinza elegante' },
-                { id: 'colorful', name: 'Colorido', color: '#7c3aed', desc: 'Roxo criativo' }
+                { 
+                  id: 'modern', 
+                  name: 'Moderno', 
+                  color: '#2563eb',
+                  bgColor: '#ffffff',
+                  textColor: '#0f172a',
+                  desc: 'Azul vibrante' 
+                },
+                { 
+                  id: 'classic', 
+                  name: 'Clássico', 
+                  color: '#1e3a8a',
+                  bgColor: '#f9fafb', 
+                  textColor: '#111827',
+                  desc: 'Azul tradicional' 
+                },
+                { 
+                  id: 'minimal', 
+                  name: 'Minimalista', 
+                  color: '#374151',
+                  bgColor: '#fafafa',
+                  textColor: '#1f2937', 
+                  desc: 'Cinza elegante' 
+                },
+                { 
+                  id: 'colorful', 
+                  name: 'Colorido', 
+                  color: '#7c3aed',
+                  bgColor: '#faf5ff',
+                  textColor: '#581c87',
+                  desc: 'Roxo criativo' 
+                }
               ].map((theme) => (
                 <button
                   key={theme.id}
                   onClick={() => changeTheme(theme.id as UniversalConfig['theme'])}
                   className={cn(
-                    "p-4 rounded-lg border-2 transition-all text-center hover:scale-105",
+                    "p-4 rounded-lg border-2 transition-all text-center hover:scale-105 hover:shadow-lg",
                     config.theme === theme.id
-                      ? "border-brand-primary bg-brand-primary/10"
-                      : "border-gray-200 hover:border-brand-primary/50"
+                      ? "border-blue-500 bg-blue-50 shadow-md"
+                      : "border-gray-200 hover:border-gray-400"
                   )}
+                  style={{
+                    backgroundColor: config.theme === theme.id ? theme.bgColor : '#ffffff'
+                  }}
                 >
+                  {/* Círculo colorido com gradiente para mostrar o tema */}
                   <div
-                    className="w-12 h-12 rounded-full mx-auto mb-3 shadow-md"
-                    style={{ backgroundColor: theme.color }}
+                    className="w-12 h-12 rounded-full mx-auto mb-3 shadow-lg border-2 border-white"
+                    style={{ 
+                      background: `linear-gradient(135deg, ${theme.color} 0%, ${theme.color}dd 100%)`,
+                      boxShadow: `0 4px 12px ${theme.color}40`
+                    }}
                   />
-                  <div className="font-medium text-sm">{theme.name}</div>
-                  <div className="text-xs text-gray-500 mt-1">{theme.desc}</div>
+                  
+                  {/* Preview mini do background */}
+                  <div 
+                    className="w-full h-3 rounded mb-2 border border-gray-200"
+                    style={{ 
+                      background: `linear-gradient(90deg, ${theme.bgColor} 0%, ${theme.color}20 100%)`
+                    }}
+                  />
+                  
+                  <div 
+                    className="font-medium text-sm mb-1"
+                    style={{ color: config.theme === theme.id ? theme.textColor : '#374151' }}
+                  >
+                    {theme.name}
+                  </div>
+                  <div 
+                    className="text-xs mt-1"
+                    style={{ color: config.theme === theme.id ? theme.textColor + '80' : '#6b7280' }}
+                  >
+                    {theme.desc}
+                  </div>
+                  
+                  {/* Indicador de tema ativo */}
+                  {config.theme === theme.id && (
+                    <div className="mt-2 flex items-center justify-center">
+                      <div 
+                        className="w-2 h-2 rounded-full"
+                        style={{ backgroundColor: theme.color }}
+                      />
+                      <span className="ml-1 text-xs font-medium" style={{ color: theme.color }}>
+                        Ativo
+                      </span>
+                    </div>
+                  )}
                 </button>
               ))}
             </div>
@@ -719,7 +934,17 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
   };
 
   return (
-    <div className={cn("interface-universal w-full has-fixed-navigation", className)} data-theme={config.theme}>
+    <div 
+      className={cn("interface-universal w-full has-fixed-navigation", className)} 
+      data-theme={config.theme}
+      key={forceUpdate} // Força re-render quando tema muda
+      style={{
+        background: `linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%)`,
+        color: 'var(--color-text-primary)',
+        transition: 'all 0.3s ease',
+        minHeight: '100vh'
+      }}
+    >
       {/* Navegação Externa com Setas */}
       <ExternalNavigation 
         onFigmaAccess={() => navigateToScreen('figma')}
