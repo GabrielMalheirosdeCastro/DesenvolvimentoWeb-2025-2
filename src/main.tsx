@@ -1,5 +1,5 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
+import ReactDOM from 'react-dom/client';
 
 // Importar ícones existentes
 import { User, Heart, MessageCircle, TrendingDown, Code } from 'lucide-react';

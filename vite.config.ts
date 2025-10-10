@@ -8,16 +8,22 @@ export default defineConfig({
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
     alias: {
       '@': path.resolve(__dirname, './src'),
-      // Aliases para os assets do Figma
-      'figma:asset/dd18ec3bf35c35cc0e58cd61147ab94926272d3c.png': path.resolve(__dirname, './src/assets/dd18ec3bf35c35cc0e58cd61147ab94926272d3c.png'),
-      'figma:asset/681ee2140d8a3dfb23dc398515d8e9539fb56338.png': path.resolve(__dirname, './src/assets/681ee2140d8a3dfb23dc398515d8e9539fb56338.png'),
-      'figma:asset/55baa85e8789d73e4e943d1a375f594add7941b3.png': path.resolve(__dirname, './src/assets/55baa85e8789d73e4e943d1a375f594add7941b3.png'),
-      'figma:asset/df4077de47a65010f0db03b4bde4b1720336789e.png': path.resolve(__dirname, './src/assets/df4077de47a65010f0db03b4bde4b1720336789e.png'),
+      // 🌐 Aliases universais - independentes do Figma
+      'assets': path.resolve(__dirname, './src/assets'),
+      'components': path.resolve(__dirname, './src/components'),
+      'styles': path.resolve(__dirname, './src/styles'),
+      'utils': path.resolve(__dirname, './src/utils'),
+      
+      // ✅ Assets locais - sem dependência do Figma
+      'local:image/space-1': path.resolve(__dirname, './src/assets/space-1.jpg'),
+      'local:image/space-2': path.resolve(__dirname, './src/assets/space-2.jpg'),
+      'local:image/space-3': path.resolve(__dirname, './src/assets/space-3.jpg'),
+      'local:image/profile': path.resolve(__dirname, './src/assets/profile.jpg'),
     },
   },
   build: {
     target: 'esnext',
-    outDir: 'build',
+    outDir: 'dist', // ✅ Padrão universal
     assetsDir: 'assets',
     sourcemap: false,
     minify: 'terser',
@@ -25,19 +31,43 @@ export default defineConfig({
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
-          ui: ['@radix-ui/react-slot', 'lucide-react']
-        }
+          ui: ['lucide-react']
+        },
+        // 🎯 Assets com hash para cache universal
+        assetFileNames: (assetInfo) => {
+          const info = assetInfo.name?.split('.') || [];
+          let extType = info[info.length - 1];
+          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
+            extType = 'img';
+          }
+          return `assets/${extType}/[name]-[hash][extname]`;
+        },
+        chunkFileNames: 'assets/js/[name]-[hash].js',
+        entryFileNames: 'assets/js/[name]-[hash].js',
       }
     }
   },
   server: {
     port: 3000,
     open: true,
-    host: true
+    host: '0.0.0.0', // ✅ Aceita conexões de qualquer IP
+    cors: true
   },
   preview: {
     port: 3000,
-    host: true
+    host: '0.0.0.0'
   },
-  base: process.env.NODE_ENV === 'production' ? '/DesenvolvimentoWeb-2025-2/' : '/',
+  // 🌐 Base path universal - funciona em qualquer ambiente
+  base: './',
+  // 🔧 Configurações para compatibilidade Windows + Google
+  define: {
+    __PORTFOLIO_VERSION__: JSON.stringify(process.env.npm_package_version || '1.0.0'),
+    __BUILD_DATE__: JSON.stringify(new Date().toISOString()),
+    __IS_PRODUCTION__: JSON.stringify(process.env.NODE_ENV === 'production'),
+  },
+  // ⚡ Otimizações para Windows
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'lucide-react'],
+    exclude: []
+  }
 });

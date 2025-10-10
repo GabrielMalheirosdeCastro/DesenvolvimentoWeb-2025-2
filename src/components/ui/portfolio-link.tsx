@@ -211,65 +211,169 @@ export const PortfolioLink: React.FC<PortfolioLinkProps> = ({
     }
   };
 
-  // 🎨 Renderizar componente
-  const isClickable = isValidUrl && config.status === 'deployed';
-  const statusText = getStatusText();
-  const statusIcon = getStatusIcon();
-
-  const baseClasses = cn(
-    "portfolio-status-indicator",
-    `portfolio-button-${config.buttonStyle}`,
-    {
-      'text-sm px-3 py-2': size === 'sm',
-      'text-base px-4 py-2': size === 'md',
-      'text-lg px-6 py-3': size === 'lg',
-    },
-    !isClickable && "opacity-60 cursor-not-allowed",
-    className
-  );
-
-  return (
-    <div className="portfolio-link-universal space-y-2">
-      {/* Componente Principal */}
-      <div
-        className={baseClasses}
-        data-status={config.status}
-        onClick={isClickable ? handleClick : undefined}
-        role={isClickable ? "button" : "status"}
-        tabIndex={isClickable ? 0 : -1}
-        onKeyDown={(e) => {
-          if (isClickable && (e.key === 'Enter' || e.key === ' ')) {
-            e.preventDefault();
-            handleClick();
-          }
-        }}
-      >
-        {statusIcon}
-        <span>{statusText}</span>
-        
-        {config.showProvider && detectedProvider !== 'URL Inválida' && (
-          <span className="portfolio-provider-badge">
-            {getProviderIcon()}
-            {detectedProvider}
+  // 🎨 Renderizar componente baseado no design Figma
+  const renderFigmaDesign = () => {
+    const isClickable = isValidUrl && config.status === 'deployed';
+    
+    return (
+      <div className="relative">
+        {/* Link Principal - Design Figma */}
+        <div
+          className={cn(
+            "portfolio-link-figma",
+            !isClickable && "pointer-events-none",
+            className
+          )}
+          data-status={config.status}
+          onClick={isClickable ? handleClick : undefined}
+          role={isClickable ? "button" : "status"}
+          tabIndex={isClickable ? 0 : -1}
+          onKeyDown={(e) => {
+            if (isClickable && (e.key === 'Enter' || e.key === ' ')) {
+              e.preventDefault();
+              handleClick();
+            }
+          }}
+          aria-label={`${config.buttonText} - ${detectedProvider} - Status: ${config.status}`}
+        >
+          {/* Ícone de Status */}
+          <span className="portfolio-icon" aria-hidden="true">
+            {getStatusIcon()}
           </span>
-        )}
-        
-        {isClickable && <ExternalLink size={14} className="ml-1" />}
-      </div>
-
-      {/* Informações de Debug */}
-      {showDebugInfo && (
-        <div className="text-xs bg-muted p-3 rounded border space-y-1">
-          <div><strong>URL:</strong> <code>{config.url}</code></div>
-          <div><strong>Provedor:</strong> {detectedProvider}</div>
-          <div><strong>Status:</strong> {config.status}</div>
-          <div><strong>Válida:</strong> {isValidUrl ? '✅' : '❌'}</div>
-          <div><strong>Online:</strong> {isOnline ? '🟢' : '🔴'}</div>
-          <div><strong>Clicável:</strong> {isClickable ? '✅' : '❌'}</div>
+          
+          {/* Texto Principal */}
+          <span className="flex-1 min-w-0">
+            {getStatusText()}
+          </span>
+          
+          {/* Badge do Provedor */}
+          {config.showProvider && detectedProvider !== 'URL Inválida' && (
+            <span className="portfolio-provider-badge" aria-label={`Hospedado em ${detectedProvider}`}>
+              <span className="portfolio-icon" aria-hidden="true">
+                {getProviderIcon()}
+              </span>
+              <span className="hidden sm:inline">{detectedProvider}</span>
+            </span>
+          )}
+          
+          {/* Ícone de Link Externo */}
+          {isClickable && (
+            <ExternalLink 
+              className="portfolio-icon flex-shrink-0" 
+              aria-hidden="true"
+            />
+          )}
         </div>
-      )}
-    </div>
-  );
+
+        {/* Informações de Debug */}
+        {showDebugInfo && (
+          <div className="portfolio-debug-info">
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <div><strong>URL:</strong></div>
+              <div className="break-all">{config.url}</div>
+              
+              <div><strong>Provedor:</strong></div>
+              <div>{detectedProvider}</div>
+              
+              <div><strong>Status:</strong></div>
+              <div>{config.status}</div>
+              
+              <div><strong>Válida:</strong></div>
+              <div>{isValidUrl ? '✅' : '❌'}</div>
+              
+              <div><strong>Clicável:</strong></div>
+              <div>{isClickable ? '✅' : '❌'}</div>
+              
+              <div><strong>Viewport:</strong></div>
+              <div className="sm:hidden">Mobile</div>
+              <div className="hidden sm:block md:hidden">Tablet</div>
+              <div className="hidden md:block">Desktop</div>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  // 🎯 Detectar ambiente e renderizar adequadamente
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
+
+  useEffect(() => {
+    const checkViewport = () => {
+      const width = window.innerWidth;
+      setIsMobile(width < 768);
+      setIsTablet(width >= 768 && width < 1024);
+    };
+
+    checkViewport();
+    window.addEventListener('resize', checkViewport);
+    return () => window.removeEventListener('resize', checkViewport);
+  }, []);
+
+  // 📱 Renderização responsiva baseada no variant
+  switch (variant) {
+    case 'badge':
+      return (
+        <span className={cn(
+          "inline-flex items-center gap-1 px-2 py-1 text-xs rounded-md",
+          "bg-primary/10 text-primary border border-primary/20",
+          className
+        )}>
+          {getStatusIcon()}
+          {isMobile ? detectedProvider.split(' ')[0] : detectedProvider}
+        </span>
+      );
+
+    case 'inline':
+      return (
+        <a
+          href={isValidUrl && config.status === 'deployed' ? config.url : undefined}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={cn(
+            "inline-flex items-center gap-1 text-sm underline-offset-4 hover:underline",
+            config.status === 'deployed' ? "text-primary" : "text-muted-foreground",
+            className
+          )}
+          aria-disabled={!(isValidUrl && config.status === 'deployed')}
+        >
+          {getStatusIcon()}
+          {config.buttonText}
+        </a>
+      );
+
+    case 'card':
+      return (
+        <div className={cn(
+          "p-4 rounded-lg border bg-card text-card-foreground shadow-sm",
+          className
+        )}>
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <h3 className="font-semibold">{config.title || 'Portfólio'}</h3>
+              {config.showProvider && (
+                <span className="portfolio-provider-badge">
+                  {getProviderIcon()}
+                  {detectedProvider}
+                </span>
+              )}
+            </div>
+            
+            {config.description && (
+              <p className="text-sm text-muted-foreground">
+                {config.description}
+              </p>
+            )}
+            
+            {renderFigmaDesign()}
+          </div>
+        </div>
+      );
+
+    default:
+      return renderFigmaDesign();
+  }
 };
 
 export default PortfolioLink;
