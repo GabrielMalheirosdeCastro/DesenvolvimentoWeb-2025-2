@@ -39,42 +39,18 @@ export const PortfolioLinkUniversal: React.FC<PortfolioLinkUniversalProps> = ({
   const [isLoading, setIsLoading] = useState(true);
   const [environment, setEnvironment] = useState<'development' | 'staging' | 'production'>('production');
 
-  // 🌐 Lista de provedores públicos com domínio personalizado GABRIEL MALHEIROS
+  // 🌐 Lista de provedores públicos FUNCIONAIS - apenas URLs reais configuradas
   const PUBLIC_PROVIDERS: PublicProvider[] = [
     {
-      name: 'Site Oficial',
-      url: 'https://gabrielmalheiros.com.br',
+      name: 'Site Principal Vercel',
+      url: 'https://desenvolvimento-web-2025-2.vercel.app',
       status: 'online',
       color: '#2563eb',
-      icon: '🌐',
-      description: 'Site pessoal oficial - gabrielmalheiros.com.br'
+      icon: '�',
+      description: 'Site principal hospedado no Vercel - 100% funcional'
     },
     {
-      name: 'Portfolio Principal',
-      url: 'https://www.gabrielmalheiros.com.br',
-      status: 'online',
-      color: '#1e40af',
-      icon: '👨‍💻',
-      description: 'Portfolio completo - www.gabrielmalheiros.com.br'
-    },
-    {
-      name: 'Subdomínio Portfolio',
-      url: 'https://portfolio.gabrielmalheiros.com.br',
-      status: 'online',
-      color: '#3b82f6',
-      icon: '📁',
-      description: 'Portfolio dedicado - portfolio.gabrielmalheiros.com.br'
-    },
-    {
-      name: 'Subdomínio Projetos',
-      url: 'https://projetos.gabrielmalheiros.com.br',
-      status: 'online',
-      color: '#1d4ed8',
-      icon: '🚀',
-      description: 'Área de projetos - projetos.gabrielmalheiros.com.br'
-    },
-    {
-      name: 'GitHub Backup',
+      name: 'GitHub Pages Backup',
       url: 'https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2',
       status: 'online',
       color: '#6b7280',
@@ -112,7 +88,7 @@ export const PortfolioLinkUniversal: React.FC<PortfolioLinkUniversalProps> = ({
         status: 'online',
         color: '#10b981',
         icon: '🏠',
-        description: 'Servidor de desenvolvimento simulando gabrielmalheiros.com.br'
+        description: 'Servidor de desenvolvimento local - localhost:3000'
       };
     } else {
       // Para produção, usar sempre o domínio personalizado principal
@@ -408,8 +384,8 @@ export const PortfolioLinkUniversal: React.FC<PortfolioLinkUniversalProps> = ({
         <div className="font-bold">
           {customText || (
             environment === 'development' 
-              ? '🏠 Acessar Desenvolvimento (simulando gabrielmalheiros.com.br)'
-              : '🌐 Acessar gabrielmalheiros.com.br'
+              ? '🏠 Acessar Servidor Local (localhost:3000)'
+              : '🚀 Acessar Site Principal'
           )}
         </div>
         {showProvider && currentProvider && (

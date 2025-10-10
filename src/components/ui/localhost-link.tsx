@@ -20,7 +20,7 @@ export const Localhost3000Link: React.FC<LocalhostLinkProps> = ({
   const [isOnline, setIsOnline] = useState<boolean>(true);
 
   useEffect(() => {
-    // 🔍 Detecção automática de ambiente com prioridade para gabrielmalheiros.com.br
+    // 🔍 Detecção automática de ambiente - desenvolvimento vs produção
     const detectEnvironment = () => {
       const hostname = window.location.hostname;
       const protocol = window.location.protocol;
@@ -66,7 +66,7 @@ export const Localhost3000Link: React.FC<LocalhostLinkProps> = ({
               signal: controller.signal
             });
             setIsOnline(true);
-            console.log('✅ Localhost:3000 está online (simulando gabrielmalheiros.com.br)');
+            console.log('✅ Localhost:3000 está online e funcional');
           } catch (error) {
             setIsOnline(false);
             console.log('❌ Localhost:3000 está offline');
@@ -91,7 +91,7 @@ export const Localhost3000Link: React.FC<LocalhostLinkProps> = ({
   const handleClick = () => {
     // 🚀 Abrir link baseado no ambiente atual
     if (environment === 'local' && !isOnline) {
-      alert('❌ Servidor local não está rodando!\n\n✅ Execute: npm run dev\n⏰ Aguarde o servidor iniciar\n🔗 Depois clique novamente\n\n💡 Em produção, este link será gabrielmalheiros.com.br');
+      alert('❌ Servidor local não está rodando!\n\n✅ Execute: npm run dev\n⏰ Aguarde o servidor iniciar\n🔗 Depois clique novamente\n\n💡 Em produção, use os links do Vercel ou GitHub Pages');
       return;
     }
 

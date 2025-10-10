@@ -92,7 +92,7 @@
   --portfolio-theme: "modern";
   
   /* 🎨 Configurações específicas para Vercel */
-  --portfolio-button-text: "🚀 Acessar Site no Vercel";
+  --portfolio-button-text: "🚀 Acessar Site Principal";
   --portfolio-button-text-dev: "🏠 Desenvolvimento Local";
   --portfolio-provider: "vercel";
   --portfolio-description: "Portfólio pessoal de Gabriel Malheiros - Desenvolvimento Web FAESA 2025-2";
@@ -906,12 +906,12 @@ html[data-environment="local"] {
   --portfolio-button-text: var(--portfolio-button-text-dev);
 }
 
-/* 🌐 Produção - domínio personalizado gabrielmalheiros.com.br */
+/* 🌐 Produção - URLs funcionais (Vercel + GitHub Pages) */
 html[data-environment="production"],
 html[data-environment="custom-domain"] {
-  --portfolio-url: var(--portfolio-url-primary);
+  --portfolio-url: var(--portfolio-url-vercel);
   --portfolio-status: "online";
-  --portfolio-button-text: "🌐 Acessar gabrielmalheiros.com.br";
+  --portfolio-button-text: "🚀 Acessar Site Principal";
 }
 
 /* 🎨 Tema profissional para domínio personalizado */
@@ -924,8 +924,8 @@ html[data-environment="custom-domain"] {
   --brand-error: #dc2626;
 }
 
-/* 🔗 Estilos específicos para gabrielmalheiros.com.br */
-.portfolio-link-universal[data-domain="gabrielmalheiros.com.br"] {
+/* 🔗 Estilos específicos para sites reais (Vercel) */
+.portfolio-link-universal[data-domain="vercel.app"] {
   background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%) !important;
   border-color: #60a5fa !important;
   box-shadow: 
