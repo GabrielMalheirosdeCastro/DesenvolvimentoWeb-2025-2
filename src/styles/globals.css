@@ -46,28 +46,58 @@
   --portfolio-url-projetos: "https://projetos.gabrielmalheiros.com.br";
   --portfolio-url-blog: "https://blog.gabrielmalheiros.com.br";
   
-  /* 🔧 URLs de desenvolvimento e fallback */
+  /* 🚀 Configurações para Deploy no Vercel */
+  --portfolio-url-vercel: "https://desenvolvimento-web-2025-2.vercel.app";
+  --portfolio-url-vercel-www: "https://www.desenvolvimento-web-2025-2.vercel.app";
+  --portfolio-url-preview: "https://desenvolvimento-web-2025-2-git-main.vercel.app";
+  
+  /* URLs de desenvolvimento e fallback */
   --portfolio-url-local: "http://localhost:3000";
   --portfolio-url-development: "http://localhost:3000";
   --portfolio-url-github-backup: "https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2";
   
-  /* 🎯 URL principal ativa (muda automaticamente) */
-  --portfolio-url: var(--portfolio-url-primary);
+  /* 🎯 URL principal ativa (Vercel REAL) */
+  --portfolio-url: var(--portfolio-url-vercel);
   
-  /* 📝 Informações do domínio personalizado */
-  --portfolio-domain: "gabrielmalheiros.com.br";
-  --portfolio-title: "Gabriel Malheiros - Site Pessoal | Desenvolvimento Web FAESA";
+  /* 📝 Informações atualizadas para Vercel REAL */
+  --portfolio-domain: "desenvolvimento-web-2025-2.vercel.app";
+  --portfolio-title: "Gabriel Malheiros - Portfólio Pessoal | FAESA";
   --portfolio-author: "Gabriel Malheiros de Castro";
   --portfolio-institution: "FAESA - Faculdades Integradas Espírito-Santenses";
-  --portfolio-status: "online"; /* online | offline | maintenance */
-  --portfolio-theme: "professional"; /* professional | modern | classic | minimal | colorful */
+  --portfolio-status: "online";
+  --portfolio-theme: "modern";
   
-  /* 🎨 Configurações específicas para domínio personalizado */
-  --portfolio-button-text: "🌐 Acessar gabrielmalheiros.com.br";
-  --portfolio-button-text-dev: "🏠 Desenvolvimento (simulando gabrielmalheiros.com.br)";
-  --portfolio-show-domain: "true";
-  --portfolio-show-ssl: "true";
-  --portfolio-description: "Site pessoal profissional de Gabriel Malheiros - Estudante de Desenvolvimento Web na FAESA";
+  /* 🎨 Configurações específicas para Vercel REAL */
+  --portfolio-button-text: "🚀 desenvolvimento-web-2025-2.vercel.app";
+  --portfolio-button-text-dev: "🏠 Desenvolvimento Local";
+  --portfolio-provider: "vercel";
+  --portfolio-description: "Portfólio pessoal de Gabriel Malheiros - Desenvolvimento Web FAESA 2025-2 - Deploy no Vercel";
+  
+  /* 🌐 URLs do Vercel (será atualizado automaticamente após deploy) */
+  --portfolio-url-vercel: "https://desenvolvimento-web-2025-2.vercel.app";
+  --portfolio-url-preview: "https://desenvolvimento-web-2025-2-git-main.vercel.app";
+  
+  /* URLs de desenvolvimento e fallback */
+  --portfolio-url-local: "http://localhost:3000";
+  --portfolio-url-development: "http://localhost:3000";
+  --portfolio-url-github-backup: "https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2";
+  
+  /* 🎯 URL principal ativa (Vercel como padrão) */
+  --portfolio-url: var(--portfolio-url-vercel);
+  
+  /* 📝 Informações atualizadas para Vercel */
+  --portfolio-domain: "vercel.app";
+  --portfolio-title: "Gabriel Malheiros - Portfólio Pessoal | FAESA";
+  --portfolio-author: "Gabriel Malheiros de Castro";
+  --portfolio-institution: "FAESA - Faculdades Integradas Espírito-Santenses";
+  --portfolio-status: "online";
+  --portfolio-theme: "modern";
+  
+  /* 🎨 Configurações específicas para Vercel */
+  --portfolio-button-text: "🚀 Acessar Site no Vercel";
+  --portfolio-button-text-dev: "🏠 Desenvolvimento Local";
+  --portfolio-provider: "vercel";
+  --portfolio-description: "Portfólio pessoal de Gabriel Malheiros - Desenvolvimento Web FAESA 2025-2";
   
   /* 🔧 Configurações técnicas universais */
   --portfolio-provider: "auto-detect";
@@ -414,7 +444,7 @@ body {
 
 /* 🔧 Classes específicas para diferentes tamanhos */
 .portfolio-link-universal[data-size="sm"] {
-  padding: var(--space-2) var(--space-4);
+  padding: var(--space-2) var(--space-4;
   font-size: var(--font-size-sm);
 }
 
@@ -799,6 +829,8 @@ html[data-environment="local"] {
 html[data-environment="vercel"] {
   --portfolio-url: "https://desenvolvimento-web-2025-2.vercel.app";
   --portfolio-status: "online";
+  --portfolio-provider: "vercel";
+  --portfolio-domain: "desenvolvimento-web-2025-2.vercel.app";
 }
 
 /* 📡 Seletor para Netlify */

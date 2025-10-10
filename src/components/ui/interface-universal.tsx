@@ -59,7 +59,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
   };
 
   const [config, setConfig] = useState<UniversalConfig>({
-    url: 'https://meu-portfolio-universal.com',
+    url: 'https://desenvolvimento-web-2025-2.vercel.app',
     title: 'Interface Gráfica Pessoal - Sistema Universal',
     author: 'Gabriel Malheiros',
     institution: 'FAESA',
@@ -74,7 +74,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
   const extractCSSConfig = useCallback((): UniversalConfig => {
     const style = getComputedStyle(document.documentElement);
     
-    // 🌐 Detecção automática do ambiente MELHORADA
+    // 🌐 Detecção automática do ambiente MELHORADA para Vercel REAL
     const hostname = window.location.hostname;
     const protocol = window.location.protocol;
     const port = window.location.port;
@@ -83,26 +83,26 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
     let autoStatus: UniversalConfig['status'] = 'online';
     let environment = 'unknown';
     
-    // Detectar ambiente automaticamente com mais precisão
+    // Detectar ambiente automaticamente com URL REAL do Vercel
     if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '0.0.0.0') {
       autoUrl = `${protocol}//${hostname}:${port || '3000'}`;
       autoStatus = 'online';
       environment = 'development';
       document.documentElement.setAttribute('data-environment', 'development');
       console.log('🏠 Ambiente detectado: Desenvolvimento Local');
+    } else if (hostname === 'desenvolvimento-web-2025-2.vercel.app' || hostname.includes('desenvolvimento-web-2025-2') || hostname.includes('vercel.app')) {
+      autoUrl = `${protocol}//${hostname}`;
+      autoStatus = 'online';
+      environment = 'vercel';
+      document.documentElement.setAttribute('data-environment', 'vercel');
+      document.documentElement.setAttribute('data-url', hostname);
+      console.log('🚀 Ambiente detectado: Vercel Deploy REAL - desenvolvimento-web-2025-2.vercel.app');
     } else if (hostname.includes('github.io') || hostname.includes('githubpages.io')) {
-      // Garantir URL correta do GitHub Pages
       autoUrl = `${protocol}//${hostname}/DesenvolvimentoWeb-2025-2`;
       autoStatus = 'online';
       environment = 'github-pages';
       document.documentElement.setAttribute('data-environment', 'github-pages');
       console.log('🌐 Ambiente detectado: GitHub Pages');
-    } else if (hostname.includes('vercel.app') || hostname.includes('vercel.com')) {
-      autoUrl = `${protocol}//${hostname}`;
-      autoStatus = 'online';
-      environment = 'vercel';
-      document.documentElement.setAttribute('data-environment', 'vercel');
-      console.log('🚀 Ambiente detectado: Vercel');
     } else if (hostname.includes('netlify.app') || hostname.includes('netlify.com')) {
       autoUrl = `${protocol}//${hostname}`;
       autoStatus = 'online';
@@ -110,19 +110,20 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
       document.documentElement.setAttribute('data-environment', 'netlify');
       console.log('📡 Ambiente detectado: Netlify');
     } else {
-      // Fallback para URL padrão
-      autoUrl = 'https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2';
+      // Fallback para URL REAL do Vercel
+      autoUrl = 'https://desenvolvimento-web-2025-2.vercel.app';
       autoStatus = 'online';
       environment = 'production';
       document.documentElement.setAttribute('data-environment', 'production');
-      console.log('🌍 Ambiente detectado: Produção (Fallback)');
+      console.log('🌍 Ambiente detectado: Produção (Fallback para Vercel REAL)');
     }
     
     // Aplicar configurações CSS específicas do ambiente
     document.documentElement.style.setProperty('--current-environment', `"${environment}"`);
     document.documentElement.style.setProperty('--current-url', `"${autoUrl}"`);
+    document.documentElement.style.setProperty('--portfolio-url', `"${autoUrl}"`);
     
-    console.log(`🔗 URL configurada: ${autoUrl}`);
+    console.log(`🔗 URL REAL configurada: ${autoUrl}`);
     
     return {
       url: autoUrl,

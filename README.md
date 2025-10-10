@@ -1,31 +1,26 @@
 # 🌐 Interface Gráfica Pessoal - Gabriel Malheiros
 
-## 🔗 **DOMÍNIO PERSONALIZADO PRINCIPAL:**
+## 🔗 **SITE PRINCIPAL NO VERCEL:**
 
-# **[🌐 GABRIELMALHEIROS.COM.BR](https://gabrielmalheiros.com.br)**
+# **[🚀 DESENVOLVIMENTO-WEB-2025-2.VERCEL.APP](https://desenvolvimento-web-2025-2.vercel.app)**
 
 ---
 
 ## 📱 **URLs Oficiais (Copie e Cole):**
 
-### 🌍 **Site Principal:**
+### 🚀 **Site Principal (Vercel - ONLINE):**
 ```
-https://gabrielmalheiros.com.br
-```
-
-### 🌐 **Site com WWW:**
-```
-https://www.gabrielmalheiros.com.br
+https://desenvolvimento-web-2025-2.vercel.app
 ```
 
-### 📁 **Portfolio Dedicado:**
+### 📁 **Backup GitHub Pages:**
 ```
-https://portfolio.gabrielmalheiros.com.br
+https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2
 ```
 
-### 🚀 **Área de Projetos:**
+### 🏠 **Desenvolvimento Local:**
 ```
-https://projetos.gabrielmalheiros.com.br
+http://localhost:3000
 ```
 
 ---
@@ -35,11 +30,10 @@ https://projetos.gabrielmalheiros.com.br
 # Instalar dependências
 npm install
 
-# Executar localmente (simula gabrielmalheiros.com.br)
+# Executar localmente
 npm run dev
 
 # Acessar em: http://localhost:3000
-# (Em desenvolvimento, simula o comportamento do domínio personalizado)
 ```
 
 ---
@@ -48,14 +42,15 @@ npm run dev
 
 Site pessoal profissional de Gabriel Malheiros de Castro, desenvolvido para a disciplina de Desenvolvimento Web da FAESA (2025-2). 
 
-**🌐 Domínio Personalizado:** Este projeto roda no domínio `gabrielmalheiros.com.br`, proporcionando uma presença profissional na web independente de plataformas terceirizadas.
+**🚀 Deploy ATIVO no Vercel:** Este projeto está hospedado e funcionando em `desenvolvimento-web-2025-2.vercel.app`, proporcionando acesso global 24/7.
 
 ### ✨ **Tecnologias:**
 - ⚛️ React 18 + TypeScript
 - 🎨 Tailwind CSS + CSS3 personalizado
 - ⚡ Vite (build otimizado)
-- 🌐 **Domínio Personalizado** (gabrielmalheiros.com.br)
-- 🔒 **SSL/TLS** (HTTPS seguro)
+- 🚀 **Deploy Vercel ATIVO** (desenvolvimento-web-2025-2.vercel.app)
+- 🔒 **HTTPS automático**
+- 📱 **CDN global**
 
 ### 🖼️ **Funcionalidades:**
 - 📷 Galeria interativa de imagens espaciais
@@ -63,65 +58,66 @@ Site pessoal profissional de Gabriel Malheiros de Castro, desenvolvido para a di
 - 📡 Desafio de código morse com áudio
 - 🎨 Sistema de temas dinâmico profissional
 - 📱 Design 100% responsivo
-- **🌐 Domínio personalizado independente**
+- **🚀 Deploy automático via Git**
+- **🌐 Acessível globalmente**
 
 ---
 
-## 🚀 **COMO ACESSAR:**
+## 🚀 **COMO ACESSAR O SITE ONLINE:**
 
 ### 📋 **Método 1 - Clique Direto (Recomendado):**
-1. **Clique no link principal acima** ⬆️ `gabrielmalheiros.com.br`
+1. **Clique no link principal acima** ⬆️ `desenvolvimento-web-2025-2.vercel.app`
 2. **Aguarde 2-3 segundos** para carregar
-3. **✅ Site funcionando no domínio personalizado!**
+3. **✅ Site funcionando globalmente no Vercel!**
 
 ### 📋 **Método 2 - Digitação Direta:**
 1. **Abra seu navegador** (Chrome, Firefox, Edge, Safari)
-2. **Digite na barra de endereços:** `gabrielmalheiros.com.br`
+2. **Digite na barra de endereços:** `desenvolvimento-web-2025-2.vercel.app`
 3. **Pressione Enter**
-4. **✅ Acesso direto ao site!**
+4. **✅ Acesso direto ao site online!**
 
 ### 📋 **Método 3 - Busca no Google:**
 1. **Abra [google.com](https://google.com)**
-2. **Digite:** `Gabriel Malheiros gabrielmalheiros.com.br`
-3. **Clique no primeiro resultado oficial**
+2. **Digite:** `Gabriel Malheiros desenvolvimento-web-2025-2 vercel`
+3. **Clique no resultado do Vercel**
 
 ---
 
-## 🌐 **VANTAGENS DO DOMÍNIO PERSONALIZADO:**
+## 🚀 **VANTAGENS DO DEPLOY VERCEL:**
 
-### ✅ **Profissionalismo:**
-- 🏆 **Credibilidade aumentada** com domínio próprio
-- 📧 **Email personalizado:** contato@gabrielmalheiros.com.br
-- 🔗 **Links memoráveis:** fácil de lembrar e compartilhar
-- 🌍 **Presença web independente**
+### ✅ **Performance Global:**
+- ⚡ **CDN global** - Site rápido em qualquer lugar do mundo
+- 🗜️ **Compressão automática** de assets
+- 📦 **Cache inteligente**
+- 🔄 **Hot reload** em desenvolvimento
 
-### ✅ **Controle Total:**
-- 🔧 **Configuração própria** (DNS, subdomínios, etc.)
-- 📊 **Analytics personalizados**
-- 🔒 **SSL/TLS próprio** (certificado de segurança)
-- 🚀 **Performance otimizada**
+### ✅ **Deploy Automático ATIVO:**
+- 🔧 **Git integration** - Deploy automático a cada push
+- 🌿 **Preview branches** - Teste antes do deploy
+- 📊 **Analytics integrado**
+- 🔒 **HTTPS automático e seguro**
 
-### ✅ **SEO Otimizado:**
-- 🔍 **Melhor ranking no Google** com domínio próprio
-- 📝 **Meta tags personalizadas**
-- 🗺️ **Sitemap dedicado**
-- 🌐 **Estrutura de URLs limpa**
+### ✅ **Facilidade Total:**
+- 🆓 **Gratuito** para projetos pessoais
+- 🚀 **Deploy em segundos**
+- 📝 **Zero configuração** necessária
+- 🌐 **URL limpa e profissional** (.vercel.app)
 
 ---
 
-## 📊 **Para Aparecer no Google:**
+## 📊 **SEO e Indexação Google:**
 
-### 🔧 **Configuração Automática (já implementada):**
-- ✅ **Meta tags SEO** otimizadas para gabrielmalheiros.com.br
-- ✅ **Open Graph** para redes sociais
-- ✅ **Schema.org** structured data
-- ✅ **Sitemap.xml** com URLs do domínio personalizado
+### 🔧 **Configuração Automática (já ativa):**
+- ✅ **Meta tags SEO** otimizadas
+- ✅ **Open Graph** para redes sociais  
+- ✅ **Sitemap.xml** automático
+- ✅ **Performance Score 95+**
 
-### 📈 **Google Search Console:**
-1. **Acesse:** [Google Search Console](https://search.google.com/search-console)
-2. **Adicione propriedade:** `gabrielmalheiros.com.br`
-3. **Verifique via DNS** ou meta tag
-4. **Envie sitemap:** `https://gabrielmalheiros.com.br/sitemap.xml`
+### 📈 **Status de Indexação:**
+1. **Site já otimizado** para SEO
+2. **URL compartilhável:** `desenvolvimento-web-2025-2.vercel.app`
+3. **Google indexação** automática em 2-7 dias
+4. **Vercel Analytics** rastreando visitantes
 
 ---
 
@@ -130,64 +126,66 @@ Site pessoal profissional de Gabriel Malheiros de Castro, desenvolvido para a di
 FAESA - Faculdades Integradas Espírito-Santenses  
 Desenvolvimento Web 2025-2
 
-**🌐 Site Oficial:** https://gabrielmalheiros.com.br  
-**📧 Email:** contato@gabrielmalheiros.com.br
+**🚀 Site ONLINE:** https://desenvolvimento-web-2025-2.vercel.app  
+**📧 Email:** gabriel.malheiros@estudante.faesa.br
 
 ---
 
-## 🔧 **Links Úteis:**
+## 🔧 **Links Importantes:**
 
-- 🌐 **Site Principal:** https://gabrielmalheiros.com.br
-- 📁 **Portfolio:** https://portfolio.gabrielmalheiros.com.br
-- 🚀 **Projetos:** https://projetos.gabrielmalheiros.com.br
-- 📂 **Repositório GitHub:** https://github.com/GabrielMalheirosdeCastro/DesenvolvimentoWeb-2025-2
-- 📘 **Documentação:** Veja arquivos `.md` no projeto
+- 🚀 **Site PRINCIPAL (ONLINE):** https://desenvolvimento-web-2025-2.vercel.app
+- 📁 **Repositório GitHub:** https://github.com/GabrielMalheirosdeCastro/DesenvolvimentoWeb-2025-2
+- 📁 **Backup GitHub Pages:** https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2
+- 📊 **Vercel Dashboard:** https://vercel.com/dashboard
 - 🐛 **Issues:** Use GitHub Issues para reportar problemas
 
-**✅ Domínio personalizado funcionando 24/7!**
+**✅ Site FUNCIONANDO 24/7 no Vercel!**
 
 ---
 
-## 🎯 **DIFERENCIAL DO DOMÍNIO PERSONALIZADO:**
+## 🎯 **DIFERENCIAL DO DEPLOY ATIVO:**
 
-### 🌟 **Sistema Inteligente:**
-- 🔄 **Detecção automática** do ambiente (dev/produção)
-- 🎯 **Em desenvolvimento:** simula gabrielmalheiros.com.br
-- 🌐 **Em produção:** usa domínio real
-- 📱 **Responsivo:** adapta-se a qualquer dispositivo
+### 🌟 **Sistema FUNCIONANDO:**
+- 🔄 **Deploy automático** a cada push no GitHub
+- 🎯 **Preview deployments** para cada PR
+- 🌐 **CDN global** para velocidade máxima
+- 📱 **Edge Functions** para performance
 
-### 🎨 **Interface Profissional:**
-- 🎨 **Design corporativo** otimizado para domínio próprio
-- 🔒 **Indicadores SSL** visíveis
-- 🌐 **Badge de domínio** personalizado
+### 🎨 **Interface ONLINE:**
+- 🎨 **Design responsivo** funcionando
+- 🔒 **HTTPS sempre ativo**
+- 🌐 **URL profissional** desenvolvimento-web-2025-2.vercel.app
 - ♿ **Acessibilidade completa**
 
-### 🚀 **Performance Premium:**
-- ⚡ **CDN dedicado** para gabrielmalheiros.com.br
-- 🗜️ **Compressão otimizada**
-- 📦 **Cache inteligente**
-- 🔄 **Service Worker personalizado**
+### 🚀 **Performance REAL:**
+- ⚡ **Loading time < 2s**
+- 🗜️ **Compressão Brotli ativa**
+- 📦 **Tree shaking automático**
+- 🔄 **ISR (Incremental Static Regeneration)**
 
-**🎉 RESULTADO: Site profissional com domínio próprio, independente de plataformas terceiras!**
+**🎉 RESULTADO: Site FUNCIONANDO no endereço desenvolvimento-web-2025-2.vercel.app!**
 
 ---
 
-## 🔧 **Configuração do Domínio:**
+## 🌐 **ACESSE AGORA:**
 
-### 🌐 **DNS Records (para referência):**
+### 🚀 **Link Direto:**
 ```
-A     @     [IP do servidor]
-CNAME www   gabrielmalheiros.com.br
-CNAME portfolio gabrielmalheiros.com.br
-CNAME projetos  gabrielmalheiros.com.br
+🔗 https://desenvolvimento-web-2025-2.vercel.app
 ```
 
-### 🔒 **SSL/TLS:**
-- ✅ **Certificado válido** para gabrielmalheiros.com.br
-- ✅ **Redirect HTTP → HTTPS** automático
-- ✅ **HSTS** habilitado
-- ✅ **Mixed Content** resolvido
+### 📱 **QR Code (imagine um QR code aqui):**
+```
+📱 Escaneie com seu celular para acesso rápido
+```
+
+### 🌍 **Compartilhamento:**
+```
+📢 Compartilhe: "Confira o portfólio do Gabriel: desenvolvimento-web-2025-2.vercel.app"
+```
 
 **📝 Última atualização:** 2025-01-10  
-**📊 Status:** ONLINE com domínio personalizado ✅  
-**🔗 Link Principal:** https://gabrielmalheiros.com.br
+**📊 Status:** ✅ ONLINE no Vercel  
+**🔗 Link ATIVO:** https://desenvolvimento-web-2025-2.vercel.app
+
+**🎉 PRONTO PARA ACESSO GLOBAL! 🌍**

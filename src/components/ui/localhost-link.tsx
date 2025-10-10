@@ -26,29 +26,29 @@ export const Localhost3000Link: React.FC<LocalhostLinkProps> = ({
       const protocol = window.location.protocol;
       const port = window.location.port;
 
-      // 🌐 PRIORIDADE 1: Domínio personalizado
-      if (hostname === 'gabrielmalheiros.com.br' || hostname === 'www.gabrielmalheiros.com.br') {
+      // 🚀 PRIORIDADE 1: Vercel Deploy Real
+      if (hostname === 'desenvolvimento-web-2025-2.vercel.app' || hostname.includes('desenvolvimento-web-2025-2') || hostname.includes('vercel.app')) {
         setEnvironment('custom-domain');
         setCurrentUrl(`${protocol}//${hostname}`);
-        console.log('🌐 Ambiente: Domínio Personalizado - ONLINE');
+        console.log('🚀 Ambiente: Vercel Deploy - ONLINE');
         
-      // 📁 PRIORIDADE 2: GitHub Pages (TEMPORÁRIO até configurar domínio)
-      } else if (hostname.includes('github.io')) {
-        setEnvironment('github');
-        setCurrentUrl('https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2');
-        console.log('📁 Ambiente: GitHub Pages - TEMPORÁRIO');
-        
-      // 🏠 PRIORIDADE 3: Desenvolvimento local
+      // 🏠 PRIORIDADE 2: Desenvolvimento local
       } else if (hostname === 'localhost' || hostname === '127.0.0.1') {
         setEnvironment('local');
         setCurrentUrl('http://localhost:3000');
         console.log('🏠 Ambiente: Desenvolvimento Local');
         
-      // 🌍 FALLBACK: Redirecionar para GitHub Pages
+      // 📁 PRIORIDADE 3: GitHub Pages (backup)
+      } else if (hostname.includes('github.io')) {
+        setEnvironment('github');
+        setCurrentUrl('https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2');
+        console.log('📁 Ambiente: GitHub Pages - BACKUP');
+        
+      // 🌍 FALLBACK: Vercel por padrão
       } else {
         setEnvironment('production');
-        setCurrentUrl('https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2');
-        console.log('🌍 Fallback: GitHub Pages');
+        setCurrentUrl('https://desenvolvimento-web-2025-2.vercel.app');
+        console.log('🌍 Fallback: Vercel Deploy Real');
       }
     };
 
@@ -109,13 +109,13 @@ export const Localhost3000Link: React.FC<LocalhostLinkProps> = ({
   const getStatusText = () => {
     switch (environment) {
       case 'local':
-        return isOnline ? 'Local Online (simulando gabrielmalheiros.com.br)' : 'Local Offline - Execute npm run dev';
+        return isOnline ? 'Local Online (desenvolvimento)' : 'Local Offline - Execute npm run dev';
       case 'custom-domain':
-        return 'gabrielmalheiros.com.br Online';
+        return 'Vercel Online';
       case 'github':
         return 'GitHub Pages Online (backup)';
       case 'production':
-        return 'gabrielmalheiros.com.br Online';
+        return 'Vercel Online';
       default:
         return 'Status Desconhecido';
     }
@@ -124,13 +124,13 @@ export const Localhost3000Link: React.FC<LocalhostLinkProps> = ({
   const getDisplayUrl = () => {
     switch (environment) {
       case 'local':
-        return 'localhost:3000 (simulando gabrielmalheiros.com.br)';
+        return 'localhost:3000 (desenvolvimento)';
       case 'custom-domain':
-        return 'gabrielmalheiros.com.br';
+        return 'Vercel App';
       case 'github':
         return 'GitHub Pages (backup)';
       case 'production':
-        return 'gabrielmalheiros.com.br';
+        return 'Vercel App';
       default:
         return currentUrl;
     }
@@ -178,19 +178,19 @@ export const Localhost3000Link: React.FC<LocalhostLinkProps> = ({
         "focus:outline-none focus:ring-2 focus:ring-offset-2",
         environment === 'local' && isOnline && "bg-green-600 hover:bg-green-700 text-white focus:ring-green-500",
         environment === 'local' && !isOnline && "bg-gray-400 text-gray-700 cursor-not-allowed",
-        environment === 'custom-domain' && "bg-blue-600 hover:bg-blue-700 text-white focus:ring-blue-500",
+        environment === 'custom-domain' && "bg-black hover:bg-gray-800 text-white focus:ring-gray-500",
         environment === 'github' && "bg-gray-600 hover:bg-gray-700 text-white focus:ring-gray-500",
-        environment === 'production' && "bg-indigo-600 hover:bg-indigo-700 text-white focus:ring-indigo-500",
+        environment === 'production' && "bg-black hover:bg-gray-800 text-white focus:ring-gray-500",
         className
       )}
     >
       {showStatus && getStatusIcon()}
       <span>
-        {environment === 'local' && isOnline && '🏠 Desenvolvimento (simulando gabrielmalheiros.com.br)'}
+        {environment === 'local' && isOnline && '🏠 Desenvolvimento Local'}
         {environment === 'local' && !isOnline && '❌ Servidor Local Offline'}
-        {environment === 'custom-domain' && '🌐 Acessar gabrielmalheiros.com.br'}
+        {environment === 'custom-domain' && '🚀 Acessar no Vercel'}
         {environment === 'github' && '📁 GitHub Pages (backup)'}
-        {environment === 'production' && '🌐 Acessar gabrielmalheiros.com.br'}
+        {environment === 'production' && '🚀 Acessar no Vercel'}
       </span>
       <ExternalLink className="w-4 h-4" />
     </button>
@@ -210,13 +210,13 @@ export const UniversalPortfolioLink: React.FC<{
     
     if (hostname === 'localhost' || hostname === '127.0.0.1') {
       setUrl('http://localhost:3000');
-      setEnvironment('🏠 Desenvolvimento (simulando gabrielmalheiros.com.br)');
-    } else if (hostname.includes('gabrielmalheiros.com.br')) {
+      setEnvironment('🏠 Desenvolvimento Local');
+    } else if (hostname === 'desenvolvimento-web-2025-2.vercel.app' || hostname.includes('desenvolvimento-web-2025-2') || hostname.includes('vercel.app')) {
       setUrl(`https://${hostname}`);
-      setEnvironment('🌐 gabrielmalheiros.com.br');
+      setEnvironment('🚀 Vercel Deploy');
     } else {
-      setUrl('https://gabrielmalheiros.com.br');
-      setEnvironment('🌐 gabrielmalheiros.com.br');
+      setUrl('https://desenvolvimento-web-2025-2.vercel.app');
+      setEnvironment('🚀 Vercel Deploy');
     }
   }, []);
 
@@ -234,18 +234,19 @@ export const UniversalPortfolioLink: React.FC<{
       rel="noopener noreferrer"
       className={cn(
         "inline-flex items-center gap-4 rounded-xl font-bold text-white transition-all duration-300 transform hover:scale-105",
-        "bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800",
-        "hover:from-blue-700 hover:via-blue-800 hover:to-blue-900",
-        "shadow-lg hover:shadow-xl border-2 border-blue-300",
-        "focus:outline-none focus:ring-4 focus:ring-blue-300",
+        "bg-gradient-to-r from-black via-gray-800 to-gray-900",
+        "hover:from-gray-800 hover:via-gray-700 hover:to-gray-600",
+        "shadow-lg hover:shadow-xl border-2 border-gray-600",
+        "focus:outline-none focus:ring-4 focus:ring-gray-300",
         sizeClasses[size],
         className
       )}
-      data-domain="gabrielmalheiros.com.br"
+      data-provider="vercel"
+      data-url="desenvolvimento-web-2025-2.vercel.app"
     >
       <Globe className="w-6 h-6" />
       <div className="text-center">
-        <div>Acessar gabrielmalheiros.com.br</div>
+        <div>🚀 desenvolvimento-web-2025-2.vercel.app</div>
         <div className="text-xs opacity-90">{environment}</div>
       </div>
       <ExternalLink className="w-5 h-5" />
