@@ -16,31 +16,36 @@ export const Localhost3000Link: React.FC<LocalhostLinkProps> = ({
   autoDetect = true
 }) => {
   const [currentUrl, setCurrentUrl] = useState<string>('');
-  const [environment, setEnvironment] = useState<'local' | 'github' | 'production'>('production');
+  const [environment, setEnvironment] = useState<'local' | 'custom-domain' | 'github' | 'production'>('production');
   const [isOnline, setIsOnline] = useState<boolean>(true);
 
   useEffect(() => {
-    // 🔍 Detecção automática de ambiente
+    // 🔍 Detecção automática de ambiente com prioridade para gabrielmalheiros.com.br
     const detectEnvironment = () => {
       const hostname = window.location.hostname;
       const protocol = window.location.protocol;
       const port = window.location.port;
 
       if (hostname === 'localhost' || hostname === '127.0.0.1') {
-        // 🏠 DESENVOLVIMENTO LOCAL
+        // 🏠 DESENVOLVIMENTO LOCAL (simula gabrielmalheiros.com.br)
         setEnvironment('local');
         setCurrentUrl('http://localhost:3000');
-        console.log('🏠 Ambiente: Desenvolvimento Local');
+        console.log('🏠 Ambiente: Desenvolvimento Local (simulando gabrielmalheiros.com.br)');
+      } else if (hostname === 'gabrielmalheiros.com.br' || hostname === 'www.gabrielmalheiros.com.br' || hostname.includes('gabrielmalheiros.com.br')) {
+        // 🌐 DOMÍNIO PERSONALIZADO GABRIEL MALHEIROS
+        setEnvironment('custom-domain');
+        setCurrentUrl(`${protocol}//${hostname}`);
+        console.log('🌐 Ambiente: Domínio Personalizado - gabrielmalheiros.com.br');
       } else if (hostname.includes('github.io')) {
-        // 🌐 GITHUB PAGES
+        // 📁 GITHUB PAGES (backup)
         setEnvironment('github');
         setCurrentUrl('https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2');
-        console.log('🌐 Ambiente: GitHub Pages');
+        console.log('📁 Ambiente: GitHub Pages (backup)');
       } else {
-        // 🌍 PRODUÇÃO/OUTROS
+        // 🌍 PRODUÇÃO (default para domínio personalizado)
         setEnvironment('production');
-        setCurrentUrl('https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2');
-        console.log('🌍 Ambiente: Produção');
+        setCurrentUrl('https://gabrielmalheiros.com.br');
+        console.log('🌍 Ambiente: Produção (gabrielmalheiros.com.br)');
       }
     };
 
@@ -58,7 +63,7 @@ export const Localhost3000Link: React.FC<LocalhostLinkProps> = ({
               signal: controller.signal
             });
             setIsOnline(true);
-            console.log('✅ Localhost:3000 está online');
+            console.log('✅ Localhost:3000 está online (simulando gabrielmalheiros.com.br)');
           } catch (error) {
             setIsOnline(false);
             console.log('❌ Localhost:3000 está offline');
@@ -70,7 +75,7 @@ export const Localhost3000Link: React.FC<LocalhostLinkProps> = ({
           console.log('❌ Localhost:3000 está offline');
         }
       } else {
-        setIsOnline(true); // GitHub Pages sempre online
+        setIsOnline(true); // Domínios personalizados sempre online
       }
     };
 
@@ -83,7 +88,7 @@ export const Localhost3000Link: React.FC<LocalhostLinkProps> = ({
   const handleClick = () => {
     // 🚀 Abrir link baseado no ambiente atual
     if (environment === 'local' && !isOnline) {
-      alert('❌ Servidor local não está rodando!\n\n✅ Execute: npm run dev\n⏰ Aguarde o servidor iniciar\n🔗 Depois clique novamente');
+      alert('❌ Servidor local não está rodando!\n\n✅ Execute: npm run dev\n⏰ Aguarde o servidor iniciar\n🔗 Depois clique novamente\n\n💡 Em produção, este link será gabrielmalheiros.com.br');
       return;
     }
 
@@ -101,11 +106,13 @@ export const Localhost3000Link: React.FC<LocalhostLinkProps> = ({
   const getStatusText = () => {
     switch (environment) {
       case 'local':
-        return isOnline ? 'Local Online' : 'Local Offline - Execute npm run dev';
+        return isOnline ? 'Local Online (simulando gabrielmalheiros.com.br)' : 'Local Offline - Execute npm run dev';
+      case 'custom-domain':
+        return 'gabrielmalheiros.com.br Online';
       case 'github':
-        return 'GitHub Pages Online';
+        return 'GitHub Pages Online (backup)';
       case 'production':
-        return 'Site Online';
+        return 'gabrielmalheiros.com.br Online';
       default:
         return 'Status Desconhecido';
     }
@@ -114,11 +121,13 @@ export const Localhost3000Link: React.FC<LocalhostLinkProps> = ({
   const getDisplayUrl = () => {
     switch (environment) {
       case 'local':
-        return 'localhost:3000';
+        return 'localhost:3000 (simulando gabrielmalheiros.com.br)';
+      case 'custom-domain':
+        return 'gabrielmalheiros.com.br';
       case 'github':
-        return 'GitHub Pages';
+        return 'GitHub Pages (backup)';
       case 'production':
-        return 'Site Público';
+        return 'gabrielmalheiros.com.br';
       default:
         return currentUrl;
     }
@@ -166,24 +175,26 @@ export const Localhost3000Link: React.FC<LocalhostLinkProps> = ({
         "focus:outline-none focus:ring-2 focus:ring-offset-2",
         environment === 'local' && isOnline && "bg-green-600 hover:bg-green-700 text-white focus:ring-green-500",
         environment === 'local' && !isOnline && "bg-gray-400 text-gray-700 cursor-not-allowed",
-        environment === 'github' && "bg-blue-600 hover:bg-blue-700 text-white focus:ring-blue-500",
+        environment === 'custom-domain' && "bg-blue-600 hover:bg-blue-700 text-white focus:ring-blue-500",
+        environment === 'github' && "bg-gray-600 hover:bg-gray-700 text-white focus:ring-gray-500",
         environment === 'production' && "bg-indigo-600 hover:bg-indigo-700 text-white focus:ring-indigo-500",
         className
       )}
     >
       {showStatus && getStatusIcon()}
       <span>
-        {environment === 'local' && isOnline && '🏠 Abrir Desenvolvimento Local'}
+        {environment === 'local' && isOnline && '🏠 Desenvolvimento (simulando gabrielmalheiros.com.br)'}
         {environment === 'local' && !isOnline && '❌ Servidor Local Offline'}
-        {environment === 'github' && '🌐 Abrir Site no GitHub Pages'}
-        {environment === 'production' && '🌍 Abrir Site Público'}
+        {environment === 'custom-domain' && '🌐 Acessar gabrielmalheiros.com.br'}
+        {environment === 'github' && '📁 GitHub Pages (backup)'}
+        {environment === 'production' && '🌐 Acessar gabrielmalheiros.com.br'}
       </span>
       <ExternalLink className="w-4 h-4" />
     </button>
   );
 };
 
-// Componente para link universal
+// Componente para link universal com domínio personalizado
 export const UniversalPortfolioLink: React.FC<{
   className?: string;
   size?: 'sm' | 'md' | 'lg' | 'xl';
@@ -196,10 +207,13 @@ export const UniversalPortfolioLink: React.FC<{
     
     if (hostname === 'localhost' || hostname === '127.0.0.1') {
       setUrl('http://localhost:3000');
-      setEnvironment('🏠 Desenvolvimento');
+      setEnvironment('🏠 Desenvolvimento (simulando gabrielmalheiros.com.br)');
+    } else if (hostname.includes('gabrielmalheiros.com.br')) {
+      setUrl(`https://${hostname}`);
+      setEnvironment('🌐 gabrielmalheiros.com.br');
     } else {
-      setUrl('https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2');
-      setEnvironment('🌐 Site Público');
+      setUrl('https://gabrielmalheiros.com.br');
+      setEnvironment('🌐 gabrielmalheiros.com.br');
     }
   }, []);
 
@@ -224,10 +238,11 @@ export const UniversalPortfolioLink: React.FC<{
         sizeClasses[size],
         className
       )}
+      data-domain="gabrielmalheiros.com.br"
     >
       <Globe className="w-6 h-6" />
       <div className="text-center">
-        <div>Acessar Portfólio</div>
+        <div>Acessar gabrielmalheiros.com.br</div>
         <div className="text-xs opacity-90">{environment}</div>
       </div>
       <ExternalLink className="w-5 h-5" />

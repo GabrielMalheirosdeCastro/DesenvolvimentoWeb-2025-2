@@ -1,4 +1,4 @@
-/* 🌐 Sistema de Interface Gráfica Universal - Independente de Figma/Vercel/Netlify */
+/* 🌐 Sistema de Interface Gráfica Universal - gabrielmalheiros.com.br */
 
 :root {
   /* 🎨 Design System Próprio - Não depende de Figma */
@@ -39,21 +39,35 @@
   --font-size-3xl: 1.875rem;
   --font-size-4xl: 2.25rem;
   
-  /* 🌐 Link de Portfólio Universal - CONFIGURAÇÃO AUTOMÁTICA */
-  --portfolio-url: "https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2";
+  /* 🌐 Domínio Personalizado Gabriel Malheiros - CONFIGURAÇÃO PRINCIPAL */
+  --portfolio-url-primary: "https://gabrielmalheiros.com.br";
+  --portfolio-url-www: "https://www.gabrielmalheiros.com.br";
+  --portfolio-url-portfolio: "https://portfolio.gabrielmalheiros.com.br";
+  --portfolio-url-projetos: "https://projetos.gabrielmalheiros.com.br";
+  --portfolio-url-blog: "https://blog.gabrielmalheiros.com.br";
+  
+  /* 🔧 URLs de desenvolvimento e fallback */
   --portfolio-url-local: "http://localhost:3000";
   --portfolio-url-development: "http://localhost:3000";
-  --portfolio-title: "Interface Gráfica Pessoal - Gabriel Malheiros - FAESA 2025-2";
+  --portfolio-url-github-backup: "https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2";
+  
+  /* 🎯 URL principal ativa (muda automaticamente) */
+  --portfolio-url: var(--portfolio-url-primary);
+  
+  /* 📝 Informações do domínio personalizado */
+  --portfolio-domain: "gabrielmalheiros.com.br";
+  --portfolio-title: "Gabriel Malheiros - Site Pessoal | Desenvolvimento Web FAESA";
   --portfolio-author: "Gabriel Malheiros de Castro";
   --portfolio-institution: "FAESA - Faculdades Integradas Espírito-Santenses";
   --portfolio-status: "online"; /* online | offline | maintenance */
-  --portfolio-theme: "modern"; /* modern | classic | minimal | colorful */
+  --portfolio-theme: "professional"; /* professional | modern | classic | minimal | colorful */
   
-  /* 🎨 Configurações específicas para site pessoal */
-  --portfolio-button-text: "🌐 Acessar Meu Site Pessoal";
-  --portfolio-show-provider: "true";
-  --portfolio-show-status: "true";
-  --portfolio-description: "Site pessoal acadêmico - FAESA - React + TypeScript + CSS3 - Windows + Google Compatible";
+  /* 🎨 Configurações específicas para domínio personalizado */
+  --portfolio-button-text: "🌐 Acessar gabrielmalheiros.com.br";
+  --portfolio-button-text-dev: "🏠 Desenvolvimento (simulando gabrielmalheiros.com.br)";
+  --portfolio-show-domain: "true";
+  --portfolio-show-ssl: "true";
+  --portfolio-description: "Site pessoal profissional de Gabriel Malheiros - Estudante de Desenvolvimento Web na FAESA";
   
   /* 🔧 Configurações técnicas universais */
   --portfolio-provider: "auto-detect";
@@ -850,4 +864,258 @@ html[data-environment="netlify"] {
   .space-gallery-figma .grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
+}
+
+/* 🌐 Detecção Automática de Ambiente para gabrielmalheiros.com.br */
+
+/* 🏠 Ambiente de desenvolvimento local (simula gabrielmalheiros.com.br) */
+html[data-environment="development"],
+html[data-environment="local"] {
+  --portfolio-url: var(--portfolio-url-local);
+  --portfolio-status: "development";
+  --portfolio-button-text: var(--portfolio-button-text-dev);
+}
+
+/* 🌐 Produção - domínio personalizado gabrielmalheiros.com.br */
+html[data-environment="production"],
+html[data-environment="custom-domain"] {
+  --portfolio-url: var(--portfolio-url-primary);
+  --portfolio-status: "online";
+  --portfolio-button-text: "🌐 Acessar gabrielmalheiros.com.br";
+}
+
+/* 🎨 Tema profissional para domínio personalizado */
+[data-theme="professional"] {
+  --brand-primary: #1e40af;
+  --brand-secondary: #2563eb;
+  --brand-accent: #3b82f6;
+  --brand-success: #059669;
+  --brand-warning: #d97706;
+  --brand-error: #dc2626;
+}
+
+/* 🔗 Estilos específicos para gabrielmalheiros.com.br */
+.portfolio-link-universal[data-domain="gabrielmalheiros.com.br"] {
+  background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%) !important;
+  border-color: #60a5fa !important;
+  box-shadow: 
+    0 0 0 2px #ffffff,
+    0 0 0 6px #1e40af,
+    0 15px 35px -5px rgba(30, 64, 175, 0.8) !important;
+}
+
+.portfolio-link-universal[data-domain="gabrielmalheiros.com.br"]:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 50%, #60a5fa 100%) !important;
+  transform: translateY(-6px) scale(1.05) !important;
+  box-shadow: 
+    0 0 0 2px #ffffff,
+    0 0 0 8px #3b82f6,
+    0 25px 50px -10px rgba(59, 130, 246, 0.9) !important;
+}
+
+/* 🌐 Badge do domínio personalizado */
+.portfolio-domain-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%) !important;
+  color: white !important;
+  font-size: 0.75rem !important;
+  font-weight: 800 !important;
+  padding: 6px 12px !important;
+  border-radius: 16px !important;
+  border: 2px solid #60a5fa !important;
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3) !important;
+  
+  z-index: 1001 !important;
+}
+
+.portfolio-domain-badge::before {
+  content: "🌐 " var(--portfolio-domain) !important;
+}
+
+/* 🔒 Indicador SSL para HTTPS */
+.portfolio-ssl-indicator {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  
+  width: 24px !important;
+  height: 24px !important;
+  background: #059669 !important;
+  border: 3px solid white !important;
+  border-radius: 50% !important;
+  
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  
+  font-size: 10px !important;
+  color: white !important;
+  font-weight: bold !important;
+  
+  z-index: 1002 !important;
+}
+
+.portfolio-ssl-indicator::before {
+  content: "🔒" !important;
+}
+
+/* 📱 Responsividade para domínio personalizado */
+@media (max-width: 767px) {
+  .portfolio-link-universal[data-domain="gabrielmalheiros.com.br"] {
+    min-width: 320px !important;
+    padding: var(--space-5) var(--space-6) !important;
+    font-size: var(--font-size-base) !important;
+  }
+  
+  .portfolio-domain-badge {
+    font-size: 0.65rem !important;
+    padding: 4px 8px !important;
+    top: -8px !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .portfolio-link-universal[data-domain="gabrielmalheiros.com.br"] {
+    min-width: 360px !important;
+    padding: var(--space-6) var(--space-8) !important;
+    font-size: var(--font-size-lg) !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .portfolio-link-universal[data-domain="gabrielmalheiros.com.br"] {
+    min-width: 450px !important;
+    padding: var(--space-8) var(--space-12) !important;
+    font-size: var(--font-size-xl) !important;
+    border-radius: 20px !important;
+  }
+  
+  .portfolio-domain-badge {
+    font-size: 0.8rem !important;
+    padding: 8px 16px !important;
+    top: -14px !important;
+  }
+}
+
+/* 🎯 Estados visuais para gabrielmalheiros.com.br */
+.portfolio-link-universal[data-status="online"][data-domain="gabrielmalheiros.com.br"] {
+  animation: domainPulse 3s ease-in-out infinite !important;
+}
+
+@keyframes domainPulse {
+  0%, 100% { 
+    box-shadow: 
+      0 0 0 2px #ffffff,
+      0 0 0 6px #1e40af,
+      0 15px 35px -5px rgba(30, 64, 175, 0.8);
+  }
+  50% { 
+    box-shadow: 
+      0 0 0 2px #ffffff,
+      0 0 0 8px #3b82f6,
+      0 20px 40px -5px rgba(59, 130, 246, 0.9);
+  }
+}
+
+/* 🌐 Container específico para link do domínio personalizado */
+.portfolio-custom-domain-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-8);
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: var(--space-8) auto;
+  border: 3px solid rgba(30, 64, 175, 0.2);
+}
+
+.portfolio-custom-domain-info {
+  text-align: center;
+  max-width: 600px;
+}
+
+.portfolio-custom-domain-title {
+  font-size: var(--font-size-2xl);
+  font-weight: 800;
+  color: var(--brand-primary);
+  margin-bottom: var(--space-3);
+  background: linear-gradient(135deg, var(--brand-primary), var(--brand-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.portfolio-custom-domain-description {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--space-6);
+}
+
+/* 🔗 URL display para copiar */
+.portfolio-url-display-custom {
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(30, 64, 175, 0.2);
+  border-radius: 12px;
+  padding: var(--space-4);
+  
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace;
+  font-size: var(--font-size-sm);
+  color: var(--brand-primary);
+  font-weight: 600;
+  
+  max-width: 500px;
+  word-break: break-all;
+  text-align: center;
+  
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: var(--space-4) 0;
+}
+
+/* 🎨 Alternativas de subdomínio */
+.portfolio-subdomain-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+  width: 100%;
+}
+
+.portfolio-subdomain-option {
+  background: white;
+  border: 2px solid var(--color-bg-tertiary);
+  border-radius: 12px;
+  padding: var(--space-4);
+  text-align: center;
+  transition: all var(--transition-normal);
+  cursor: pointer;
+}
+
+.portfolio-subdomain-option:hover {
+  border-color: var(--brand-accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.portfolio-subdomain-option h4 {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--brand-primary);
+  margin-bottom: var(--space-2);
+}
+
+.portfolio-subdomain-option code {
+  background: var(--color-bg-secondary);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
 }

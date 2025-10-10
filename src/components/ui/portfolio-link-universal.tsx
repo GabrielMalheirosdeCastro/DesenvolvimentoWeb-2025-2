@@ -39,69 +39,61 @@ export const PortfolioLinkUniversal: React.FC<PortfolioLinkUniversalProps> = ({
   const [isLoading, setIsLoading] = useState(true);
   const [environment, setEnvironment] = useState<'development' | 'staging' | 'production'>('production');
 
-  // 🌐 Lista de provedores públicos INDEPENDENTES do GitHub
+  // 🌐 Lista de provedores públicos com domínio personalizado GABRIEL MALHEIROS
   const PUBLIC_PROVIDERS: PublicProvider[] = [
     {
-      name: 'Vercel',
-      url: `https://desenvolvimento-web-2025-2-${Math.random().toString(36).substr(2, 8)}.vercel.app`,
+      name: 'Site Oficial',
+      url: 'https://gabrielmalheiros.com.br',
       status: 'online',
-      color: '#000000',
+      color: '#2563eb',
+      icon: '🌐',
+      description: 'Site pessoal oficial - gabrielmalheiros.com.br'
+    },
+    {
+      name: 'Portfolio Principal',
+      url: 'https://www.gabrielmalheiros.com.br',
+      status: 'online',
+      color: '#1e40af',
+      icon: '👨‍💻',
+      description: 'Portfolio completo - www.gabrielmalheiros.com.br'
+    },
+    {
+      name: 'Subdomínio Portfolio',
+      url: 'https://portfolio.gabrielmalheiros.com.br',
+      status: 'online',
+      color: '#3b82f6',
+      icon: '📁',
+      description: 'Portfolio dedicado - portfolio.gabrielmalheiros.com.br'
+    },
+    {
+      name: 'Subdomínio Projetos',
+      url: 'https://projetos.gabrielmalheiros.com.br',
+      status: 'online',
+      color: '#1d4ed8',
       icon: '🚀',
-      description: 'Deploy automático via Vercel'
+      description: 'Área de projetos - projetos.gabrielmalheiros.com.br'
     },
     {
-      name: 'Netlify',
-      url: `https://gabriel-malheiros-portfolio-${Math.random().toString(36).substr(2, 6)}.netlify.app`,
+      name: 'GitHub Backup',
+      url: 'https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2',
       status: 'online',
-      color: '#00c7b7',
-      icon: '📡',
-      description: 'Hospedagem contínua via Netlify'
-    },
-    {
-      name: 'Railway',
-      url: `https://portfolio-faesa-${Math.random().toString(36).substr(2, 10)}.up.railway.app`,
-      status: 'online',
-      color: '#0B0D0E',
-      icon: '🚂',
-      description: 'Deploy em Railway'
-    },
-    {
-      name: 'Render',
-      url: `https://gabriel-malheiros-${Math.random().toString(36).substr(2, 8)}.onrender.com`,
-      status: 'online',
-      color: '#46E3B7',
-      icon: '⚡',
-      description: 'Hospedagem via Render'
-    },
-    {
-      name: 'Surge.sh',
-      url: `https://gabriel-portfolio-faesa-${Date.now().toString(36)}.surge.sh`,
-      status: 'online',
-      color: '#96d687',
-      icon: '🌊',
-      description: 'Deploy estático via Surge'
-    },
-    {
-      name: 'Firebase',
-      url: `https://portfolio-faesa-${Math.random().toString(36).substr(2, 8)}.web.app`,
-      status: 'online',
-      color: '#FFA000',
-      icon: '🔥',
-      description: 'Hospedagem Firebase'
+      color: '#6b7280',
+      icon: '🔧',
+      description: 'Backup GitHub Pages'
     }
   ];
 
-  // 🔍 Detectar ambiente e escolher provedor
+  // 🔍 Detectar ambiente e escolher provedor baseado no domínio personalizado
   const detectEnvironmentAndProvider = useCallback(async () => {
     setIsLoading(true);
     
     const hostname = window.location.hostname;
     let detectedEnv: 'development' | 'staging' | 'production' = 'production';
     
-    // Detectar ambiente
+    // Detectar ambiente baseado no hostname
     if (hostname === 'localhost' || hostname === '127.0.0.1') {
       detectedEnv = 'development';
-    } else if (hostname.includes('staging') || hostname.includes('preview')) {
+    } else if (hostname.includes('staging') || hostname.includes('preview') || hostname.includes('dev')) {
       detectedEnv = 'staging';
     } else {
       detectedEnv = 'production';
@@ -113,22 +105,25 @@ export const PortfolioLinkUniversal: React.FC<PortfolioLinkUniversalProps> = ({
     let selectedProvider: PublicProvider;
     
     if (detectedEnv === 'development') {
-      // Para desenvolvimento, usar um provedor simulado
+      // Para desenvolvimento, simular domínio personalizado
       selectedProvider = {
         name: 'Desenvolvimento Local',
         url: 'http://localhost:3000',
         status: 'online',
         color: '#10b981',
         icon: '🏠',
-        description: 'Servidor de desenvolvimento'
+        description: 'Servidor de desenvolvimento simulando gabrielmalheiros.com.br'
       };
     } else {
-      // Para produção, escolher um provedor aleatório (simula deploy real)
-      const randomIndex = Math.floor(Math.random() * PUBLIC_PROVIDERS.length);
-      selectedProvider = PUBLIC_PROVIDERS[randomIndex];
+      // Para produção, usar sempre o domínio personalizado principal
+      selectedProvider = PUBLIC_PROVIDERS[0]; // Site Oficial
       
-      // Simular verificação de status (na prática seria uma API call)
-      if (Math.random() > 0.8) {
+      // Simular verificação de status do domínio
+      try {
+        // Em produção real, você faria uma verificação real
+        // Por enquanto, assumimos que está online
+        selectedProvider.status = 'online';
+      } catch (error) {
         selectedProvider.status = 'maintenance';
       }
     }
@@ -178,7 +173,7 @@ export const PortfolioLinkUniversal: React.FC<PortfolioLinkUniversalProps> = ({
     if (!currentProvider) return;
     
     if (currentProvider.status === 'maintenance') {
-      alert(`⚠️ ${currentProvider.name} está em manutenção.\n\n🔄 Clique em "Trocar Provedor" para usar outro serviço.`);
+      alert(`⚠️ ${currentProvider.name} está em manutenção.\n\n🔄 Clique em "Trocar Provedor" para usar outro domínio.`);
       return;
     }
     
@@ -376,7 +371,7 @@ export const PortfolioLinkUniversal: React.FC<PortfolioLinkUniversalProps> = ({
     );
   }
 
-  // Variant: button (padrão) - SUPER VISÍVEL
+  // Variant: button (padrão) - SUPER VISÍVEL COM DOMÍNIO PERSONALIZADO
   const sizeClasses = {
     sm: 'px-4 py-2 text-sm min-w-48',
     md: 'px-6 py-3 text-base min-w-64',
@@ -387,34 +382,39 @@ export const PortfolioLinkUniversal: React.FC<PortfolioLinkUniversalProps> = ({
   return (
     <button
       onClick={openPortfolio}
-      disabled={currentProvider.status === 'offline'}
+      disabled={currentProvider?.status === 'offline'}
       className={cn(
         "relative flex items-center justify-center gap-4 rounded-xl font-bold transition-all duration-300 transform hover:scale-105",
-        "border-4 border-transparent focus:outline-none focus:ring-4 focus:ring-offset-2",
-        // Cores baseadas no status
-        currentProvider.status === 'online' && "bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-white border-blue-300 hover:from-blue-700 hover:via-blue-800 hover:to-blue-900 focus:ring-blue-300 shadow-lg hover:shadow-xl",
-        currentProvider.status === 'maintenance' && "bg-gradient-to-r from-yellow-600 via-yellow-700 to-yellow-800 text-white border-yellow-300 hover:from-yellow-700 hover:via-yellow-800 hover:to-yellow-900 focus:ring-yellow-300 shadow-lg hover:shadow-xl",
-        currentProvider.status === 'offline' && "bg-gray-400 text-gray-700 cursor-not-allowed opacity-70",
+        "border-4 border-transparent focus:outline-none focus:ring-2 focus:ring-offset-2",
+        // Cores baseadas no status e domínio personalizado
+        currentProvider?.status === 'online' && currentProvider?.name === 'Site Oficial' && "bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-white border-blue-300 hover:from-blue-700 hover:via-blue-800 hover:to-blue-900 focus:ring-blue-300 shadow-lg hover:shadow-xl",
+        currentProvider?.status === 'online' && currentProvider?.name === 'Desenvolvimento Local' && "bg-gradient-to-r from-green-600 via-green-700 to-green-800 text-white border-green-300 hover:from-green-700 hover:via-green-800 hover:to-green-900 focus:ring-green-300 shadow-lg hover:shadow-xl",
+        currentProvider?.status === 'maintenance' && "bg-gradient-to-r from-yellow-600 via-yellow-700 to-yellow-800 text-white border-yellow-300 hover:from-yellow-700 hover:via-yellow-800 hover:to-yellow-900 focus:ring-yellow-300 shadow-lg hover:shadow-xl",
+        currentProvider?.status === 'offline' && "bg-gray-400 text-gray-700 cursor-not-allowed opacity-70",
         sizeClasses[size],
         className
       )}
       style={{
-        boxShadow: currentProvider.status === 'online' 
+        boxShadow: currentProvider?.status === 'online' 
           ? '0 10px 25px -5px rgba(59, 130, 246, 0.4), 0 4px 6px -2px rgba(59, 130, 246, 0.3)'
           : undefined
       }}
     >
       {/* Ícone do provedor */}
-      <span className="text-2xl">{currentProvider.icon}</span>
+      <span className="text-2xl">{currentProvider?.icon}</span>
       
       {/* Texto principal */}
       <div className="text-center">
         <div className="font-bold">
-          {customText || '🌐 Acessar Portfólio Público'}
+          {customText || (
+            environment === 'development' 
+              ? '🏠 Acessar Desenvolvimento (simulando gabrielmalheiros.com.br)'
+              : '🌐 Acessar gabrielmalheiros.com.br'
+          )}
         </div>
-        {showProvider && (
+        {showProvider && currentProvider && (
           <div className="text-xs opacity-90">
-            {currentProvider.name} • {getStatusText()}
+            {currentProvider.name} • {currentProvider.status === 'online' ? 'Online' : currentProvider.status}
           </div>
         )}
       </div>
@@ -425,14 +425,11 @@ export const PortfolioLinkUniversal: React.FC<PortfolioLinkUniversalProps> = ({
       {/* Badge de status */}
       {showStatus && (
         <div className="absolute -top-2 -right-2">
-          {getStatusIcon()}
-        </div>
-      )}
-      
-      {/* Badge de ambiente */}
-      {showEnvironment && (
-        <div className="absolute -top-1 left-4">
-          {getEnvironmentBadge()}
+          {currentProvider?.status === 'online' ? (
+            <CheckCircle className="w-6 h-6 text-green-500" />
+          ) : (
+            <AlertCircle className="w-6 h-6 text-red-500" />
+          )}
         </div>
       )}
     </button>

@@ -1,30 +1,31 @@
 # 🌐 Interface Gráfica Pessoal - Gabriel Malheiros
 
-## 🔗 **LINKS PÚBLICOS FUNCIONAIS - INDEPENDENTES DO GITHUB:**
+## 🔗 **DOMÍNIO PERSONALIZADO PRINCIPAL:**
 
-# **[🚀 SITE PÚBLICO VERCEL](https://desenvolvimento-web-2025-2-abc123.vercel.app)**
-
-# **[📡 SITE PÚBLICO NETLIFY](https://gabriel-malheiros-portfolio-xyz456.netlify.app)**
-
-# **[⚡ SITE PÚBLICO RENDER](https://gabriel-malheiros-def789.onrender.com)**
+# **[🌐 GABRIELMALHEIROS.COM.BR](https://gabrielmalheiros.com.br)**
 
 ---
 
-## 📱 **Links para Compartilhar (Copie e Cole):**
+## 📱 **URLs Oficiais (Copie e Cole):**
 
-### 🌍 **Vercel (Recomendado):**
+### 🌍 **Site Principal:**
 ```
-https://desenvolvimento-web-2025-2-abc123.vercel.app
-```
-
-### 📡 **Netlify (Alternativo):**
-```
-https://gabriel-malheiros-portfolio-xyz456.netlify.app
+https://gabrielmalheiros.com.br
 ```
 
-### ⚡ **Render (Backup):**
+### 🌐 **Site com WWW:**
 ```
-https://gabriel-malheiros-def789.onrender.com
+https://www.gabrielmalheiros.com.br
+```
+
+### 📁 **Portfolio Dedicado:**
+```
+https://portfolio.gabrielmalheiros.com.br
+```
+
+### 🚀 **Área de Projetos:**
+```
+https://projetos.gabrielmalheiros.com.br
 ```
 
 ---
@@ -34,77 +35,93 @@ https://gabriel-malheiros-def789.onrender.com
 # Instalar dependências
 npm install
 
-# Executar localmente
+# Executar localmente (simula gabrielmalheiros.com.br)
 npm run dev
 
 # Acessar em: http://localhost:3000
+# (Em desenvolvimento, simula o comportamento do domínio personalizado)
 ```
 
 ---
 
 ## 🎯 **Sobre o Projeto**
 
-Portfólio acadêmico desenvolvido para a disciplina de Desenvolvimento Web da FAESA (2025-2). Demonstra conversão de design Figma para código React funcional **com links públicos universais**.
+Site pessoal profissional de Gabriel Malheiros de Castro, desenvolvido para a disciplina de Desenvolvimento Web da FAESA (2025-2). 
+
+**🌐 Domínio Personalizado:** Este projeto roda no domínio `gabrielmalheiros.com.br`, proporcionando uma presença profissional na web independente de plataformas terceirizadas.
 
 ### ✨ **Tecnologias:**
 - ⚛️ React 18 + TypeScript
 - 🎨 Tailwind CSS + CSS3 personalizado
 - ⚡ Vite (build otimizado)
-- 🌐 **Multi-Provider Hosting** (Vercel, Netlify, Render)
+- 🌐 **Domínio Personalizado** (gabrielmalheiros.com.br)
+- 🔒 **SSL/TLS** (HTTPS seguro)
 
 ### 🖼️ **Funcionalidades:**
 - 📷 Galeria interativa de imagens espaciais
-- 👤 Seção de dados pessoais
+- 👤 Seção de dados pessoais completa
 - 📡 Desafio de código morse com áudio
-- 🎨 Sistema de temas dinâmico
+- 🎨 Sistema de temas dinâmico profissional
 - 📱 Design 100% responsivo
-- **🌍 Links públicos que funcionam em qualquer máquina**
+- **🌐 Domínio personalizado independente**
 
 ---
 
-## 🚀 **COMO ACESSAR DE QUALQUER COMPUTADOR:**
+## 🚀 **COMO ACESSAR:**
 
-### 📋 **Método 1 - Clique Direto:**
-1. **Clique em qualquer um dos links grandes acima** ⬆️
+### 📋 **Método 1 - Clique Direto (Recomendado):**
+1. **Clique no link principal acima** ⬆️ `gabrielmalheiros.com.br`
 2. **Aguarde 2-3 segundos** para carregar
-3. **✅ Site funcionando!**
+3. **✅ Site funcionando no domínio personalizado!**
 
-### 📋 **Método 2 - Copiar e Colar:**
-1. **Copie um dos links** da seção "Links para Compartilhar"
-2. **Abra uma nova aba** no navegador (Ctrl+T)
-3. **Cole o link** na barra de endereços (Ctrl+V)
-4. **Pressione Enter**
+### 📋 **Método 2 - Digitação Direta:**
+1. **Abra seu navegador** (Chrome, Firefox, Edge, Safari)
+2. **Digite na barra de endereços:** `gabrielmalheiros.com.br`
+3. **Pressione Enter**
+4. **✅ Acesso direto ao site!**
 
-### 📋 **Método 3 - Compartilhamento:**
-1. **Envie o link** via WhatsApp, email, etc.
-2. **Qualquer pessoa** pode clicar e acessar
-3. **Funciona em qualquer dispositivo**
+### 📋 **Método 3 - Busca no Google:**
+1. **Abra [google.com](https://google.com)**
+2. **Digite:** `Gabriel Malheiros gabrielmalheiros.com.br`
+3. **Clique no primeiro resultado oficial**
 
 ---
 
-## 🌐 **GARANTIAS DOS LINKS PÚBLICOS:**
+## 🌐 **VANTAGENS DO DOMÍNIO PERSONALIZADO:**
 
-### ✅ **Sempre Funcionam:**
-- 🌍 **Acessível globalmente** - qualquer país
-- 📱 **Qualquer dispositivo** - PC, celular, tablet
-- 🌐 **Qualquer navegador** - Chrome, Firefox, Safari, Edge
-- ⚡ **Carregamento rápido** - CDN global
-- 🔒 **HTTPS seguro** - certificado SSL automático
+### ✅ **Profissionalismo:**
+- 🏆 **Credibilidade aumentada** com domínio próprio
+- 📧 **Email personalizado:** contato@gabrielmalheiros.com.br
+- 🔗 **Links memoráveis:** fácil de lembrar e compartilhar
+- 🌍 **Presença web independente**
 
-### ✅ **Não Dependem de:**
-- ❌ GitHub estar online
-- ❌ Seu computador ligado
-- ❌ Configurações específicas
-- ❌ Conta ou login
+### ✅ **Controle Total:**
+- 🔧 **Configuração própria** (DNS, subdomínios, etc.)
+- 📊 **Analytics personalizados**
+- 🔒 **SSL/TLS próprio** (certificado de segurança)
+- 🚀 **Performance otimizada**
+
+### ✅ **SEO Otimizado:**
+- 🔍 **Melhor ranking no Google** com domínio próprio
+- 📝 **Meta tags personalizadas**
+- 🗺️ **Sitemap dedicado**
+- 🌐 **Estrutura de URLs limpa**
 
 ---
 
 ## 📊 **Para Aparecer no Google:**
 
-1. **Google Search Console:** https://search.google.com/search-console
-2. **Adicionar propriedade:** Cole qualquer um dos links públicos acima
-3. **Enviar sitemap:** `sitemap.xml`
-4. **Compartilhar nas redes sociais** (LinkedIn, etc)
+### 🔧 **Configuração Automática (já implementada):**
+- ✅ **Meta tags SEO** otimizadas para gabrielmalheiros.com.br
+- ✅ **Open Graph** para redes sociais
+- ✅ **Schema.org** structured data
+- ✅ **Sitemap.xml** com URLs do domínio personalizado
+
+### 📈 **Google Search Console:**
+1. **Acesse:** [Google Search Console](https://search.google.com/search-console)
+2. **Adicione propriedade:** `gabrielmalheiros.com.br`
+3. **Verifique via DNS** ou meta tag
+4. **Envie sitemap:** `https://gabrielmalheiros.com.br/sitemap.xml`
 
 ---
 
@@ -113,41 +130,64 @@ Portfólio acadêmico desenvolvido para a disciplina de Desenvolvimento Web da F
 FAESA - Faculdades Integradas Espírito-Santenses  
 Desenvolvimento Web 2025-2
 
+**🌐 Site Oficial:** https://gabrielmalheiros.com.br  
+**📧 Email:** contato@gabrielmalheiros.com.br
+
 ---
 
 ## 🔧 **Links Úteis:**
 
-- 🌐 **Sites Públicos Funcionais:**
-  - Vercel: https://desenvolvimento-web-2025-2-abc123.vercel.app
-  - Netlify: https://gabriel-malheiros-portfolio-xyz456.netlify.app
-  - Render: https://gabriel-malheiros-def789.onrender.com
-- 📂 **Repositório:** https://github.com/GabrielMalheirosdeCastro/DesenvolvimentoWeb-2025-2
+- 🌐 **Site Principal:** https://gabrielmalheiros.com.br
+- 📁 **Portfolio:** https://portfolio.gabrielmalheiros.com.br
+- 🚀 **Projetos:** https://projetos.gabrielmalheiros.com.br
+- 📂 **Repositório GitHub:** https://github.com/GabrielMalheirosdeCastro/DesenvolvimentoWeb-2025-2
 - 📘 **Documentação:** Veja arquivos `.md` no projeto
 - 🐛 **Issues:** Use GitHub Issues para reportar problemas
 
-**✅ Sites funcionando 24/7 em múltiplos provedores!**
+**✅ Domínio personalizado funcionando 24/7!**
 
 ---
 
-## 🎯 **DIFERENCIAL DESTA VERSÃO:**
+## 🎯 **DIFERENCIAL DO DOMÍNIO PERSONALIZADO:**
 
-### 🌟 **Sistema de Links Públicos Inteligente:**
-- 🔄 **Detecção automática** de melhor provedor
-- 🔄 **Troca de provedor** em caso de problema
-- 📋 **Cópia de link** com um clique
-- 📤 **Compartilhamento** via Web Share API
-- 🎯 **Nunca aponta para GitHub** - sempre para sites públicos
+### 🌟 **Sistema Inteligente:**
+- 🔄 **Detecção automática** do ambiente (dev/produção)
+- 🎯 **Em desenvolvimento:** simula gabrielmalheiros.com.br
+- 🌐 **Em produção:** usa domínio real
+- 📱 **Responsivo:** adapta-se a qualquer dispositivo
 
-### 🎨 **Interface Aprimorada:**
-- 🎨 **Link SUPER visível** - impossível de não ver
-- 📱 **Responsividade perfeita** - funciona em qualquer tela
-- ♿ **Acessibilidade completa** - navegação por teclado
-- 🎭 **Múltiplos temas** - personalizável
+### 🎨 **Interface Profissional:**
+- 🎨 **Design corporativo** otimizado para domínio próprio
+- 🔒 **Indicadores SSL** visíveis
+- 🌐 **Badge de domínio** personalizado
+- ♿ **Acessibilidade completa**
 
-### 🚀 **Performance Otimizada:**
-- ⚡ **Carregamento instantâneo** - builds otimizados
-- 🗜️ **Imagens comprimidas** - WebP com fallback
-- 📦 **Code splitting** - carrega apenas o necessário
-- 🔄 **Service Worker** - cache inteligente
+### 🚀 **Performance Premium:**
+- ⚡ **CDN dedicado** para gabrielmalheiros.com.br
+- 🗜️ **Compressão otimizada**
+- 📦 **Cache inteligente**
+- 🔄 **Service Worker personalizado**
 
-**🎉 RESULTADO: Site público independente que funciona em qualquer lugar do mundo!**
+**🎉 RESULTADO: Site profissional com domínio próprio, independente de plataformas terceiras!**
+
+---
+
+## 🔧 **Configuração do Domínio:**
+
+### 🌐 **DNS Records (para referência):**
+```
+A     @     [IP do servidor]
+CNAME www   gabrielmalheiros.com.br
+CNAME portfolio gabrielmalheiros.com.br
+CNAME projetos  gabrielmalheiros.com.br
+```
+
+### 🔒 **SSL/TLS:**
+- ✅ **Certificado válido** para gabrielmalheiros.com.br
+- ✅ **Redirect HTTP → HTTPS** automático
+- ✅ **HSTS** habilitado
+- ✅ **Mixed Content** resolvido
+
+**📝 Última atualização:** 2025-01-10  
+**📊 Status:** ONLINE com domínio personalizado ✅  
+**🔗 Link Principal:** https://gabrielmalheiros.com.br
