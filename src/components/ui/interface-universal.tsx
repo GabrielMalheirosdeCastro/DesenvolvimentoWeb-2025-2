@@ -1,20 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { 
-  Globe, 
   Monitor, 
   Smartphone, 
   Tablet,
   Settings,
   Palette,
   Link,
-  CheckCircle,
-  AlertCircle,
-  Wrench,
   Github,
   Home,
   Rocket,
-  Image,
-  User
+  Image
 } from 'lucide-react';
 import { cn } from './utils';
 import PortfolioLinkUniversal from './portfolio-link-universal';
@@ -442,7 +437,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
         <div className="max-w-7xl mx-auto mt-8">
           <SpaceGallery 
             images={spaceFleetImages}
-            allowMultipleSelection={false}
+            allowMultipleSelection={true}
             onSelectionChange={(selectedIds, selectedImages) => {
               console.log('Seleção alterada:', { selectedIds, selectedImages });
             }}
@@ -505,6 +500,34 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Seção de dados pessoais */}
+        <div className="max-w-7xl mx-auto mt-16">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-gray-800 mb-4">
+              👤 Sobre o Desenvolvedor
+            </h2>
+            <p className="text-lg text-gray-600">
+              Conheça mais sobre quem criou este projeto
+            </p>
+          </div>
+          
+          <PersonalData className="mb-8" />
+        </div>
+
+        {/* Desafio de código morse */}
+        <div className="max-w-4xl mx-auto mt-16">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-gray-800 mb-4">
+              📡 Desafio Interativo
+            </h2>
+            <p className="text-lg text-gray-600">
+              Teste seus conhecimentos em código morse!
+            </p>
+          </div>
+          
+          <MorseChallenge />
         </div>
 
         <div className="text-center mt-12">
@@ -652,6 +675,58 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* Como tornar o site público */}
+          <div className="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-lg p-6 shadow-lg">
+            <h3 className="text-xl font-semibold mb-4 flex items-center gap-2 text-green-700">
+              🌐 Como Tornar Seu Site Público
+            </h3>
+            
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="font-semibold text-gray-800 mb-3">📘 Opção 1: GitHub Pages (Recomendado)</h4>
+                <ol className="list-decimal list-inside space-y-2 text-sm text-gray-700">
+                  <li>Faça push do seu código para GitHub</li>
+                  <li>Vá em Settings → Pages no repositório</li>
+                  <li>Selecione "Deploy from a branch"</li>
+                  <li>Escolha "main" branch</li>
+                  <li>Seu site estará em: <code className="bg-gray-100 px-1 rounded text-xs">usuario.github.io/repositorio</code></li>
+                </ol>
+                
+                <div className="mt-4 p-3 bg-green-100 rounded-lg">
+                  <p className="text-sm text-green-800">
+                    <strong>✅ Vantagens:</strong> Gratuito, SSL automático, integração com Git
+                  </p>
+                </div>
+              </div>
+              
+              <div>
+                <h4 className="font-semibold text-gray-800 mb-3">🚀 Opção 2: Vercel/Netlify</h4>
+                <ol className="list-decimal list-inside space-y-2 text-sm text-gray-700">
+                  <li>Conecte seu repositório GitHub</li>
+                  <li>Configure comando build: <code className="bg-gray-100 px-1 rounded text-xs">npm run build</code></li>
+                  <li>Diretório public: <code className="bg-gray-100 px-1 rounded text-xs">build/</code></li>
+                  <li>Deploy automático a cada push</li>
+                </ol>
+                
+                <div className="mt-4 p-3 bg-blue-100 rounded-lg">
+                  <p className="text-sm text-blue-800">
+                    <strong>🚀 Vantagens:</strong> Deploy automático, preview branches, domínio personalizado
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+              <h4 className="font-semibold text-yellow-800 mb-2">🔗 Para aparecer no Google:</h4>
+              <ul className="list-disc list-inside space-y-1 text-sm text-yellow-700">
+                <li>Adicione <code className="bg-yellow-100 px-1 rounded text-xs">sitemap.xml</code> no diretório public</li>
+                <li>Configure <code className="bg-yellow-100 px-1 rounded text-xs">meta tags</code> para SEO no index.html</li>
+                <li>Registre no <a href="https://search.google.com/search-console" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">Google Search Console</a></li>
+                <li>Compartilhe o link em redes sociais para indexação mais rápida</li>
+              </ul>
             </div>
           </div>
 
