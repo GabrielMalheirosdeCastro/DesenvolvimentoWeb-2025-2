@@ -439,10 +439,6 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
         <div className="max-w-7xl mx-auto mt-8">
           <SpaceGallery 
             images={spaceFleetImages}
-            allowMultipleSelection={true}
-            onSelectionChange={(selectedIds, selectedImages) => {
-              console.log('Seleção alterada:', { selectedIds, selectedImages });
-            }}
             className="space-gallery-figma"
           />
         </div>

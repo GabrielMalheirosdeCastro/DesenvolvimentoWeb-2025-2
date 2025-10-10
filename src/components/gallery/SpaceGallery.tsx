@@ -1,52 +1,25 @@
 import React from 'react';
-import { useImageSelection, SelectableImage } from '../../hooks/useImageSelection';
+import { SelectableImage } from '../../hooks/useImageSelection';
 import ImageFullscreenViewer from '../ui/image-fullscreen-viewer';
 
 interface SpaceGalleryProps {
   images: SelectableImage[];
-  allowMultipleSelection?: boolean;
-  onSelectionChange?: (selectedIds: string[], selectedImages: SelectableImage[]) => void;
   className?: string;
 }
 
 export function SpaceGallery({ 
   images, 
-  allowMultipleSelection = true,
-  onSelectionChange,
   className = ""
 }: SpaceGalleryProps) {
-  const {
-    selectedImages,
-    toggleImage,
-    clearSelection,
-    isSelected,
-    selectedCount,
-    hasSelection
-  } = useImageSelection(allowMultipleSelection);
-
   // Estados para visualizador em tela inteira
   const [fullscreenImage, setFullscreenImage] = React.useState<string | null>(null);
   const [isFullscreenOpen, setIsFullscreenOpen] = React.useState(false);
 
-  // Calcular dados das imagens selecionadas
-  const selectedImageData = React.useMemo(() => {
-    return images.filter(img => selectedImages.includes(img.id));
-  }, [images, selectedImages]);
-
-  // Notificar mudanças na seleção
-  React.useEffect(() => {
-    onSelectionChange?.(selectedImages, selectedImageData);
-  }, [selectedImages, selectedImageData, onSelectionChange]);
-
-  const handleImageClick = (imageId: string, event: React.MouseEvent) => {
-    // Se Ctrl/Cmd estiver pressionado ou for modo de seleção múltipla, alternar seleção
-    if (event.ctrlKey || event.metaKey || allowMultipleSelection) {
-      toggleImage(imageId);
-    } else {
-      // Caso contrário, abrir em tela inteira
-      setFullscreenImage(imageId);
-      setIsFullscreenOpen(true);
-    }
+  const handleImageClick = (imageId: string) => {
+    // Sempre abrir em tela inteira para visualização direta das imagens do Figma
+    // Seleção múltipla removida para simplificar experiência do usuário
+    setFullscreenImage(imageId);
+    setIsFullscreenOpen(true);
   };
 
   const handleFullscreenClose = () => {
@@ -58,56 +31,18 @@ export function SpaceGallery({
     setFullscreenImage(imageId);
   };
 
-  const handleSelectAll = () => {
-    if (allowMultipleSelection) {
-      if (selectedCount === images.length) {
-        clearSelection();
-      } else {
-        images.forEach(image => {
-          if (!isSelected(image.id)) {
-            toggleImage(image.id);
-          }
-        });
-      }
-    }
-  };
-
   return (
     <div className={`w-full space-y-6 ${className}`}>
-      {/* Controles de seleção */}
-      <div className="flex items-center justify-between flex-wrap gap-4 p-4 bg-white border border-indigo-200 rounded-lg shadow-sm">
-        <div className="flex items-center gap-4">
-          {allowMultipleSelection && (
-            <button
-              onClick={handleSelectAll}
-              className="px-3 py-1.5 text-sm font-medium text-indigo-600 hover:text-indigo-800 hover:bg-indigo-50 rounded-md transition-colors border border-indigo-200"
-            >
-              {selectedCount === images.length ? 'Desmarcar Todas' : 'Selecionar Todas'}
-            </button>
-          )}
-          
-          {hasSelection && (
-            <button
-              onClick={clearSelection}
-              className="px-3 py-1.5 text-sm font-medium text-red-600 hover:text-red-800 hover:bg-red-50 rounded-md transition-colors"
-            >
-              Limpar Seleção
-            </button>
-          )}
-        </div>
-
-        <div className="text-sm text-gray-600">
-          {hasSelection ? (
+      {/* Info da galeria simplificada */}
+      <div className="flex items-center justify-center p-4 bg-white border border-indigo-200 rounded-lg shadow-sm">
+        <div className="text-center">
+          <div className="text-sm text-gray-600">
             <span className="font-medium text-indigo-700">
-              {selectedCount} de {images.length} {selectedCount === 1 ? 'nave selecionada' : 'naves selecionadas'}
+              {images.length} {images.length === 1 ? 'imagem do Figma' : 'imagens do Figma'}
             </span>
-          ) : (
-            <span>
-              {images.length} {images.length === 1 ? 'nave disponível' : 'naves disponíveis'}
-            </span>
-          )}
+          </div>
           <div className="text-xs text-gray-500 mt-1">
-            💡 Clique para {allowMultipleSelection ? 'selecionar • Ctrl+Clique para' : ''} visualizar em tela inteira
+            💡 Clique em qualquer imagem para visualização em tela inteira
           </div>
         </div>
       </div>
@@ -117,25 +52,20 @@ export function SpaceGallery({
         {images.map((image) => (
           <div
             key={image.id}
-            className={`
+            className="
               relative cursor-pointer transition-all duration-300 rounded-lg overflow-hidden
-              bg-white shadow-md hover:shadow-lg border-2
-              ${isSelected(image.id) 
-                ? 'border-indigo-500 ring-2 ring-indigo-200' 
-                : 'border-gray-200 hover:border-indigo-300'
-              }
-            `}
-            onClick={(e) => handleImageClick(image.id, e)}
+              bg-white shadow-md hover:shadow-lg border-2 border-gray-200 hover:border-indigo-300
+            "
+            onClick={() => handleImageClick(image.id)}
             role="button"
             tabIndex={0}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
-                handleImageClick(image.id, e as any);
+                handleImageClick(image.id);
               }
             }}
-            aria-pressed={isSelected(image.id)}
-            aria-label={`${image.alt}${isSelected(image.id) ? ' - Selecionada' : ''}`}
+            aria-label={image.alt}
           >
             {/* Container da imagem */}
             <div className="relative aspect-video bg-gradient-to-br from-indigo-900 to-purple-900">
@@ -155,13 +85,6 @@ export function SpaceGallery({
                   {image.category === 'Frotas Militares' && '🛸'}
                   {image.category === 'Comunicações' && '📡'}
                   {' '}{image.category}
-                </div>
-              )}
-
-              {/* Indicador de seleção */}
-              {isSelected(image.id) && (
-                <div className="absolute top-3 right-3 w-6 h-6 bg-indigo-500 rounded-full flex items-center justify-center">
-                  <span className="text-white text-sm font-bold">✓</span>
                 </div>
               )}
 
