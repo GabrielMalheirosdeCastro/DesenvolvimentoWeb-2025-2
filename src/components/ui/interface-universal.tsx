@@ -264,15 +264,15 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
         description: 'Azul tradicional com fundo neutro'
       },
       minimal: {
-        brandPrimary: '#374151',
-        brandSecondary: '#4b5563',
-        brandAccent: '#6b7280',
-        bgPrimary: '#2d3748', // 🎯 FUNDO MAIS ESCURO para melhor contraste
+        brandPrimary: '#60a5fa',
+        brandSecondary: '#3b82f6',
+        brandAccent: '#93c5fd',
+        bgPrimary: '#1f2937', // 🎯 FUNDO MAIS ESCURO para melhor contraste
         bgSecondary: '#374151', 
-        bgTertiary: '#4a5568',
+        bgTertiary: '#4b5563',
         textPrimary: '#ffffff', // 🎯 TEXTO BRANCO para contraste perfeito
-        textSecondary: '#e2e8f0',
-        textMuted: '#cbd5e0',
+        textSecondary: '#f9fafb',
+        textMuted: '#e5e7eb',
         description: 'Cinza elegante com alto contraste'
       },
       colorful: {
@@ -758,8 +758,8 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
                 { 
                   id: 'minimal', 
                   name: 'Minimalista', 
-                  color: '#374151',
-                  bgColor: '#2d3748', // 🎯 Fundo escuro para melhor contraste
+                  color: '#60a5fa',
+                  bgColor: '#1f2937', // 🎯 Fundo escuro para melhor contraste
                   textColor: '#ffffff', // 🎯 Texto branco sempre
                   contrastText: '#ffffff', // FORÇAR BRANCO para contraste
                   desc: 'Cinza elegante' 

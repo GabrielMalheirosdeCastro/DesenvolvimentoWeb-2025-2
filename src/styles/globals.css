@@ -627,15 +627,15 @@ body {
 
 /* ⚫ Tema Minimalista - Cinza elegante com alto contraste */
 [data-theme="minimal"] {
-  --brand-primary: #374151 !important;
-  --brand-secondary: #4b5563 !important;
-  --brand-accent: #6b7280 !important;
-  --color-bg-primary: #2d3748 !important;
+  --brand-primary: #60a5fa !important;
+  --brand-secondary: #3b82f6 !important;
+  --brand-accent: #93c5fd !important;
+  --color-bg-primary: #1f2937 !important;
   --color-bg-secondary: #374151 !important;
-  --color-bg-tertiary: #4a5568 !important;
+  --color-bg-tertiary: #4b5563 !important;
   --color-text-primary: #ffffff !important;
-  --color-text-secondary: #e2e8f0 !important;
-  --color-text-muted: #cbd5e0 !important;
+  --color-text-secondary: #f9fafb !important;
+  --color-text-muted: #e5e7eb !important;
 }
 
 /* 🟣 Tema Colorido - Roxo criativo com fundo vibrante */
@@ -717,23 +717,23 @@ body {
   color: #111827 !important;
 }
 
-/* Tema Minimalista - Forçar aplicação */
+/* Tema Minimalista - Forçar aplicação com CONTRASTE MÁXIMO */
 [data-theme="minimal"] body {
-  background: linear-gradient(135deg, #2d3748 0%, #374151 100%) !important;
+  background: linear-gradient(135deg, #1f2937 0%, #374151 100%) !important;
   color: #ffffff !important;
 }
 
 [data-theme="minimal"] .interface-main {
-  background: linear-gradient(135deg, #2d3748 0%, #374151 100%) !important;
+  background: linear-gradient(135deg, #1f2937 0%, #374151 100%) !important;
   color: #ffffff !important;
 }
 
 [data-theme="minimal"] .bg-white {
-  background-color: #2d3748 !important;
+  background-color: #1f2937 !important;
   color: #ffffff !important;
 }
 
-/* 🎯 CONTRASTE ESPECÍFICO PARA TEMA MINIMAL */
+/* 🎯 CONTRASTE ABSOLUTO PARA TEMA MINIMAL - TEXTO SEMPRE BRANCO */
 [data-theme="minimal"] h1,
 [data-theme="minimal"] h2,
 [data-theme="minimal"] h3,
@@ -746,36 +746,61 @@ body {
 [data-theme="minimal"] .text-gray-500,
 [data-theme="minimal"] .text-gray-600,
 [data-theme="minimal"] .text-gray-700,
-[data-theme="minimal"] .text-muted {
+[data-theme="minimal"] .text-gray-800,
+[data-theme="minimal"] .text-gray-900,
+[data-theme="minimal"] .text-muted,
+[data-theme="minimal"] .interface-title,
+[data-theme="minimal"] .interface-subtitle,
+[data-theme="minimal"] .interface-description,
+[data-theme="minimal"] label,
+[data-theme="minimal"] strong {
   color: #ffffff !important;
 }
 
+/* Tema Minimalista - Texto secundário em branco suave */
 [data-theme="minimal"] .text-sm {
-  color: #e2e8f0 !important;
+  color: #f9fafb !important;
 }
 
 [data-theme="minimal"] .text-xs {
-  color: #cbd5e0 !important;
+  color: #e5e7eb !important;
 }
 
-/* 🎯 BOTÕES E CARDS NO TEMA MINIMAL - Contraste Perfeito */
+/* 🎯 BOTÕES E SELETORES DE TEMA NO TEMA MINIMAL - CONTRASTE PERFEITO */
 [data-theme="minimal"] .interface-card,
 [data-theme="minimal"] .card {
   background-color: #374151 !important;
   color: #ffffff !important;
-  border: 1px solid #4a5568 !important;
+  border: 1px solid #4b5563 !important;
 }
 
 [data-theme="minimal"] button {
   color: #ffffff !important;
+  background-color: #60a5fa !important;
+  border-color: #60a5fa !important;
 }
 
+[data-theme="minimal"] button:hover {
+  background-color: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+}
+
+/* 🔴 SELETORES DE TEMA - CONTRASTE FORÇADO QUANDO EM MINIMAL */
 [data-theme="minimal"] .border-gray-200 {
-  border-color: #4a5568 !important;
+  border-color: #4b5563 !important;
 }
 
 [data-theme="minimal"] .hover\\:border-gray-400:hover {
   border-color: #6b7280 !important;
+}
+
+/* 🎯 CORES DOS SELETORES DE TEMA - FORÇAR BRANCO NO MINIMAL */
+[data-theme="minimal"] [style*="color: #374151"] {
+  color: #ffffff !important;
+}
+
+[data-theme="minimal"] [style*="color: #6b7280"] {
+  color: #e5e7eb !important;
 }
 
 /* 🎯 TEMA MINIMAL - Bordas e estruturas visuais */
@@ -792,20 +817,94 @@ body {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3) !important;
 }
 
-/* 🚨 CONTRASTE FORÇADO PARA TODOS OS ELEMENTOS NO TEMA MINIMAL */
-[data-theme="minimal"] * {
+/* 🚨 SISTEMA INTELIGENTE DE CONTRASTE AUTOMÁTICO */
+/* Garante texto branco em fundos escuros para TODOS os temas */
+
+/* Tema Colorido - Ajustar contraste se necessário */
+[data-theme="colorful"] h1,
+[data-theme="colorful"] h2,
+[data-theme="colorful"] h3,
+[data-theme="colorful"] h4,
+[data-theme="colorful"] h5,
+[data-theme="colorful"] h6 {
+  color: #581c87 !important;
+}
+
+[data-theme="colorful"] p,
+[data-theme="colorful"] span,
+[data-theme="colorful"] div {
+  color: #7c2d92 !important;
+}
+
+/* Tema Classic - Manter texto escuro em fundo claro */
+[data-theme="classic"] h1,
+[data-theme="classic"] h2,
+[data-theme="classic"] h3,
+[data-theme="classic"] h4,
+[data-theme="classic"] h5,
+[data-theme="classic"] h6,
+[data-theme="classic"] p,
+[data-theme="classic"] span,
+[data-theme="classic"] div {
+  color: #111827 !important;
+}
+
+/* Tema Modern - Manter texto escuro em fundo claro */
+[data-theme="modern"] h1,
+[data-theme="modern"] h2,
+[data-theme="modern"] h3,
+[data-theme="modern"] h4,
+[data-theme="modern"] h5,
+[data-theme="modern"] h6,
+[data-theme="modern"] p,
+[data-theme="modern"] span,
+[data-theme="modern"] div {
+  color: #0f172a !important;
+}
+
+/* 🎯 SISTEMA UNIVERSAL DE BOTÕES POR TEMA */
+/* Cada tema tem botões com cores adequadas */
+
+/* Botões no tema Minimal - Azul em fundo escuro */
+[data-theme="minimal"] button:not(.portfolio-link-universal) {
+  background-color: #60a5fa !important;
+  color: #ffffff !important;
+  border-color: #60a5fa !important;
+}
+
+[data-theme="minimal"] button:not(.portfolio-link-universal):hover {
+  background-color: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+}
+
+/* Botões nos demais temas */
+[data-theme="modern"] button:not(.portfolio-link-universal),
+[data-theme="classic"] button:not(.portfolio-link-universal),
+[data-theme="colorful"] button:not(.portfolio-link-universal) {
+  background-color: var(--brand-primary) !important;
+  color: #ffffff !important;
+  border-color: var(--brand-primary) !important;
+}
+
+[data-theme="modern"] button:not(.portfolio-link-universal):hover,
+[data-theme="classic"] button:not(.portfolio-link-universal):hover,
+[data-theme="colorful"] button:not(.portfolio-link-universal):hover {
+  background-color: var(--brand-secondary) !important;
+  border-color: var(--brand-secondary) !important;
+}
+
+/* 🎨 SELETORES DE TEMA - TEXTO SEMPRE LEGÍVEL */
+/* Quando um tema está ativo, força cores adequadas */
+[data-theme="minimal"] .bg-blue-50 {
+  background-color: #374151 !important;
   color: #ffffff !important;
 }
 
-[data-theme="minimal"] .text-blue-500,
-[data-theme="minimal"] .text-blue-600 {
-  color: #60a5fa !important;
-}
-
-[data-theme="minimal"] code {
-  background-color: #4a5568 !important;
-  color: #e2e8f0 !important;
-  border: 1px solid #6b7280 !important;
+[data-theme="modern"] .bg-blue-50,
+[data-theme="classic"] .bg-blue-50,
+[data-theme="colorful"] .bg-blue-50 {
+  background-color: #eff6ff !important;
+  color: #1e40af !important;
 }
 
 /* Tema Colorido - Forçar aplicação */
