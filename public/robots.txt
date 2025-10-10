@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Sitemap para localhost
+Sitemap: http://localhost:3000/sitemap.xml
+
+# Permitir indexação completa do site local
+Crawl-delay: 1
+
+# Permitir todos os recursos estáticos
+Allow: /assets/
+Allow: /src/
+Allow: /*.css
+Allow: /*.js
+Allow: /*.json
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.svg
