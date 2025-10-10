@@ -1,5 +1,5 @@
 import React from 'react';
-import { User, MapPin, GraduationCap, Briefcase, Mail, Github, Linkedin, Code, Calendar, Heart } from 'lucide-react';
+import { User, MapPin, GraduationCap, Briefcase, Mail, Github, Code, Calendar, Heart } from 'lucide-react';
 import { cn } from './utils';
 
 interface PersonalDataProps {
@@ -13,9 +13,8 @@ export const PersonalData: React.FC<PersonalDataProps> = ({ className }) => {
     location: "Vitória, Espírito Santo, Brasil",
     institution: "FAESA - Faculdades Integradas Espírito-Santenses",
     course: "Desenvolvimento Web Moderno",
-    email: "gabriel.malheiros@exemplo.com",
+    email: "gabriel.m.castro@hotmail.com",
     github: "https://github.com/GabrielMalheirosdeCastro",
-    linkedin: "https://linkedin.com/in/gabriel-malheiros",
     age: "22 anos",
     experience: "2+ anos em desenvolvimento web",
     availableForWork: true
@@ -147,16 +146,6 @@ export const PersonalData: React.FC<PersonalDataProps> = ({ className }) => {
             >
               <Github size={18} className="text-gray-600" />
               <span className="text-gray-700">GitHub Profile</span>
-            </a>
-            
-            <a 
-              href={personalInfo.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
-            >
-              <Linkedin size={18} className="text-gray-600" />
-              <span className="text-gray-700">LinkedIn Profile</span>
             </a>
           </div>
 
