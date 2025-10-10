@@ -14,7 +14,6 @@ import SpaceGallery from '../gallery/SpaceGallery';
 import { spaceFleetImages } from '../../data/spaceFleetData';
 import PersonalData from './personal-data';
 import MorseChallenge from './morse-challenge';
-import ExternalNavigation from './external-navigation';
 import FixedBottomNavigation from './fixed-bottom-navigation';
 
 interface UniversalConfig {
@@ -938,11 +937,6 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
         minHeight: '100vh'
       }}
     >
-      {/* Navegação Externa com Setas */}
-      <ExternalNavigation 
-        onFigmaAccess={() => navigateToScreen('figma')}
-      />
-      
       {renderCurrentScreen()}
 
       {/* 📱 Navegação Fixa Inferior - SEMPRE VISÍVEL */}
