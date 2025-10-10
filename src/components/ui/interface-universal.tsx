@@ -3,10 +3,8 @@ import {
   Monitor, 
   Smartphone, 
   Tablet,
-  Settings,
   Palette,
   Link,
-  Github,
   Home,
   Rocket,
   Image
@@ -17,6 +15,7 @@ import { spaceFleetImages } from '../../data/spaceFleetData';
 import PersonalData from './personal-data';
 import MorseChallenge from './morse-challenge';
 import ExternalNavigation from './external-navigation';
+import FixedBottomNavigation from './fixed-bottom-navigation';
 
 interface UniversalConfig {
   url: string;
@@ -36,7 +35,6 @@ interface InterfaceUniversalProps {
 
 export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
   className,
-  showMultipleScreens = true,
   enableThemeSelector = true,
   initialScreen
 }) => {
@@ -292,61 +290,12 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
           <MorseChallenge />
         </div>
 
-        {/* Navegação entre telas */}
-        {showMultipleScreens && (
+        {/* Navegação entre telas - REMOVIDA - Agora usa navegação fixa inferior */}
+        {/* {showMultipleScreens && (
           <div className="flex justify-center gap-4 mt-12 flex-wrap">
-            <button
-              onClick={() => navigateToScreen('main')}
-              className={cn(
-                "px-6 py-3 rounded-lg font-medium transition-all flex items-center gap-2",
-                currentScreen === 'main' 
-                  ? "bg-brand-primary text-white" 
-                  : "bg-white text-brand-primary border border-brand-primary hover:bg-brand-primary hover:text-white"
-              )}
-            >
-              <Home size={20} />
-              Tela Principal
-            </button>
-            <button
-              onClick={() => navigateToScreen('gallery')}
-              className={cn(
-                "px-6 py-3 rounded-lg font-medium transition-all flex items-center gap-2",
-                currentScreen === 'gallery' 
-                  ? "bg-brand-primary text-white" 
-                  : "bg-white text-brand-primary border border-brand-primary hover:bg-brand-primary hover:text-white"
-              )}
-            >
-              <Github size={20} />
-              Projetos
-            </button>
-            <button
-              onClick={() => navigateToScreen('figma')}
-              className={cn(
-                "px-6 py-3 rounded-lg font-medium transition-all flex items-center gap-2",
-                currentScreen === 'figma' 
-                  ? "bg-brand-primary text-white" 
-                  : "bg-white text-brand-primary border border-brand-primary hover:bg-brand-primary hover:text-white"
-              )}
-            >
-              <Rocket size={20} />
-              Galeria Figma
-            </button>
-            {enableThemeSelector && (
-              <button
-                onClick={() => navigateToScreen('settings')}
-                className={cn(
-                  "px-6 py-3 rounded-lg font-medium transition-all flex items-center gap-2",
-                  currentScreen === 'settings' 
-                    ? "bg-brand-primary text-white" 
-                    : "bg-white text-brand-primary border border-brand-primary hover:bg-brand-primary hover:text-white"
-                )}
-              >
-                <Settings size={20} />
-                Configurações
-              </button>
-            )}
+            ... botões removidos ...
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
@@ -770,13 +719,21 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
   };
 
   return (
-    <div className={cn("interface-universal w-full", className)} data-theme={config.theme}>
+    <div className={cn("interface-universal w-full has-fixed-navigation", className)} data-theme={config.theme}>
       {/* Navegação Externa com Setas */}
       <ExternalNavigation 
         onFigmaAccess={() => navigateToScreen('figma')}
       />
       
       {renderCurrentScreen()}
+
+      {/* 📱 Navegação Fixa Inferior - SEMPRE VISÍVEL */}
+      <FixedBottomNavigation
+        currentScreen={currentScreen}
+        onNavigate={navigateToScreen}
+        enableThemeSelector={enableThemeSelector}
+        className="fixed-bottom-navigation"
+      />
     </div>
   );
 };

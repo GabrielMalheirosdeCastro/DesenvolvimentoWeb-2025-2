@@ -1149,3 +1149,194 @@ html[data-environment="custom-domain"] {
   font-size: 0.75rem;
   color: var(--color-text-secondary);
 }
+
+/* 📱 Navegação Fixa Inferior - Sistema Always Visible */
+.fixed-bottom-navigation {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  
+  border-top: 1px solid rgba(229, 231, 235, 0.5);
+  box-shadow: 0 -10px 25px -5px rgba(0, 0, 0, 0.1), 
+              0 -4px 6px -2px rgba(0, 0, 0, 0.05);
+  
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Tema escuro para navegação fixa */
+[data-theme="minimal"] .fixed-bottom-navigation,
+[data-theme="colorful"] .fixed-bottom-navigation {
+  background: rgba(17, 24, 39, 0.95);
+  border-top-color: rgba(75, 85, 99, 0.5);
+}
+
+/* Container principal da navegação com padding maior */
+.fixed-bottom-navigation .nav-container {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 16px 24px;
+}
+
+/* Grid responsivo dos botões com espaçamento aumentado */
+.fixed-bottom-navigation .nav-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .fixed-bottom-navigation .nav-grid {
+    gap: 32px;
+  }
+}
+
+/* Botões individuais da navegação com tamanhos maiores */
+.fixed-bottom-navigation .nav-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  
+  padding: 12px 16px;
+  border-radius: 12px;
+  
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.2;
+  
+  min-width: 80px;
+  
+  background: transparent;
+  color: var(--brand-primary);
+  border: 2px solid transparent;
+  
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+/* Versão desktop dos botões */
+@media (min-width: 768px) {
+  .fixed-bottom-navigation .nav-button {
+    padding: 16px 24px;
+    border-radius: 16px;
+    font-size: 16px;
+    min-width: 100px;
+    gap: 8px;
+  }
+}
+
+/* Estado ativo do botão */
+.fixed-bottom-navigation .nav-button.active {
+  background: var(--brand-primary);
+  color: white;
+  box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.4);
+  transform: scale(1.05);
+}
+
+/* Estados hover e focus */
+.fixed-bottom-navigation .nav-button:hover:not(.active) {
+  background: rgba(37, 99, 235, 0.1);
+  border-color: rgba(37, 99, 235, 0.2);
+  transform: scale(1.02);
+}
+
+.fixed-bottom-navigation .nav-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.5);
+}
+
+/* Ícones dos botões */
+.fixed-bottom-navigation .nav-button svg {
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.fixed-bottom-navigation .nav-button.active svg {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+/* Labels dos botões */
+.fixed-bottom-navigation .nav-button .nav-label {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.fixed-bottom-navigation .nav-button .nav-label-mobile {
+  display: block;
+  font-size: 10px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .fixed-bottom-navigation .nav-button .nav-label-mobile {
+    display: none;
+  }
+}
+
+/* Gradiente de integração visual */
+.fixed-bottom-navigation::before {
+  content: '';
+  position: absolute;
+  top: -16px;
+  left: 0;
+  right: 0;
+  height: 16px;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.2), transparent);
+  pointer-events: none;
+}
+
+/* Ajuste de espaçamento para conteúdo quando navegação está ativa */
+.interface-universal.has-fixed-navigation {
+  padding-bottom: 100px;
+}
+
+@media (min-width: 768px) {
+  .interface-universal.has-fixed-navigation {
+    padding-bottom: 120px;
+  }
+}
+
+/* Animação de entrada */
+.fixed-bottom-navigation {
+  transform: translateY(100%);
+  animation: slideUpNavigation 0.5s ease-out forwards;
+}
+
+@keyframes slideUpNavigation {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Indicador de scroll para mostrar que há mais conteúdo acima */
+.fixed-bottom-navigation .scroll-indicator {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  width: 40px;
+  height: 4px;
+  background: rgba(156, 163, 175, 0.5);
+  border-radius: 2px;
+  
+  transition: all 0.3s ease;
+}
+
+.fixed-bottom-navigation:hover .scroll-indicator {
+  background: var(--brand-primary);
+  width: 60px;
+}
