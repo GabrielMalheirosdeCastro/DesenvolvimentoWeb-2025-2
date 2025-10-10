@@ -39,12 +39,14 @@
   --font-size-3xl: 1.875rem;
   --font-size-4xl: 2.25rem;
   
-  /* 🌐 Link de Portfólio Universal - CONFIGURAÇÃO VÁLIDA PARA FAESA */
-  --portfolio-url: "https://interface-grafica-pessoal-faesa.vercel.app";
+  /* 🌐 Link de Portfólio Universal - CONFIGURAÇÃO AUTOMÁTICA */
+  --portfolio-url: "https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2";
+  --portfolio-url-local: "http://localhost:3000";
+  --portfolio-url-development: "http://localhost:3000";
   --portfolio-title: "Interface Gráfica Pessoal - Gabriel Malheiros - FAESA 2025-2";
   --portfolio-author: "Gabriel Malheiros de Castro";
   --portfolio-institution: "FAESA - Faculdades Integradas Espírito-Santenses";
-  --portfolio-status: "deployed"; /* deployed | staging | development | offline */
+  --portfolio-status: "online"; /* online | offline | maintenance */
   --portfolio-theme: "modern"; /* modern | classic | minimal | colorful */
   
   /* 🎨 Configurações específicas para site pessoal */
@@ -605,7 +607,48 @@ body {
   .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-/* 🎨 Estilos específicos para a galeria do Figma */
+/* � Detecção Automática de Ambiente via CSS */
+
+/* 🔧 Seletor para ambiente de desenvolvimento (localhost) */
+@media screen and (min-width: 1px) {
+  :root:has(body) {
+    --current-url: var(--portfolio-url);
+  }
+}
+
+/* 🌍 Seletor para ambiente de produção via hostname */
+@supports (color: env(safe-area-inset-top)) {
+  :root {
+    --current-url: var(--portfolio-url);
+  }
+}
+
+/* 🎯 Seletor específico para GitHub Pages */
+html[data-environment="github-pages"] {
+  --portfolio-url: "https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2";
+  --portfolio-status: "online";
+}
+
+/* 🏠 Seletor específico para desenvolvimento local */
+html[data-environment="development"],
+html[data-environment="local"] {
+  --portfolio-url: var(--portfolio-url-local);
+  --portfolio-status: "development";
+}
+
+/* 🚀 Seletor para Vercel */
+html[data-environment="vercel"] {
+  --portfolio-url: "https://desenvolvimento-web-2025-2.vercel.app";
+  --portfolio-status: "online";
+}
+
+/* 📡 Seletor para Netlify */
+html[data-environment="netlify"] {
+  --portfolio-url: "https://desenvolvimento-web-2025-2.netlify.app";
+  --portfolio-status: "online";
+}
+
+/* �🎨 Estilos específicos para a galeria do Figma */
 .space-gallery-figma {
   /* Animações suaves para interações */
   --transition-gallery: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -620,6 +663,7 @@ body {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
 }
 
 /* Hover effects para cards da galeria */

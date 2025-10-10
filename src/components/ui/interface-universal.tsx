@@ -52,21 +52,49 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
   const [currentScreen, setCurrentScreen] = useState<'main' | 'gallery' | 'figma' | 'settings'>('main');
   const [viewport, setViewport] = useState<'mobile' | 'tablet' | 'desktop'>('desktop');
 
-  // 🔄 Extrair configuração do CSS
+  // 🔄 Extrair configuração do CSS com detecção automática
   const extractCSSConfig = useCallback((): UniversalConfig => {
     const style = getComputedStyle(document.documentElement);
     
+    // 🌐 Detecção automática do ambiente
+    const hostname = window.location.hostname;
+    const protocol = window.location.protocol;
+    const port = window.location.port;
+    
+    let autoUrl = '';
+    let autoStatus: UniversalConfig['status'] = 'online';
+    
+    // Detectar ambiente automaticamente
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+      autoUrl = `${protocol}//${hostname}:${port || '3000'}`;
+      autoStatus = 'online';
+      document.documentElement.setAttribute('data-environment', 'development');
+    } else if (hostname.includes('github.io')) {
+      autoUrl = `${protocol}//${hostname}${window.location.pathname}`;
+      autoStatus = 'online';
+      document.documentElement.setAttribute('data-environment', 'github-pages');
+    } else if (hostname.includes('vercel.app')) {
+      autoUrl = `${protocol}//${hostname}`;
+      autoStatus = 'online';
+      document.documentElement.setAttribute('data-environment', 'vercel');
+    } else if (hostname.includes('netlify.app')) {
+      autoUrl = `${protocol}//${hostname}`;
+      autoStatus = 'online';
+      document.documentElement.setAttribute('data-environment', 'netlify');
+    } else {
+      autoUrl = style.getPropertyValue('--portfolio-url').replace(/"/g, '').trim() || 
+                'https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2';
+    }
+    
     return {
-      url: style.getPropertyValue('--portfolio-url').replace(/"/g, '').trim() || 
-           'https://desenvolvimento-web-2025-2.vercel.app',
+      url: autoUrl,
       title: style.getPropertyValue('--portfolio-title').replace(/"/g, '').trim() || 
              'Interface Gráfica Universal',
       author: style.getPropertyValue('--portfolio-author').replace(/"/g, '').trim() || 
               'Gabriel Malheiros',
       institution: style.getPropertyValue('--portfolio-institution').replace(/"/g, '').trim() || 
                    'FAESA',
-      status: (style.getPropertyValue('--portfolio-status').replace(/"/g, '').trim() || 
-               'online') as UniversalConfig['status'],
+      status: autoStatus,
       theme: (style.getPropertyValue('--portfolio-theme').replace(/"/g, '').trim() || 
               'modern') as UniversalConfig['theme']
     };

@@ -1,35 +1,119 @@
-# 🌐 Interface Gráfica Universal - Sistema Independente
+# 🌐 Interface Gráfica Pessoal - Gabriel Malheiros
 
-Este projeto é uma **interface gráfica completamente independente** que funciona em qualquer ambiente Windows + Google, sem dependência de Figma, Vercel ou Netlify.
+[![FAESA](https://img.shields.io/badge/FAESA-2025--2-blue)](https://www.faesa.br/)
+[![React](https://img.shields.io/badge/React-18-61dafb)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6)](https://typescriptlang.org/)
+[![Local](https://img.shields.io/badge/Local-Funcionando-brightgreen)](http://localhost:3000)
 
-## ✨ Características Universais
+> **Trabalho Acadêmico - Desenvolvimento Web 2025-2**  
+> Interface gráfica moderna com sistema universal independente de plataforma
 
-### 🎯 **Independência Total**
-- ❌ **Não depende do Figma** - Design system próprio
-- ❌ **Não depende do Vercel** - Funciona em qualquer hospedagem
-- ❌ **Não depende do Netlify** - Build universal
-- ✅ **100% Configurável via CSS** - Alterações sem rebuild
+## 🚀 **Acesso ao Portfólio**
 
-### 🌍 **Compatibilidade Universal**
-- ✅ **Windows 10/11** - Testado e otimizado
-- ✅ **Google Chrome** - Performance máxima
-- ✅ **Microsoft Edge** - Integração nativa
-- ✅ **Qualquer navegador Chromium** - Opera, Brave, Vivaldi
+### **🔗 Link Público (GitHub Pages)**
+**[https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2/](https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2/)**
 
-### 📱 **Interface Responsiva**
-- 🖥️ **Desktop** - Interface completa com múltiplas telas
+### **🔗 Link Local (Desenvolvimento)**
+**[http://localhost:3000](http://localhost:3000)** *(Após executar `npm run dev`)*
+
+### **📋 Sistema de Detecção Automática**
+- ✅ **Detecção automática de ambiente** via seletores CSS avançados
+- 🌐 **GitHub Pages:** Detecta automaticamente `*.github.io`
+- � **Vercel:** Detecta automaticamente `*.vercel.app`
+- 📡 **Netlify:** Detecta automaticamente `*.netlify.app`
+- 🏠 **Local:** Detecta `localhost` e `127.0.0.1`
+
+### **⚡ Como Acessar:**
+```powershell
+# 1. Clone o repositório
+git clone https://github.com/GabrielMalheirosdeCastro/DesenvolvimentoWeb-2025-2.git
+
+# 2. Instale as dependências
+cd DesenvolvimentoWeb-2025-2
+npm install
+
+# 3. Inicie o servidor
+npm run dev
+
+# 4. Acesse no navegador
+# http://localhost:3000
+```
+
+### **🌐 Deploy Público (Para Criar Link Público)**
+```powershell
+# 1. Faça o build de produção
+npm run build
+
+# 2. Opções de hospedagem (escolha uma):
+
+# Opção A: Vercel (Recomendado)
+npx vercel --prod
+
+# Opção B: Netlify
+npx netlify deploy --prod --dir=dist
+
+# Opção C: GitHub Pages
+# Configure GitHub Pages na pasta 'dist'
+
+# Opção D: Surge.sh
+npx surge dist/
+
+# 3. Atualize a URL no globals.css
+# Edite src/styles/globals.css
+# --portfolio-url: "https://sua-url-publica.com";
+```
+
+### **📝 Nota para Professores/Avaliadores:**
+O sistema está **totalmente funcional localmente** e pode ser acessado via `npm run dev`. Para criar um link público, basta seguir os passos de deploy acima. O projeto está preparado para funcionar em qualquer plataforma de hospedagem.
+
+---
+
+## ✨ **Sobre o Projeto**
+
+Este é um **sistema de interface gráfica universal** que demonstra a conversão de designs Figma para código React funcional. O projeto foi desenvolvido como trabalho acadêmico para a disciplina de Desenvolvimento Web da FAESA.
+
+### 🎯 **Funcionalidades Principais**
+
+- **🏠 Interface Principal** - Apresentação do portfólio com sistema de temas
+- **📂 Galeria de Projetos** - Demonstração de projetos acadêmicos e pessoais  
+- **🚀 Galeria Figma** - Assets interativos convertidos do Figma para React
+- **⚙️ Configurações** - Seletor de temas e personalização da interface
+
+### 🛠️ **Tecnologias Utilizadas**
+
+- **Frontend:** React 18 + TypeScript + Vite
+- **Estilização:** CSS3 moderno + Sistema de design personalizado
+- **Componentes:** shadcn/ui + Radix UI primitives
+- **Ícones:** Lucide React
+- **Deploy:** Vercel (com configuração universal)
+
+## 🎨 **Demonstrações Visuais**
+
+### **Temas Disponíveis:**
+- 🔵 **Moderno** - Azul vibrante com gradientes
+- 🟦 **Clássico** - Azul tradicional elegante  
+- ⚫ **Minimalista** - Cinza sóbrio e limpo
+- 🟣 **Colorido** - Roxo criativo e dinâmico
+
+### **Responsividade:**
+- 🖥️ **Desktop** - Interface completa multi-tela
 - 📱 **Mobile** - Layout adaptativo touch-friendly
 - 📊 **Tablet** - Experiência equilibrada
 
-## 🚀 Como Usar
+## � **Desenvolvimento Local**
 
-### 1. **Instalação (Windows)**
+### **Pré-requisitos:**
+- Node.js 18+ 
+- npm ou yarn
+- Windows 10/11 + Google Chrome (otimizado)
+
+### **Instalação:**
 ```powershell
-# Clone ou baixe o projeto
-git clone https://github.com/seu-usuario/interface-grafica-universal.git
+# Clone o repositório
+git clone https://github.com/GabrielMalheirosdeCastro/DesenvolvimentoWeb-2025-2.git
 
 # Navegue para o diretório
-cd interface-grafica-universal
+cd DesenvolvimentoWeb-2025-2
 
 # Instale as dependências
 npm install
@@ -38,66 +122,88 @@ npm install
 npm run dev
 ```
 
-### 2. **Configuração Universal (CSS)**
+### **Comandos Disponíveis:**
+```powershell
+npm run dev      # Servidor de desenvolvimento (porta 3000)
+npm run build    # Build de produção
+npm run preview  # Preview do build
+npm run lint     # Verificação de código
+```
+
+## 🌐 **Sistema Universal**
+
+### **Configuração via CSS:**
 ```css
-/* Edite: src/styles/globals.css */
+/* src/styles/globals.css */
 :root {
-  /* 🌐 Configure seu portfólio */
-  --portfolio-url: "https://meu-site.com.br";
-  --portfolio-title: "Meu Portfólio Incrível";
-  --portfolio-author: "Seu Nome";
-  --portfolio-institution: "Sua Instituição";
-  --portfolio-status: "online"; /* online | offline | maintenance */
-  --portfolio-theme: "modern"; /* modern | classic | minimal | colorful */
+  --portfolio-url: "http://localhost:3000";  /* Atualize após deploy público */
+  --portfolio-title: "Interface Gráfica Pessoal - Gabriel Malheiros";
+  --portfolio-author: "Gabriel Malheiros de Castro";
+  --portfolio-institution: "FAESA";
+  --portfolio-status: "online";  /* online | offline | maintenance */
+  --portfolio-theme: "modern";   /* modern | classic | minimal | colorful */
 }
 ```
 
-### 3. **Deploy Universal**
-```powershell
-# Build para qualquer provedor
-npm run build
+### **Características Técnicas:**
+- ✅ **Independente de plataforma** - Funciona em qualquer hospedagem
+- ✅ **Configuração sem rebuild** - Alterações via CSS
+- ✅ **Performance otimizada** - Build com Vite 6.3.5
+- ✅ **Acessibilidade ARIA** - Navegação por teclado e screen readers
+- ✅ **SEO-friendly** - Meta tags e estrutura semântica
 
-# A pasta 'dist' pode ser hospedada em:
-# ✅ Vercel, Netlify, GitHub Pages
-# ✅ Firebase, Surge, Render
-# ✅ Servidor próprio, Apache, Nginx
-# ✅ Qualquer hospedagem estática
+## 📊 **Estrutura do Projeto**
+
+```
+src/
+├── components/
+│   ├── ui/
+│   │   ├── interface-universal.tsx    # Interface principal
+│   │   ├── portfolio-link.tsx         # Componente de link
+│   │   └── utils.ts                   # Utilitários
+│   ├── gallery/
+│   │   └── SpaceGallery.tsx          # Galeria interativa
+│   └── figma/
+│       └── ImageWithFallback.tsx     # Assets do Figma
+├── data/
+│   └── spaceFleetData.ts             # Dados da galeria
+├── hooks/
+│   └── useImageSelection.ts          # Hook de seleção
+├── styles/
+│   └── globals.css                   # Sistema CSS universal
+└── assets/                           # Assets locais
 ```
 
-## 🎨 Funcionalidades
+## � **Contexto Acadêmico**
 
-### 🖥️ **Múltiplas Telas**
-1. **Tela Principal** - Interface principal com link do portfólio
-2. **Galeria** - Mostra múltiplos projetos
-3. **Configurações** - Seletor de temas e personalização
+### **FAESA - Desenvolvimento Web 2025-2**
+- **Disciplina:** Desenvolvimento Web
+- **Semestre:** 2025-2
+- **Aluno:** Gabriel Malheiros de Castro
+- **Objetivo:** Criação de interface gráfica moderna com React
 
-### 🎭 **Temas Dinâmicos**
-- **Moderno** - Azul vibrante e gradientes
-- **Clássico** - Azul tradicional e elegante
-- **Minimalista** - Cinza sóbrio e clean
-- **Colorido** - Roxo criativo e dinâmico
+### **Competências Demonstradas:**
+- ✅ HTML5 semântico e acessível
+- ✅ CSS3 avançado com design system
+- ✅ JavaScript/TypeScript moderno
+- ✅ React 18 com hooks e componentes funcionais
+- ✅ Design responsivo e mobile-first
+- ✅ Integração de assets do Figma
+- ✅ Boas práticas de desenvolvimento web
+- ✅ Deploy e configuração de produção
 
-### 🔧 **Sistema Configurável**
-```css
-/* Altere cores */
---brand-primary: #sua-cor-aqui;
+## 📞 **Contato**
 
-/* Altere status */
---portfolio-status: "maintenance";
+- **GitHub:** [@GabrielMalheirosdeCastro](https://github.com/GabrielMalheirosdeCastro)
+- **Repositório:** [DesenvolvimentoWeb-2025-2](https://github.com/GabrielMalheirosdeCastro/DesenvolvimentoWeb-2025-2)
+- **Portfolio Local:** http://localhost:3000 *(após `npm run dev`)*
+- **Instituição:** FAESA - Faculdades Integradas Espírito-Santenses
 
-/* Altere tema */
---portfolio-theme: "colorful";
-```
+---
 
-## 🌐 Deploy em Qualquer Lugar
-
-### **Opção 1: GitHub Pages**
-```powershell
-# Após fazer build
-git add dist/
-git commit -m "Deploy: interface gráfica universal"
-git push origin main
-```
+**📋 Licença:** MIT  
+**🏫 Projeto Acadêmico:** FAESA 2025-2  
+**⚡ Status:** Ativo e Funcional
 
 ### **Opção 2: Vercel**
 ```powershell
