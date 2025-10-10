@@ -96,3 +96,4 @@ storybook-static
 # Comentário: A pasta .github/ NÃO está no .gitignore
 # pois contém arquivos importantes como copilot-instructions.md
 # que devem ser versionados no repositório
+.vercel

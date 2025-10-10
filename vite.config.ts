@@ -20,30 +20,37 @@ export default defineConfig({
     assetsDir: 'assets',
     sourcemap: false,
     minify: 'terser',
+    // Otimizações para Vercel
     rollupOptions: {
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
-          ui: ['lucide-react'],
-          utils: ['clsx', 'tailwind-merge']
-        }
+          utils: ['lucide-react']
+        },
+        assetFileNames: 'assets/[name].[hash][extname]',
+        chunkFileNames: 'assets/[name].[hash].js',
+        entryFileNames: 'assets/[name].[hash].js'
       }
-    }
+    },
+    // Limite de chunk warning aumentado
+    chunkSizeWarningLimit: 1000
   },
   server: {
+    host: '0.0.0.0',
     port: 3000,
     open: true,
-    host: true,
     cors: true
   },
   preview: {
-    port: 3000,
-    host: true
+    host: '0.0.0.0',
+    port: 4173
   },
   // 🌐 Configuração para GitHub Pages
   base: process.env.NODE_ENV === 'production' 
     ? '/DesenvolvimentoWeb-2025-2/' 
     : '/',
+  // 🚀 Configuração otimizada para Vercel
+  base: '/',
   // 🔧 Otimizações específicas para Windows + Google
   define: {
     __PORTFOLIO_VERSION__: JSON.stringify('1.0.0'),
