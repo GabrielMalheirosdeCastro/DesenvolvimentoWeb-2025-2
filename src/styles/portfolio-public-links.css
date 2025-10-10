@@ -1,0 +1,427 @@
+/* 🌐 SISTEMA DE LINKS PÚBLICOS UNIVERSAIS - INDEPENDENTE DE GITHUB */
+
+/* 🎯 Container principal para links públicos */
+.portfolio-public-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 2rem auto;
+  border: 3px solid rgba(59, 130, 246, 0.2);
+}
+
+/* 🌍 Link principal SUPER VISÍVEL - NÃO vai para GitHub */
+.portfolio-link-public-universal {
+  /* Base estrutural */
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 1rem !important;
+  
+  /* Tamanho GRANDE para máxima visibilidade */
+  min-width: 400px !important;
+  min-height: 80px !important;
+  padding: 1.5rem 2rem !important;
+  
+  /* Visual IMPOSSÍVEL de ignorar */
+  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 50%, #1d4ed8 100%) !important;
+  color: white !important;
+  text-decoration: none !important;
+  
+  /* Bordas e sombras CHAMATIVAS */
+  border-radius: 16px !important;
+  border: 4px solid #60a5fa !important;
+  box-shadow: 
+    0 0 0 2px #ffffff,
+    0 0 0 6px #3b82f6,
+    0 15px 35px -5px rgba(59, 130, 246, 0.8),
+    inset 0 2px 0 rgba(255, 255, 255, 0.2) !important;
+  
+  /* Tipografia SUPER legível */
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif !important;
+  font-weight: 800 !important;
+  font-size: 1.25rem !important;
+  line-height: 1.3 !important;
+  text-align: center !important;
+  letter-spacing: 0.5px !important;
+  
+  /* Animações SUAVES */
+  transition: all 400ms cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  cursor: pointer !important;
+  user-select: none !important;
+  
+  /* Z-index ALTO para ficar sempre visível */
+  z-index: 999 !important;
+  
+  /* Garantias de visibilidade */
+  opacity: 1 !important;
+  visibility: visible !important;
+  overflow: visible !important;
+}
+
+/* 🔥 Hover EXTREMAMENTE chamativo */
+.portfolio-link-public-universal:hover {
+  transform: translateY(-6px) scale(1.05) !important;
+  box-shadow: 
+    0 0 0 2px #ffffff,
+    0 0 0 8px #60a5fa,
+    0 25px 50px -10px rgba(59, 130, 246, 0.9),
+    inset 0 3px 0 rgba(255, 255, 255, 0.3) !important;
+  border-color: #93c5fd !important;
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%) !important;
+}
+
+/* 🎯 Active state CLARO */
+.portfolio-link-public-universal:active {
+  transform: translateY(-3px) scale(1.02) !important;
+  transition-duration: 150ms !important;
+}
+
+/* 🔍 Focus ULTRA visível para acessibilidade */
+.portfolio-link-public-universal:focus,
+.portfolio-link-public-universal:focus-visible {
+  outline: 6px solid #fbbf24 !important;
+  outline-offset: 4px !important;
+  border-color: #fbbf24 !important;
+}
+
+/* 🌍 Variações por provedor */
+.portfolio-link-public-universal[data-provider="vercel"] {
+  background: linear-gradient(135deg, #000000 0%, #333333 100%) !important;
+  border-color: #666666 !important;
+  box-shadow: 
+    0 0 0 2px #ffffff,
+    0 0 0 6px #000000,
+    0 15px 35px -5px rgba(0, 0, 0, 0.8) !important;
+}
+
+.portfolio-link-public-universal[data-provider="netlify"] {
+  background: linear-gradient(135deg, #00c7b7 0%, #00ad9f 100%) !important;
+  border-color: #5eead4 !important;
+  box-shadow: 
+    0 0 0 2px #ffffff,
+    0 0 0 6px #00c7b7,
+    0 15px 35px -5px rgba(0, 199, 183, 0.8) !important;
+}
+
+.portfolio-link-public-universal[data-provider="railway"] {
+  background: linear-gradient(135deg, #0B0D0E 0%, #1a1d21 100%) !important;
+  border-color: #4f5155 !important;
+}
+
+.portfolio-link-public-universal[data-provider="render"] {
+  background: linear-gradient(135deg, #46E3B7 0%, #2dd4aa 100%) !important;
+  border-color: #6ee7ca !important;
+}
+
+.portfolio-link-public-universal[data-provider="firebase"] {
+  background: linear-gradient(135deg, #FFA000 0%, #ff8f00 100%) !important;
+  border-color: #ffb74d !important;
+}
+
+.portfolio-link-public-universal[data-provider="surge"] {
+  background: linear-gradient(135deg, #96d687 0%, #7bc670 100%) !important;
+  border-color: #a8e6cf !important;
+}
+
+/* 🚨 Estado de manutenção */
+.portfolio-link-public-universal[data-status="maintenance"] {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+  border-color: #fbbf24 !important;
+  animation: maintenancePulse 2s ease-in-out infinite !important;
+}
+
+@keyframes maintenancePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+/* ❌ Estado offline */
+.portfolio-link-public-universal[data-status="offline"] {
+  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%) !important;
+  border-color: #9ca3af !important;
+  cursor: not-allowed !important;
+  opacity: 0.6 !important;
+}
+
+/* 🏷️ Badge de provedor */
+.portfolio-provider-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  
+  background: rgba(255, 255, 255, 0.95) !important;
+  color: #1f2937 !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  padding: 4px 8px !important;
+  border-radius: 12px !important;
+  border: 2px solid rgba(59, 130, 246, 0.3) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  
+  z-index: 1000 !important;
+}
+
+/* 🏷️ Badge de status */
+.portfolio-status-badge {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 50% !important;
+  border: 3px solid white !important;
+  
+  z-index: 1000 !important;
+}
+
+.portfolio-status-badge[data-status="online"] {
+  background: #10b981 !important;
+  box-shadow: 0 0 0 2px #10b981, 0 0 12px rgba(16, 185, 129, 0.6) !important;
+}
+
+.portfolio-status-badge[data-status="maintenance"] {
+  background: #f59e0b !important;
+  box-shadow: 0 0 0 2px #f59e0b, 0 0 12px rgba(245, 158, 11, 0.6) !important;
+}
+
+.portfolio-status-badge[data-status="offline"] {
+  background: #ef4444 !important;
+  box-shadow: 0 0 0 2px #ef4444, 0 0 12px rgba(239, 68, 68, 0.6) !important;
+}
+
+/* 📱 Responsividade EXTREMA */
+@media (max-width: 500px) {
+  .portfolio-link-public-universal {
+    min-width: 300px !important;
+    min-height: 70px !important;
+    padding: 1rem 1.5rem !important;
+    font-size: 1rem !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+  
+  .portfolio-public-container {
+    margin: 1rem !important;
+    padding: 1.5rem !important;
+    max-width: 95vw !important;
+  }
+}
+
+@media (min-width: 501px) and (max-width: 768px) {
+  .portfolio-link-public-universal {
+    min-width: 350px !important;
+    min-height: 75px !important;
+    padding: 1.25rem 1.75rem !important;
+    font-size: 1.125rem !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .portfolio-link-public-universal {
+    min-width: 380px !important;
+    min-height: 80px !important;
+    padding: 1.5rem 2rem !important;
+    font-size: 1.25rem !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  .portfolio-link-public-universal {
+    min-width: 450px !important;
+    min-height: 90px !important;
+    padding: 1.75rem 2.5rem !important;
+    font-size: 1.375rem !important;
+    border-radius: 20px !important;
+  }
+}
+
+/* 🔧 Controles auxiliares */
+.portfolio-controls-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.portfolio-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  
+  padding: 0.75rem 1rem;
+  background: white;
+  color: #374151;
+  text-decoration: none;
+  
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  
+  transition: all 250ms ease;
+  cursor: pointer;
+}
+
+.portfolio-control-button:hover {
+  background: #f3f4f6;
+  border-color: #3b82f6;
+  color: #3b82f6;
+  transform: translateY(-2px);
+}
+
+.portfolio-control-button:active {
+  transform: translateY(0);
+}
+
+/* 🎯 Indicador de URL pública */
+.portfolio-url-display {
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(59, 130, 246, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace;
+  font-size: 0.875rem;
+  color: #374151;
+  
+  max-width: 500px;
+  word-break: break-all;
+  text-align: center;
+  
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 🏷️ Labels informativos */
+.portfolio-info-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+/* 📊 Estatísticas de provider */
+.portfolio-provider-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  background: rgba(59, 130, 246, 0.05);
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  border-radius: 8px;
+  padding: 0.75rem;
+  
+  font-size: 0.75rem;
+  color: #4b5563;
+}
+
+/* 🎨 Animação de loading */
+.portfolio-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.portfolio-loading::before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  border: 2px solid #e5e7eb;
+  border-top: 2px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* 🛡️ Garantias de funcionamento */
+.portfolio-link-public-universal,
+.portfolio-link-public-universal * {
+  /* Overrides para garantir visibilidade */
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: inherit !important;
+}
+
+/* 🔍 Debug mode */
+.portfolio-debug-mode {
+  border: 3px dashed #ef4444 !important;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(239, 68, 68, 0.1),
+    rgba(239, 68, 68, 0.1) 10px,
+    transparent 10px,
+    transparent 20px
+  ) !important;
+}
+
+.portfolio-debug-mode::after {
+  content: "🐛 DEBUG MODE";
+  position: absolute;
+  top: -25px;
+  left: 0;
+  
+  background: #ef4444;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+/* 📝 Texto informativo */
+.portfolio-info-text {
+  max-width: 400px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-top: 1rem;
+}
+
+.portfolio-info-text strong {
+  color: #374151;
+  font-weight: 600;
+}
+
+/* 🎯 Override para garantir que NUNCA vá para GitHub */
+.portfolio-link-public-universal[href*="github.com"],
+.portfolio-link-public-universal[href*="github.io"] {
+  /* Forçar redirecionamento para provedor público */
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+  border-color: #f87171 !important;
+}
+
+.portfolio-link-public-universal[href*="github.com"]::before,
+.portfolio-link-public-universal[href*="github.io"]::before {
+  content: "⚠️ ERRO: Link vai para GitHub! " !important;
+  position: absolute;
+  top: -30px;
+  left: 0;
+  right: 0;
+  
+  background: #ef4444;
+  color: white;
+  padding: 4px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+}

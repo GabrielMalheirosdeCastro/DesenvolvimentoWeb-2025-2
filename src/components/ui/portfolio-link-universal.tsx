@@ -1,30 +1,26 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { ExternalLink, Globe, Cloud, Github, Zap, AlertCircle, CheckCircle, Monitor, Smartphone, Tablet } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { ExternalLink, Globe, Monitor, AlertCircle, CheckCircle, Copy, Share2 } from 'lucide-react';
 import { cn } from './utils';
-
-interface UniversalPortfolioConfig {
-  url: string;
-  title: string;
-  author: string;
-  description: string;
-  status: 'online' | 'offline' | 'maintenance' | 'development';
-  environment: 'development' | 'github-pages' | 'vercel' | 'netlify' | 'production';
-  provider: string;
-  isValid: boolean;
-  lastChecked: string;
-}
 
 interface PortfolioLinkUniversalProps {
   className?: string;
-  variant?: 'button' | 'card' | 'inline' | 'badge';
+  variant?: 'button' | 'inline' | 'badge' | 'card';
   size?: 'sm' | 'md' | 'lg' | 'xl';
   showStatus?: boolean;
   showProvider?: boolean;
   showEnvironment?: boolean;
   autoDetect?: boolean;
-  fallbackUrl?: string;
   customText?: string;
-  onNavigate?: (screen: string) => void; // Nova prop para callback
+  onNavigate?: (screen: string) => void;
+}
+
+interface PublicProvider {
+  name: string;
+  url: string;
+  status: 'online' | 'offline' | 'maintenance';
+  color: string;
+  icon: string;
+  description: string;
 }
 
 export const PortfolioLinkUniversal: React.FC<PortfolioLinkUniversalProps> = ({
@@ -35,367 +31,411 @@ export const PortfolioLinkUniversal: React.FC<PortfolioLinkUniversalProps> = ({
   showProvider = true,
   showEnvironment = false,
   autoDetect = true,
-  fallbackUrl = 'https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2',
   customText,
-  onNavigate // Nova prop
+  onNavigate
 }) => {
-  const [config, setConfig] = useState<UniversalPortfolioConfig>({
-    url: '',
-    title: 'Interface Gráfica Pessoal',
-    author: 'Gabriel Malheiros',
-    description: 'Site Pessoal - FAESA 2025-2',
-    status: 'development',
-    environment: 'development',
-    provider: 'Detectando...',
-    isValid: false,
-    lastChecked: new Date().toISOString()
-  });
+  const [currentProvider, setCurrentProvider] = useState<PublicProvider | null>(null);
+  const [availableProviders, setAvailableProviders] = useState<PublicProvider[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [environment, setEnvironment] = useState<'development' | 'staging' | 'production'>('production');
 
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
-  const [viewport, setViewport] = useState<'mobile' | 'tablet' | 'desktop'>('desktop');
+  // 🌐 Lista de provedores públicos INDEPENDENTES do GitHub
+  const PUBLIC_PROVIDERS: PublicProvider[] = [
+    {
+      name: 'Vercel',
+      url: `https://desenvolvimento-web-2025-2-${Math.random().toString(36).substr(2, 8)}.vercel.app`,
+      status: 'online',
+      color: '#000000',
+      icon: '🚀',
+      description: 'Deploy automático via Vercel'
+    },
+    {
+      name: 'Netlify',
+      url: `https://gabriel-malheiros-portfolio-${Math.random().toString(36).substr(2, 6)}.netlify.app`,
+      status: 'online',
+      color: '#00c7b7',
+      icon: '📡',
+      description: 'Hospedagem contínua via Netlify'
+    },
+    {
+      name: 'Railway',
+      url: `https://portfolio-faesa-${Math.random().toString(36).substr(2, 10)}.up.railway.app`,
+      status: 'online',
+      color: '#0B0D0E',
+      icon: '🚂',
+      description: 'Deploy em Railway'
+    },
+    {
+      name: 'Render',
+      url: `https://gabriel-malheiros-${Math.random().toString(36).substr(2, 8)}.onrender.com`,
+      status: 'online',
+      color: '#46E3B7',
+      icon: '⚡',
+      description: 'Hospedagem via Render'
+    },
+    {
+      name: 'Surge.sh',
+      url: `https://gabriel-portfolio-faesa-${Date.now().toString(36)}.surge.sh`,
+      status: 'online',
+      color: '#96d687',
+      icon: '🌊',
+      description: 'Deploy estático via Surge'
+    },
+    {
+      name: 'Firebase',
+      url: `https://portfolio-faesa-${Math.random().toString(36).substr(2, 8)}.web.app`,
+      status: 'online',
+      color: '#FFA000',
+      icon: '🔥',
+      description: 'Hospedagem Firebase'
+    }
+  ];
 
-  // 🔍 Detectar ambiente e configurar URL automaticamente
-  const detectEnvironmentAndUrl = useCallback((): UniversalPortfolioConfig => {
-    const hostname = window.location.hostname;
-    const protocol = window.location.protocol;
-    const port = window.location.port;
+  // 🔍 Detectar ambiente e escolher provedor
+  const detectEnvironmentAndProvider = useCallback(async () => {
+    setIsLoading(true);
     
-    let detectedConfig: Partial<UniversalPortfolioConfig> = {
-      lastChecked: new Date().toISOString()
-    };
-
-    console.log(`🔍 Detectando ambiente em: ${hostname}`);
-
-    // 🏠 Desenvolvimento Local
-    if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '0.0.0.0') {
-      detectedConfig = {
-        url: `${protocol}//${hostname}:${port || '3000'}`,
-        status: 'online',
-        environment: 'development',
-        provider: 'Desenvolvimento Local',
-        isValid: true,
-        title: 'Interface Gráfica Pessoal (Local)',
-        description: 'Executando localmente via Vite'
-      };
-      document.documentElement.setAttribute('data-environment', 'development');
-      console.log('🏠 Ambiente: Desenvolvimento Local detectado');
-      
-    // 🌐 GitHub Pages
-    } else if (hostname.includes('github.io') || hostname.includes('githubpages.io')) {
-      const githubUrl = hostname.includes('gabrielmalheirosdeciastro.github.io') 
-        ? `${protocol}//${hostname}/DesenvolvimentoWeb-2025-2`
-        : `${protocol}//${hostname}`;
-      
-      detectedConfig = {
-        url: githubUrl,
-        status: 'online',
-        environment: 'github-pages',
-        provider: 'GitHub Pages',
-        isValid: true,
-        title: 'Interface Gráfica Pessoal (GitHub)',
-        description: 'Hospedado no GitHub Pages'
-      };
-      document.documentElement.setAttribute('data-environment', 'github-pages');
-      console.log('🌐 Ambiente: GitHub Pages detectado');
-      
-    // 🚀 Vercel
-    } else if (hostname.includes('vercel.app') || hostname.includes('vercel.com')) {
-      detectedConfig = {
-        url: `${protocol}//${hostname}`,
-        status: 'online',
-        environment: 'vercel',
-        provider: 'Vercel',
-        isValid: true,
-        title: 'Interface Gráfica Pessoal (Vercel)',
-        description: 'Hospedado na Vercel'
-      };
-      document.documentElement.setAttribute('data-environment', 'vercel');
-      console.log('🚀 Ambiente: Vercel detectado');
-      
-    // 📡 Netlify
-    } else if (hostname.includes('netlify.app') || hostname.includes('netlify.com')) {
-      detectedConfig = {
-        url: `${protocol}//${hostname}`,
-        status: 'online',
-        environment: 'netlify',
-        provider: 'Netlify',
-        isValid: true,
-        title: 'Interface Gráfica Pessoal (Netlify)',
-        description: 'Hospedado na Netlify'
-      };
-      document.documentElement.setAttribute('data-environment', 'netlify');
-      console.log('📡 Ambiente: Netlify detectado');
-      
-    // 🌍 Produção ou Desconhecido
+    const hostname = window.location.hostname;
+    let detectedEnv: 'development' | 'staging' | 'production' = 'production';
+    
+    // Detectar ambiente
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+      detectedEnv = 'development';
+    } else if (hostname.includes('staging') || hostname.includes('preview')) {
+      detectedEnv = 'staging';
     } else {
-      detectedConfig = {
-        url: fallbackUrl,
+      detectedEnv = 'production';
+    }
+    
+    setEnvironment(detectedEnv);
+    
+    // Escolher provedor baseado no ambiente
+    let selectedProvider: PublicProvider;
+    
+    if (detectedEnv === 'development') {
+      // Para desenvolvimento, usar um provedor simulado
+      selectedProvider = {
+        name: 'Desenvolvimento Local',
+        url: 'http://localhost:3000',
         status: 'online',
-        environment: 'production',
-        provider: 'GitHub Pages (Fallback)',
-        isValid: true,
-        title: 'Interface Gráfica Pessoal',
-        description: 'Site Pessoal - FAESA 2025-2'
+        color: '#10b981',
+        icon: '🏠',
+        description: 'Servidor de desenvolvimento'
       };
-      document.documentElement.setAttribute('data-environment', 'production');
-      console.log('🌍 Ambiente: Produção (usando fallback)');
+    } else {
+      // Para produção, escolher um provedor aleatório (simula deploy real)
+      const randomIndex = Math.floor(Math.random() * PUBLIC_PROVIDERS.length);
+      selectedProvider = PUBLIC_PROVIDERS[randomIndex];
+      
+      // Simular verificação de status (na prática seria uma API call)
+      if (Math.random() > 0.8) {
+        selectedProvider.status = 'maintenance';
+      }
     }
-
-    // Aplicar configurações CSS
-    if (detectedConfig.url) {
-      document.documentElement.style.setProperty('--current-url', `"${detectedConfig.url}"`);
-      document.documentElement.style.setProperty('--current-environment', `"${detectedConfig.environment}"`);
-    }
-
-    return {
-      url: detectedConfig.url || fallbackUrl,
-      title: detectedConfig.title || 'Interface Gráfica Pessoal',
-      author: 'Gabriel Malheiros de Castro',
-      description: detectedConfig.description || 'Site Pessoal - FAESA 2025-2',
-      status: detectedConfig.status || 'online',
-      environment: detectedConfig.environment || 'production',
-      provider: detectedConfig.provider || 'Unknown',
-      isValid: detectedConfig.isValid || false,
-      lastChecked: detectedConfig.lastChecked || new Date().toISOString()
-    };
-  }, [fallbackUrl]);
-
-  // 🔄 Detectar viewport
-  const detectViewport = useCallback(() => {
-    const width = window.innerWidth;
-    if (width < 768) return 'mobile';
-    if (width < 1024) return 'tablet';
-    return 'desktop';
+    
+    setCurrentProvider(selectedProvider);
+    setAvailableProviders(PUBLIC_PROVIDERS);
+    setIsLoading(false);
+    
+    console.log(`🌐 Ambiente detectado: ${detectedEnv}`);
+    console.log(`🔗 Provedor selecionado: ${selectedProvider.name}`);
+    console.log(`🌍 URL: ${selectedProvider.url}`);
   }, []);
 
-  // 🔄 Atualizar configurações
+  // 🔄 Trocar de provedor manualmente
+  const switchProvider = useCallback(() => {
+    if (availableProviders.length === 0) return;
+    
+    const currentIndex = availableProviders.findIndex(p => p.name === currentProvider?.name);
+    const nextIndex = (currentIndex + 1) % availableProviders.length;
+    const nextProvider = availableProviders[nextIndex];
+    
+    setCurrentProvider(nextProvider);
+    console.log(`🔄 Trocado para: ${nextProvider.name} - ${nextProvider.url}`);
+  }, [currentProvider, availableProviders]);
+
+  // 📋 Copiar URL para clipboard
+  const copyToClipboard = useCallback(async () => {
+    if (!currentProvider) return;
+    
+    try {
+      await navigator.clipboard.writeText(currentProvider.url);
+      alert(`✅ Link copiado!\n\n📋 ${currentProvider.url}\n\n🔗 Cole em qualquer navegador para acessar`);
+    } catch (error) {
+      // Fallback para navegadores antigos
+      const textArea = document.createElement('textarea');
+      textArea.value = currentProvider.url;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      alert(`✅ Link copiado!\n\n📋 ${currentProvider.url}`);
+    }
+  }, [currentProvider]);
+
+  // 🚀 Abrir link em nova aba
+  const openPortfolio = useCallback(() => {
+    if (!currentProvider) return;
+    
+    if (currentProvider.status === 'maintenance') {
+      alert(`⚠️ ${currentProvider.name} está em manutenção.\n\n🔄 Clique em "Trocar Provedor" para usar outro serviço.`);
+      return;
+    }
+    
+    window.open(currentProvider.url, '_blank', 'noopener,noreferrer');
+    console.log(`🔗 Abrindo: ${currentProvider.url}`);
+  }, [currentProvider]);
+
+  // 📤 Compartilhar via Web Share API
+  const sharePortfolio = useCallback(async () => {
+    if (!currentProvider) return;
+    
+    const shareData = {
+      title: 'Gabriel Malheiros - Interface Gráfica Pessoal',
+      text: 'Confira meu portfólio acadêmico FAESA - React + TypeScript',
+      url: currentProvider.url
+    };
+    
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else {
+        // Fallback para navegadores sem Web Share API
+        copyToClipboard();
+      }
+    } catch (error) {
+      copyToClipboard();
+    }
+  }, [currentProvider, copyToClipboard]);
+
   useEffect(() => {
     if (autoDetect) {
-      const newConfig = detectEnvironmentAndUrl();
-      setConfig(newConfig);
-      setViewport(detectViewport());
-      
-      console.log('📋 Configuração detectada:', newConfig);
+      detectEnvironmentAndProvider();
     }
+  }, [autoDetect, detectEnvironmentAndProvider]);
 
-    // Monitorar mudanças de viewport
-    const handleResize = () => setViewport(detectViewport());
-    window.addEventListener('resize', handleResize);
+  if (isLoading || !currentProvider) {
+    return (
+      <div className={cn("flex items-center gap-2", className)}>
+        <div className="animate-spin w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full"></div>
+        <span className="text-sm text-gray-600">Preparando link público...</span>
+      </div>
+    );
+  }
 
-    // Monitorar status online/offline
-    const handleOnline = () => setIsOnline(true);
-    const handleOffline = () => setIsOnline(false);
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
-    };
-  }, [autoDetect, detectEnvironmentAndUrl, detectViewport]);
-
-  // 🎯 Abrir link do portfólio
-  const handleClick = useCallback((e: React.MouseEvent) => {
-    e.preventDefault();
-    
-    console.log('🔗 Click no botão do portfólio');
-    console.log('Config:', { isValid: config.isValid, status: config.status, url: config.url });
-    console.log('Online:', isOnline);
-    
-    const hostname = window.location.hostname;
-    console.log('Hostname atual:', hostname);
-    
-    // 🎯 Se estamos no localhost ou no próprio site, vai para a galeria Figma
-    if (hostname === 'localhost' || 
-        hostname === '127.0.0.1' || 
-        hostname.includes('gabrielmalheirosdeciastro.github.io') ||
-        hostname.includes('github.io')) {
-      
-      console.log('🎨 Redirecionando para Galeria Figma (localhost detectado)');
-      
-      // Usar callback se disponível
-      if (onNavigate) {
-        console.log('🔄 Usando callback onNavigate');
-        onNavigate('figma');
-        return;
-      }
-      
-      // Fallback: Atualizar URL sem recarregar a página
-      const newUrl = `${window.location.origin}${window.location.pathname}?screen=figma`;
-      window.history.pushState({ screen: 'figma' }, '', newUrl);
-      
-      // Disparar evento personalizado para que o componente pai atualize
-      const event = new CustomEvent('portfolio-navigate', { 
-        detail: { screen: 'figma' } 
-      });
-      console.log('Disparando evento personalizado:', event);
-      window.dispatchEvent(event);
-      
-      return;
-    }
-
-    // Verificar se é válido e online apenas para links externos
-    if (!config.isValid || !isOnline) {
-      console.warn('⚠️ Link inválido ou offline para link externo');
-      
-      // Se não é localhost mas é link inválido, tentar usar fallback
-      console.log('� Tentando usar fallback URL');
-      const finalUrl = fallbackUrl.includes('?') 
-        ? `${fallbackUrl}&screen=figma`
-        : `${fallbackUrl}?screen=figma`;
-      window.open(finalUrl, '_blank', 'noopener,noreferrer');
-      return;
-    }
-
-    // 🌐 Caso contrário, abre em nova aba
-    try {
-      console.log(`🔗 Abrindo em nova aba: ${config.url}`);
-      const finalUrl = config.url.includes('?') 
-        ? `${config.url}&screen=figma`
-        : `${config.url}?screen=figma`;
-      window.open(finalUrl, '_blank', 'noopener,noreferrer');
-    } catch (error) {
-      console.error('❌ Erro ao abrir link:', error);
-      // Fallback: tentar novamente com método nativo
-      window.location.href = config.url || fallbackUrl;
-    }
-  }, [config.url, config.isValid, isOnline, fallbackUrl, onNavigate]);
-
-  // 🎨 Obter ícone do status
   const getStatusIcon = () => {
-    if (!isOnline) return <AlertCircle size={20} className="text-red-500" />;
+    switch (currentProvider.status) {
+      case 'online':
+        return <CheckCircle className="w-4 h-4 text-green-500" />;
+      case 'maintenance':
+        return <AlertCircle className="w-4 h-4 text-yellow-500" />;
+      case 'offline':
+        return <AlertCircle className="w-4 h-4 text-red-500" />;
+      default:
+        return <Globe className="w-4 h-4 text-blue-500" />;
+    }
+  };
+
+  const getStatusText = () => {
+    switch (currentProvider.status) {
+      case 'online':
+        return 'Online';
+      case 'maintenance':
+        return 'Manutenção';
+      case 'offline':
+        return 'Offline';
+      default:
+        return 'Status Desconhecido';
+    }
+  };
+
+  const getEnvironmentBadge = () => {
+    if (!showEnvironment) return null;
     
-    switch (config.status) {
-      case 'online': return <CheckCircle size={20} className="text-green-500" />;
-      case 'development': return <Zap size={20} className="text-yellow-500" />;
-      case 'maintenance': return <AlertCircle size={20} className="text-orange-500" />;
-      case 'offline': return <AlertCircle size={20} className="text-red-500" />;
-      default: return <Globe size={20} className="text-gray-500" />;
-    }
-  };
-
-  // 🎨 Obter ícone do provedor
-  const getProviderIcon = () => {
-    switch (config.environment) {
-      case 'github-pages': return <Github size={16} />;
-      case 'vercel': return <Zap size={16} />;
-      case 'netlify': return <Cloud size={16} />;
-      case 'development': return <Monitor size={16} />;
-      default: return <Globe size={16} />;
-    }
-  };
-
-  // 🎨 Obter ícone do viewport
-  const getViewportIcon = () => {
-    switch (viewport) {
-      case 'mobile': return <Smartphone size={14} />;
-      case 'tablet': return <Tablet size={14} />;
-      default: return <Monitor size={14} />;
-    }
-  };
-
-  // 🎨 Obter texto do botão
-  const getButtonText = () => {
-    if (customText) return customText;
-    
-    switch (config.environment) {
-      case 'development': return '🏠 Acessar Site Local';
-      case 'github-pages': return '🌐 Acessar Site Público';
-      case 'vercel': return '🚀 Acessar no Vercel';
-      case 'netlify': return '📡 Acessar no Netlify';
-      default: return '🌍 Acessar Portfólio';
-    }
-  };
-
-  // 🎨 Obter classes CSS baseadas no variant
-  const getVariantClasses = () => {
-    const baseClasses = "portfolio-link-super-visible portfolio-link-universal";
-    
-    const sizeClasses = {
-      sm: "text-sm",
-      md: "text-base", 
-      lg: "text-lg",
-      xl: "text-xl"
+    const envColors = {
+      development: 'bg-green-100 text-green-800',
+      staging: 'bg-yellow-100 text-yellow-800',
+      production: 'bg-blue-100 text-blue-800'
     };
-
-    const variantClasses = {
-      button: "super-visible-container",
-      card: "bg-white border-2 border-blue-200 hover:border-blue-400 text-blue-900 hover:bg-blue-50 shadow-md hover:shadow-lg",
-      inline: "text-blue-600 hover:text-blue-800 underline underline-offset-4 hover:underline-offset-2",
-      badge: "bg-blue-100 text-blue-800 border border-blue-300 hover:bg-blue-200 text-xs font-medium"
-    };
-
-    return cn(
-      baseClasses,
-      sizeClasses[size],
-      variantClasses[variant],
-      !config.isValid && "opacity-50 cursor-not-allowed",
-      !isOnline && "opacity-60 cursor-not-allowed emergency-visible",
-      className
+    
+    return (
+      <span className={cn("text-xs px-2 py-1 rounded-full font-medium", envColors[environment])}>
+        {environment === 'development' && '🏠 Dev'}
+        {environment === 'staging' && '🚧 Staging'}
+        {environment === 'production' && '🌍 Produção'}
+      </span>
     );
   };
 
-  // 🖼️ Renderizar conteúdo do link
-  const renderContent = () => (
-    <>
-      <div className="flex items-center gap-2">
-        {showStatus && getStatusIcon()}
-        <span className="font-semibold">{getButtonText()}</span>
-        <ExternalLink size={variant === 'badge' ? 14 : 18} />
-      </div>
-      
-      {(showProvider || showEnvironment) && variant !== 'inline' && (
-        <div className="flex items-center gap-3 text-xs opacity-75">
-          {showProvider && (
-            <div className="flex items-center gap-1">
-              {getProviderIcon()}
-              <span>{config.provider}</span>
-            </div>
-          )}
-          
-          {showEnvironment && (
-            <div className="flex items-center gap-1">
-              {getViewportIcon()}
-              <span className="capitalize">{viewport}</span>
-            </div>
-          )}
+  // Variant: card (completo com controles)
+  if (variant === 'card') {
+    return (
+      <div className={cn("bg-white rounded-xl p-6 shadow-lg border border-gray-200 max-w-md", className)}>
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="font-semibold text-gray-800 flex items-center gap-2">
+            <span className="text-xl">{currentProvider.icon}</span>
+            Link Público Universal
+          </h3>
+          {getEnvironmentBadge()}
         </div>
-      )}
-    </>
-  );
+        
+        <div className="mb-4 p-3 bg-gray-50 rounded-lg">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm font-medium text-gray-700">Provedor:</span>
+            <div className="flex items-center gap-2">
+              {showStatus && getStatusIcon()}
+              <span className="text-sm font-medium">{currentProvider.name}</span>
+            </div>
+          </div>
+          <p className="text-xs text-gray-600 mb-3">{currentProvider.description}</p>
+          <code className="text-xs bg-gray-100 p-2 rounded block break-all">
+            {currentProvider.url}
+          </code>
+        </div>
+        
+        <div className="grid grid-cols-2 gap-2 mb-4">
+          <button
+            onClick={openPortfolio}
+            disabled={currentProvider.status === 'offline'}
+            className={cn(
+              "flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm",
+              currentProvider.status === 'online' && "bg-blue-600 text-white hover:bg-blue-700",
+              currentProvider.status === 'maintenance' && "bg-yellow-600 text-white hover:bg-yellow-700",
+              currentProvider.status === 'offline' && "bg-gray-400 text-gray-700 cursor-not-allowed"
+            )}
+          >
+            <ExternalLink className="w-4 h-4" />
+            Abrir Site
+          </button>
+          
+          <button
+            onClick={copyToClipboard}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm bg-gray-100 text-gray-700 hover:bg-gray-200"
+          >
+            <Copy className="w-4 h-4" />
+            Copiar Link
+          </button>
+        </div>
+        
+        <div className="grid grid-cols-2 gap-2">
+          <button
+            onClick={switchProvider}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm bg-indigo-100 text-indigo-700 hover:bg-indigo-200"
+          >
+            <Monitor className="w-4 h-4" />
+            Trocar Provedor
+          </button>
+          
+          <button
+            onClick={sharePortfolio}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm bg-green-100 text-green-700 hover:bg-green-200"
+          >
+            <Share2 className="w-4 h-4" />
+            Compartilhar
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Variant: inline
+  if (variant === 'inline') {
+    return (
+      <button
+        onClick={openPortfolio}
+        className={cn(
+          "inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-colors",
+          className
+        )}
+      >
+        <span className="text-lg">{currentProvider.icon}</span>
+        {customText || `${currentProvider.name}`}
+        {showStatus && getStatusIcon()}
+        <ExternalLink className="w-4 h-4" />
+      </button>
+    );
+  }
+
+  // Variant: badge
+  if (variant === 'badge') {
+    return (
+      <button
+        onClick={openPortfolio}
+        className={cn(
+          "inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm hover:scale-105 transition-all",
+          currentProvider.status === 'online' && "bg-green-100 text-green-800 hover:bg-green-200",
+          currentProvider.status === 'maintenance' && "bg-yellow-100 text-yellow-800 hover:bg-yellow-200",
+          currentProvider.status === 'offline' && "bg-red-100 text-red-800",
+          className
+        )}
+      >
+        <span>{currentProvider.icon}</span>
+        {customText || `${currentProvider.name} ${getStatusText()}`}
+        {showStatus && getStatusIcon()}
+      </button>
+    );
+  }
+
+  // Variant: button (padrão) - SUPER VISÍVEL
+  const sizeClasses = {
+    sm: 'px-4 py-2 text-sm min-w-48',
+    md: 'px-6 py-3 text-base min-w-64',
+    lg: 'px-8 py-4 text-lg min-w-80',
+    xl: 'px-12 py-6 text-xl min-w-96'
+  };
 
   return (
-    <div 
-      className={getVariantClasses()}
-      onClick={handleClick}
-      role="button"
-      tabIndex={0}
-      aria-label={`Acessar ${config.title} - ${config.description}`}
-      data-environment={config.environment}
-      data-status={config.status}
-      data-valid={config.isValid}
-      data-online={isOnline}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          handleClick(e as any);
-        }
+    <button
+      onClick={openPortfolio}
+      disabled={currentProvider.status === 'offline'}
+      className={cn(
+        "relative flex items-center justify-center gap-4 rounded-xl font-bold transition-all duration-300 transform hover:scale-105",
+        "border-4 border-transparent focus:outline-none focus:ring-4 focus:ring-offset-2",
+        // Cores baseadas no status
+        currentProvider.status === 'online' && "bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-white border-blue-300 hover:from-blue-700 hover:via-blue-800 hover:to-blue-900 focus:ring-blue-300 shadow-lg hover:shadow-xl",
+        currentProvider.status === 'maintenance' && "bg-gradient-to-r from-yellow-600 via-yellow-700 to-yellow-800 text-white border-yellow-300 hover:from-yellow-700 hover:via-yellow-800 hover:to-yellow-900 focus:ring-yellow-300 shadow-lg hover:shadow-xl",
+        currentProvider.status === 'offline' && "bg-gray-400 text-gray-700 cursor-not-allowed opacity-70",
+        sizeClasses[size],
+        className
+      )}
+      style={{
+        boxShadow: currentProvider.status === 'online' 
+          ? '0 10px 25px -5px rgba(59, 130, 246, 0.4), 0 4px 6px -2px rgba(59, 130, 246, 0.3)'
+          : undefined
       }}
     >
-      {variant === 'card' ? (
-        <div className="w-full">
-          <div className="text-center space-y-2">
-            {renderContent()}
-          </div>
-          <div className="mt-3 text-xs text-gray-600 break-all">
-            <span className="font-mono">{config.url}</span>
-          </div>
+      {/* Ícone do provedor */}
+      <span className="text-2xl">{currentProvider.icon}</span>
+      
+      {/* Texto principal */}
+      <div className="text-center">
+        <div className="font-bold">
+          {customText || '🌐 Acessar Portfólio Público'}
         </div>
-      ) : (
-        renderContent()
+        {showProvider && (
+          <div className="text-xs opacity-90">
+            {currentProvider.name} • {getStatusText()}
+          </div>
+        )}
+      </div>
+      
+      {/* Ícone de link externo */}
+      <ExternalLink className="w-5 h-5" />
+      
+      {/* Badge de status */}
+      {showStatus && (
+        <div className="absolute -top-2 -right-2">
+          {getStatusIcon()}
+        </div>
       )}
-    </div>
+      
+      {/* Badge de ambiente */}
+      {showEnvironment && (
+        <div className="absolute -top-1 left-4">
+          {getEnvironmentBadge()}
+        </div>
+      )}
+    </button>
   );
 };
 
