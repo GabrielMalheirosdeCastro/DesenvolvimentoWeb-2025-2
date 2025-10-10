@@ -17,6 +17,7 @@ import SpaceGallery from '../gallery/SpaceGallery';
 import { spaceFleetImages } from '../../data/spaceFleetData';
 import PersonalData from './personal-data';
 import MorseChallenge from './morse-challenge';
+import { Localhost3000Link } from './localhost-link';
 
 interface UniversalConfig {
   url: string;

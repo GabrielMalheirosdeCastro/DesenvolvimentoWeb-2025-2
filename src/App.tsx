@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import InterfaceUniversal from './components/ui/interface-universal';
 import './styles/globals.css';
 import './styles/super-visible-link.css';
+import './styles/localhost-links.css';
 
 function App() {
   const [initialScreen, setInitialScreen] = useState<'main' | 'gallery' | 'figma' | 'settings'>('main');

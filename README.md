@@ -1,4 +1,4 @@
-# 🌐 Portfólio Gabriel Malheiros - FAESA# 🌐 Portfólio Gabriel Malheiros - FAESA# 🌐 Site Pessoal - Gabriel Malheiros | Interface Gráfica FAESA
+# 🌐 Portfólio Gabriel Malheiros - FAESA# 🌐 Portfólio Gabriel Malheiros - FAESA# 🌐 Portfólio Gabriel Malheiros - FAESA# 🌐 Site Pessoal - Gabriel Malheiros | Interface Gráfica FAESA
 
 
 
@@ -6,15 +6,23 @@
 
 
 
-### 📋 **Link Localhost (Desenvolvimento):**## 🚀 **ACESSO LOCAL ATIVO:**<div align="center">
+### 🔗 **LINK CLICÁVEL FUNCIONAL:**## 🚀 **ACESSO LOCAL ATIVO:**
+
+
+
+# **[🌐 CLIQUE AQUI: http://localhost:3000](http://localhost:3000)**
+
+
+
+### 📋 **Link para copiar e colar:**### 📋 **Link Localhost (Desenvolvimento):**## 🚀 **ACESSO LOCAL ATIVO:**<div align="center">
+
+```
+
+http://localhost:3000```
 
 ```
 
 http://localhost:3000
-
-```
-
-### 📋 **Link Localhost (Desenvolvimento):**## 🚀 **ACESSE MEU SITE PESSOAL AGORA:**
 
 [![Localhost](https://img.shields.io/badge/🌐_Localhost-http://localhost:3000-brightgreen?style=for-the-badge)](http://localhost:3000)
 
@@ -22,94 +30,197 @@ http://localhost:3000
 
 
 
----http://localhost:3000# **[🔗 CLIQUE AQUI PARA VER O SITE](https://gabrielmalheirosdcastro.github.io/DesenvolvimentoWeb-2025-2/)**
+---### 📋 **Link Localhost (Desenvolvimento):**## 🚀 **ACESSE MEU SITE PESSOAL AGORA:**
 
 
 
-## ⚡ **COMO INICIAR O PROJETO:**```
+## ⚡ **COMO INICIAR O PROJETO:**[![Localhost](https://img.shields.io/badge/🌐_Localhost-http://localhost:3000-brightgreen?style=for-the-badge)](http://localhost:3000)
 
 
 
-### 🛠️ **Passos Essenciais:**### 📋 **Link Direto (Corrigido):**
+### 🛠️ **Passos Essenciais:**[![Desenvolvimento](https://img.shields.io/badge/Status-Ativo-green?style=for-the-badge)](http://localhost:3000)```
 
 ```powershell
 
-# 1. Instalar dependências[![Localhost](https://img.shields.io/badge/🌐_Localhost-http://localhost:3000-brightgreen?style=for-the-badge)](http://localhost:3000)```
+# 1. Instalar dependências
 
 npm install
 
-[![Desenvolvimento](https://img.shields.io/badge/Status-Ativo-green?style=for-the-badge)](http://localhost:3000)https://gabrielmalheirosdcastro.github.io/DesenvolvimentoWeb-2025-2/
+---http://localhost:3000# **[🔗 CLIQUE AQUI PARA VER O SITE](https://gabrielmalheirosdcastro.github.io/DesenvolvimentoWeb-2025-2/)**
 
 # 2. Iniciar servidor local na porta 3000
 
-npm run dev```
+npm run dev
 
 
 
-# 3. Acessar no navegador---
+# 3. Acessar no navegador## ⚡ **COMO INICIAR O PROJETO:**```
 
 # Abre automaticamente: http://localhost:3000
 
-```[![Site Pessoal](https://img.shields.io/badge/🌐_Site_Pessoal-ONLINE-brightgreen?style=for-the-badge&logo=github)](https://gabrielmalheirosdcastro.github.io/DesenvolvimentoWeb-2025-2/)
+```
 
 
 
-### ✅ **Verificação (Funcionando):**## ⚡ **COMO INICIAR O PROJETO:**[![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-ATIVO-blue?style=for-the-badge&logo=github)](https://gabrielmalheirosdcastro.github.io/DesenvolvimentoWeb-2025-2/)
+### ✅ **Verificação (Funcionando):**### 🛠️ **Passos Essenciais:**### 📋 **Link Direto (Corrigido):**
 
-- ✅ **URL**: http://localhost:3000
+- ✅ **URL**: [http://localhost:3000](http://localhost:3000)
 
-- ✅ **Auto-Open**: Abre automaticamente no Chrome[![SEO](https://img.shields.io/badge/SEO-OTIMIZADO-green?style=for-the-badge&logo=google)](https://gabrielmalheirosdcastro.github.io/DesenvolvimentoWeb-2025-2/)
+- ✅ **Auto-Open**: Abre automaticamente no Chrome```powershell
 
 - ✅ **Host**: Acessível na rede local
 
-- ✅ **CORS**: Habilitado para desenvolvimento### 🛠️ **Passos Essenciais:**
+- ✅ **CORS**: Habilitado para desenvolvimento# 1. Instalar dependências[![Localhost](https://img.shields.io/badge/🌐_Localhost-http://localhost:3000-brightgreen?style=for-the-badge)](http://localhost:3000)```
 
 
 
----```powershell</div>
+---npm install
 
 
 
-## 🌐 **PARA GOOGLE/CHROME:**# 1. Instalar dependências
+## 🌐 **PARA GOOGLE/CHROME:**[![Desenvolvimento](https://img.shields.io/badge/Status-Ativo-green?style=for-the-badge)](http://localhost:3000)https://gabrielmalheirosdcastro.github.io/DesenvolvimentoWeb-2025-2/
 
 
 
-### 🔧 **Configuração Atual (Funcionando):**npm install---
+### 🔧 **Configuração Atual (Funcionando):**# 2. Iniciar servidor local na porta 3000
 
 ```powershell
 
-# O projeto já está configurado para:
+# O projeto já está configurado para:npm run dev```
 
 ✅ Rodar em http://localhost:3000
 
-✅ Abrir automaticamente no Google Chrome  # 2. Iniciar servidor local na porta 3000## 🔍 **PARA APARECER NO GOOGLE - AGORA OTIMIZADO:**
+✅ Abrir automaticamente no Google Chrome  
 
 ✅ Funcionar na rede local (host: true)
 
-✅ CORS habilitado para desenvolvimentonpm run dev
+✅ CORS habilitado para desenvolvimento# 3. Acessar no navegador---
 
 ```
 
-### ✅ **SEO Implementado:**
+# Abre automaticamente: http://localhost:3000
 
 ### 🌍 **Tornar Público para Google (Opcional):**
 
-```powershell# 3. Acessar no navegador- 🎯 Meta tags otimizadas para Google
+```powershell```[![Site Pessoal](https://img.shields.io/badge/🌐_Site_Pessoal-ONLINE-brightgreen?style=for-the-badge&logo=github)](https://gabrielmalheirosdcastro.github.io/DesenvolvimentoWeb-2025-2/)
 
 # Para tornar indexável pelo Google, use ngrok:
 
-npm install -g ngrok# Abre automaticamente: http://localhost:3000- 📄 Sitemap.xml configurado
+npm install -g ngrok
 
 ngrok http 3000
 
-```- 🤖 Robots.txt personalizado
+### ✅ **Verificação (Funcionando):**## ⚡ **COMO INICIAR O PROJETO:**[![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-ATIVO-blue?style=for-the-badge&logo=github)](https://gabrielmalheirosdcastro.github.io/DesenvolvimentoWeb-2025-2/)
 
 # Resultado: URL pública como https://abc123.ngrok.io
 
-# Esta URL SIM pode ser indexada pelo Google!- 📱 Open Graph para redes sociais
+# Esta URL SIM pode ser indexada pelo Google!- ✅ **URL**: http://localhost:3000
 
 ```
 
+- ✅ **Auto-Open**: Abre automaticamente no Chrome[![SEO](https://img.shields.io/badge/SEO-OTIMIZADO-green?style=for-the-badge&logo=google)](https://gabrielmalheirosdcastro.github.io/DesenvolvimentoWeb-2025-2/)
+
+### 🚀 **Acesso via Rede Local:**
+
+- ✅ **Localhost**: [http://localhost:3000](http://localhost:3000)- ✅ **Host**: Acessível na rede local
+
+- ✅ **IP Local**: http://192.168.X.X:3000 (Vite mostra o IP)
+
+- ✅ **Chrome**: Abre automaticamente quando roda npm run dev- ✅ **CORS**: Habilitado para desenvolvimento### 🛠️ **Passos Essenciais:**
+
+
+
+---
+
+
+
+## 🛠️ **TECNOLOGIAS:**---```powershell</div>
+
+
+
+- ⚛️ **React 18** + TypeScript
+
+- ⚡ **Vite** (servidor rápido)
+
+- 🎨 **Tailwind CSS**## 🌐 **PARA GOOGLE/CHROME:**# 1. Instalar dependências
+
+- 🔧 **Configurado para porta 3000**
+
+
+
+---
+
+### 🔧 **Configuração Atual (Funcionando):**npm install---
+
+## 📋 **COMANDOS ÚTEIS:**
+
+```powershell
+
+### 🚀 **Desenvolvimento:**
+
+```powershell# O projeto já está configurado para:
+
+npm run dev     # Inicia servidor localhost:3000
+
+npm run build   # Build de produção✅ Rodar em http://localhost:3000
+
+npm run preview # Visualiza build local
+
+```✅ Abrir automaticamente no Google Chrome  # 2. Iniciar servidor local na porta 3000## 🔍 **PARA APARECER NO GOOGLE - AGORA OTIMIZADO:**
+
+
+
+### 🔍 **Verificar Status:**✅ Funcionar na rede local (host: true)
+
+```powershell
+
+# Se o servidor não abrir automaticamente:✅ CORS habilitado para desenvolvimentonpm run dev
+
+# 1. Verifique se porta 3000 está livre
+
+# 2. Acesse manualmente: http://localhost:3000```
+
+# 3. Para rede local, use o IP mostrado pelo Vite
+
+```### ✅ **SEO Implementado:**
+
+
+
+---### 🌍 **Tornar Público para Google (Opcional):**
+
+
+
+## 📞 **SUPORTE:**```powershell# 3. Acessar no navegador- 🎯 Meta tags otimizadas para Google
+
+- 🐙 **GitHub**: [@GabrielMalheirosdeCastro](https://github.com/GabrielMalheirosdeCastro)
+
+- 📧 **Email**: gabriel.malheiros@faesa.br# Para tornar indexável pelo Google, use ngrok:
+
+- 📖 **Guia Completo**: Veja `LOCALHOST-GOOGLE-GUIDE.md`
+
+npm install -g ngrok# Abre automaticamente: http://localhost:3000- 📄 Sitemap.xml configurado
+
+---
+
+ngrok http 3000
+
+<div align="center">
+
+```- 🤖 Robots.txt personalizado
+
+## 🏆 **PROJETO ACADÊMICO FAESA 2025**
+
+# Resultado: URL pública como https://abc123.ngrok.io
+
+[![FAESA](https://img.shields.io/badge/FAESA-2025-blue?style=flat-square)](http://localhost:3000)
+
+[![Localhost](https://img.shields.io/badge/Localhost-3000-green?style=flat-square)](http://localhost:3000)# Esta URL SIM pode ser indexada pelo Google!- 📱 Open Graph para redes sociais
+
+[![React](https://img.shields.io/badge/React-18-blue?style=flat-square)](http://localhost:3000)
+
+```
+
+</div>
 ### ✅ **Verificação:**- 🏷️ Schema.org markup
 
 ### 🚀 **Acesso via Rede Local:**
