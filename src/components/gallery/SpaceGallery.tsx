@@ -93,9 +93,26 @@ export function SpaceGallery({
             </div>
 
             {/* Informações */}
-            <div className="p-4">
-              <h3 className="font-medium text-gray-800 mb-1">{image.title}</h3>
-              <p className="text-sm text-gray-600 line-clamp-2">{image.description}</p>
+            <div className="p-4 bg-white bg-opacity-95 backdrop-blur-sm">
+              <h3 className="font-bold text-gray-900 mb-2 text-base leading-tight">
+                {image.title}
+              </h3>
+              <p className="text-sm text-gray-700 leading-relaxed">
+                {image.description}
+              </p>
+              
+              {/* Informação adicional sempre visível */}
+              {image.category && (
+                <div className="mt-2 pt-2 border-t border-gray-200">
+                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                    {image.category === 'Combate' && '⚔️'} 
+                    {image.category === 'Caças Estelares' && '🚀'}
+                    {image.category === 'Frotas Militares' && '🛸'}
+                    {image.category === 'Comunicações' && '📡'}
+                    {' '}{image.category}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
         ))}

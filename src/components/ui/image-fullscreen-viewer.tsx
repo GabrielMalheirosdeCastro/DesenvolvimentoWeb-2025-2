@@ -19,7 +19,7 @@ export const ImageFullscreenViewer: React.FC<ImageFullscreenViewerProps> = ({
   onImageChange
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [showInfo, setShowInfo] = useState(false);
+  const [showInfo, setShowInfo] = useState(true); // ✅ INFORMAÇÕES SEMPRE VISÍVEIS por padrão
   const [isLoading, setIsLoading] = useState(true);
 
   // Encontrar índice da imagem atual
@@ -121,7 +121,7 @@ export const ImageFullscreenViewer: React.FC<ImageFullscreenViewerProps> = ({
             <button
               onClick={() => setShowInfo(!showInfo)}
               className="p-2 rounded-full hover:bg-white/20 transition-colors pointer-events-auto"
-              title="Informações (I)"
+              title={showInfo ? "Ocultar informações (I)" : "Mostrar informações (I)"}
             >
               <Info size={20} />
             </button>
@@ -225,24 +225,34 @@ export const ImageFullscreenViewer: React.FC<ImageFullscreenViewerProps> = ({
         </div>
       </div>
 
-      {/* Painel de informações */}
+      {/* Painel de informações SEMPRE VISÍVEL (pode ser ocultado) */}
       {showInfo && (
-        <div className="absolute bottom-0 left-0 right-0 z-10 p-6 bg-gradient-to-t from-black/90 to-transparent text-white pointer-events-auto">
-          <div className="max-w-2xl">
-            <h3 className="text-xl font-semibold mb-2">{currentImage.title}</h3>
-            <p className="text-sm opacity-90 mb-3">{currentImage.description}</p>
+        <div className="absolute bottom-0 left-0 right-0 z-10 p-6 bg-gradient-to-t from-black/95 to-black/70 text-white pointer-events-auto">
+          <div className="max-w-4xl mx-auto">
+            <h3 className="text-2xl font-bold mb-3 text-white drop-shadow-lg">
+              {currentImage.title}
+            </h3>
+            <p className="text-base text-gray-100 mb-4 leading-relaxed drop-shadow-md">
+              {currentImage.description}
+            </p>
             
-            {currentImage.category && (
-              <div className="flex items-center gap-2">
-                <span className="px-3 py-1 bg-white/20 rounded-full text-sm font-medium">
-                  {currentImage.category === 'Combate' && '⚔️'} 
-                  {currentImage.category === 'Caças Estelares' && '🚀'}
-                  {currentImage.category === 'Frotas Militares' && '🛸'}
-                  {currentImage.category === 'Comunicações' && '📡'}
-                  {' '}{currentImage.category}
-                </span>
+            <div className="flex items-center justify-between flex-wrap gap-4">
+              {currentImage.category && (
+                <div className="flex items-center gap-2">
+                  <span className="px-4 py-2 bg-white/20 rounded-full text-sm font-semibold backdrop-blur-sm border border-white/20">
+                    {currentImage.category === 'Combate' && '⚔️'} 
+                    {currentImage.category === 'Caças Estelares' && '🚀'}
+                    {currentImage.category === 'Frotas Militares' && '🛸'}
+                    {currentImage.category === 'Comunicações' && '📡'}
+                    {' '}{currentImage.category}
+                  </span>
+                </div>
+              )}
+              
+              <div className="text-sm text-gray-200 bg-black/40 px-3 py-1 rounded-full backdrop-blur-sm">
+                Imagem {currentIndex + 1} de {images.length} • Pressione I para ocultar informações
               </div>
-            )}
+            </div>
           </div>
         </div>
       )}
