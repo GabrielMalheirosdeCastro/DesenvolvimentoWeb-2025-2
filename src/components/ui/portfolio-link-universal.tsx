@@ -11,7 +11,7 @@ interface PortfolioLinkUniversalProps {
   showEnvironment?: boolean;
   autoDetect?: boolean;
   customText?: string;
-  onNavigate?: (screen: string) => void;
+  // onNavigate removido - não usado mais
 }
 
 interface PublicProvider {
@@ -31,8 +31,8 @@ export const PortfolioLinkUniversal: React.FC<PortfolioLinkUniversalProps> = ({
   showProvider = true,
   showEnvironment = false,
   autoDetect = true,
-  customText,
-  onNavigate
+  customText
+  // onNavigate removido
 }) => {
   const [currentProvider, setCurrentProvider] = useState<PublicProvider | null>(null);
   const [availableProviders, setAvailableProviders] = useState<PublicProvider[]>([]);

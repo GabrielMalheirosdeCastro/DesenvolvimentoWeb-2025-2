@@ -73,7 +73,7 @@ export const ExternalNavigation: React.FC<ExternalNavigationProps> = ({
         </div>
       </div>
 
-      {/* Seta Direita - Acesso à Galeria Figma */}
+      {/* Seta Direita - ÚNICO ACESSO: Galeria Figma */}
       <div 
         className={cn(
           "fixed right-4 top-1/2 transform -translate-y-1/2 z-50",
@@ -82,19 +82,25 @@ export const ExternalNavigation: React.FC<ExternalNavigationProps> = ({
           "transition-all duration-300 cursor-pointer group",
           "hover:scale-110 hover:shadow-xl",
           "animate-pulse hover:animate-none",
+          "border-2 border-white/30",
           className
         )}
         onClick={onFigmaAccess}
-        title="Acessar Galeria Figma - Exploração Espacial"
+        title="🎯 ACESSO ÚNICO: Galeria Figma - Exploração Espacial Segura"
       >
-        <div className="p-4 flex items-center gap-2">
+        <div className="p-4 flex items-center gap-3">
           <span className="hidden lg:block text-sm font-bold text-white">
-            Galeria Figma
+            🌌 Galeria Figma
           </span>
           <ChevronRight 
             size={28} 
-            className="text-white group-hover:translate-x-1 transition-transform" 
+            className="text-white group-hover:translate-x-1 transition-transform drop-shadow-lg" 
           />
+        </div>
+        
+        {/* Badge de destaque */}
+        <div className="absolute -top-2 -right-2 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded-full shadow-lg">
+          ÚNICO
         </div>
       </div>
 
@@ -121,12 +127,15 @@ export const ExternalNavigation: React.FC<ExternalNavigationProps> = ({
         </div>
       </div>
 
-      {/* Informação de Navegação Segura */}
+      {/* Informação de Navegação Simplificada */}
       <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-40">
-        <div className="bg-black/80 text-white px-4 py-2 rounded-lg text-xs opacity-70 hover:opacity-100 transition-opacity">
-          <div className="flex items-center gap-2">
-            <Globe size={14} />
-            <span>Navegação Segura: Use as setas para voltar com segurança</span>
+        <div className="bg-gradient-to-r from-purple-900/90 to-blue-900/90 text-white px-6 py-3 rounded-lg text-xs opacity-80 hover:opacity-100 transition-opacity backdrop-blur-sm border border-white/20">
+          <div className="flex items-center gap-3">
+            <Globe size={16} />
+            <div className="text-center">
+              <div className="font-semibold">🎯 Navegação Simplificada</div>
+              <div className="text-white/80">Acesso ÚNICO via seta direita → Galeria Figma Segura</div>
+            </div>
           </div>
         </div>
       </div>

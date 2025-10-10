@@ -12,12 +12,10 @@ import {
   Image
 } from 'lucide-react';
 import { cn } from './utils';
-import PortfolioLinkUniversal from './portfolio-link-universal';
 import SpaceGallery from '../gallery/SpaceGallery';
 import { spaceFleetImages } from '../../data/spaceFleetData';
 import PersonalData from './personal-data';
 import MorseChallenge from './morse-challenge';
-import { Localhost3000Link } from './localhost-link';
 import ExternalNavigation from './external-navigation';
 
 interface UniversalConfig {
@@ -230,24 +228,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
           </p>
         </div>
 
-        {/* Link Principal do Portfólio usando o componente PortfolioLinkUniversal NOVO */}
-        <div className="layout-center">
-          <div className="relative">
-            <PortfolioLinkUniversal 
-              variant="button" 
-              size="xl"
-              showStatus={true}
-              showProvider={true}
-              showEnvironment={true}
-              autoDetect={true}
-              className="portfolio-link-universal"
-              onNavigate={(screen) => {
-                console.log('🔄 Callback onNavigate chamado:', screen);
-                navigateToScreen(screen as 'main' | 'gallery' | 'figma' | 'settings');
-              }}
-            />
-          </div>
-        </div>
+        {/* Acesso direto apenas via navegação externa - sem botões localhost */}
 
         {/* Seção Destacada - Galeria Figma */}
         <div className="max-w-4xl mx-auto mt-12">
@@ -434,16 +415,10 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
                 ))}
               </div>
               
-              <PortfolioLinkUniversal 
-                variant="inline"
-                size="sm"
-                showStatus={false}
-                showProvider={false}
-                customText="🔗 Ver Projeto"
-                className={cn(
-                  project.status !== 'online' && "opacity-50 pointer-events-none"
-                )}
-              />
+              {/* Link de projeto removido para simplificar interface */}
+              <div className="text-sm text-gray-500 italic">
+                Acesso via navegação principal
+              </div>
             </div>
           ))}
         </div>
@@ -623,14 +598,13 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
                 </ol>
               </div>
               
-              <PortfolioLinkUniversal 
-                variant="card" 
-                size="lg"
-                showStatus={true}
-                showProvider={true}
-                showEnvironment={true}
-                autoDetect={true}
-              />
+              {/* Links externos removidos - acesso apenas via galeria Figma */}
+              <div className="text-center p-4 bg-purple-50 border border-purple-200 rounded-lg">
+                <p className="text-purple-800 font-medium">🎯 Acesso Simplificado</p>
+                <p className="text-sm text-purple-600 mt-1">
+                  Use as setas de navegação para acessar a Galeria Figma
+                </p>
+              </div>
             </div>
           </div>
 
