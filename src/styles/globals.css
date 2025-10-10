@@ -39,15 +39,13 @@
   --font-size-3xl: 1.875rem;
   --font-size-4xl: 2.25rem;
   
-  /* 🌐 Domínio Personalizado Gabriel Malheiros - CONFIGURAÇÃO PRINCIPAL */
-  --portfolio-url-primary: "https://gabrielmalheiros.com.br";
-  --portfolio-url-www: "https://www.gabrielmalheiros.com.br";
-  --portfolio-url-portfolio: "https://portfolio.gabrielmalheiros.com.br";
-  --portfolio-url-projetos: "https://projetos.gabrielmalheiros.com.br";
-  --portfolio-url-blog: "https://blog.gabrielmalheiros.com.br";
-  
-  /* 🚀 Configurações para Deploy no Vercel */
+  /* 🌐 Site Oficial no Vercel - CONFIGURAÇÃO PRINCIPAL */
+  --portfolio-url-primary: "https://desenvolvimento-web-2025-2.vercel.app";
   --portfolio-url-vercel: "https://desenvolvimento-web-2025-2.vercel.app";
+  --portfolio-url-github: "https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2";
+  
+  /* 🚀 Configurações para Deploy Oficial */
+  --portfolio-url-official: "https://desenvolvimento-web-2025-2.vercel.app";
   --portfolio-url-vercel-www: "https://www.desenvolvimento-web-2025-2.vercel.app";
   --portfolio-url-preview: "https://desenvolvimento-web-2025-2-git-main.vercel.app";
   
@@ -444,7 +442,7 @@ body {
 
 /* 🔧 Classes específicas para diferentes tamanhos */
 .portfolio-link-universal[data-size="sm"] {
-  padding: var(--space-2) var(--space-4;
+  padding: var(--space-2) var(--space-4);
   font-size: var(--font-size-sm);
 }
 

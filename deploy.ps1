@@ -1,6 +1,6 @@
-# Script de Deploy Automático para gabrielmalheiros.com.br
+# Script de Deploy Automático para desenvolvimento-web-2025-2.vercel.app
 
-Write-Host "🚀 Iniciando deploy para gabrielmalheiros.com.br..." -ForegroundColor Cyan
+Write-Host "🚀 Iniciando deploy para desenvolvimento-web-2025-2.vercel.app..." -ForegroundColor Cyan
 
 # 1. Verificar se estamos na pasta correta
 if (!(Test-Path "package.json")) {
@@ -32,6 +32,6 @@ Write-Host "🌐 Fazendo deploy para GitHub Pages..." -ForegroundColor Yellow
 npm run deploy:github
 
 Write-Host "✅ Deploy concluído!" -ForegroundColor Green
-Write-Host "🌐 Site disponível em: https://gabrielmalheiros.com.br" -ForegroundColor Cyan
+Write-Host "🌐 Site disponível em: https://desenvolvimento-web-2025-2.vercel.app" -ForegroundColor Cyan
 Write-Host "📁 GitHub Pages: https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2" -ForegroundColor Cyan
 Write-Host "⏰ Aguarde 2-10 minutos para propagação DNS" -ForegroundColor Yellow
