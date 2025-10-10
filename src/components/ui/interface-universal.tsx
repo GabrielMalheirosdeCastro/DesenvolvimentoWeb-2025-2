@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { 
-  ExternalLink, 
   Globe, 
   Monitor, 
   Smartphone, 
@@ -12,10 +11,14 @@ import {
   AlertCircle,
   Wrench,
   Github,
-  Home
+  Home,
+  Rocket,
+  Image
 } from 'lucide-react';
 import { cn } from './utils';
 import { PortfolioLink } from './portfolio-link';
+import { SpaceGallery } from '../gallery/SpaceGallery';
+import { spaceFleetImages } from '../../data/spaceFleetData';
 
 interface UniversalConfig {
   url: string;
@@ -46,7 +49,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
     theme: 'modern'
   });
 
-  const [currentScreen, setCurrentScreen] = useState<'main' | 'gallery' | 'settings'>('main');
+  const [currentScreen, setCurrentScreen] = useState<'main' | 'gallery' | 'figma' | 'settings'>('main');
   const [viewport, setViewport] = useState<'mobile' | 'tablet' | 'desktop'>('desktop');
 
   // 🔄 Extrair configuração do CSS
@@ -189,7 +192,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
 
         {/* Navegação entre telas */}
         {showMultipleScreens && (
-          <div className="flex justify-center gap-4 mt-12">
+          <div className="flex justify-center gap-4 mt-12 flex-wrap">
             <button
               onClick={() => setCurrentScreen('main')}
               className={cn(
@@ -213,6 +216,18 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
             >
               <Github size={20} />
               Projetos
+            </button>
+            <button
+              onClick={() => setCurrentScreen('figma')}
+              className={cn(
+                "px-6 py-3 rounded-lg font-medium transition-all flex items-center gap-2",
+                currentScreen === 'figma' 
+                  ? "bg-brand-primary text-white" 
+                  : "bg-white text-brand-primary border border-brand-primary hover:bg-brand-primary hover:text-white"
+              )}
+            >
+              <Rocket size={20} />
+              Galeria Figma
             </button>
             {enableThemeSelector && (
               <button
@@ -248,7 +263,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
         </div>
 
         <div className="interface-gallery">
-          {{
+          {[
             {
               title: "Interface Gráfica Principal",
               description: "Portfólio principal com design responsivo e sistema de temas dinâmico",
@@ -288,7 +303,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
               
               {/* Tags de tecnologia */}
               <div className="flex flex-wrap gap-2 mb-4">
-                {project.tech.map((tech, techIndex) => (
+                {project.tech.map((tech: string, techIndex: number) => (
                   <span 
                     key={techIndex}
                     className="px-2 py-1 bg-brand-primary/10 text-brand-primary text-xs rounded-md font-medium"
@@ -306,6 +321,105 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
               />
             </div>
           ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <button
+            onClick={() => setCurrentScreen('main')}
+            className="px-8 py-4 bg-brand-primary text-white rounded-lg font-medium hover:bg-brand-secondary transition-all flex items-center gap-2 mx-auto"
+          >
+            <Home size={20} />
+            Voltar à Tela Principal
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
+  // 🎨 Renderizar tela da galeria do Figma
+  const renderFigmaScreen = () => (
+    <div className="interface-main">
+      <div className="layout-container">
+        <div className="interface-header">
+          <h1 className="interface-title">
+            Galeria de Assets do Figma
+          </h1>
+          <p className="interface-subtitle">
+            Exploração interativa dos assets convertidos do Figma para código
+          </p>
+          <p className="interface-description">
+            Esta galeria demonstra a conversão bem-sucedida de designs Figma para componentes React funcionais. 
+            Cada asset foi otimizado e integrado ao sistema de interface universal.
+          </p>
+        </div>
+
+        {/* Galeria de imagens do espaço */}
+        <div className="max-w-7xl mx-auto mt-8">
+          <SpaceGallery 
+            images={spaceFleetImages}
+            allowMultipleSelection={true}
+            onSelectionChange={(selectedIds, selectedImages) => {
+              console.log('Seleção alterada:', { selectedIds, selectedImages });
+            }}
+            className="space-gallery-figma"
+          />
+        </div>
+
+        {/* Informações técnicas sobre os assets */}
+        <div className="max-w-4xl mx-auto mt-12 grid md:grid-cols-2 gap-6">
+          <div className="bg-white rounded-lg p-6 shadow-lg border border-indigo-100">
+            <h3 className="text-xl font-semibold mb-4 flex items-center gap-2 text-indigo-700">
+              <Image size={20} />
+              Assets do Figma
+            </h3>
+            <div className="space-y-3 text-sm">
+              <div className="flex justify-between">
+                <span className="text-gray-600">Total de Assets:</span>
+                <span className="font-medium">{spaceFleetImages.length}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-600">Formato Original:</span>
+                <span className="font-medium">PNG/SVG</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-600">Otimização:</span>
+                <span className="font-medium text-green-600">✓ WebP Ready</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-600">Sistema de Fallback:</span>
+                <span className="font-medium text-green-600">✓ Ativo</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-lg p-6 shadow-lg border border-purple-100">
+            <h3 className="text-xl font-semibold mb-4 flex items-center gap-2 text-purple-700">
+              <Rocket size={20} />
+              Funcionalidades
+            </h3>
+            <div className="space-y-2 text-sm">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                <span>Seleção múltipla de imagens</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                <span>Sistema de categorização</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                <span>Loading lazy automático</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                <span>Responsividade total</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                <span>Acessibilidade ARIA</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="text-center mt-12">
@@ -372,12 +486,12 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
             </h3>
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {{
+              {[
                 { id: 'modern', name: 'Moderno', color: '#2563eb', desc: 'Azul vibrante' },
                 { id: 'classic', name: 'Clássico', color: '#1e3a8a', desc: 'Azul tradicional' },
                 { id: 'minimal', name: 'Minimalista', color: '#374151', desc: 'Cinza elegante' },
                 { id: 'colorful', name: 'Colorido', color: '#7c3aed', desc: 'Roxo criativo' }
-              }.map((theme) => (
+              ].map((theme) => (
                 <button
                   key={theme.id}
                   onClick={() => changeTheme(theme.id as UniversalConfig['theme'])}
@@ -467,6 +581,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
   const renderCurrentScreen = () => {
     switch (currentScreen) {
       case 'gallery': return renderGalleryScreen();
+      case 'figma': return renderFigmaScreen();
       case 'settings': return renderSettingsScreen();
       default: return renderMainScreen();
     }

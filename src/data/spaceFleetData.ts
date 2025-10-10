@@ -1,10 +1,16 @@
 import { SelectableImage } from '../hooks/useImageSelection';
 
+// Importações diretas dos assets
+import spaceImage1 from '../assets/dd18ec3bf35c35cc0e58cd61147ab94926272d3c.png';
+import spaceImage2 from '../assets/681ee2140d8a3dfb23dc398515d8e9539fb56338.png';
+import spaceImage3 from '../assets/55baa85e8789d73e4e943d1a375f594add7941b3.png';
+import spaceImage4 from '../assets/df4077de47a65010f0db03b4bde4b1720336789e.png';
+
 // Dados da frota espacial usando as imagens existentes do projeto
 export const spaceFleetImages: SelectableImage[] = [
   {
     id: 'space-battle-epic',
-    src: '/src/assets/dd18ec3bf35c35cc0e58cd61147ab94926272d3c.png',
+    src: spaceImage1,
     alt: 'Naves espaciais em combate épico',
     title: 'Batalha Espacial Épica',
     description: 'Uma cena intensa de combate entre naves espaciais avançadas, mostrando explosões e manobras táticas no vácuo do espaço.',
@@ -12,7 +18,7 @@ export const spaceFleetImages: SelectableImage[] = [
   },
   {
     id: 'x-wing-starfighter',
-    src: '/src/assets/681ee2140d8a3dfb23dc398515d8e9539fb56338.png',
+    src: spaceImage2,
     alt: 'T-65 X-Wing de Star Wars',
     title: 'X-Wing Starfighter',
     description: 'O icônico caça estelar T-65 X-Wing da Aliança Rebelde, conhecido por sua versatilidade e poder de fogo.',
@@ -20,7 +26,7 @@ export const spaceFleetImages: SelectableImage[] = [
   },
   {
     id: 'star-fox-fleet',
-    src: '/src/assets/55baa85e8789d73e4e943d1a375f594add7941b3.png',
+    src: spaceImage3,
     alt: 'Star Fox Corneria Army naves e bases',
     title: 'Frota de Corneria',
     description: 'Naves e bases militares da Corneria Army do universo Star Fox, incluindo Arwings e estruturas defensivas.',
@@ -28,7 +34,7 @@ export const spaceFleetImages: SelectableImage[] = [
   },
   {
     id: 'morse-communications',
-    src: '/src/assets/df4077de47a65010f0db03b4bde4b1720336789e.png',
+    src: spaceImage4,
     alt: 'Tabela de Código Morse para comunicações espaciais',
     title: 'Comunicações Espaciais',
     description: 'Sistema de comunicação morse utilizado para transmissões de longa distância entre naves espaciais.',

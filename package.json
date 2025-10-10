@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Interface Gráfica Pessoal - FAESA - Gabriel Malheiros",
+  "description": "Site Pessoal - Interface Gráfica - Gabriel Malheiros - FAESA 2025-2",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -18,43 +18,31 @@
     "tailwind-merge": "^1.14.0"
   },
   "devDependencies": {
+    "@types/node": "^20.10.0",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
-    "@vitejs/plugin-react-swc": "^3.3.2",
+    "@vitejs/plugin-react-swc": "^3.10.2",
     "eslint": "^8.45.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5",
-    "tailwindcss": "^3.3.0",
-    "autoprefixer": "^10.4.14",
-    "postcss": "^8.4.24"
+    "vite": "6.3.5"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/gabriel-malheiros/DesenvolvimentoWeb-2025-2"
   },
-  "author": "Gabriel Malheiros",
-  "license": "MIT"
-}
-            "react-hook-form": "^7.55.0",
-            "react-resizable-panels": "^2.1.7",
-            "recharts": "^2.15.2",
-            "sonner": "^2.0.3",
-            "tailwind-merge": "*",
-            "vaul": "^1.1.2"
-      },
-      "devDependencies": {
-            "@types/node": "^20.10.0",
-            "@types/react": "^19.2.2",
-            "@types/react-dom": "^19.2.1",
-            "@vitejs/plugin-react-swc": "^3.10.2",
-            "vite": "6.3.5"
-      },
-      "scripts": {
-            "dev": "vite",
-            "build": "vite build"
-      }
+  "author": "Gabriel Malheiros de Castro",
+  "license": "MIT",
+  "keywords": [
+    "site-pessoal",
+    "portfolio",
+    "faesa",
+    "react",
+    "typescript",
+    "css3",
+    "interface-grafica"
+  ]
 }
