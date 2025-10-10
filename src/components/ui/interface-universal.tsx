@@ -79,7 +79,6 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
     const hostname = window.location.hostname;
     const protocol = window.location.protocol;
     const port = window.location.port;
-    const pathname = window.location.pathname;
     
     let autoUrl = '';
     let autoStatus: UniversalConfig['status'] = 'online';
@@ -157,8 +156,10 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
 
     // Listener para navegação do portfólio
     const handlePortfolioNavigate = (event: CustomEvent) => {
+      console.log('🎯 Evento portfolio-navigate recebido:', event.detail);
       const { screen } = event.detail;
       if (screen) {
+        console.log(`🔄 Mudando para tela: ${screen}`);
         setCurrentScreen(screen);
       }
     };
@@ -201,39 +202,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
     window.history.pushState({ screen }, '', newUrl);
   }, []);
 
-  // 🎯 Abrir link do portfólio
-  const openPortfolio = useCallback(() => {
-    if (config.status === 'online') {
-      try {
-        const url = new URL(config.url);
-        window.open(url.toString(), '_blank', 'noopener,noreferrer');
-      } catch {
-        alert('URL do portfólio inválida. Configure uma URL válida no CSS.');
-      }
-    }
-  }, [config.url, config.status]);
-
-  // 🎨 Obter ícone do status
-  const getStatusIcon = () => {
-    switch (config.status) {
-      case 'online': return <CheckCircle size={20} />;
-      case 'offline': return <AlertCircle size={20} />;
-      case 'maintenance': return <Wrench size={20} />;
-      default: return <Globe size={20} />;
-    }
-  };
-
-  // 🎨 Obter texto do status
-  const getStatusText = () => {
-    switch (config.status) {
-      case 'online': return 'Online e Funcionando';
-      case 'offline': return 'Temporariamente Offline';
-      case 'maintenance': return 'Em Manutenção';
-      default: return 'Status Desconhecido';
-    }
-  };
-
-  // 🎨 Obter ícone do viewport
+  //  Obter ícone do viewport
   const getViewportIcon = () => {
     switch (viewport) {
       case 'mobile': return <Smartphone size={16} />;
@@ -271,6 +240,10 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
               showEnvironment={true}
               autoDetect={true}
               className="portfolio-link-universal"
+              onNavigate={(screen) => {
+                console.log('🔄 Callback onNavigate chamado:', screen);
+                navigateToScreen(screen as 'main' | 'gallery' | 'figma' | 'settings');
+              }}
             />
           </div>
         </div>

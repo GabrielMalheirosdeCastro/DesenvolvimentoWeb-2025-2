@@ -24,6 +24,7 @@ interface PortfolioLinkUniversalProps {
   autoDetect?: boolean;
   fallbackUrl?: string;
   customText?: string;
+  onNavigate?: (screen: string) => void; // Nova prop para callback
 }
 
 export const PortfolioLinkUniversal: React.FC<PortfolioLinkUniversalProps> = ({
@@ -35,7 +36,8 @@ export const PortfolioLinkUniversal: React.FC<PortfolioLinkUniversalProps> = ({
   showEnvironment = false,
   autoDetect = true,
   fallbackUrl = 'https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2',
-  customText
+  customText,
+  onNavigate // Nova prop
 }) => {
   const [config, setConfig] = useState<UniversalPortfolioConfig>({
     url: '',
@@ -197,12 +199,12 @@ export const PortfolioLinkUniversal: React.FC<PortfolioLinkUniversalProps> = ({
   const handleClick = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     
-    if (!config.isValid || !isOnline) {
-      console.warn('⚠️ Link inválido ou offline');
-      return;
-    }
-
+    console.log('🔗 Click no botão do portfólio');
+    console.log('Config:', { isValid: config.isValid, status: config.status, url: config.url });
+    console.log('Online:', isOnline);
+    
     const hostname = window.location.hostname;
+    console.log('Hostname atual:', hostname);
     
     // 🎯 Se estamos no localhost ou no próprio site, vai para a galeria Figma
     if (hostname === 'localhost' || 
@@ -210,23 +212,45 @@ export const PortfolioLinkUniversal: React.FC<PortfolioLinkUniversalProps> = ({
         hostname.includes('gabrielmalheirosdeciastro.github.io') ||
         hostname.includes('github.io')) {
       
-      console.log('🎨 Redirecionando para Galeria Figma');
+      console.log('🎨 Redirecionando para Galeria Figma (localhost detectado)');
       
-      // Atualizar URL sem recarregar a página
+      // Usar callback se disponível
+      if (onNavigate) {
+        console.log('🔄 Usando callback onNavigate');
+        onNavigate('figma');
+        return;
+      }
+      
+      // Fallback: Atualizar URL sem recarregar a página
       const newUrl = `${window.location.origin}${window.location.pathname}?screen=figma`;
       window.history.pushState({ screen: 'figma' }, '', newUrl);
       
       // Disparar evento personalizado para que o componente pai atualize
-      window.dispatchEvent(new CustomEvent('portfolio-navigate', { 
+      const event = new CustomEvent('portfolio-navigate', { 
         detail: { screen: 'figma' } 
-      }));
+      });
+      console.log('Disparando evento personalizado:', event);
+      window.dispatchEvent(event);
       
+      return;
+    }
+
+    // Verificar se é válido e online apenas para links externos
+    if (!config.isValid || !isOnline) {
+      console.warn('⚠️ Link inválido ou offline para link externo');
+      
+      // Se não é localhost mas é link inválido, tentar usar fallback
+      console.log('� Tentando usar fallback URL');
+      const finalUrl = fallbackUrl.includes('?') 
+        ? `${fallbackUrl}&screen=figma`
+        : `${fallbackUrl}?screen=figma`;
+      window.open(finalUrl, '_blank', 'noopener,noreferrer');
       return;
     }
 
     // 🌐 Caso contrário, abre em nova aba
     try {
-      console.log(`🔗 Abrindo: ${config.url}`);
+      console.log(`🔗 Abrindo em nova aba: ${config.url}`);
       const finalUrl = config.url.includes('?') 
         ? `${config.url}&screen=figma`
         : `${config.url}?screen=figma`;
@@ -234,9 +258,9 @@ export const PortfolioLinkUniversal: React.FC<PortfolioLinkUniversalProps> = ({
     } catch (error) {
       console.error('❌ Erro ao abrir link:', error);
       // Fallback: tentar novamente com método nativo
-      window.location.href = config.url;
+      window.location.href = config.url || fallbackUrl;
     }
-  }, [config.url, config.isValid, isOnline]);
+  }, [config.url, config.isValid, isOnline, fallbackUrl, onNavigate]);
 
   // 🎨 Obter ícone do status
   const getStatusIcon = () => {
