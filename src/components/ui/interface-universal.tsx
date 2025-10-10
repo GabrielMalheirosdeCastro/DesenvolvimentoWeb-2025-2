@@ -30,7 +30,7 @@ interface InterfaceUniversalProps {
   className?: string;
   showMultipleScreens?: boolean;
   enableThemeSelector?: boolean;
-  initialScreen?: 'main' | 'gallery' | 'figma' | 'settings';
+  initialScreen?: 'main' | 'figma' | 'settings';
 }
 
 export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
@@ -39,7 +39,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
   initialScreen
 }) => {
   // 🔍 Detectar tela inicial baseada em parâmetros URL ou prop
-  const getInitialScreen = (): 'main' | 'gallery' | 'figma' | 'settings' => {
+  const getInitialScreen = (): 'main' | 'figma' | 'settings' => {
     // Se foi passada uma tela inicial, usar ela
     if (initialScreen) return initialScreen;
     
@@ -49,7 +49,6 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
     
     // Verificar parâmetros da URL
     if (screenParam === 'figma' || hashParam === 'figma') return 'figma';
-    if (screenParam === 'gallery' || hashParam === 'gallery') return 'gallery';
     if (screenParam === 'settings' || hashParam === 'settings') return 'settings';
     
     return 'main';
@@ -64,7 +63,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
     theme: 'modern'
   });
 
-  const [currentScreen, setCurrentScreen] = useState<'main' | 'gallery' | 'figma' | 'settings'>(getInitialScreen());
+  const [currentScreen, setCurrentScreen] = useState<'main' | 'figma' | 'settings'>(getInitialScreen());
   const [viewport, setViewport] = useState<'mobile' | 'tablet' | 'desktop'>('desktop');
   const [forceUpdate, setForceUpdate] = useState(0); // Para forçar re-render quando tema muda
 
@@ -332,7 +331,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
   }, []);
 
   // 🎯 Navegar entre telas com atualização de URL
-  const navigateToScreen = useCallback((screen: 'main' | 'gallery' | 'figma' | 'settings') => {
+  const navigateToScreen = useCallback((screen: 'main' | 'figma' | 'settings') => {
     setCurrentScreen(screen);
     
     // Atualizar URL baseado na tela
@@ -445,98 +444,13 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
     </div>
   );
 
-  // 🖼️ Renderizar tela de galeria
-  const renderGalleryScreen = () => (
-    <div className="interface-main">
-      <div className="layout-container">
-        <div className="interface-header">
-          <h1 className="interface-title">
-            Projetos e Demonstrações
-          </h1>
-          <p className="interface-subtitle">
-            Portfólio de projetos acadêmicos e profissionais
-          </p>
-        </div>
-
-        <div className="interface-gallery">
-          {[
-            {
-              title: "Interface Gráfica Principal",
-              description: "Portfólio principal com design responsivo e sistema de temas dinâmico",
-              url: config.url,
-              status: config.status,
-              tech: ["React", "TypeScript", "CSS3"]
-            },
-            {
-              title: "Sistema de Componentes",
-              description: "Biblioteca de componentes reutilizáveis baseada em shadcn/ui",
-              url: `${config.url}/components`,
-              status: "online",
-              tech: ["React", "Radix UI", "Tailwind"]
-            },
-            {
-              title: "Estudos CSS Avançado",
-              description: "Demonstrações de animações, grid layouts e propriedades modernas",
-              url: `${config.url}/css-studies`,
-              status: "online",
-              tech: ["CSS3", "Animations", "Grid"]
-            },
-            {
-              title: "Projeto FAESA",
-              description: "Trabalho acadêmico demonstrando conversão de Figma para código",
-              url: `${config.url}/faesa-project`,
-              status: "maintenance",
-              tech: ["Figma", "React", "Vite"]
-            }
-          ].map((project, index) => (
-            <div key={index} className="interface-card">
-              <h3 className="interface-card-title">
-                {project.title}
-              </h3>
-              <p className="interface-card-description">
-                {project.description}
-              </p>
-              
-              {/* Tags de tecnologia */}
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.tech.map((tech: string, techIndex: number) => (
-                  <span 
-                    key={techIndex}
-                    className="px-2 py-1 bg-brand-primary/10 text-brand-primary text-xs rounded-md font-medium"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-              
-              {/* Link de projeto removido para simplificar interface */}
-              <div className="text-sm text-gray-500 italic">
-                Acesso via navegação principal
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="text-center mt-12">
-          <button
-            onClick={() => setCurrentScreen('main')}
-            className="px-8 py-4 bg-brand-primary text-white rounded-lg font-medium hover:bg-brand-secondary transition-all flex items-center gap-2 mx-auto"
-          >
-            <Home size={20} />
-            Voltar à Tela Principal
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-
   // 🎨 Renderizar tela da galeria do Figma
   const renderFigmaScreen = () => (
     <div className="interface-main">
       <div className="layout-container">
         <div className="interface-header">
           <h1 className="interface-title">
-            Galeria de Assets do Figma
+            Galeria Espacial
           </h1>
           <p className="interface-subtitle">
             Exploração interativa dos assets convertidos do Figma para código
@@ -926,7 +840,6 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
   // 🎯 Renderizar tela atual
   const renderCurrentScreen = () => {
     switch (currentScreen) {
-      case 'gallery': return renderGalleryScreen();
       case 'figma': return renderFigmaScreen();
       case 'settings': return renderSettingsScreen();
       default: return renderMainScreen();
