@@ -208,7 +208,7 @@ body {
   margin: 0 auto;
 }
 
-/* 🎯 Sistema de Link Universal SUPER VISÍVEL - Independente de Plataforma */
+/* 🎯 Sistema de Link Universal SUPER VISÍVEL - Adaptável a todos os temas */
 .portfolio-link-universal {
   /* Base - Sempre visível */
   position: relative !important;
@@ -217,14 +217,14 @@ body {
   justify-content: center !important;
   gap: var(--space-3) !important;
   
-  /* Cores SUPER contrastantes para Windows + Google */
-  background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 50%, #2563eb 100%) !important;
+  /* Cores que se adaptam ao tema atual */
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-secondary) 50%, var(--brand-accent) 100%) !important;
   color: white !important;
   text-decoration: none !important;
   
   /* Estilo otimizado para MÁXIMA visibilidade */
   border-radius: 16px !important;
-  border: 3px solid #3b82f6 !important;
+  border: 3px solid var(--brand-accent) !important;
   box-shadow: 
     0 10px 25px -5px rgba(59, 130, 246, 0.4),
     0 4px 6px -2px rgba(59, 130, 246, 0.3),
@@ -258,15 +258,15 @@ body {
   z-index: 100 !important;
 }
 
-/* 🔥 Hover SUPER chamativo */
+/* 🔥 Hover que se adapta ao tema */
 .portfolio-link-universal:hover {
   transform: translateY(-4px) scale(1.05) !important;
   box-shadow: 
     0 20px 40px -10px rgba(59, 130, 246, 0.6),
     0 8px 16px -4px rgba(59, 130, 246, 0.4),
     inset 0 2px 0 rgba(255, 255, 255, 0.3) !important;
-  border-color: #60a5fa !important;
-  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 50%, #60a5fa 100%) !important;
+  border-color: var(--brand-accent) !important;
+  background: linear-gradient(135deg, var(--brand-secondary) 0%, var(--brand-accent) 50%, var(--brand-primary) 100%) !important;
 }
 
 /* 🎯 Active state CLARO */
@@ -284,6 +284,41 @@ body {
   outline: 4px solid #fbbf24 !important;
   outline-offset: 4px !important;
   border-color: #fbbf24 !important;
+}
+
+/* 🎨 Garantir visibilidade específica por tema */
+
+/* Tema Clássico - Azul mais escuro, texto garantidamente branco */
+[data-theme="classic"] .portfolio-link-universal {
+  color: white !important;
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3b82f6 100%) !important;
+  border-color: #3b82f6 !important;
+  box-shadow: 
+    0 10px 25px -5px rgba(30, 58, 138, 0.4),
+    0 4px 6px -2px rgba(30, 58, 138, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Tema Minimalista - Contraste garantido */
+[data-theme="minimal"] .portfolio-link-universal {
+  color: white !important;
+  background: linear-gradient(135deg, #374151 0%, #4b5563 50%, #6b7280 100%) !important;
+  border-color: #6b7280 !important;
+  box-shadow: 
+    0 10px 25px -5px rgba(55, 65, 81, 0.4),
+    0 4px 6px -2px rgba(55, 65, 81, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Tema Colorido - Roxo vibrante, texto garantidamente branco */
+[data-theme="colorful"] .portfolio-link-universal {
+  color: white !important;
+  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 50%, #a78bfa 100%) !important;
+  border-color: #a78bfa !important;
+  box-shadow: 
+    0 10px 25px -5px rgba(124, 58, 237, 0.4),
+    0 4px 6px -2px rgba(124, 58, 237, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
 }
 
 /* 📱 Responsividade OTIMIZADA */
@@ -562,23 +597,58 @@ body {
   opacity: 0.6;
 }
 
-/* 🎨 Tema Dinâmico */
+/* 🎨 Tema Dinâmico - Sistema Completo com Background e Texto */
+
+/* 🔵 Tema Moderno (Padrão) - Azul vibrante com fundo claro */
+[data-theme="modern"], :root {
+  --brand-primary: #2563eb;
+  --brand-secondary: #1d4ed8;
+  --brand-accent: #3b82f6;
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8fafc;
+  --color-bg-tertiary: #f1f5f9;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #94a3b8;
+}
+
+/* 🟦 Tema Clássico - Azul tradicional com fundo neutro */
 [data-theme="classic"] {
   --brand-primary: #1e3a8a;
   --brand-secondary: #1e40af;
   --brand-accent: #3b82f6;
+  --color-bg-primary: #f9fafb;
+  --color-bg-secondary: #f3f4f6;
+  --color-bg-tertiary: #e5e7eb;
+  --color-text-primary: #111827;
+  --color-text-secondary: #374151;
+  --color-text-muted: #6b7280;
 }
 
+/* ⚫ Tema Minimalista - Cinza elegante com alto contraste */
 [data-theme="minimal"] {
   --brand-primary: #374151;
   --brand-secondary: #4b5563;
   --brand-accent: #6b7280;
+  --color-bg-primary: #fafafa;
+  --color-bg-secondary: #f5f5f5;
+  --color-bg-tertiary: #eeeeee;
+  --color-text-primary: #1f2937;
+  --color-text-secondary: #374151;
+  --color-text-muted: #6b7280;
 }
 
+/* 🟣 Tema Colorido - Roxo criativo com fundo vibrante */
 [data-theme="colorful"] {
   --brand-primary: #7c3aed;
   --brand-secondary: #8b5cf6;
   --brand-accent: #a78bfa;
+  --color-bg-primary: #faf5ff;
+  --color-bg-secondary: #f3e8ff;
+  --color-bg-tertiary: #e9d5ff;
+  --color-text-primary: #581c87;
+  --color-text-secondary: #7c2d92;
+  --color-text-muted: #a855f7;
 }
 
 /* 🔧 Utilitários Universais */
@@ -922,6 +992,109 @@ html[data-environment="custom-domain"] {
   --brand-success: #059669;
   --brand-warning: #d97706;
   --brand-error: #dc2626;
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8fafc;
+  --color-bg-tertiary: #f1f5f9;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #94a3b8;
+}
+
+/* 🛡️ GARANTIR VISIBILIDADE DE TODOS OS ELEMENTOS EM TODOS OS TEMAS */
+
+/* Títulos principais sempre visíveis */
+.interface-title,
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text-primary) !important;
+  font-weight: 700 !important;
+}
+
+/* Subtítulos e descrições sempre legíveis */
+.interface-subtitle,
+.interface-description,
+p, span {
+  color: var(--color-text-secondary) !important;
+}
+
+/* Cards e containers sempre com bom contraste */
+.bg-white,
+.interface-card,
+.card {
+  background-color: var(--color-bg-primary) !important;
+  color: var(--color-text-primary) !important;
+  border-color: var(--color-bg-tertiary) !important;
+}
+
+/* Background principal sempre adequado */
+.interface-main,
+body {
+  background: linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%) !important;
+  color: var(--color-text-primary) !important;
+}
+
+/* Botões secundários sempre visíveis */
+button:not(.portfolio-link-universal),
+.btn,
+.button {
+  background-color: var(--brand-primary) !important;
+  color: white !important;
+  border-color: var(--brand-primary) !important;
+}
+
+button:not(.portfolio-link-universal):hover,
+.btn:hover,
+.button:hover {
+  background-color: var(--brand-secondary) !important;
+  border-color: var(--brand-secondary) !important;
+}
+
+/* Links de texto sempre legíveis */
+a:not(.portfolio-link-universal) {
+  color: var(--brand-primary) !important;
+}
+
+a:not(.portfolio-link-universal):hover {
+  color: var(--brand-secondary) !important;
+}
+
+/* Labels e textos pequenos sempre visíveis */
+.text-gray-500,
+.text-gray-600,
+.text-gray-700,
+.text-muted {
+  color: var(--color-text-muted) !important;
+}
+
+/* Assegurar que backgrounds escuros tenham texto claro */
+[data-theme="minimal"] .bg-gray-100,
+[data-theme="minimal"] .bg-gray-50 {
+  background-color: var(--color-bg-secondary) !important;
+  color: var(--color-text-primary) !important;
+}
+
+/* Tema colorido - garantir contraste adequado */
+[data-theme="colorful"] .interface-title {
+  background: linear-gradient(135deg, var(--brand-primary), var(--brand-accent)) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* Garantir que navegação inferior seja sempre visível */
+.fixed-bottom-navigation {
+  background-color: var(--color-bg-primary) !important;
+  border-color: var(--color-bg-tertiary) !important;
+  color: var(--color-text-primary) !important;
+}
+
+.fixed-bottom-navigation button {
+  color: var(--color-text-secondary) !important;
+}
+
+.fixed-bottom-navigation button.active,
+.fixed-bottom-navigation button:hover {
+  color: var(--brand-primary) !important;
+  background-color: var(--color-bg-secondary) !important;
 }
 
 /* 🔗 Estilos específicos para sites reais (Vercel) */
@@ -1169,11 +1342,25 @@ html[data-environment="custom-domain"] {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Tema escuro para navegação fixa */
+/* Navegação inferior adaptável a todos os temas */
 [data-theme="minimal"] .fixed-bottom-navigation,
 [data-theme="colorful"] .fixed-bottom-navigation {
-  background: rgba(17, 24, 39, 0.95);
-  border-top-color: rgba(75, 85, 99, 0.5);
+  background: var(--color-bg-primary) !important;
+  border-top-color: var(--color-bg-tertiary) !important;
+  color: var(--color-text-primary) !important;
+}
+
+[data-theme="minimal"] .fixed-bottom-navigation button,
+[data-theme="colorful"] .fixed-bottom-navigation button {
+  color: var(--color-text-secondary) !important;
+}
+
+[data-theme="minimal"] .fixed-bottom-navigation button.active,
+[data-theme="minimal"] .fixed-bottom-navigation button:hover,
+[data-theme="colorful"] .fixed-bottom-navigation button.active,
+[data-theme="colorful"] .fixed-bottom-navigation button:hover {
+  color: var(--brand-primary) !important;
+  background-color: var(--color-bg-secondary) !important;
 }
 
 /* Container principal da navegação com padding maior */
