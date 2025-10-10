@@ -45,11 +45,7 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 4173
   },
-  // 🌐 Configuração para GitHub Pages
-  base: process.env.NODE_ENV === 'production' 
-    ? '/DesenvolvimentoWeb-2025-2/' 
-    : '/',
-  // 🚀 Configuração otimizada para Vercel
+  // 🚀 Configuração otimizada para Vercel (base padrão)
   base: '/',
   // 🔧 Otimizações específicas para Windows + Google
   define: {

@@ -1,8 +1,8 @@
-import React from 'react';
 import InterfaceUniversal from './components/ui/interface-universal';
 import './styles/globals.css';
 import './styles/figma-gallery-fixes.css';
 import './styles/portfolio-public-links.css';
+import './styles/external-navigation.css';
 
 function App() {
   return (

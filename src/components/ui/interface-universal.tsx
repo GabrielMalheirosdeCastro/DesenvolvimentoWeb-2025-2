@@ -18,6 +18,7 @@ import { spaceFleetImages } from '../../data/spaceFleetData';
 import PersonalData from './personal-data';
 import MorseChallenge from './morse-challenge';
 import { Localhost3000Link } from './localhost-link';
+import ExternalNavigation from './external-navigation';
 
 interface UniversalConfig {
   url: string;
@@ -245,6 +246,48 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
                 navigateToScreen(screen as 'main' | 'gallery' | 'figma' | 'settings');
               }}
             />
+          </div>
+        </div>
+
+        {/* Seção Destacada - Galeria Figma */}
+        <div className="max-w-4xl mx-auto mt-12">
+          <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl p-8 border-2 border-purple-200 shadow-lg">
+            <div className="text-center mb-6">
+              <h2 className="text-3xl font-bold text-purple-800 mb-3 flex items-center justify-center gap-3">
+                <Rocket size={32} className="text-purple-600" />
+                🌌 Galeria Figma Espacial
+              </h2>
+              <p className="text-lg text-purple-700 mb-4">
+                Explore nossa coleção de assets convertidos do Figma em uma experiência interativa única
+              </p>
+              
+              <div className="grid md:grid-cols-3 gap-4 mb-6">
+                <div className="bg-white/70 rounded-lg p-4 border border-purple-200">
+                  <div className="text-2xl mb-2">🖼️</div>
+                  <h3 className="font-semibold text-purple-800 mb-1">Assets do Figma</h3>
+                  <p className="text-sm text-purple-600">Conversão direta de designs para código</p>
+                </div>
+                <div className="bg-white/70 rounded-lg p-4 border border-purple-200">
+                  <div className="text-2xl mb-2">🎨</div>
+                  <h3 className="font-semibold text-purple-800 mb-1">Galeria Interativa</h3>
+                  <p className="text-sm text-purple-600">Navegação fluida e responsiva</p>
+                </div>
+                <div className="bg-white/70 rounded-lg p-4 border border-purple-200">
+                  <div className="text-2xl mb-2">🚀</div>
+                  <h3 className="font-semibold text-purple-800 mb-1">Tema Espacial</h3>
+                  <p className="text-sm text-purple-600">Exploração visual imersiva</p>
+                </div>
+              </div>
+
+              <button
+                onClick={() => navigateToScreen('figma')}
+                className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center gap-3 mx-auto"
+              >
+                <Rocket size={24} />
+                🎯 Explorar Galeria Figma
+                <Image size={24} />
+              </button>
+            </div>
           </div>
         </div>
 
@@ -754,6 +797,11 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
 
   return (
     <div className={cn("interface-universal w-full", className)} data-theme={config.theme}>
+      {/* Navegação Externa com Setas */}
+      <ExternalNavigation 
+        onFigmaAccess={() => navigateToScreen('figma')}
+      />
+      
       {renderCurrentScreen()}
     </div>
   );

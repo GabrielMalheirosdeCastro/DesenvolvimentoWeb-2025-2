@@ -1,0 +1,156 @@
+/* 🎯 Estilos para Navegação Externa - Setas Laterais */
+
+/* Setas de navegação lateral sempre visíveis */
+.external-navigation-arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.external-navigation-arrow:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Seta esquerda - voltar */
+.external-navigation-left {
+  left: 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  border-radius: 50px;
+  padding: 0.75rem;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.external-navigation-left:hover {
+  border-color: rgba(59, 130, 246, 0.6);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Seta direita - Galeria Figma */
+.external-navigation-right {
+  right: 1rem;
+  background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+  border-radius: 50px;
+  padding: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  animation: gentle-pulse 3s ease-in-out infinite;
+}
+
+.external-navigation-right:hover {
+  background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  animation: none;
+}
+
+/* Animação sutil para chamar atenção */
+@keyframes gentle-pulse {
+  0%, 100% {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 0 0 rgba(139, 92, 246, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 0 20px rgba(139, 92, 246, 0.3);
+  }
+}
+
+/* Botão home no topo */
+.external-navigation-home {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(34, 197, 94, 0.3);
+  border-radius: 25px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.external-navigation-home:hover {
+  border-color: rgba(34, 197, 94, 0.6);
+  transform: translateX(-50%) scale(1.05);
+}
+
+/* Informação de navegação segura */
+.safe-navigation-info {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.safe-navigation-info:hover {
+  opacity: 1;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .external-navigation-left,
+  .external-navigation-right {
+    padding: 0.5rem;
+  }
+  
+  .external-navigation-left {
+    left: 0.5rem;
+  }
+  
+  .external-navigation-right {
+    right: 0.5rem;
+  }
+  
+  .external-navigation-home {
+    top: 0.5rem;
+    padding: 0.375rem 0.75rem;
+  }
+  
+  .safe-navigation-info {
+    bottom: 0.5rem;
+    font-size: 0.625rem;
+    padding: 0.375rem 0.75rem;
+  }
+}
+
+/* Estados de acessibilidade */
+.external-navigation-arrow:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.external-navigation-home:focus {
+  outline: 2px solid #22c55e;
+  outline-offset: 2px;
+}
+
+/* Prevenção de seleção de texto */
+.external-navigation-arrow,
+.external-navigation-home {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Melhor aparência em telas de alta densidade */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .external-navigation-arrow,
+  .external-navigation-home {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
