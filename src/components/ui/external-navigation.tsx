@@ -86,11 +86,11 @@ export const ExternalNavigation: React.FC<ExternalNavigationProps> = ({
           className
         )}
         onClick={onFigmaAccess}
-        title="🎯 Galeria Espacial - Exploração Interativa"
+        title="🎯 ACESSO ÚNICO: Galeria Figma - Exploração Espacial Segura"
       >
         <div className="p-4 flex items-center gap-3">
           <span className="hidden lg:block text-sm font-bold text-white">
-            🌌 Galeria Espacial
+            🌌 Galeria Figma
           </span>
           <ChevronRight 
             size={28} 

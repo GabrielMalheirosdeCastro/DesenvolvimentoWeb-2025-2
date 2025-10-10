@@ -1,10 +1,10 @@
 import React from 'react';
-import { Home, Rocket, Settings } from 'lucide-react';
+import { Home, Github, Rocket, Settings } from 'lucide-react';
 import { cn } from './utils';
 
 interface FixedBottomNavigationProps {
-  currentScreen: 'main' | 'figma' | 'settings';
-  onNavigate: (screen: 'main' | 'figma' | 'settings') => void;
+  currentScreen: 'main' | 'gallery' | 'figma' | 'settings';
+  onNavigate: (screen: 'main' | 'gallery' | 'figma' | 'settings') => void;
   enableThemeSelector?: boolean;
   className?: string;
 }
@@ -23,9 +23,15 @@ export const FixedBottomNavigation: React.FC<FixedBottomNavigationProps> = ({
       description: 'Tela Principal'
     },
     {
+      id: 'gallery' as const,
+      icon: Github,
+      label: 'Projetos',
+      description: 'Portfólio'
+    },
+    {
       id: 'figma' as const,
       icon: Rocket,
-      label: 'Galeria',
+      label: 'Figma',
       description: 'Galeria Espacial'
     },
     ...(enableThemeSelector ? [{
