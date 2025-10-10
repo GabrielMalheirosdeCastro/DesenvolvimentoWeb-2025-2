@@ -105,7 +105,7 @@ export const ImageFullscreenViewer: React.FC<ImageFullscreenViewerProps> = ({
   if (!isOpen || !currentImage) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-black bg-opacity-90 backdrop-blur-md pointer-events-none">
+    <div className="fixed inset-0 z-50 bg-black bg-opacity-90 backdrop-blur-md pointer-events-none image-fullscreen-viewer">
       {/* Container principal que permite pointer events apenas nos controles */}
       <div className="relative w-full h-full pointer-events-auto">{/* Controles do topo */}
       <div className="absolute top-0 left-0 right-0 z-10 p-4 bg-gradient-to-b from-black/80 to-transparent pointer-events-auto">
@@ -227,19 +227,19 @@ export const ImageFullscreenViewer: React.FC<ImageFullscreenViewerProps> = ({
 
       {/* Painel de informações SEMPRE VISÍVEL (pode ser ocultado) */}
       {showInfo && (
-        <div className="absolute bottom-0 left-0 right-0 z-10 p-6 bg-gradient-to-t from-black/95 to-black/70 text-white pointer-events-auto">
+        <div className="absolute bottom-0 left-0 right-0 z-10 p-6 bg-gradient-to-t from-black/98 to-black/85 text-white pointer-events-auto border-t border-white/20">
           <div className="max-w-4xl mx-auto">
             <h3 className="text-2xl font-bold mb-3 text-white drop-shadow-lg">
               {currentImage.title}
             </h3>
-            <p className="text-base text-gray-100 mb-4 leading-relaxed drop-shadow-md">
+            <p className="text-base text-white mb-4 leading-relaxed drop-shadow-md font-medium">
               {currentImage.description}
             </p>
             
             <div className="flex items-center justify-between flex-wrap gap-4">
               {currentImage.category && (
                 <div className="flex items-center gap-2">
-                  <span className="px-4 py-2 bg-white/20 rounded-full text-sm font-semibold backdrop-blur-sm border border-white/20">
+                  <span className="px-4 py-2 bg-white/25 rounded-full text-sm font-bold backdrop-blur-sm border border-white/30 text-white">
                     {currentImage.category === 'Combate' && '⚔️'} 
                     {currentImage.category === 'Caças Estelares' && '🚀'}
                     {currentImage.category === 'Frotas Militares' && '🛸'}
@@ -249,7 +249,7 @@ export const ImageFullscreenViewer: React.FC<ImageFullscreenViewerProps> = ({
                 </div>
               )}
               
-              <div className="text-sm text-gray-200 bg-black/40 px-3 py-1 rounded-full backdrop-blur-sm">
+              <div className="text-sm text-white bg-black/50 px-4 py-2 rounded-full backdrop-blur-sm font-semibold">
                 Imagem {currentIndex + 1} de {images.length} • Pressione I para ocultar informações
               </div>
             </div>

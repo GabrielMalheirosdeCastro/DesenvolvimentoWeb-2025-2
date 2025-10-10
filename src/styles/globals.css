@@ -1893,3 +1893,72 @@ a:not(.portfolio-link-universal):hover {
   background: var(--brand-primary);
   width: 60px;
 }
+
+/* 🎯 VISUALIZADOR FULLSCREEN - CORREÇÃO DE CONTRASTE PARA TODOS OS TEMAS */
+/* Garante que o painel de informações seja sempre legível independente do tema */
+
+/* Força texto branco em TODOS os elementos do visualizador */
+.image-fullscreen-viewer h3,
+.image-fullscreen-viewer p,
+.image-fullscreen-viewer span,
+.image-fullscreen-viewer div:not(.w-8):not(.border-2),
+[data-theme] .image-fullscreen-viewer h3,
+[data-theme] .image-fullscreen-viewer p,
+[data-theme] .image-fullscreen-viewer span,
+[data-theme] .image-fullscreen-viewer div:not(.w-8):not(.border-2) {
+  color: #ffffff !important;
+}
+
+/* Painel inferior do visualizador - SEMPRE contraste máximo */
+.image-fullscreen-viewer .absolute.bottom-0 h3,
+.image-fullscreen-viewer .absolute.bottom-0 p,
+.image-fullscreen-viewer .absolute.bottom-0 span,
+.image-fullscreen-viewer .absolute.bottom-0 div,
+[data-theme="modern"] .image-fullscreen-viewer .absolute.bottom-0 h3,
+[data-theme="modern"] .image-fullscreen-viewer .absolute.bottom-0 p,
+[data-theme="modern"] .image-fullscreen-viewer .absolute.bottom-0 span,
+[data-theme="modern"] .image-fullscreen-viewer .absolute.bottom-0 div,
+[data-theme="classic"] .image-fullscreen-viewer .absolute.bottom-0 h3,
+[data-theme="classic"] .image-fullscreen-viewer .absolute.bottom-0 p,
+[data-theme="classic"] .image-fullscreen-viewer .absolute.bottom-0 span,
+[data-theme="classic"] .image-fullscreen-viewer .absolute.bottom-0 div {
+  color: #ffffff !important;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9) !important;
+  font-weight: 600 !important;
+}
+
+/* Classes específicas do Tailwind no visualizador */
+[data-theme] .image-fullscreen-viewer .text-gray-100 {
+  color: #f3f4f6 !important;
+}
+
+[data-theme] .image-fullscreen-viewer .text-gray-200 {
+  color: #e5e7eb !important;
+}
+
+/* Badge/categoria sempre legível */
+[data-theme] .image-fullscreen-viewer .bg-white\/20,
+[data-theme] .image-fullscreen-viewer .bg-black\/40 {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+/* Controles de navegação sempre brancos */
+[data-theme] .image-fullscreen-viewer button {
+  color: #ffffff !important;
+}
+
+/* Título principal no visualizador */
+[data-theme] .image-fullscreen-viewer .text-2xl {
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Botões de navegação lateral sempre visíveis */
+[data-theme] .image-fullscreen-viewer .bg-black\/50 {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+  color: #ffffff !important;
+}
