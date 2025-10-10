@@ -403,14 +403,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
                 </div>
               </div>
 
-              <button
-                onClick={() => navigateToScreen('figma')}
-                className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center gap-3 mx-auto"
-              >
-                <Rocket size={24} />
-                🎯 Explorar Galeria Figma
-                <Image size={24} />
-              </button>
+              {/* Botão "Explorar Galeria Figma" removido - acesso apenas via navegação inferior */}
             </div>
           </div>
         </div>
