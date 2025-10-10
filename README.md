@@ -1,4 +1,20 @@
-# 🚀 PORTFÓLIO PESSOAL - GABRIEL MALHEIROS
+# 🚀## 🌐 **ACESSE MEU SITE PESSOAL AGORA:**
+
+# **[🔗 CLIQUE AQUI PARA VER O SITE](https://gabrielmalheirosdcastro.github.io/DesenvolvimentoWeb-2025-2/)**
+
+### 📋 **Link Direto:**
+```
+https://gabrielmalheirosdcastro.github.io/DesenvolvimentoWeb-2025-2/
+```
+
+⚠️ **PRIMEIRO ACESSO?** Se o link não funcionar, você precisa ativar o GitHub Pages:
+
+### 🔧 **COMO ATIVAR GITHUB PAGES:**
+1. 🌐 Acesse: `https://github.com/GabrielMalheirosdeCastro/DesenvolvimentoWeb-2025-2/settings/pages`
+2. 📂 Em **"Source"** selecione: `GitHub Actions`
+3. ✅ Clique em **"Save"**
+4. ⏳ Aguarde 2-3 minutos para o deploy
+5. 🎉 **Link funcionará automaticamente!**IO PESSOAL - GABRIEL MALHEIROS
 
 <div align="center">
 
