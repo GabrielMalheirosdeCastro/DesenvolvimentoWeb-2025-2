@@ -417,20 +417,27 @@ body {
 
     /* Link do Portfólio - Alterável via CSS */
     --portfolio-url: "https://desenvolvimento-web-2025-2.vercel.app";
-    --portfolio-title: "Interface Gráfica Pessoal - Gabriel Malheiros";
-    --portfolio-description: "Portfólio acadêmico FAESA - React + TypeScript + Vite";
+    --portfolio-title: "Interface Gráfica Pessoal - Gabriel Malheiros - FAESA";
+    --portfolio-description: "Portfólio acadêmico - Desenvolvimento Web 2025-2 - React + TypeScript + CSS3";
     --portfolio-status: "deployed"; /* deployed | staging | development | offline */
     
-    /* 🔧 Configurações Flexíveis - Funcionam com QUALQUER provedor */
-    --portfolio-provider: "auto-detect"; /* auto-detect | vercel | netlify | github-pages | custom */
+    /* 🎓 Configurações Acadêmicas FAESA */
+    --portfolio-student: "Gabriel Malheiros";
+    --portfolio-institution: "FAESA";
+    --portfolio-course: "Desenvolvimento Web 2025-2";
+    --portfolio-semester: "2025-2";
+    
+    /* 🔧 Configurações Técnicas */
+    --portfolio-provider: "auto-detect"; /* auto-detect | vercel | netlify | github-pages */
     --portfolio-branch: "main";
-    --portfolio-domain-custom: ""; /* Para domínios personalizados */
+    --portfolio-domain-custom: "";
     
     /* 🎨 Personalização Visual */
-    --portfolio-button-text: "🌐 Acessar Portfólio";
-    --portfolio-button-style: "primary"; /* primary | secondary | outline | ghost */
-    --portfolio-show-provider: "true"; /* true | false */
-    --portfolio-show-status: "true"; /* true | false */
+    --portfolio-button-text: "🌐 Acessar Portfólio FAESA";
+    --portfolio-button-style: "primary";
+    --portfolio-show-provider: "true";
+    --portfolio-show-status: "true";
+    --portfolio-show-academic-info: "true";
   }
 
   /* 🎯 Estilos para exibição do link do portfólio */
@@ -544,5 +551,23 @@ body {
   background: hsl(var(--accent));
   color: hsl(var(--accent-foreground));
 }
+
+/* 🎓 Estilos específicos para projeto acadêmico */
+.portfolio-academic-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  border-radius: 0.25rem;
+  background: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+  border: 1px solid hsl(var(--border));
 }
 
+.portfolio-faesa-branding {
+  font-weight: 600;
+  color: hsl(var(--primary));
+}
+
+}

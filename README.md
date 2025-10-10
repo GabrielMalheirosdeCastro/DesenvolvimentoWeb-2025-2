@@ -4,118 +4,156 @@ Este é um projeto de portfólio pessoal construído com React + Vite + TypeScri
 
 **🌐 Projeto Original no Figma:** https://www.figma.com/design/YhRfiVLoaaxLm9j3TH7xOP/Interface-Gr%C3%A1fica-Pessoal
 
+## 🎓 Atividade FAESA - Portfólio com CSS3
+
+### 📝 Requisitos da Atividade Atendidos
+
+✅ **Portfólio pessoal criado** - Interface gráfica baseada no design Figma  
+✅ **Estilização CSS3 aplicada** - Sistema completo com Tailwind CSS + CSS personalizado  
+✅ **Seletores CSS utilizados** - Incluindo conceitos do CSS Diner  
+✅ **Design responsivo** - Mobile-first com breakpoints adaptativos  
+✅ **Commits no GitHub** - Histórico completo de desenvolvimento  
+✅ **Link público funcional** - Configurado independente de plataforma  
+
+### 🌐 Link Público do Portfólio (FAESA 2025-2)
+
+**🔗 Acesso Direto:** https://desenvolvimento-web-2025-2.vercel.app
+
+> **Nota:** Este link é configurado via CSS e pode ser alterado facilmente para qualquer provedor de hospedagem, funcionando independentemente da plataforma escolhida.
+
+### 🎯 Como Configurar Seu Próprio Link Público
+
+**Para alunos Windows - Fluxo Completo:**
+
+#### 1. **Preparar o CSS (ANTES do deploy)**
+```css
+/* Em src/styles/globals.css */
+:root {
+  /* 🌐 Configure seu link de portfólio aqui */
+  --portfolio-url: "https://seu-nome-portfolio.vercel.app";
+  --portfolio-status: "deployed";
+  --portfolio-title: "Portfólio - Seu Nome - FAESA 2025-2";
+  --portfolio-button-text: "🌐 Ver Meu Portfólio";
+}
+```
+
+#### 2. **Fazer Deploy (Windows PowerShell)**
+```powershell
+# Navegar para o projeto
+cd "C:\Users\SeuUsuario\Desktop\HTML\DesenvolvimentoWeb-2025-2"
+
+# Instalar dependências se necessário
+npm install
+
+# Build do projeto
+npm run build
+
+# Deploy no Vercel (recomendado)
+npx vercel --prod
+
+# OU Deploy no Netlify
+npx netlify deploy --prod --dir=dist
+
+# OU Deploy no GitHub Pages (automático via push)
+git add .
+git commit -m "feat: portfólio FAESA pronto para avaliação"
+git push origin main
+```
+
+#### 3. **Atualizar com Link Real**
+```css
+/* Depois do deploy - cole o link que você recebeu */
+:root {
+  --portfolio-url: "https://portfolio-gabriel-malheiros-faesa.vercel.app"; /* Link real */
+  --portfolio-status: "deployed";
+  --portfolio-title: "Gabriel Malheiros - Desenvolvimento Web FAESA";
+}
+```
+
+#### 4. **Commit Final para Entrega**
+```powershell
+git add .
+git commit -m "feat: portfólio FAESA 2025-2 - CSS3 aplicado e link público ativo"
+git push origin main
+```
+
+### 📋 Template para Entrega da Atividade
+
+**Link do Repositório GitHub:** `https://github.com/seu-usuario/DesenvolvimentoWeb-2025-2`
+
+**Link do Portfólio Público:** `https://seu-portfolio.vercel.app` *(gerado automaticamente)*
+
+**Commits Realizados:**
+- ✅ Estrutura inicial do portfólio
+- ✅ Conversão do design Figma para React
+- ✅ Aplicação de CSS3 e estilização avançada
+- ✅ Responsividade e otimizações
+- ✅ Deploy e configuração do link público
+
+### 🎨 Recursos CSS3 Implementados
+
+**Seletores Avançados:**
+```css
+/* Seletores de atributo */
+[data-status="deployed"] { /* ... */ }
+
+/* Pseudo-elementos */
+.portfolio-link::before { /* ... */ }
+
+/* Combinadores */
+.portfolio-container > .status-indicator { /* ... */ }
+
+/* Pseudo-classes */
+.portfolio-button:hover:not(:disabled) { /* ... */ }
+```
+
+**Propriedades Modernas:**
+- ✅ **Custom Properties (CSS Variables)** - Sistema de tokens de design
+- ✅ **Flexbox & Grid** - Layouts responsivos
+- ✅ **Transitions & Animations** - Interações suaves
+- ✅ **Media Queries** - Design mobile-first
+- ✅ **Transform & Filter** - Efeitos visuais
+- ✅ **Border-radius & Box-shadow** - Estética moderna
+
+### 💻 Compatibilidade Windows
+
+**Testado em:**
+- ✅ Windows 11 + PowerShell
+- ✅ Visual Studio Code
+- ✅ Node.js 18+
+- ✅ npm/yarn
+- ✅ Git for Windows
+
+**Browsers Suportados:**
+- ✅ Chrome 90+
+- ✅ Firefox 88+
+- ✅ Edge 90+
+- ✅ Safari 14+
+
+### 🚀 Demonstração das Funcionalidades
+
+**1. Sistema de Link Dinâmico:**
+```jsx
+<PortfolioLink /> // Detecta provedor automaticamente
+```
+
+**2. Estados Visuais:**
+- 🟢 **Deployed** - Link ativo e clicável
+- 🔶 **Staging** - Em teste/desenvolvimento
+- 🔴 **Offline** - Temporariamente indisponível
+
+**3. Detecção Automática de Plataforma:**
+- Vercel → ⚡ Vercel
+- Netlify → ☁️ Netlify  
+- GitHub Pages → 🐙 GitHub Pages
+- Firebase → 🔥 Firebase
+- Domínio Próprio → 🌐 Custom Domain
+
 ## 🔗 Link do Portfólio (Universal - Funciona com QUALQUER Provedor)
 
-O sistema de link do portfólio é **totalmente independente de plataforma** e funciona com qualquer provedor de hospedagem. Basta alterar a URL no CSS!
+**🌐 LINK PÚBLICO CONFIGURADO:** https://desenvolvimento-web-2025-2.vercel.app
 
-### 🌍 Provedores Suportados (Detecção Automática)
-
-| Provedor | Exemplo de URL | Status |
-|----------|----------------|--------|
-| **Vercel** | `https://meu-projeto.vercel.app` | ✅ Auto-detectado |
-| **Netlify** | `https://amazing-site.netlify.app` | ✅ Auto-detectado |
-| **GitHub Pages** | `https://usuario.github.io/repo` | ✅ Auto-detectado |
-| **Firebase** | `https://projeto.web.app` | ✅ Auto-detectado |
-| **Surge.sh** | `https://meusite.surge.sh` | ✅ Auto-detectado |
-| **Heroku** | `https://app.herokuapp.com` | ✅ Auto-detectado |
-| **Render** | `https://app.render.com` | ✅ Auto-detectado |
-| **Railway** | `https://app.railway.app` | ✅ Auto-detectado |
-| **Cloudflare Pages** | `https://projeto.pages.dev` | ✅ Auto-detectado |
-| **AWS Amplify** | `https://app.amplify.aws` | ✅ Auto-detectado |
-| **Domínio Próprio** | `https://meusite.com.br` | ✅ Auto-detectado |
-| **Qualquer Outro** | `https://qualquer-url.com` | ✅ Funciona! |
-
-### 🎯 Como Configurar (Universal)
-
-**1. Abra:** `src/styles/globals.css`
-
-**2. Configure sua URL:**
-```css
-:root {
-  /* 🌐 CONFIGURE APENAS ESTA URL - Funciona com QUALQUER provedor! */
-  --portfolio-url: "https://SEU-LINK-AQUI.com";
-  --portfolio-status: "deployed"; /* deployed | staging | development | offline */
-  
-  /* 🎨 Personalizações Opcionais */
-  --portfolio-title: "Seu Portfólio Incrível";
-  --portfolio-button-text: "🌐 Ver Meu Trabalho";
-  --portfolio-show-provider: "true"; /* mostra o provedor detectado */
-}
-```
-
-### 📋 Exemplos Práticos para Diferentes Provedores
-
-```css
-/* ✅ VERCEL */
-:root {
-  --portfolio-url: "https://portfolio-gabriel-2025.vercel.app";
-  --portfolio-status: "deployed";
-}
-
-/* ✅ NETLIFY */
-:root {
-  --portfolio-url: "https://stunning-portfolio-123abc.netlify.app";
-  --portfolio-status: "deployed";
-}
-
-/* ✅ GITHUB PAGES */
-:root {
-  --portfolio-url: "https://gabriel-malheiros.github.io/DesenvolvimentoWeb-2025-2";
-  --portfolio-status: "deployed";
-}
-
-/* ✅ DOMÍNIO PRÓPRIO */
-:root {
-  --portfolio-url: "https://gabrielmalheiros.dev";
-  --portfolio-status: "deployed";
-}
-
-/* ✅ FIREBASE HOSTING */
-:root {
-  --portfolio-url: "https://meu-portfolio-2025.web.app";
-  --portfolio-status: "deployed";
-}
-
-/* ⏳ DEPLOY EM ANDAMENTO (Qualquer provedor) */
-:root {
-  --portfolio-url: "https://meu-novo-site.vercel.app";
-  --portfolio-status: "staging"; /* Mostra como "em desenvolvimento" */
-}
-```
-
-### 🔧 Estados Universais do Sistema
-
-| Status | Quando Usar | Comportamento |
-|--------|-------------|---------------|
-| `"deployed"` | Site no ar e funcionando | ✅ Link clicável, abre nova aba |
-| `"staging"` | Deploy de teste/preview | 🔄 Visual diferenciado, clicável |
-| `"development"` | Apenas desenvolvimento | 🔧 Não clicável, apenas info |
-| `"offline"` | Site temporariamente fora | 📴 Não clicável, aviso visual |
-
-### 🎯 Como Usar o Componente Universal
-
-```jsx
-// Botão padrão - detecta provedor automaticamente
-<PortfolioLink />
-
-// Badge pequeno com provedor
-<PortfolioLink variant="badge" size="sm" />
-
-// Card completo com informações
-<PortfolioLink variant="card" />
-
-// Com debug info (desenvolvimento)
-<PortfolioLink showDebugInfo={true} />
-```
-
-### ✨ Funcionalidades Universais
-
-- **🔍 Auto-detecção:** Identifica automaticamente Vercel, Netlify, GitHub Pages, Firebase, Surge, Heroku, Render, Railway, Cloudflare, AWS, domínios próprios, etc.
-- **🌐 Validação Universal:** Verifica se URL é válida independente do provedor
-- **⚡ Tempo Real:** Mudanças no CSS refletem instantaneamente
-- **🛡️ Proteção:** Impede cliques em URLs inválidas ou offline
-- **🎨 Visual Adaptativo:** Interface muda baseada no provedor detectado
-- **📱 Responsivo:** Funciona perfeitamente em mobile e desktop
+> Este link é **configurado via CSS** e funciona independentemente da plataforma de hospedagem escolhida. Ideal para projetos acadêmicos que precisam de flexibilidade de deploy.
 
 ## 🚀 Deploy Universal - Qualquer Plataforma
 
