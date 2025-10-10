@@ -67,6 +67,37 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
   const [viewport, setViewport] = useState<'mobile' | 'tablet' | 'desktop'>('desktop');
   const [forceUpdate, setForceUpdate] = useState(0); // Para forçar re-render quando tema muda
 
+  // 🎨 Função para calcular contraste inteligente
+  const calculateContrastColor = (backgroundColor: string): string => {
+    // Função para converter hex para RGB
+    const hexToRgb = (hex: string) => {
+      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      } : null;
+    };
+
+    // Calcular luminosidade
+    const getLuminance = (r: number, g: number, b: number) => {
+      const [rs, gs, bs] = [r, g, b].map(c => {
+        c = c / 255;
+        return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+      });
+      return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+    };
+
+    const rgb = hexToRgb(backgroundColor);
+    if (!rgb) return '#ffffff';
+
+    const luminance = getLuminance(rgb.r, rgb.g, rgb.b);
+    
+    // Se luminosidade for baixa (fundo escuro), usar texto branco
+    // Se luminosidade for alta (fundo claro), usar texto escuro
+    return luminance > 0.5 ? '#1f2937' : '#ffffff';
+  };
+
   // 🎨 Hook para monitorar mudanças de tema
   useEffect(() => {
     const handleThemeChange = (event: CustomEvent) => {
@@ -236,12 +267,12 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
         brandPrimary: '#374151',
         brandSecondary: '#4b5563',
         brandAccent: '#6b7280',
-        bgPrimary: '#fafafa',
-        bgSecondary: '#f5f5f5', 
-        bgTertiary: '#eeeeee',
-        textPrimary: '#1f2937',
-        textSecondary: '#374151',
-        textMuted: '#6b7280',
+        bgPrimary: '#2d3748', // 🎯 FUNDO MAIS ESCURO para melhor contraste
+        bgSecondary: '#374151', 
+        bgTertiary: '#4a5568',
+        textPrimary: '#ffffff', // 🎯 TEXTO BRANCO para contraste perfeito
+        textSecondary: '#e2e8f0',
+        textMuted: '#cbd5e0',
         description: 'Cinza elegante com alto contraste'
       },
       colorful: {
@@ -712,6 +743,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
                   color: '#2563eb',
                   bgColor: '#ffffff',
                   textColor: '#0f172a',
+                  contrastText: '#0f172a',
                   desc: 'Azul vibrante' 
                 },
                 { 
@@ -720,14 +752,16 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
                   color: '#1e3a8a',
                   bgColor: '#f9fafb', 
                   textColor: '#111827',
+                  contrastText: '#111827',
                   desc: 'Azul tradicional' 
                 },
                 { 
                   id: 'minimal', 
                   name: 'Minimalista', 
                   color: '#374151',
-                  bgColor: '#fafafa',
-                  textColor: '#1f2937', 
+                  bgColor: '#2d3748', // 🎯 Fundo escuro para melhor contraste
+                  textColor: '#ffffff', // 🎯 Texto branco sempre
+                  contrastText: '#ffffff', // FORÇAR BRANCO para contraste
                   desc: 'Cinza elegante' 
                 },
                 { 
@@ -736,6 +770,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
                   color: '#7c3aed',
                   bgColor: '#faf5ff',
                   textColor: '#581c87',
+                  contrastText: '#581c87',
                   desc: 'Roxo criativo' 
                 }
               ].map((theme) => (
@@ -749,7 +784,11 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
                       : "border-gray-200 hover:border-gray-400"
                   )}
                   style={{
-                    backgroundColor: config.theme === theme.id ? theme.bgColor : '#ffffff'
+                    backgroundColor: config.theme === theme.id ? theme.bgColor : '#ffffff',
+                    // 🎯 Sistema de Contraste Inteligente Automático
+                    color: config.theme === theme.id 
+                      ? calculateContrastColor(theme.bgColor)
+                      : '#374151'
                   }}
                 >
                   {/* Círculo colorido com gradiente para mostrar o tema */}
@@ -771,13 +810,21 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
                   
                   <div 
                     className="font-medium text-sm mb-1"
-                    style={{ color: config.theme === theme.id ? theme.textColor : '#374151' }}
+                    style={{ 
+                      color: config.theme === theme.id 
+                        ? calculateContrastColor(theme.bgColor)
+                        : '#374151'
+                    }}
                   >
                     {theme.name}
                   </div>
                   <div 
                     className="text-xs mt-1"
-                    style={{ color: config.theme === theme.id ? theme.textColor + '80' : '#6b7280' }}
+                    style={{ 
+                      color: config.theme === theme.id 
+                        ? calculateContrastColor(theme.bgColor) + '90'
+                        : '#6b7280'
+                    }}
                   >
                     {theme.desc}
                   </div>
@@ -789,7 +836,12 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
                         className="w-2 h-2 rounded-full"
                         style={{ backgroundColor: theme.color }}
                       />
-                      <span className="ml-1 text-xs font-medium" style={{ color: theme.color }}>
+                      <span 
+                        className="ml-1 text-xs font-medium" 
+                        style={{ 
+                          color: calculateContrastColor(theme.bgColor)
+                        }}
+                      >
                         Ativo
                       </span>
                     </div>
