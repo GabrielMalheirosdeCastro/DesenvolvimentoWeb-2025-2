@@ -1,15 +1,14 @@
 User-agent: *
 Allow: /
 
-# Sitemap para localhost
-Sitemap: http://localhost:3000/sitemap.xml
+# Sitemap para GitHub Pages
+Sitemap: https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2/sitemap.xml
 
-# Permitir indexação completa do site local
+# Permitir indexação completa
 Crawl-delay: 1
 
-# Permitir todos os recursos estáticos
+# Permitir todos os recursos
 Allow: /assets/
-Allow: /src/
 Allow: /*.css
 Allow: /*.js
 Allow: /*.json
