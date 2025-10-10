@@ -13,12 +13,15 @@ import {
   Github,
   Home,
   Rocket,
-  Image
+  Image,
+  User
 } from 'lucide-react';
 import { cn } from './utils';
 import PortfolioLinkUniversal from './portfolio-link-universal';
 import SpaceGallery from '../gallery/SpaceGallery';
 import { spaceFleetImages } from '../../data/spaceFleetData';
+import PersonalData from './personal-data';
+import MorseChallenge from './morse-challenge';
 
 interface UniversalConfig {
   url: string;
@@ -258,6 +261,16 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
           </div>
         </div>
 
+        {/* Seção de Dados Pessoais */}
+        <div className="max-w-6xl mx-auto mt-16">
+          <PersonalData className="mb-12" />
+        </div>
+
+        {/* Seção do Desafio Morse */}
+        <div className="max-w-4xl mx-auto mt-12">
+          <MorseChallenge />
+        </div>
+
         {/* Navegação entre telas */}
         {showMultipleScreens && (
           <div className="flex justify-center gap-4 mt-12 flex-wrap">
@@ -429,7 +442,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
         <div className="max-w-7xl mx-auto mt-8">
           <SpaceGallery 
             images={spaceFleetImages}
-            allowMultipleSelection={true}
+            allowMultipleSelection={false}
             onSelectionChange={(selectedIds, selectedImages) => {
               console.log('Seleção alterada:', { selectedIds, selectedImages });
             }}

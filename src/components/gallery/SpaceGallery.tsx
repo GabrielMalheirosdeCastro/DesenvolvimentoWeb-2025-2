@@ -1,5 +1,6 @@
 import React from 'react';
 import { useImageSelection, SelectableImage } from '../../hooks/useImageSelection';
+import ImageFullscreenViewer from '../ui/image-fullscreen-viewer';
 
 interface SpaceGalleryProps {
   images: SelectableImage[];
@@ -23,6 +24,10 @@ export function SpaceGallery({
     hasSelection
   } = useImageSelection(allowMultipleSelection);
 
+  // Estados para visualizador em tela inteira
+  const [fullscreenImage, setFullscreenImage] = React.useState<string | null>(null);
+  const [isFullscreenOpen, setIsFullscreenOpen] = React.useState(false);
+
   // Calcular dados das imagens selecionadas
   const selectedImageData = React.useMemo(() => {
     return images.filter(img => selectedImages.includes(img.id));
@@ -33,8 +38,24 @@ export function SpaceGallery({
     onSelectionChange?.(selectedImages, selectedImageData);
   }, [selectedImages, selectedImageData, onSelectionChange]);
 
-  const handleImageClick = (imageId: string) => {
-    toggleImage(imageId);
+  const handleImageClick = (imageId: string, event: React.MouseEvent) => {
+    // Se Ctrl/Cmd estiver pressionado ou for modo de seleção múltipla, alternar seleção
+    if (event.ctrlKey || event.metaKey || allowMultipleSelection) {
+      toggleImage(imageId);
+    } else {
+      // Caso contrário, abrir em tela inteira
+      setFullscreenImage(imageId);
+      setIsFullscreenOpen(true);
+    }
+  };
+
+  const handleFullscreenClose = () => {
+    setIsFullscreenOpen(false);
+    setFullscreenImage(null);
+  };
+
+  const handleFullscreenImageChange = (imageId: string) => {
+    setFullscreenImage(imageId);
   };
 
   const handleSelectAll = () => {
@@ -85,6 +106,9 @@ export function SpaceGallery({
               {images.length} {images.length === 1 ? 'nave disponível' : 'naves disponíveis'}
             </span>
           )}
+          <div className="text-xs text-gray-500 mt-1">
+            💡 Clique para {allowMultipleSelection ? 'selecionar • Ctrl+Clique para' : ''} visualizar em tela inteira
+          </div>
         </div>
       </div>
 
@@ -101,13 +125,13 @@ export function SpaceGallery({
                 : 'border-gray-200 hover:border-indigo-300'
               }
             `}
-            onClick={() => handleImageClick(image.id)}
+            onClick={(e) => handleImageClick(image.id, e)}
             role="button"
             tabIndex={0}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
-                handleImageClick(image.id);
+                handleImageClick(image.id, e as any);
               }
             }}
             aria-pressed={isSelected(image.id)}
@@ -153,6 +177,15 @@ export function SpaceGallery({
           </div>
         ))}
       </div>
+
+      {/* Visualizador em tela inteira */}
+      <ImageFullscreenViewer
+        images={images}
+        currentImageId={fullscreenImage}
+        isOpen={isFullscreenOpen}
+        onClose={handleFullscreenClose}
+        onImageChange={handleFullscreenImageChange}
+      />
     </div>
   );
 }

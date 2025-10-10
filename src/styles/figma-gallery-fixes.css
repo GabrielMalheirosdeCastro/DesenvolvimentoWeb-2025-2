@@ -99,6 +99,30 @@
   will-change: transform, box-shadow !important;
 }
 
+/* 📝 TÍTULOS E TEXTOS MUITO MAIS VISÍVEIS POR PADRÃO */
+.space-gallery-figma h3 {
+  font-size: 1.25rem !important; /* 20px */
+  font-weight: 700 !important;
+  color: #1e40af !important;
+  margin-bottom: 8px !important;
+  line-height: 1.3 !important;
+  letter-spacing: 0.2px !important;
+}
+
+.space-gallery-figma p {
+  font-size: 0.95rem !important; /* 15.2px */
+  color: #4b5563 !important;
+  line-height: 1.5 !important;
+  font-weight: 500 !important;
+}
+
+/* 📦 CONTAINER DE CONTEÚDO MELHORADO */
+.space-gallery-figma .p-4 {
+  padding: 18px !important;
+  background: rgba(248, 250, 252, 0.8) !important;
+  border-top: 1px solid rgba(59, 130, 246, 0.1) !important;
+}
+
 /* Hover ULTRA CHAMATIVO */
 .space-gallery-figma [role="button"]:hover {
   transform: translateY(-6px) scale(1.03) !important;
@@ -108,7 +132,7 @@
   border-color: #3b82f6 !important;
 }
 
-/* Seleção SUPER VISÍVEL */
+/* Seleção SUPER VISÍVEL com AUMENTO DE TAMANHO */
 .space-gallery-figma [aria-pressed="true"] {
   border-color: #3b82f6 !important;
   background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%) !important;
@@ -116,6 +140,65 @@
     0 0 0 4px rgba(59, 130, 246, 0.3),
     0 12px 32px rgba(59, 130, 246, 0.25) !important;
   animation: selectPulseStrong 0.4s ease-out !important;
+  
+  /* 🔥 AUMENTO SIGNIFICATIVO quando selecionada */
+  transform: scale(1.1) translateY(-8px) !important;
+  z-index: 50 !important;
+  position: relative !important;
+}
+
+/* 🎨 IMAGEM AMPLIADA quando selecionada */
+.space-gallery-figma [aria-pressed="true"] img {
+  transform: scale(1.15) !important;
+  transition: transform 500ms cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  filter: brightness(1.1) contrast(1.05) !important;
+}
+
+/* 📝 TEXTOS ULTRA VISÍVEIS quando selecionada */
+.space-gallery-figma [aria-pressed="true"] .p-4 {
+  background: rgba(59, 130, 246, 0.05) !important;
+  border-top: 3px solid #3b82f6 !important;
+  padding: 20px !important;
+}
+
+.space-gallery-figma [aria-pressed="true"] h3 {
+  font-size: 1.375rem !important; /* 22px */
+  font-weight: 800 !important;
+  color: #1e40af !important;
+  margin-bottom: 12px !important;
+  text-shadow: 0 2px 4px rgba(59, 130, 246, 0.1) !important;
+  letter-spacing: 0.3px !important;
+}
+
+.space-gallery-figma [aria-pressed="true"] p {
+  font-size: 1rem !important; /* 16px */
+  color: #374151 !important;
+  line-height: 1.6 !important;
+  font-weight: 500 !important;
+  display: block !important;
+  overflow: visible !important;
+  -webkit-line-clamp: unset !important;
+  line-clamp: unset !important;
+  -webkit-box-orient: unset !important;
+  white-space: normal !important;
+}
+
+/* 🏷️ CATEGORIA ULTRA DESTACADA quando selecionada */
+.space-gallery-figma [aria-pressed="true"] .bg-black {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+  color: white !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  padding: 8px 16px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
+  animation: categoryPulse 0.6s ease-out !important;
+}
+
+@keyframes categoryPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
 }
 
 @keyframes selectPulseStrong {
@@ -160,6 +243,30 @@
   font-size: 13px !important;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6) !important;
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  padding: 6px 12px !important;
+  letter-spacing: 0.3px !important;
+}
+
+/* 🏷️ CATEGORIAS AINDA MAIS VISÍVEIS */
+.space-gallery-figma .bg-black {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(31, 41, 55, 0.9) 100%) !important;
+  backdrop-filter: blur(16px) !important;
+  border-radius: 12px !important;
+  font-weight: 800 !important;
+  font-size: 14px !important;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8) !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  padding: 8px 14px !important;
+  letter-spacing: 0.4px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+  transition: all 300ms ease !important;
+}
+
+/* 💫 EFEITOS DE HOVER NAS CATEGORIAS */
+.space-gallery-figma [role="button"]:hover .bg-black {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+  transform: scale(1.05) !important;
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4) !important;
 }
 
 /* Botão voltar SUPER CHAMATIVO */
