@@ -1,0 +1,289 @@
+/* 🔧 CORREÇÕES ESPECÍFICAS PARA GALERIA FIGMA SUPER VISÍVEL */
+
+/* 🎯 Navegação entre telas OTIMIZADA */
+.interface-screen-navigation {
+  position: relative !important;
+  z-index: 100 !important;
+  background: rgba(255, 255, 255, 0.98) !important;
+  backdrop-filter: blur(12px) !important;
+  border-radius: 20px !important;
+  padding: 24px !important;
+  margin: 32px auto !important;
+  max-width: 800px !important;
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.08),
+    0 4px 12px rgba(0, 0, 0, 0.04) !important;
+  border: 2px solid rgba(59, 130, 246, 0.15) !important;
+}
+
+.interface-screen-navigation button {
+  /* Botões EXTREMAMENTE visíveis */
+  min-height: 60px !important;
+  padding: 16px 28px !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  border-radius: 14px !important;
+  border: 3px solid transparent !important;
+  transition: all 400ms cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  
+  /* Garantir máxima visibilidade */
+  position: relative !important;
+  overflow: hidden !important;
+  text-transform: none !important;
+  letter-spacing: 0.5px !important;
+}
+
+.interface-screen-navigation button:hover {
+  transform: translateY(-3px) scale(1.05) !important;
+  box-shadow: 0 12px 28px rgba(59, 130, 246, 0.25) !important;
+}
+
+.interface-screen-navigation button.active,
+.interface-screen-navigation button[data-active="true"] {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+  color: white !important;
+  border-color: #1d4ed8 !important;
+  box-shadow: 
+    0 6px 20px rgba(59, 130, 246, 0.4),
+    inset 0 2px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+.interface-screen-navigation button:not(.active):not([data-active="true"]) {
+  background: white !important;
+  color: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+}
+
+/* 🎨 Container da galeria Figma SUPER MELHORADO */
+.space-gallery-figma {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+  border-radius: 24px !important;
+  padding: 40px !important;
+  margin: 24px auto !important;
+  box-shadow: 
+    0 24px 48px rgba(59, 130, 246, 0.15),
+    0 8px 16px rgba(59, 130, 246, 0.08) !important;
+  border: 3px solid rgba(59, 130, 246, 0.1) !important;
+  
+  /* Garantir visibilidade e funcionalidade */
+  min-height: 700px !important;
+  position: relative !important;
+  z-index: 20 !important;
+  overflow: visible !important;
+}
+
+/* 🎯 Grid da galeria ULTRA otimizado */
+.space-gallery-figma .grid {
+  display: grid !important;
+  gap: 28px !important;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+  padding: 16px 0 !important;
+}
+
+/* 🎨 Cards da galeria IMPOSSÍVEIS DE NÃO VER */
+.space-gallery-figma [role="button"] {
+  background: white !important;
+  border-radius: 20px !important;
+  overflow: hidden !important;
+  transition: all 400ms cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  border: 4px solid #e2e8f0 !important;
+  box-shadow: 
+    0 6px 20px rgba(0, 0, 0, 0.06),
+    0 2px 8px rgba(0, 0, 0, 0.04) !important;
+  cursor: pointer !important;
+  position: relative !important;
+  
+  /* Garantir máxima interatividade */
+  user-select: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  will-change: transform, box-shadow !important;
+}
+
+/* Hover ULTRA CHAMATIVO */
+.space-gallery-figma [role="button"]:hover {
+  transform: translateY(-6px) scale(1.03) !important;
+  box-shadow: 
+    0 16px 40px rgba(59, 130, 246, 0.2),
+    0 6px 16px rgba(59, 130, 246, 0.1) !important;
+  border-color: #3b82f6 !important;
+}
+
+/* Seleção SUPER VISÍVEL */
+.space-gallery-figma [aria-pressed="true"] {
+  border-color: #3b82f6 !important;
+  background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%) !important;
+  box-shadow: 
+    0 0 0 4px rgba(59, 130, 246, 0.3),
+    0 12px 32px rgba(59, 130, 246, 0.25) !important;
+  animation: selectPulseStrong 0.4s ease-out !important;
+}
+
+@keyframes selectPulseStrong {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Focus ULTRA VISÍVEL para acessibilidade */
+.space-gallery-figma [role="button"]:focus {
+  outline: 5px solid #fbbf24 !important;
+  outline-offset: 6px !important;
+  border-color: #3b82f6 !important;
+  z-index: 100 !important;
+}
+
+/* Aspect ratio otimizado */
+.space-gallery-figma .aspect-video {
+  aspect-ratio: 16 / 9 !important;
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 16px !important;
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%) !important;
+}
+
+/* Text clamp otimizado */
+.space-gallery-figma .line-clamp-2 {
+  overflow: hidden !important;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 2 !important;
+  line-clamp: 2 !important;
+  line-height: 1.5 !important;
+}
+
+/* Badges de categoria CHAMATIVAS */
+.space-gallery-figma .bg-black {
+  background: rgba(0, 0, 0, 0.85) !important;
+  backdrop-filter: blur(12px) !important;
+  border-radius: 10px !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Botão voltar SUPER CHAMATIVO */
+.figma-back-button {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+  color: white !important;
+  border: 4px solid #1d4ed8 !important;
+  border-radius: 20px !important;
+  padding: 20px 40px !important;
+  font-weight: 800 !important;
+  font-size: 18px !important;
+  box-shadow: 
+    0 10px 30px rgba(59, 130, 246, 0.3),
+    inset 0 2px 0 rgba(255, 255, 255, 0.2) !important;
+  transition: all 400ms cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  text-transform: none !important;
+  letter-spacing: 0.5px !important;
+}
+
+.figma-back-button:hover {
+  transform: translateY(-4px) scale(1.08) !important;
+  box-shadow: 
+    0 15px 40px rgba(59, 130, 246, 0.4),
+    inset 0 3px 0 rgba(255, 255, 255, 0.3) !important;
+}
+
+/* 📱 Responsividade PERFEITA */
+@media (max-width: 767px) {
+  .space-gallery-figma {
+    padding: 20px !important;
+    border-radius: 16px !important;
+    margin: 16px !important;
+  }
+  
+  .space-gallery-figma .grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  
+  .interface-screen-navigation {
+    padding: 16px !important;
+    margin: 16px !important;
+  }
+  
+  .interface-screen-navigation button {
+    min-height: 52px !important;
+    padding: 12px 20px !important;
+    font-size: 15px !important;
+  }
+  
+  .figma-back-button {
+    padding: 16px 32px !important;
+    font-size: 16px !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .space-gallery-figma .grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 24px !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .space-gallery-figma .grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 28px !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .space-gallery-figma .grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 32px !important;
+  }
+}
+
+/* 🎯 Estados da interface para debugging */
+.interface-universal[data-current-screen="figma"] {
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%) !important;
+}
+
+.interface-universal[data-current-screen="main"] {
+  background: linear-gradient(135deg, #fefefe 0%, #f8fafc 100%) !important;
+}
+
+/* 🔧 Classes utilitárias extras que podem estar faltando */
+.interface-main {
+  min-height: 100vh !important;
+  padding: 32px 16px !important;
+}
+
+.layout-container {
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  padding: 0 16px !important;
+}
+
+.interface-header {
+  text-align: center !important;
+  margin-bottom: 48px !important;
+}
+
+.interface-title {
+  font-size: 3rem !important;
+  font-weight: 800 !important;
+  color: #1e40af !important;
+  margin-bottom: 16px !important;
+  background: linear-gradient(135deg, #1e40af, #3b82f6) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+.interface-subtitle {
+  font-size: 1.25rem !important;
+  color: #64748b !important;
+  margin-bottom: 8px !important;
+}
+
+.interface-description {
+  font-size: 1rem !important;
+  color: #94a3b8 !important;
+  max-width: 600px !important;
+  margin: 0 auto !important;
+  line-height: 1.6 !important;
+}

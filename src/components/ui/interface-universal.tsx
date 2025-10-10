@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 import { cn } from './utils';
 import PortfolioLinkUniversal from './portfolio-link-universal';
-import { SpaceGallery } from '../gallery/SpaceGallery';
+import SpaceGallery from '../gallery/SpaceGallery';
 import { spaceFleetImages } from '../../data/spaceFleetData';
 
 interface UniversalConfig {
@@ -33,13 +33,32 @@ interface InterfaceUniversalProps {
   className?: string;
   showMultipleScreens?: boolean;
   enableThemeSelector?: boolean;
+  initialScreen?: 'main' | 'gallery' | 'figma' | 'settings';
 }
 
 export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
   className,
   showMultipleScreens = true,
-  enableThemeSelector = true
+  enableThemeSelector = true,
+  initialScreen
 }) => {
+  // 🔍 Detectar tela inicial baseada em parâmetros URL ou prop
+  const getInitialScreen = (): 'main' | 'gallery' | 'figma' | 'settings' => {
+    // Se foi passada uma tela inicial, usar ela
+    if (initialScreen) return initialScreen;
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const screenParam = urlParams.get('screen');
+    const hashParam = window.location.hash.replace('#', '');
+    
+    // Verificar parâmetros da URL
+    if (screenParam === 'figma' || hashParam === 'figma') return 'figma';
+    if (screenParam === 'gallery' || hashParam === 'gallery') return 'gallery';
+    if (screenParam === 'settings' || hashParam === 'settings') return 'settings';
+    
+    return 'main';
+  };
+
   const [config, setConfig] = useState<UniversalConfig>({
     url: 'https://meu-portfolio-universal.com',
     title: 'Interface Gráfica Pessoal - Sistema Universal',
@@ -49,7 +68,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
     theme: 'modern'
   });
 
-  const [currentScreen, setCurrentScreen] = useState<'main' | 'gallery' | 'figma' | 'settings'>('main');
+  const [currentScreen, setCurrentScreen] = useState<'main' | 'gallery' | 'figma' | 'settings'>(getInitialScreen());
   const [viewport, setViewport] = useState<'mobile' | 'tablet' | 'desktop'>('desktop');
 
   // 🔄 Extrair configuração do CSS com detecção automática
@@ -136,6 +155,14 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
       setViewport(detectViewport());
     };
 
+    // Listener para navegação do portfólio
+    const handlePortfolioNavigate = (event: CustomEvent) => {
+      const { screen } = event.detail;
+      if (screen) {
+        setCurrentScreen(screen);
+      }
+    };
+
     updateConfig();
 
     const observer = new MutationObserver(updateConfig);
@@ -145,10 +172,12 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
     });
 
     window.addEventListener('resize', updateConfig);
+    window.addEventListener('portfolio-navigate', handlePortfolioNavigate as EventListener);
 
     return () => {
       observer.disconnect();
       window.removeEventListener('resize', updateConfig);
+      window.removeEventListener('portfolio-navigate', handlePortfolioNavigate as EventListener);
     };
   }, [extractCSSConfig, detectViewport]);
 
@@ -157,6 +186,19 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
     document.documentElement.setAttribute('data-theme', newTheme);
     document.documentElement.style.setProperty('--portfolio-theme', `"${newTheme}"`);
     setConfig(prev => ({ ...prev, theme: newTheme }));
+  }, []);
+
+  // 🎯 Navegar entre telas com atualização de URL
+  const navigateToScreen = useCallback((screen: 'main' | 'gallery' | 'figma' | 'settings') => {
+    setCurrentScreen(screen);
+    
+    // Atualizar URL baseado na tela
+    let newUrl = `${window.location.origin}${window.location.pathname}`;
+    if (screen !== 'main') {
+      newUrl += `?screen=${screen}`;
+    }
+    
+    window.history.pushState({ screen }, '', newUrl);
   }, []);
 
   // 🎯 Abrir link do portfólio
@@ -247,7 +289,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
         {showMultipleScreens && (
           <div className="flex justify-center gap-4 mt-12 flex-wrap">
             <button
-              onClick={() => setCurrentScreen('main')}
+              onClick={() => navigateToScreen('main')}
               className={cn(
                 "px-6 py-3 rounded-lg font-medium transition-all flex items-center gap-2",
                 currentScreen === 'main' 
@@ -259,7 +301,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
               Tela Principal
             </button>
             <button
-              onClick={() => setCurrentScreen('gallery')}
+              onClick={() => navigateToScreen('gallery')}
               className={cn(
                 "px-6 py-3 rounded-lg font-medium transition-all flex items-center gap-2",
                 currentScreen === 'gallery' 
@@ -271,7 +313,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
               Projetos
             </button>
             <button
-              onClick={() => setCurrentScreen('figma')}
+              onClick={() => navigateToScreen('figma')}
               className={cn(
                 "px-6 py-3 rounded-lg font-medium transition-all flex items-center gap-2",
                 currentScreen === 'figma' 
@@ -284,7 +326,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
             </button>
             {enableThemeSelector && (
               <button
-                onClick={() => setCurrentScreen('settings')}
+                onClick={() => navigateToScreen('settings')}
                 className={cn(
                   "px-6 py-3 rounded-lg font-medium transition-all flex items-center gap-2",
                   currentScreen === 'settings' 
@@ -481,7 +523,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
 
         <div className="text-center mt-12">
           <button
-            onClick={() => setCurrentScreen('main')}
+            onClick={() => navigateToScreen('main')}
             className="px-8 py-4 bg-brand-primary text-white rounded-lg font-medium hover:bg-brand-secondary transition-all flex items-center gap-2 mx-auto"
           >
             <Home size={20} />

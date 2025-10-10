@@ -202,9 +202,35 @@ export const PortfolioLinkUniversal: React.FC<PortfolioLinkUniversalProps> = ({
       return;
     }
 
+    const hostname = window.location.hostname;
+    
+    // 🎯 Se estamos no localhost ou no próprio site, vai para a galeria Figma
+    if (hostname === 'localhost' || 
+        hostname === '127.0.0.1' || 
+        hostname.includes('gabrielmalheirosdeciastro.github.io') ||
+        hostname.includes('github.io')) {
+      
+      console.log('🎨 Redirecionando para Galeria Figma');
+      
+      // Atualizar URL sem recarregar a página
+      const newUrl = `${window.location.origin}${window.location.pathname}?screen=figma`;
+      window.history.pushState({ screen: 'figma' }, '', newUrl);
+      
+      // Disparar evento personalizado para que o componente pai atualize
+      window.dispatchEvent(new CustomEvent('portfolio-navigate', { 
+        detail: { screen: 'figma' } 
+      }));
+      
+      return;
+    }
+
+    // 🌐 Caso contrário, abre em nova aba
     try {
       console.log(`🔗 Abrindo: ${config.url}`);
-      window.open(config.url, '_blank', 'noopener,noreferrer');
+      const finalUrl = config.url.includes('?') 
+        ? `${config.url}&screen=figma`
+        : `${config.url}?screen=figma`;
+      window.open(finalUrl, '_blank', 'noopener,noreferrer');
     } catch (error) {
       console.error('❌ Erro ao abrir link:', error);
       // Fallback: tentar novamente com método nativo
