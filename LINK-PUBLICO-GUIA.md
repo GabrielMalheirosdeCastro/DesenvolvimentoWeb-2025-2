@@ -85,23 +85,7 @@ https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2/?screen=fi
 
 ---
 
-## 🔍 **COMO APARECER NO GOOGLE**
-
-### **SEO Automático (já implementado):**
-- ✅ **Meta tags** otimizadas
-- ✅ **Título descritivo**
-- ✅ **Open Graph** para redes sociais
-- ✅ **Estrutura HTML** semântica
-
-### **Para indexar no Google:**
-1. 🔗 Acesse [Google Search Console](https://search.google.com/search-console)
-2. ➕ Adicione sua propriedade
-3. 🔗 Cole seu link: `https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2/`
-4. ✅ Solicite indexação
-
----
-
-## 🛠️ **SOLUÇÃO DE PROBLEMAS**
+## ️ **SOLUÇÃO DE PROBLEMAS**
 
 ### **� Se o site não carregar:**
 

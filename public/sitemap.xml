@@ -1,58 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Projeto Acadêmico FAESA - Interface Gráfica Pessoal -->
+<!-- Gabriel Malheiros de Castro - Desenvolvimento Web 2025-2 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Página principal -->
+  
+  <!-- Página principal do projeto acadêmico -->
   <url>
-    <loc>https://gabrielmalheiros.com.br/</loc>
-    <lastmod>2025-01-10</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://desenvolvimento-web-2025-2.vercel.app/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   
-  <!-- Versão com www -->
-  <url>
-    <loc>https://www.gabrielmalheiros.com.br/</loc>
-    <lastmod>2025-01-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  
-  <!-- Galeria Figma -->
-  <url>
-    <loc>https://gabrielmalheiros.com.br/?screen=figma</loc>
-    <lastmod>2025-01-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <!-- Galeria de projetos -->
-  <url>
-    <loc>https://gabrielmalheiros.com.br/?screen=gallery</loc>
-    <lastmod>2025-01-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <!-- Configurações -->
-  <url>
-    <loc>https://gabrielmalheiros.com.br/?screen=settings</loc>
-    <lastmod>2025-01-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <!-- Subdomínio portfolio -->
-  <url>
-    <loc>https://portfolio.gabrielmalheiros.com.br/</loc>
-    <lastmod>2025-01-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <!-- Subdomínio projetos -->
-  <url>
-    <loc>https://projetos.gabrielmalheiros.com.br/</loc>
-    <lastmod>2025-01-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
 </urlset>

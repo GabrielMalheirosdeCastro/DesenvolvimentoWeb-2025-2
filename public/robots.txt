@@ -1,17 +1,8 @@
+# Projeto Acadêmico FAESA - Interface Gráfica Pessoal
+# Gabriel Malheiros de Castro - Desenvolvimento Web 2025-2
+
 User-agent: *
 Allow: /
 
-# Sitemap para GitHub Pages
-Sitemap: https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2/sitemap.xml
-
-# Permitir indexação completa
-Crawl-delay: 1
-
-# Permitir todos os recursos
-Allow: /assets/
-Allow: /*.css
-Allow: /*.js
-Allow: /*.json
-Allow: /*.png
-Allow: /*.jpg
-Allow: /*.svg
+# Básico para desenvolvimento
+Crawl-delay: 5
