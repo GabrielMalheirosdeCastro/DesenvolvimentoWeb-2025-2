@@ -1,0 +1,189 @@
+📱 WIREFRAME MOBILE - Interface Gráfica Pessoal Gabriel Malheiros
+
+===========================================
+|            HEADER MOBILE               |
+===========================================
+|  🌐 Interface Gráfica Pessoal         |
+|     Gabriel Malheiros                  |
+|     FAESA 2025-2                       |
+|                                        |
+|         [☰ MENU HAMBÚRGUER]            |
+===========================================
+
+===========================================
+|             SEÇÃO HERO                 |
+===========================================
+|                                        |
+|    🎯 Portfólio Digital                |
+|                                        |
+|  Competências em React,                |
+|  TypeScript e CSS3                     |
+|                                        |
+|     [🚀 SITE PRINCIPAL]                |
+|     [📁 GITHUB PAGES]                  |
+|                                        |
+===========================================
+
+===========================================
+|          GALERIA VERTICAL              |
+===========================================
+|  🌌 Assets do Figma                    |
+|                                        |
+|  +----------------------------+        |
+|  |       IMAGEM ESPAÇO        |        |
+|  |         FULL WIDTH         |        |
+|  |      (Toque p/ ampliar)    |        |
+|  +----------------------------+        |
+|  | Descrição da imagem        |        |
+|  +----------------------------+        |
+|                                        |
+|  +----------------------------+        |
+|  |       IMAGEM NAVE          |        |
+|  |         FULL WIDTH         |        |
+|  |      (Toque p/ ampliar)    |        |
+|  +----------------------------+        |
+|  | Descrição da imagem        |        |
+|  +----------------------------+        |
+|                                        |
+|  +----------------------------+        |
+|  |      IMAGEM PLANETA        |        |
+|  |         FULL WIDTH         |        |
+|  |      (Toque p/ ampliar)    |        |
+|  +----------------------------+        |
+|  | Descrição da imagem        |        |
+|  +----------------------------+        |
+|                                        |
+|  +----------------------------+        |
+|  |      IMAGEM ESTRELA        |        |
+|  |         FULL WIDTH         |        |
+|  |      (Toque p/ ampliar)    |        |
+|  +----------------------------+        |
+|  | Descrição da imagem        |        |
+|  +----------------------------+        |
+===========================================
+
+===========================================
+|            DADOS PESSOAIS              |
+===========================================
+|  👤 Sobre o Desenvolvedor              |
+|                                        |
+|  +------------------------------+     |
+|  | 📧 CONTATO                   |     |
+|  | Gabriel Malheiros            |     |
+|  | gabriel@estudante.faesa.br   |     |
+|  | Vitória - ES                 |     |
+|  +------------------------------+     |
+|                                        |
+|  +------------------------------+     |
+|  | 🎓 FORMAÇÃO                  |     |
+|  | FAESA - Faculdades           |     |
+|  | Desenvolvimento Web          |     |
+|  | 2025-2                       |     |
+|  +------------------------------+     |
+|                                        |
+|  +------------------------------+     |
+|  | 💼 HABILIDADES               |     |
+|  | • React + TypeScript         |     |
+|  | • CSS3 Avançado             |     |
+|  | • Design Responsivo         |     |
+|  | • Vite + Build Tools        |     |
+|  +------------------------------+     |
+|                                        |
+|  +------------------------------+     |
+|  | 🔗 LINKS                     |     |
+|  | [📂 GitHub Portfolio]        |     |
+|  | [🚀 Vercel Deploy]           |     |
+|  | [💼 LinkedIn]                |     |
+|  +------------------------------+     |
+===========================================
+
+===========================================
+|           DESAFIO MORSE                |
+===========================================
+|  📡 Teste de Conhecimento              |
+|                                        |
+|  +------------------------------+     |
+|  | Palavra: [* * * _ _ * _]      |     |
+|  |                              |     |
+|  | Resposta:                    |     |
+|  | [_________________]          |     |
+|  |                              |     |
+|  | [🔊 ÁUDIO] [✅ OK] [🔄 NOVO] |     |
+|  +------------------------------+     |
+|                                        |
+|  Score: 0/5 | Dica: Tech Web          |
+===========================================
+
+===========================================
+|            SELETOR DE TEMAS            |
+===========================================
+|  🎨 Personalizar Interface             |
+|                                        |
+|  +------------------------------+     |
+|  |        [🔵 Moderno]          |     |
+|  +------------------------------+     |
+|  |        [🟦 Clássico]         |     |
+|  +------------------------------+     |
+|  |       [⚫ Minimalista]       |     |
+|  +------------------------------+     |
+|  |        [🟣 Colorido]         |     |
+|  +------------------------------+     |
+|                                        |
+|  Detecção: Mobile | Touch Screen      |
+===========================================
+
+===========================================
+|         NAVEGAÇÃO FIXA INFERIOR        |
+===========================================
+| [🏠]     [🖼️]     [📊]     [⚙️]      |
+| Início   Figma   Projetos  Config     |
+===========================================
+
+===========================================
+|               FOOTER                   |
+===========================================
+|  © 2025 Gabriel Malheiros              |
+|  FAESA Desenvolvimento Web             |
+|  desenvolvimento-web-2025-2.vercel.app |
+===========================================
+
+ESPECIFICAÇÕES TÉCNICAS MOBILE:
+- Resolução mínima: 320px
+- Layout em coluna única
+- Navegação por toque (touch)
+- Imagens empilhadas verticalmente
+- Botões grandes (mín. 44px altura)
+- Texto legível (mín. 16px)
+- Navegação inferior sempre visível
+
+FUNCIONALIDADES INTERATIVAS MOBILE:
+- Toque nas imagens para fullscreen
+- Swipe entre imagens da galeria
+- Menu hambúrguer para navegação
+- Teclado virtual otimizado
+- Orientação portrait/landscape
+- Zoom de imagens com pinch
+
+OTIMIZAÇÕES MOBILE:
+- Carregamento progressivo
+- Imagens otimizadas (WebP)
+- Cache local inteligente
+- Offline fallbacks
+- Bateria e dados otimizados
+- Performance 60fps em dispositivos antigos
+
+GESTOS TOUCH:
+- Toque simples: Seleção
+- Toque longo: Menu contextual  
+- Swipe horizontal: Navegar imagens
+- Swipe vertical: Scroll página
+- Pinch: Zoom de imagens
+- Double tap: Fullscreen
+
+ACESSIBILIDADE MOBILE:
+- Contraste alto automático
+- Texto escalável (até 200%)
+- Navegação por voz
+- Screen reader compatível
+- Modo alto contraste
+- Redutor de movimento

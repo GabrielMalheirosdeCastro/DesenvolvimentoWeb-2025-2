@@ -1,0 +1,124 @@
+🖥️ WIREFRAME DESKTOP - Interface Gráfica Pessoal Gabriel Malheiros
+
+===================================================================
+|                    HEADER - LOGO & NAVEGAÇÃO                    |
+===================================================================
+|  🌐 Interface Gráfica Pessoal - Gabriel Malheiros             |
+|     Estudante FAESA | Desenvolvimento Web 2025-2              |
+|                                                                 |
+|     [HOME]  [GALERIA]  [PROJETOS]  [CONTATO]                  |
+===================================================================
+
+===================================================================
+|                         SEÇÃO HERO                             |
+===================================================================
+|                                                                 |
+|           🎯 Bem-vindo ao Meu Portfólio Digital               |
+|                                                                 |
+|    Demonstração de competências em React, TypeScript e CSS3    |
+|              Sistema de temas dinâmico profissional            |
+|                                                                 |
+|              [🚀 ACESSAR SITE PRINCIPAL]                       |
+|              [📁 VISUALIZAR NO GITHUB]                         |
+|                                                                 |
+===================================================================
+
+===================================================================
+|                    SEÇÃO GALERIA ESPACIAL                      |
+===================================================================
+|  🌌 Galeria de Assets Convertidos do Figma                     |
+|                                                                 |
+|  +-------------+ +-------------+ +-------------+ +-------------+|
+|  |   IMAGEM    | |   IMAGEM    | |   IMAGEM    | |   IMAGEM    ||
+|  |   ESPAÇO    | |   NAVE      | |   PLANETA   | |   ESTRELA   ||
+|  |    #1       | |    #2       | |    #3       | |    #4       ||
+|  +-------------+ +-------------+ +-------------+ +-------------+|
+|  | Clique para | | Visualizar  | | Tela cheia  | | Interativo  ||
+|  | ampliar     | | detalhes    | | disponível  | | e responsivo||
+|  +-------------+ +-------------+ +-------------+ +-------------+|
+===================================================================
+
+===================================================================
+|                      DADOS PESSOAIS                            |
+===================================================================
+|  👤 Sobre o Desenvolvedor                                      |
+|                                                                 |
+|  +-------------------------+ +-------------------------+         |
+|  | 📧 CONTATO             | | 🎓 FORMAÇÃO           |         |
+|  | Gabriel Malheiros      | | FAESA - Faculdades    |         |
+|  | gabriel@estudante...   | | Desenvolvimento Web   |         |
+|  | Vitória - ES          | | 2025-2                |         |
+|  +-------------------------+ +-------------------------+         |
+|                                                                 |
+|  +-------------------------+ +-------------------------+         |
+|  | 💼 HABILIDADES         | | 🔗 LINKS ÚTEIS       |         |
+|  | • React + TypeScript   | | GitHub Portfolio      |         |
+|  | • CSS3 Avançado       | | Vercel Deploy        |         |
+|  | • Design Responsivo   | | LinkedIn Profile      |         |
+|  | • Vite + Build Tools  | | FAESA Project        |         |
+|  +-------------------------+ +-------------------------+         |
+===================================================================
+
+===================================================================
+|                      DESAFIO INTERATIVO                        |
+===================================================================
+|  📡 Código Morse - Teste Seus Conhecimentos                    |
+|                                                                 |
+|  +-------------------------------------------------------+      |
+|  |  Palavra Secreta: [* * * _ _ * _]                    |      |
+|  |                                                      |      |
+|  |  Digite sua resposta: [________________]             |      |
+|  |                                                      |      |
+|  |  [🔊 OUVIR ÁUDIO]  [✅ VERIFICAR]  [🔄 NOVO]       |      |
+|  +-------------------------------------------------------+      |
+|                                                                 |
+|  Score: 0/5  |  Dica: Uma tecnologia web moderna              |
+===================================================================
+
+===================================================================
+|                    CONFIGURAÇÕES & TEMAS                       |
+===================================================================
+|  🎨 Personalização da Interface                                |
+|                                                                 |
+|  Escolha seu tema preferido:                                   |
+|                                                                 |
+|  [🔵 Moderno]  [🟦 Clássico]  [⚫ Minimalista]  [🟣 Colorido] |
+|                                                                 |
+|  Detecção automática: Viewport Desktop | Windows + Chrome      |
+===================================================================
+
+===================================================================
+|                    NAVEGAÇÃO FIXA INFERIOR                     |
+===================================================================
+|    [🏠 INÍCIO]   [🖼️ FIGMA]   [📊 PROJETOS]   [⚙️ CONFIG]    |
+===================================================================
+
+===================================================================
+|                           FOOTER                               |
+===================================================================
+|  © 2025 Gabriel Malheiros de Castro | FAESA Desenvolvimento Web |
+|  🌐 desenvolvimento-web-2025-2.vercel.app | 📧 Contato        |
+===================================================================
+
+ESPECIFICAÇÕES TÉCNICAS DESKTOP:
+- Resolução mínima: 1024px
+- Layout em grid responsivo
+- Navegação horizontal no header
+- Cards em grid 4 colunas na galeria
+- Sidebar opcional para navegação secundária
+- Hover effects e animações suaves
+- Sistema de temas com preview instantâneo
+
+FUNCIONALIDADES INTERATIVAS DESKTOP:
+- Clique nas imagens da galeria para visualização fullscreen
+- Seleção múltipla de imagens com Ctrl+Click
+- Sistema de busca e filtros na galeria
+- Desafio morse com controles de áudio
+- Troca de temas em tempo real
+- Navegação por teclado (Tab, Enter, Esc)
+
+PERFORMANCE DESKTOP:
+- Carregamento < 2s em conexão rápida
+- Animações 60fps
+- Lazy loading de imagens
+- Cache inteligente de assets

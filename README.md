@@ -1,19 +1,28 @@
 # 🌐 Interface Gráfica Pessoal - Gabriel Malheiros
 
-## 🔗 **SITE PRINCIPAL NO VERCEL:**
+**Projeto acadêmico de portfólio pessoal desenvolvido para a disciplina de Desenvolvimento Web na FAESA (2025-2)**
 
-# **[🚀 DESENVOLVIMENTO-WEB-2025-2.VERCEL.APP](https://desenvolvimento-web-2025-2.vercel.app)**
+## � **Descrição do Projeto**
 
----
+Site pessoal profissional que demonstra competências em desenvolvimento web moderno, incluindo HTML5 semântico, CSS3 avançado, design responsivo e arquitetura de componentes React. O projeto converte assets do Figma para código funcional, implementando um sistema de galeria interativa, dados pessoais dinâmicos e desafio de código morse.
 
-## 📱 **URLs Oficiais (Copie e Cole):**
+## 💻 **Tecnologias Utilizadas**
 
-### 🚀 **Site Principal (Vercel - ONLINE):**
+- **HTML5** - Estrutura semântica moderna
+- **CSS3** - Sistema de design personalizado, Grid/Flexbox, animações
+- **JavaScript (TypeScript)** - React 18, hooks, gerenciamento de estado
+- **React** - Componentes funcionais, Context API, sistema de temas
+- **Vite** - Build tool moderno e otimizado
+- **Vercel** - Deploy automático e CDN global
+
+## 🚀 **Como Visualizar o Projeto**
+
+### 📱 **Acesso Online (Recomendado):**
 ```
 https://desenvolvimento-web-2025-2.vercel.app
 ```
 
-### 📁 **Backup GitHub Pages:**
+### 📁 **GitHub Pages (Backup):**
 ```
 https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2
 ```
@@ -23,18 +32,29 @@ https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2
 http://localhost:3000
 ```
 
----
+## 🏠 **Como Executar Localmente**
 
-## 🏠 **Desenvolvimento Local:**
 ```bash
-# Instalar dependências
+# 1. Clonar o repositório
+git clone https://github.com/GabrielMalheirosdeCastro/DesenvolvimentoWeb-2025-2.git
+
+# 2. Navegar para o diretório
+cd DesenvolvimentoWeb-2025-2
+
+# 3. Instalar dependências
 npm install
 
-# Executar localmente
+# 4. Executar servidor de desenvolvimento
 npm run dev
 
-# Acessar em: http://localhost:3000
+# 5. Abrir navegador em: http://localhost:3000
 ```
+
+## 🌐 **Link para GitHub Pages**
+
+**Site publicado:** https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2/
+
+*Nota: O deploy principal está no Vercel para melhor performance, mas o GitHub Pages serve como backup funcional.*
 
 ---
 
@@ -105,13 +125,40 @@ Site pessoal profissional de Gabriel Malheiros de Castro, desenvolvido para a di
 
 ---
 
-## ‍💻 **Desenvolvido por:**
-**Gabriel Malheiros de Castro**  
-FAESA - Faculdades Integradas Espírito-Santenses  
-Desenvolvimento Web 2025-2
+## � **Autor e Contato**
 
-**🚀 Site ONLINE:** https://desenvolvimento-web-2025-2.vercel.app  
-**📧 Email:** gabriel.malheiros@estudante.faesa.br
+**Gabriel Malheiros de Castro**  
+📚 FAESA - Faculdades Integradas Espírito-Santenses  
+🎓 Desenvolvimento Web 2025-2  
+� Email: gabriel.malheiros@estudante.faesa.br  
+🌐 Portfólio: https://desenvolvimento-web-2025-2.vercel.app  
+� GitHub: [@GabrielMalheirosdeCastro](https://github.com/GabrielMalheirosdeCastro)
+
+---
+
+## 📚 **Estrutura do Projeto**
+
+```
+portfolio-web/
+├── wireframes/
+│   ├── wireframe-desktop.txt
+│   ├── wireframe-mobile.txt
+│   └── link-figma.txt
+├── index.html
+├── style.css
+├── assets/
+│   ├── images/
+│   │   ├── dd18ec3bf35c35cc0e58cd61147ab94926272d3c.png
+│   │   ├── 681ee2140d8a3dfb23dc398515d8e9539fb56338.png
+│   │   ├── 55baa85e8789d73e4e943d1a375f594add7941b3.png
+│   │   └── df4077de47a65010f0db03b4bde4b1720336789e.png
+│   └── fonts/
+├── src/
+│   ├── components/
+│   ├── styles/
+│   └── assets/
+└── README.md
+```
 
 ---
 

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Projeto Acadêmico FAESA - Interface Gráfica Pessoal -->
+<!-- Gabriel Malheiros de Castro - Desenvolvimento Web 2025-2 -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <!-- Página principal do projeto acadêmico -->
+  <url>
+    <loc>https://desenvolvimento-web-2025-2.vercel.app/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+</urlset>
