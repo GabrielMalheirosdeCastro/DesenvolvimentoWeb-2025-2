@@ -1,26 +1,25 @@
 /* 🌐 Interface Gráfica Pessoal - Gabriel Malheiros FAESA 2025-2 */
 
-/* === IMPORTAÇÃO DOS ESTILOS PRINCIPAIS === */
-@import url('./src/styles/globals.css');
-@import url('./src/index.css');
+/* === ESTILOS HTML ESTÁTICO (Compatibilidade Garantida) === */
+/* IMPORTANTE: Este CSS funciona independentemente do React */
 
-/* === SISTEMA DE DESIGN PERSONALIZADO === */
+/* === SISTEMA DE DESIGN HTML ESTÁTICO === */
 :root {
-  /* 🎨 Cores da Marca */
-  --brand-primary: #2563eb;
-  --brand-secondary: #1d4ed8;
-  --brand-accent: #3b82f6;
-  --brand-success: #10b981;
-  --brand-warning: #f59e0b;
-  --brand-error: #ef4444;
+  /* 🎨 Cores da Marca - Namespace HTML para evitar conflito */
+  --html-brand-primary: #2563eb;
+  --html-brand-secondary: #1d4ed8;
+  --html-brand-accent: #3b82f6;
+  --html-brand-success: #10b981;
+  --html-brand-warning: #f59e0b;
+  --html-brand-error: #ef4444;
   
-  /* 🌈 Palette de Cores */
-  --color-bg-primary: #ffffff;
-  --color-bg-secondary: #f8fafc;
-  --color-bg-tertiary: #f1f5f9;
-  --color-text-primary: #0f172a;
-  --color-text-secondary: #475569;
-  --color-text-muted: #94a3b8;
+  /* 🌈 Palette de Cores HTML */
+  --html-color-bg-primary: #ffffff;
+  --html-color-bg-secondary: #f8fafc;
+  --html-color-bg-tertiary: #f1f5f9;
+  --html-color-text-primary: #0f172a;
+  --html-color-text-secondary: #475569;
+  --html-color-text-muted: #94a3b8;
   
   /* 📐 Sistema de Espaçamento */
   --space-1: 0.25rem;   /* 4px */
@@ -68,11 +67,12 @@ html {
   font-size: 16px;
 }
 
-body {
+/* === ESTILOS APENAS PARA PÁGINAS HTML ESTÁTICAS === */
+.html-page body {
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   line-height: 1.6;
-  color: var(--color-text-primary);
-  background: linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+  color: var(--html-color-text-primary);
+  background: linear-gradient(135deg, var(--html-color-bg-primary) 0%, var(--html-color-bg-secondary) 100%);
   min-height: 100vh;
 }
 
@@ -98,26 +98,26 @@ header {
   margin-bottom: var(--space-12);
 }
 
-.site-title {
+.html-page .site-title {
   font-size: var(--font-size-4xl);
   font-weight: 800;
-  color: var(--brand-primary);
+  color: var(--html-brand-primary);
   margin-bottom: var(--space-4);
-  background: linear-gradient(135deg, var(--brand-primary), var(--brand-accent));
+  background: linear-gradient(135deg, var(--html-brand-primary), var(--html-brand-accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.site-subtitle {
+.html-page .site-subtitle {
   font-size: var(--font-size-xl);
-  color: var(--color-text-secondary);
+  color: var(--html-color-text-secondary);
   margin-bottom: var(--space-3);
 }
 
-.site-description {
+.html-page .site-description {
   font-size: var(--font-size-base);
-  color: var(--color-text-muted);
+  color: var(--html-color-text-muted);
   max-width: 600px;
   margin: 0 auto var(--space-8);
 }
@@ -171,15 +171,15 @@ section {
   text-align: center;
 }
 
-/* === GALERIA === */
-.gallery {
+/* === GALERIA HTML ESTÁTICA (Namespace isolado) === */
+.html-page .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: var(--space-6);
   margin-top: var(--space-8);
 }
 
-.gallery-item {
+.html-page .gallery-item {
   background: white;
   border-radius: 16px;
   overflow: hidden;
@@ -188,16 +188,29 @@ section {
   cursor: pointer;
 }
 
-.gallery-item:hover {
+.html-page .gallery-item:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-xl);
 }
 
-.gallery-image {
+.html-page .gallery-image {
   width: 100%;
   height: 200px;
   object-fit: cover;
-  background: linear-gradient(135deg, var(--color-bg-secondary), var(--color-bg-tertiary));
+  background: linear-gradient(135deg, var(--html-color-bg-secondary), var(--html-color-bg-tertiary));
+}
+
+/* === COMPATIBILIDADE DE IMAGENS HTML === */
+.html-page img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.html-page img:hover {
+  transform: scale(1.02);
 }
 
 .gallery-content {

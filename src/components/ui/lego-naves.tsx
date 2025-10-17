@@ -3,30 +3,35 @@ import { cn } from '../ui/utils';
 
 interface LegoNavesProps {
   className?: string;
+  enableHtmlImages?: boolean; // Nova prop para ativar suporte a imagens HTML
 }
 
-const LegoNaves: React.FC<LegoNavesProps> = ({ className }) => {
+const LegoNaves: React.FC<LegoNavesProps> = ({ className, enableHtmlImages = false }) => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   
-  // Dados das mini naves LEGO - usando placeholders seguros por enquanto
+  // Dados das mini naves LEGO - compatível com HTML e React
   const legoNaves = [
     {
       id: 1,
       name: "Mini Nave Espacial 1",
       description: "Primeira mini nave construída com peças LEGO",
-      alt: "Mini nave espacial LEGO com detalhes em vermelho e cinza"
+      alt: "Mini nave espacial LEGO com detalhes em vermelho e cinza",
+      // Suporte a imagens HTML tradicionais
+      htmlImageSrc: enableHtmlImages ? "./src/assets/lego-naves/mini-nave-1.jpg" : null
     },
     {
       id: 2,
       name: "Mini Nave Espacial 2", 
       description: "Segunda mini nave com design diferenciado",
-      alt: "Mini nave espacial LEGO com estrutura complexa e múltiplas cores"
+      alt: "Mini nave espacial LEGO com estrutura complexa e múltiplas cores",
+      htmlImageSrc: enableHtmlImages ? "./src/assets/lego-naves/mini-nave-2.jpg" : null
     },
     {
       id: 3,
       name: "Mini Nave Espacial 3",
       description: "Terceira mini nave do conjunto", 
-      alt: "Mini nave espacial LEGO com configuração única de peças"
+      alt: "Mini nave espacial LEGO com configuração única de peças",
+      htmlImageSrc: enableHtmlImages ? "./src/assets/lego-naves/mini-nave-3.jpg" : null
     }
   ];
 
@@ -48,46 +53,53 @@ const LegoNaves: React.FC<LegoNavesProps> = ({ className }) => {
             className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow duration-300"
           >
             <div className="aspect-square bg-gray-100 flex items-center justify-center relative overflow-hidden">
-              {/* Placeholder com preview das imagens LEGO */}
-              <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center relative">
-                {/* Simulação visual das naves LEGO baseada nas imagens fornecidas */}
-                <div className="text-center p-4 relative">
-                  {index === 0 && (
-                    <div className="relative">
-                      {/* Nave 1: Estrutura com detalhes vermelhos e cinza */}
-                      <div className="text-6xl mb-2 filter drop-shadow-lg">�</div>
-                      <div className="text-sm font-medium text-gray-700">Nave com Detalhes Vermelhos</div>
-                      <div className="text-xs text-gray-500 mt-1">Estrutura básica com cockpit</div>
-                      <div className="absolute -top-2 -right-2 w-3 h-3 bg-red-500 rounded-full"></div>
+              {/* Renderização condicional: Imagem HTML ou Placeholder React */}
+              {nave.htmlImageSrc ? (
+                // Modo HTML: Imagem tradicional com <img>
+                <img 
+                  src={nave.htmlImageSrc}
+                  alt={nave.alt}
+                  className="w-full h-full object-cover html-compatible-image"
+                  loading="lazy"
+                />
+              ) : (
+                // Modo React: Placeholder visual interativo
+                <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center relative">
+                  <div className="text-center p-4 relative">
+                    {index === 0 && (
+                      <div className="relative">
+                        <div className="text-6xl mb-2 filter drop-shadow-lg">🚀</div>
+                        <div className="text-sm font-medium text-gray-700">Nave com Detalhes Vermelhos</div>
+                        <div className="text-xs text-gray-500 mt-1">Estrutura básica com cockpit</div>
+                        <div className="absolute -top-2 -right-2 w-3 h-3 bg-red-500 rounded-full"></div>
+                      </div>
+                    )}
+                    
+                    {index === 1 && (
+                      <div className="relative">
+                        <div className="text-6xl mb-2 filter drop-shadow-lg">🚁</div>
+                        <div className="text-sm font-medium text-gray-700">Nave com Estrutura Complexa</div>
+                        <div className="text-xs text-gray-500 mt-1">Múltiplas cores e detalhes</div>
+                        <div className="absolute -top-2 -left-2 w-3 h-3 bg-blue-500 rounded-full"></div>
+                        <div className="absolute -bottom-2 -right-2 w-3 h-3 bg-yellow-500 rounded-full"></div>
+                      </div>
+                    )}
+                    
+                    {index === 2 && (
+                      <div className="relative">
+                        <div className="text-6xl mb-2 filter drop-shadow-lg">✈️</div>
+                        <div className="text-sm font-medium text-gray-700">Nave Configuração Única</div>
+                        <div className="text-xs text-gray-500 mt-1">Design diferenciado</div>
+                        <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-green-500 rounded-full"></div>
+                      </div>
+                    )}
+                    
+                    <div className="mt-2 text-xs text-blue-600 font-medium">
+                      📷 Preview - Clique para carregar imagem real
                     </div>
-                  )}
-                  
-                  {index === 1 && (
-                    <div className="relative">
-                      {/* Nave 2: Estrutura mais complexa */}
-                      <div className="text-6xl mb-2 filter drop-shadow-lg">🚁</div>
-                      <div className="text-sm font-medium text-gray-700">Nave com Estrutura Complexa</div>
-                      <div className="text-xs text-gray-500 mt-1">Múltiplas cores e detalhes</div>
-                      <div className="absolute -top-2 -left-2 w-3 h-3 bg-blue-500 rounded-full"></div>
-                      <div className="absolute -bottom-2 -right-2 w-3 h-3 bg-yellow-500 rounded-full"></div>
-                    </div>
-                  )}
-                  
-                  {index === 2 && (
-                    <div className="relative">
-                      {/* Nave 3: Configuração única */}
-                      <div className="text-6xl mb-2 filter drop-shadow-lg">✈️</div>
-                      <div className="text-sm font-medium text-gray-700">Nave Configuração Única</div>
-                      <div className="text-xs text-gray-500 mt-1">Design diferenciado</div>
-                      <div className="absolute -top-2 center w-3 h-3 bg-green-500 rounded-full"></div>
-                    </div>
-                  )}
-                  
-                  <div className="mt-2 text-xs text-blue-600 font-medium">
-                    📷 Preview - Clique para carregar imagem real
                   </div>
                 </div>
-              </div>
+              )}
               
               {/* Botão para expandir */}
               <button 
@@ -173,6 +185,21 @@ const LegoNaves: React.FC<LegoNavesProps> = ({ className }) => {
           </div>
         </div>
       </div>
+
+      {/* Seção de compatibilidade HTML */}
+      {enableHtmlImages && (
+        <div className="mt-8 p-4 bg-green-50 border border-green-200 rounded-lg">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-green-600">✅</span>
+            <span className="font-semibold text-green-800">Modo HTML Ativado</span>
+          </div>
+          <p className="text-sm text-green-700">
+            As imagens estão sendo carregadas usando comandos HTML tradicionais (&lt;img&gt;). 
+            Certifique-se de que os arquivos de imagem estejam na pasta correta: 
+            <code className="bg-white px-2 py-1 rounded font-mono text-xs">src/assets/lego-naves/</code>
+          </p>
+        </div>
+      )}
     </div>
   );
 };

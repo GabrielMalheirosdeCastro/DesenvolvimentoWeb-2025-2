@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="html-page">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Naves LEGO - Exemplo HTML Puro</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos específicos para esta página */
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .demo-title {
+            text-align: center;
+            color: var(--html-brand-primary);
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .demo-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--html-brand-accent);
+        }
+        
+        .demo-card h3 {
+            color: var(--html-brand-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .demo-card img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+        
+        .back-to-react {
+            display: inline-block;
+            background: var(--html-brand-primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 2rem 0;
+            transition: transform 0.2s ease;
+        }
+        
+        .back-to-react:hover {
+            transform: translateY(-2px);
+            background: var(--html-brand-secondary);
+        }
+        
+        .instructions {
+            background: #f0f9ff;
+            border: 2px solid #0ea5e9;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .instructions h4 {
+            color: #0c4a6e;
+            margin-bottom: 1rem;
+        }
+        
+        .instructions code {
+            background: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #dc2626;
+        }
+    </style>
+</head>
+<body class="html-page">
+    <div class="demo-container">
+        <h1 class="demo-title">
+            🚀 Mini Naves LEGO - HTML Puro
+        </h1>
+        
+        <div class="instructions">
+            <h4>📋 Como usar imagens HTML neste projeto:</h4>
+            <p><strong>1.</strong> Salve suas 3 imagens das mini naves LEGO na pasta: 
+               <code>src/assets/lego-naves/</code></p>
+            <p><strong>2.</strong> Nomeie os arquivos como: 
+               <code>mini-nave-1.jpg</code>, 
+               <code>mini-nave-2.jpg</code>, 
+               <code>mini-nave-3.jpg</code></p>
+            <p><strong>3.</strong> As imagens aparecerão automaticamente abaixo (ou mostrarão placeholders se não encontradas)</p>
+        </div>
+        
+        <div class="demo-grid">
+            <!-- Nave 1 -->
+            <div class="demo-card">
+                <h3>🚀 Mini Nave Espacial 1</h3>
+                <img src="./src/assets/lego-naves/mini-nave-1.jpg" 
+                     alt="Mini nave espacial LEGO com detalhes em vermelho e cinza"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div style="display:none; text-align:center; padding:2rem; background:#f3f4f6; border-radius:8px; color:#6b7280;">
+                    📷 Imagem não encontrada<br>
+                    <small>Coloque <strong>mini-nave-1.jpg</strong> em <code>src/assets/lego-naves/</code></small>
+                </div>
+                <p><strong>Descrição:</strong> Primeira mini nave construída com peças LEGO</p>
+                <p><strong>Detalhes:</strong> Estrutura básica com cockpit, detalhes em vermelho e cinza</p>
+            </div>
+            
+            <!-- Nave 2 -->
+            <div class="demo-card">
+                <h3>🚁 Mini Nave Espacial 2</h3>
+                <img src="./src/assets/lego-naves/mini-nave-2.jpg" 
+                     alt="Mini nave espacial LEGO com estrutura complexa e múltiplas cores"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div style="display:none; text-align:center; padding:2rem; background:#f3f4f6; border-radius:8px; color:#6b7280;">
+                    📷 Imagem não encontrada<br>
+                    <small>Coloque <strong>mini-nave-2.jpg</strong> em <code>src/assets/lego-naves/</code></small>
+                </div>
+                <p><strong>Descrição:</strong> Segunda mini nave com design diferenciado</p>
+                <p><strong>Detalhes:</strong> Estrutura mais complexa, múltiplas cores e detalhes</p>
+            </div>
+            
+            <!-- Nave 3 -->
+            <div class="demo-card">
+                <h3>✈️ Mini Nave Espacial 3</h3>
+                <img src="./src/assets/lego-naves/mini-nave-3.jpg" 
+                     alt="Mini nave espacial LEGO com configuração única de peças"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div style="display:none; text-align:center; padding:2rem; background:#f3f4f6; border-radius:8px; color:#6b7280;">
+                    📷 Imagem não encontrada<br>
+                    <small>Coloque <strong>mini-nave-3.jpg</strong> em <code>src/assets/lego-naves/</code></small>
+                </div>
+                <p><strong>Descrição:</strong> Terceira mini nave do conjunto</p>
+                <p><strong>Detalhes:</strong> Configuração única de peças, design diferenciado</p>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="/" class="back-to-react">
+                ⬅️ Voltar para o React App
+            </a>
+        </div>
+        
+        <div class="instructions" style="margin-top: 2rem;">
+            <h4>✅ Funcionalidades Demonstradas:</h4>
+            <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Imagens HTML tradicionais</strong> com <code>&lt;img&gt;</code></li>
+                <li><strong>Fallback automático</strong> quando imagens não são encontradas</li>
+                <li><strong>CSS isolado</strong> usando namespace <code>.html-page</code></li>
+                <li><strong>Compatibilidade total</strong> com comandos HTML puros</li>
+                <li><strong>Sem conflito</strong> com o sistema React</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
