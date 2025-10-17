@@ -6,8 +6,9 @@
   "description": "Site Pessoal - Interface Gráfica - Gabriel Malheiros - FAESA 2025-2",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "build-with-types": "tsc && vite build",
+    "build": "vite build && npm run copy-html-pages",
+    "build-with-types": "tsc && vite build && npm run copy-html-pages",
+    "copy-html-pages": "cp galeria-lego-naves.html dist/galeria-lego-naves.html 2>/dev/null || copy galeria-lego-naves.html dist\\galeria-lego-naves.html",
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },

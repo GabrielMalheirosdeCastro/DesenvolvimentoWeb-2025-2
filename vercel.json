@@ -4,6 +4,10 @@
   "framework": "vite",
   "rewrites": [
     {
+      "source": "/galeria-lego-naves.html",
+      "destination": "/galeria-lego-naves.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
