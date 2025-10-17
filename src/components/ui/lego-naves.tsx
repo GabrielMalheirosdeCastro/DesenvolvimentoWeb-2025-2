@@ -95,7 +95,7 @@ const LegoNaves: React.FC<LegoNavesProps> = ({ className, enableHtmlImages = fal
                     )}
                     
                     <div className="mt-2 text-xs text-blue-600 font-medium">
-                      📷 Preview - Clique para carregar imagem real
+                      📷 Preview - <a href="galeria-lego-naves.html" className="underline hover:text-blue-800">Ver Galeria HTML</a>
                     </div>
                   </div>
                 </div>
@@ -183,6 +183,23 @@ const LegoNaves: React.FC<LegoNavesProps> = ({ className, enableHtmlImages = fal
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Links para Galeria HTML */}
+      <div className="mt-8 text-center">
+        <div className="inline-flex flex-col sm:flex-row gap-3 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl border border-blue-200">
+          <a 
+            href="galeria-lego-naves.html" 
+            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold shadow-lg hover:shadow-xl"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            🖼️ Ver Galeria HTML Completa
+          </a>
+          <span className="text-sm text-gray-600 self-center">
+            Página HTML separada com imagens em alta qualidade
+          </span>
         </div>
       </div>
 

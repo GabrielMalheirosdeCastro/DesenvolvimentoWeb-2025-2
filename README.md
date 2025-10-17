@@ -74,12 +74,32 @@ Site pessoal profissional de Gabriel Malheiros de Castro, desenvolvido para a di
 
 ### 🖼️ **Funcionalidades:**
 - 📷 Galeria interativa de imagens espaciais
-- 👤 Seção de dados pessoais completa
+- � **Galeria LEGO Naves** - Página HTML isolada com mini naves LEGO
+- �👤 Seção de dados pessoais completa
 - 📡 Desafio de código morse com áudio
 - 🎨 Sistema de temas dinâmico profissional
 - 📱 Design 100% responsivo
 - **🚀 Deploy automático via Git**
 - **🌐 Acessível globalmente**
+
+### 🚀 **Nova Funcionalidade: Galeria LEGO Naves**
+
+**Página Especial:** `galeria-lego-naves.html`
+
+Uma galeria HTML completamente isolada que exibe as mini naves LEGO construídas pelo desenvolvedor, implementada com:
+
+- ✅ **HTML5 Puro** - Sem conflitos com o sistema React
+- ✅ **CSS isolado** com namespace `--html-` para evitar interferências
+- ✅ **Fallback inteligente** - Placeholders visuais caso as imagens não sejam adicionadas
+- ✅ **Design responsivo** - Grid adaptativo de 1 a 3 colunas
+- ✅ **Interatividade** - Clique nas imagens para ampliar
+- ✅ **SEO otimizado** - Meta tags e estrutura semântica
+- ✅ **Performance** - Loading lazy e otimizações de imagem
+
+**Como acessar:**
+1. Adicione as 3 imagens das mini naves em `src/assets/lego-naves/`
+2. Acesse `https://desenvolvimento-web-2025-2.vercel.app/galeria-lego-naves.html`
+3. Ou clique no botão "Ver Galeria HTML" no componente React
 
 ---
 
