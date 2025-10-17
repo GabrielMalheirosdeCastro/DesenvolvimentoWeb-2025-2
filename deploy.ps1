@@ -27,11 +27,10 @@ git add .
 git commit -m "feat: atualização automática $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
 git push origin main
 
-# 5. Deploy para GitHub Pages
-Write-Host "🌐 Fazendo deploy para GitHub Pages..." -ForegroundColor Yellow
-npm run deploy:github
+# 5. Deploy automático via GitHub (Vercel detecta push)
+Write-Host "🚀 Enviando para Vercel via GitHub..." -ForegroundColor Yellow
 
 Write-Host "✅ Deploy concluído!" -ForegroundColor Green
 Write-Host "🌐 Site disponível em: https://desenvolvimento-web-2025-2.vercel.app" -ForegroundColor Cyan
-Write-Host "📁 GitHub Pages: https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2" -ForegroundColor Cyan
-Write-Host "⏰ Aguarde 2-10 minutos para propagação DNS" -ForegroundColor Yellow
+Write-Host "⚡ Deploy automático do Vercel ativo via GitHub" -ForegroundColor Cyan
+Write-Host "⏰ Aguarde 2-5 minutos para propagação global" -ForegroundColor Yellow
