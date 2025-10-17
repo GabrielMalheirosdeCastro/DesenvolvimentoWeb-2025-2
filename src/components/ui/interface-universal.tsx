@@ -15,6 +15,7 @@ import { spaceFleetImages } from '../../data/spaceFleetData';
 import PersonalData from './personal-data';
 import MorseChallenge from './morse-challenge';
 import FixedBottomNavigation from './fixed-bottom-navigation';
+import LegoNaves from './lego-naves';
 
 interface UniversalConfig {
   url: string;
@@ -633,6 +634,11 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Seção Mini Naves LEGO */}
+        <div className="max-w-7xl mx-auto mt-16">
+          <LegoNaves className="mb-8" />
         </div>
 
         {/* Seção de dados pessoais */}
