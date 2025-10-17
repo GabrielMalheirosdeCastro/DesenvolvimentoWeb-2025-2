@@ -45,8 +45,8 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 4173
   },
-  // 🚀 Configuração otimizada para Vercel (base padrão)
-  base: '/',
+  // 🚀 Configuração de base path inteligente
+  base: process.env.GITHUB_PAGES === 'true' ? '/DesenvolvimentoWeb-2025-2/' : '/',
   // 🔧 Otimizações específicas para Windows + Google
   define: {
     __PORTFOLIO_VERSION__: JSON.stringify('1.0.0'),
