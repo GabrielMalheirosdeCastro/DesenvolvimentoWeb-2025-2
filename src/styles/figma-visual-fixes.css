@@ -1,0 +1,192 @@
+/* 🔧 CORREÇÕES VISUAIS PARA IMAGENS DO FIGMA */
+
+/* 🎯 Garantir renderização perfeita das imagens */
+.figma-image-container {
+  /* Força renderização otimizada */
+  image-rendering: auto !important;
+  image-rendering: -webkit-optimize-contrast !important;
+  image-rendering: crisp-edges !important;
+  
+  /* Suavização para diferentes densidades */
+  backface-visibility: hidden !important;
+  transform: translateZ(0) !important;
+  will-change: transform !important;
+  
+  /* Prevenção de blur e problemas visuais */
+  filter: none !important;
+  backdrop-filter: none !important;
+  
+  /* Garantir contraste adequado */
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* 🖼️ Imagens do Figma - renderização otimizada */
+img[src*="assets/"],
+img[src*="figma"],
+.figma-image-safe img {
+  /* Renderização de alta qualidade */
+  image-rendering: auto !important;
+  image-rendering: -webkit-optimize-contrast !important;
+  
+  /* Suavização anti-aliasing */
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  
+  /* Otimizações para nitidez */
+  transform: translateZ(0) !important;
+  backface-visibility: hidden !important;
+  perspective: 1000px !important;
+  
+  /* Prevenção de problemas de contraste */
+  filter: none !important;
+  opacity: 1 !important;
+  
+  /* Transições suaves */
+  transition: opacity 0.3s ease, transform 0.3s ease !important;
+}
+
+/* 🌟 Container de galeria - otimizações visuais */
+.space-gallery-figma {
+  /* Renderização acelerada por hardware */
+  transform: translateZ(0) !important;
+  will-change: scroll-position !important;
+  
+  /* Prevenção de blur durante scroll */
+  backface-visibility: hidden !important;
+  perspective: 1000px !important;
+}
+
+/* 🔄 Estados de carregamento e erro melhorados */
+.figma-loading-placeholder {
+  background: linear-gradient(135deg, 
+    rgba(59, 130, 246, 0.1) 0%, 
+    rgba(147, 51, 234, 0.1) 100%) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 2px solid rgba(59, 130, 246, 0.2) !important;
+  animation: pulse-gentle 2s infinite !important;
+}
+
+.figma-error-placeholder {
+  background: linear-gradient(135deg, 
+    rgba(239, 68, 68, 0.1) 0%, 
+    rgba(249, 115, 22, 0.1) 100%) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 2px solid rgba(239, 68, 68, 0.2) !important;
+}
+
+/* 🎨 Animação suave para carregamento */
+@keyframes pulse-gentle {
+  0%, 100% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+}
+
+/* 📱 Responsividade específica para imagens */
+@media (max-width: 768px) {
+  img[src*="assets/"],
+  img[src*="figma"],
+  .figma-image-safe img {
+    /* Otimizações para mobile */
+    max-width: 100% !important;
+    height: auto !important;
+    object-fit: cover !important;
+    
+    /* Menor uso de GPU em mobile */
+    will-change: auto !important;
+  }
+}
+
+/* 🖥️ Otimizações para desktop */
+@media (min-width: 1024px) {
+  img[src*="assets/"],
+  img[src*="figma"],
+  .figma-image-safe img {
+    /* Renderização máxima qualidade */
+    image-rendering: -webkit-optimize-contrast !important;
+    image-rendering: crisp-edges !important;
+    
+    /* Aceleração por hardware completa */
+    transform: translate3d(0, 0, 0) !important;
+    will-change: transform !important;
+  }
+}
+
+/* 🎯 Hover effects seguros */
+.figma-image-safe:hover img {
+  transform: scale(1.02) !important;
+  filter: brightness(1.05) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* 🔧 Fix para problemas específicos do Figma */
+.figma-image-safe img[src*="figma"],
+.figma-image-safe img[src*="assets/"] {
+  /* Força reflow para imagens problemáticas */
+  position: relative !important;
+  z-index: 1 !important;
+  
+  /* Garante dimensões corretas */
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+
+/* 🚫 Prevenção de problemas conhecidos */
+.figma-image-safe {
+  /* Isola stacking context */
+  isolation: isolate !important;
+  
+  /* Força nova camada de compositing */
+  transform: translateZ(0) !important;
+  
+  /* Prevenção de bugs de renderização */
+  contain: layout style paint !important;
+}
+
+/* ✨ Efeitos visuais aprimorados */
+.figma-image-container:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.05) 50%, 
+    transparent 100%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.figma-image-container:hover:before {
+  opacity: 1;
+}
+
+/* 🔍 Debug mode (remover em produção) */
+.figma-debug .figma-image-safe {
+  outline: 2px dashed rgba(59, 130, 246, 0.5) !important;
+  outline-offset: 2px !important;
+}
+
+.figma-debug .figma-image-safe:after {
+  content: '🖼️ Figma Image';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  background: rgba(59, 130, 246, 0.9);
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  z-index: 1000;
+  pointer-events: none;
+}

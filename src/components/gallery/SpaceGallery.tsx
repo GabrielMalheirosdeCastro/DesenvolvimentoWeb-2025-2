@@ -1,6 +1,7 @@
 import React from 'react';
 import { SelectableImage } from '../../hooks/useImageSelection';
 import ImageFullscreenViewer from '../ui/image-fullscreen-viewer';
+import { FigmaImageSafe } from '../figma/FigmaImageSafeV2';
 
 interface SpaceGalleryProps {
   images: SelectableImage[];
@@ -69,12 +70,14 @@ export function SpaceGallery({
           >
             {/* Container da imagem */}
             <div className="relative aspect-video bg-gradient-to-br from-indigo-900 to-purple-900">
-              <img
+              <FigmaImageSafe
                 src={image.src}
                 alt={image.alt}
                 className="w-full h-full object-cover"
-                draggable={false}
-                loading="lazy"
+                enableRetry={true}
+                maxRetries={3}
+                onLoad={() => console.log(`✅ Imagem carregada: ${image.title}`)}
+                onError={() => console.warn(`❌ Erro ao carregar: ${image.title}`)}
               />
 
               {/* Badge da categoria */}
