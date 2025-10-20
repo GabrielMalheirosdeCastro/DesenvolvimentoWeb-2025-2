@@ -1,6 +1,5 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useCallback, useEffect } from 'react';
 import { cn } from '../ui/utils';
-import { useFigmaImage } from '../../hooks/useFigmaImage';
 
 interface FigmaImageSafeProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   /** URL da imagem do Figma */

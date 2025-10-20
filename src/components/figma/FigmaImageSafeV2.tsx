@@ -1,6 +1,5 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useCallback, useEffect } from 'react';
 import { cn } from '../ui/utils';
-import { useFigmaImage } from '../../hooks/useFigmaImage';
 
 interface FigmaImageSafeProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   /** URL da imagem do Figma */
@@ -42,25 +41,55 @@ export function FigmaImageSafe({
   onError,
   ...props
 }: FigmaImageSafeProps) {
+  const [imageState, setImageState] = useState<'loading' | 'loaded' | 'error'>('loading');
+  const [retryCount, setRetryCount] = useState(0);
+  const [currentSrc, setCurrentSrc] = useState(src);
   const imgRef = useRef<HTMLImageElement>(null);
-  
-  // Hook personalizado para gerenciar estado da imagem
-  const {
-    currentSrc,
-    isLoading,
-    isError,
-    isRetrying,
-    handleLoad: onImageLoad,
-    handleError: onImageError,
-    forceRetry,
-    stats
-  } = useFigmaImage({
-    src,
-    enableRetry,
-    maxRetries,
-    onLoad,
-    onError
-  });
+
+  // Função para forçar recarregamento
+  const forceRetry = useCallback(() => {
+    if (retryCount < maxRetries) {
+      setRetryCount(prev => prev + 1);
+      setImageState('loading');
+      setCurrentSrc(`${src}?retry=${Date.now()}`);
+    }
+  }, [src, retryCount, maxRetries]);
+
+  // Manipulador de carregamento bem-sucedido
+  const handleLoad = useCallback(() => {
+    setImageState('loaded');
+    setRetryCount(0);
+    onLoad?.();
+  }, [onLoad]);
+
+  // Manipulador de erro
+  const handleError = useCallback(() => {
+    setImageState('error');
+    onError?.();
+    
+    // Tentar novamente automaticamente se habilitado
+    if (enableRetry && retryCount < maxRetries) {
+      setTimeout(() => {
+        forceRetry();
+      }, 1000 * (retryCount + 1));
+    }
+  }, [enableRetry, retryCount, maxRetries, forceRetry, onError]);
+
+  // Reset quando src muda
+  useEffect(() => {
+    setImageState('loading');
+    setRetryCount(0);
+    setCurrentSrc(src);
+  }, [src]);
+
+  const stats = {
+    totalAttempts: retryCount + 1,
+    hasExceededRetries: retryCount >= maxRetries
+  };
+
+  const isLoading = imageState === 'loading';
+  const isError = imageState === 'error';
+  const isRetrying = false; // Simplificado
 
   // Placeholder de carregamento com animação
   const defaultLoadingPlaceholder = (
@@ -140,8 +169,8 @@ export function FigmaImageSafe({
           // Renderização otimizada
           "image-rendering-auto"
         )}
-        onLoad={onImageLoad}
-        onError={onImageError}
+        onLoad={handleLoad}
+        onError={handleError}
         loading="lazy"
         decoding="async"
         referrerPolicy="no-referrer"
