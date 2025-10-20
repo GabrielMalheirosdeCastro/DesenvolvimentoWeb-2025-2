@@ -244,8 +244,18 @@
             <!-- Mini Nave 1 -->
             <article class="lego-card">
                 <div class="lego-card-image-container">
-                    <!-- Placeholder visual funcional até imagem real ser adicionada -->
-                    <div class="lego-card-placeholder placeholder-1" style="display: flex;">
+                    <!-- ✅ Sistema híbrido: Imagem real + Placeholder como fallback -->
+                    <img 
+                        class="lego-card-image"
+                        src="./src/assets/lego-naves/mini-nave-1.jpg"
+                        alt="Mini Nave Espacial Alpha - Primeira construção LEGO com design compacto, propulsores laterais e detalhes em vermelho e cinza"
+                        loading="lazy"
+                        style="display: block;"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                        onload="console.log('✅ Mini Nave 1 carregada com sucesso');"
+                    >
+                    <!-- Placeholder visual funcional como fallback -->
+                    <div class="lego-card-placeholder placeholder-1" style="display: none;">
                         <div style="font-size: 3rem; margin-bottom: 1rem;">🚀</div>
                         <div style="font-size: 1.2rem; margin-bottom: 0.5rem; font-weight: 700;">Mini Nave Espacial Alpha</div>
                         <div style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 0.5rem;">Primeira construção da série</div>
@@ -285,8 +295,18 @@
             <!-- Mini Nave 2 -->
             <article class="lego-card">
                 <div class="lego-card-image-container">
-                    <!-- Placeholder visual funcional até imagem real ser adicionada -->
-                    <div class="lego-card-placeholder placeholder-2" style="display: flex;">
+                    <!-- ✅ Sistema híbrido: Imagem real + Placeholder como fallback -->
+                    <img 
+                        class="lego-card-image"
+                        src="./src/assets/lego-naves/mini-nave-2.jpg"
+                        alt="Mini Nave Espacial Beta - Segunda construção LEGO com estrutura avançada multi-seções e sistema de propulsão duplo"
+                        loading="lazy"
+                        style="display: block;"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                        onload="console.log('✅ Mini Nave 2 carregada com sucesso');"
+                    >
+                    <!-- Placeholder visual funcional como fallback -->
+                    <div class="lego-card-placeholder placeholder-2" style="display: none;">
                         <div style="font-size: 3rem; margin-bottom: 1rem;">🛸</div>
                         <div style="font-size: 1.2rem; margin-bottom: 0.5rem; font-weight: 700;">Mini Nave Espacial Beta</div>
                         <div style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 0.5rem;">Segunda iteração com design complexo</div>
@@ -326,8 +346,18 @@
             <!-- Mini Nave 3 -->
             <article class="lego-card">
                 <div class="lego-card-image-container">
-                    <!-- Placeholder visual funcional até imagem real ser adicionada -->
-                    <div class="lego-card-placeholder placeholder-3" style="display: flex;">
+                    <!-- ✅ Sistema híbrido: Imagem real + Placeholder como fallback -->
+                    <img 
+                        class="lego-card-image"
+                        src="./src/assets/lego-naves/mini-nave-3.jpg"
+                        alt="Mini Nave Espacial Gamma - Terceira construção LEGO com design único assimétrico e detalhes técnicos refinados"
+                        loading="lazy"
+                        style="display: block;"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                        onload="console.log('✅ Mini Nave 3 carregada com sucesso');"
+                    >
+                    <!-- Placeholder visual funcional como fallback -->
+                    <div class="lego-card-placeholder placeholder-3" style="display: none;">
                         <div style="font-size: 3rem; margin-bottom: 1rem;">🛰️</div>
                         <div style="font-size: 1.2rem; margin-bottom: 0.5rem; font-weight: 700;">Mini Nave Espacial Gamma</div>
                         <div style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 0.5rem;">Terceira e mais avançada da série</div>
@@ -396,50 +426,69 @@
         </nav>
     </div>
 
-    <!-- ✅ JavaScript para Interatividade Otimizada -->
+    <!-- ✅ JavaScript para Sistema Híbrido Otimizado -->
     <script>
-        // �️ Gerenciamento inteligente de imagens com fallback
-        function initializeImageFallbacks() {
+        // 🖼️ Gerenciamento inteligente do sistema híbrido de imagens
+        function initializeHybridImageSystem() {
             const images = document.querySelectorAll('.lego-card-image');
             
+            console.log(`🔍 Encontradas ${images.length} imagens para verificação`);
+            
             images.forEach((img, index) => {
-                // Timeout para mostrar placeholder se imagem não carregar em 3 segundos
+                const placeholder = img.nextElementSibling;
+                const naveNumber = index + 1;
+                
+                // ⏱️ Timeout de 2 segundos para mostrar placeholder se imagem não carregar
                 const timeoutId = setTimeout(() => {
-                    if (!img.complete || img.naturalHeight === 0) {
+                    if (!img.complete || img.naturalHeight === 0 || img.naturalWidth === 0) {
+                        console.log(`⚠️ Timeout: Imagem ${naveNumber} não carregou, mostrando placeholder`);
                         img.style.display = 'none';
-                        const placeholder = img.nextElementSibling;
-                        if (placeholder) {
+                        if (placeholder && placeholder.classList.contains('lego-card-placeholder')) {
                             placeholder.style.display = 'flex';
                         }
-                        console.log(`⚠️ Timeout: Mostrando placeholder para imagem ${index + 1}`);
                     }
-                }, 3000);
+                }, 2000);
                 
-                // Limpar timeout se imagem carregar com sucesso
+                // ✅ Evento de carregamento bem-sucedido
                 img.addEventListener('load', function() {
                     clearTimeout(timeoutId);
-                    console.log(`✅ Imagem ${index + 1} carregada com sucesso`);
+                    console.log(`✅ Mini Nave ${naveNumber} carregada com sucesso!`);
+                    this.style.display = 'block';
+                    if (placeholder) {
+                        placeholder.style.display = 'none';
+                    }
                 });
                 
-                // Mostrar placeholder imediatamente em caso de erro
+                // ❌ Evento de erro - mostra placeholder imediatamente
                 img.addEventListener('error', function() {
                     clearTimeout(timeoutId);
+                    console.log(`❌ Erro ao carregar Mini Nave ${naveNumber}, exibindo placeholder`);
                     this.style.display = 'none';
-                    const placeholder = this.nextElementSibling;
-                    if (placeholder) {
+                    if (placeholder && placeholder.classList.contains('lego-card-placeholder')) {
                         placeholder.style.display = 'flex';
                     }
-                    console.log(`❌ Erro ao carregar imagem ${index + 1}, mostrando placeholder`);
                 });
+                
+                // 🔍 Verificação inicial imediata
+                if (img.complete) {
+                    if (img.naturalHeight === 0 || img.naturalWidth === 0) {
+                        // Imagem "carregada" mas sem dimensões = erro
+                        img.dispatchEvent(new Event('error'));
+                    } else {
+                        // Imagem realmente carregada
+                        img.dispatchEvent(new Event('load'));
+                    }
+                }
             });
         }
 
-        // 🖱️ Funcionalidade de clique para expandir (melhorada)
+        // 🖱️ Funcionalidade de clique para expandir (otimizada para sistema híbrido)
         function initializeImageInteraction() {
             document.querySelectorAll('.lego-card-image, .lego-card-placeholder').forEach(element => {
+                element.style.cursor = 'pointer';
                 element.addEventListener('click', function() {
                     if (this.classList.contains('lego-card-image')) {
-                        // Para imagens reais
+                        // Para imagens reais - zoom suave
                         if (this.style.transform === 'scale(1.2)') {
                             this.style.transform = 'scale(1)';
                             this.style.cursor = 'zoom-in';
@@ -447,8 +496,9 @@
                             this.style.transform = 'scale(1.2)';
                             this.style.cursor = 'zoom-out';
                         }
+                        this.style.transition = 'transform 0.3s ease';
                     } else {
-                        // Para placeholders
+                        // Para placeholders - efeito hover
                         this.style.transform = this.style.transform === 'scale(1.05)' ? 'scale(1)' : 'scale(1.05)';
                         this.style.transition = 'transform 0.3s ease';
                     }
@@ -456,14 +506,20 @@
             });
         }
 
-        // � Inicialização quando DOM carrega
+        // 🚀 Inicialização quando DOM carrega
         document.addEventListener('DOMContentLoaded', function() {
-            initializeImageFallbacks();
+            console.log('🚀 Iniciando Galeria LEGO Naves com sistema híbrido...');
+            
+            // Inicializar sistema híbrido de imagens
+            initializeHybridImageSystem();
+            
+            // Inicializar interações
             initializeImageInteraction();
             
-            console.log('🚀 Galeria LEGO Naves carregada com sucesso!');
+            console.log('✅ Galeria LEGO Naves carregada com sucesso!');
             console.log('📁 Imagens esperadas em: ./src/assets/lego-naves/');
-            console.log('🎯 Placeholders visuais ativados para melhor experiência');
+            console.log('🎯 Sistema híbrido: Imagens reais com fallback para placeholders');
+            console.log('🔧 Para adicionar imagens: Coloque mini-nave-1.jpg, mini-nave-2.jpg, mini-nave-3.jpg na pasta');
         });
     </script>
 </body>
