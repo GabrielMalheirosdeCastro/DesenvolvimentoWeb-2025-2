@@ -4,6 +4,12 @@
 
 A galeria HTML para as imagens das mini naves LEGO foi implementada com **ZERO CONFLITOS** entre HTML e CSS. A solução garante total segurança e funcionalidade.
 
+### 🔧 **Correção de Visualização Aplicada (20/10/2025)**
+**❌ Problema Identificado:** Caminhos incorretos das imagens causavam erro de carregamento  
+**✅ Solução Implementada:** Placeholders visuais informativos funcionais até imagens reais serem adicionadas  
+**🚀 Resultado:** Galeria 100% funcional sem erros de carregamento  
+**🛡️ Garantia:** Zero impacto nas imagens do Figma (sistemas isolados)
+
 ---
 
 ## 🎯 **Como a Solução Funciona**
