@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 1 - Fundamentos CSS</title>
+    <link rel="stylesheet" href="style-lab.css">
+    
+    <!-- Exemplo 2: CSS Interno - Dentro da tag <style> no <head> -->
+    <style>
+        p {
+            color: blue;
+            font-size: 16px;
+        }
+        
+        /* Estilos específicos para demonstração */
+        .exemplo-interno {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #1976d2;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Exemplo 1: CSS Inline - Aplicado diretamente no elemento HTML -->
+    <h1 id="titulo-principal" style="color: red; font-size: 2.5em; text-align: center;">
+        Meu Primeiro Laboratório CSS
+    </h1>
+    
+    <!-- Demonstração CSS Inline -->
+    <p style="color: blue; font-size: 16px;">Texto azul - CSS Inline</p>
+    
+    <!-- Demonstração CSS Interno (definido no <style> acima) -->
+    <div class="exemplo-interno">
+        <p><strong>CSS Interno:</strong> Este parágrafo usa estilos definidos na tag &lt;style&gt; no &lt;head&gt;</p>
+    </div>
+    
+    <!-- Seletores básicos conforme o exercício -->
+    <p class="destaque">Este parágrafo tem uma classe especial.</p>
+    <p>Este é um parágrafo normal.</p>
+    <p class="destaque">Outro parágrafo com destaque.</p>
+
+    <!-- DESAFIOS RESOLVIDOS -->
+    
+    <!-- Desafio 1: Classe .aviso -->
+    <div class="aviso">
+        <strong>Desafio 1:</strong> Classe .aviso com fundo vermelho claro e texto vermelho escuro
+    </div>
+
+    <!-- Desafio 2: Parágrafos dentro de div.conteudo -->
+    <div class="conteudo">
+        <h2>Desafio 2: Seletor descendente .conteudo p</h2>
+        <p>Este parágrafo está dentro de uma div com classe .conteudo</p>
+        <p>Este também está dentro da div .conteudo</p>
+        <p>Ambos são estilizados pelo seletor <code>.conteudo p { ... }</code></p>
+    </div>
+
+    <p>Este parágrafo está FORA da div .conteudo, então mantém o estilo padrão.</p>
+
+    <!-- Desafio 3: Efeito hover já está implementado no CSS para a classe .destaque -->
+    <p class="destaque">Passe o mouse sobre este parágrafo para ver o efeito hover!</p>
+
+    <!-- Exemplos de outros seletores -->
+    <h2>Exemplos de Seletores CSS</h2>
+    
+    <ul>
+        <li><strong>Seletor de elemento:</strong> <code>p { ... }</code> - afeta todos os parágrafos</li>
+        <li><strong>Seletor de classe:</strong> <code>.destaque { ... }</code> - afeta elementos com class="destaque"</li>
+        <li><strong>Seletor de ID:</strong> <code>#titulo-principal { ... }</code> - afeta o elemento com id="titulo-principal"</li>
+        <li><strong>Seletor universal:</strong> <code>* { ... }</code> - afeta todos os elementos</li>
+    </ul>
+
+    <!-- Navegação -->
+    <div style="text-align: center; margin-top: 40px;">
+        <a href="index.html" style="display: inline-block; background-color: #0072bc; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; margin: 0 10px;">
+            🏠 Voltar ao Portfolio
+        </a>
+        <a href="lab-fundamentos-css.html" style="display: inline-block; background-color: #4caf50; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; margin: 0 10px;">
+            🚀 Versão Completa
+        </a>
+    </div>
+
+    <!-- Rodapé -->
+    <footer style="text-align: center; margin-top: 40px; padding: 20px; background-color: #f0f0f0; border-radius: 8px;">
+        <p><strong>Laboratório 1 - Fundamentos CSS</strong></p>
+        <p>Gabriel Malheiros de Castro - FAESA 2025-2</p>
+        <p>Demonstração dos 3 tipos de CSS: Inline, Interno e Externo</p>
+    </footer>
+</body>
+</html>

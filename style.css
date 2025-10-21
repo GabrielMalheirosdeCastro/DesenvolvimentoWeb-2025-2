@@ -603,3 +603,164 @@ footer {
   background: var(--brand-primary);
   color: white;
 }
+
+/* === LABORATÓRIOS CSS3 (FAESA 2025-2) === */
+
+/* Estilos específicos para páginas de laboratório */
+.html-page .lab-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-6);
+  background: var(--html-color-bg-primary);
+  min-height: 100vh;
+}
+
+/* Títulos de laboratório */
+.html-page .lab-title {
+  color: var(--html-brand-primary);
+  text-align: center;
+  margin-bottom: var(--space-8);
+  font-size: var(--font-size-4xl);
+  font-weight: 700;
+}
+
+/* Cards de exemplo */
+.html-page .exemplo-card {
+  background: white;
+  padding: var(--space-6);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  margin-bottom: var(--space-4);
+  border-left: 4px solid var(--html-brand-primary);
+}
+
+/* Demonstração de seletores CSS */
+.html-page .seletor-demo {
+  background: var(--html-color-bg-secondary);
+  padding: var(--space-4);
+  border-radius: 8px;
+  margin: var(--space-4) 0;
+  border: 1px solid var(--html-brand-accent);
+}
+
+/* Code examples */
+.html-page code {
+  background-color: #f8f9fa;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  color: #d63384;
+  font-size: 0.9em;
+}
+
+/* Navegação entre laboratórios */
+.html-page .lab-navigation {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  margin: var(--space-8) 0;
+  flex-wrap: wrap;
+}
+
+.html-page .lab-nav-link {
+  background: var(--html-brand-primary);
+  color: white;
+  padding: var(--space-3) var(--space-6);
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition-normal);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.html-page .lab-nav-link:hover {
+  background: var(--html-brand-secondary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.html-page .lab-nav-link.secondary {
+  background: var(--html-brand-accent);
+}
+
+.html-page .lab-nav-link.secondary:hover {
+  background: var(--html-brand-primary);
+}
+
+/* Exemplos de CSS inline, interno e externo */
+.html-page .css-tipo-exemplo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-6);
+  margin: var(--space-8) 0;
+}
+
+.html-page .css-exemplo-item {
+  background: white;
+  padding: var(--space-5);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-normal);
+}
+
+.html-page .css-exemplo-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.html-page .css-exemplo-item h3 {
+  color: var(--html-brand-primary);
+  margin-bottom: var(--space-3);
+  font-size: var(--font-size-xl);
+}
+
+/* Desafios resolvidos */
+.html-page .desafio-resolvido {
+  background: linear-gradient(135deg, #e8f5e8, #f1f8e9);
+  border-left: 4px solid #4caf50;
+  padding: var(--space-5);
+  border-radius: 8px;
+  margin: var(--space-4) 0;
+}
+
+.html-page .desafio-resolvido h4 {
+  color: #2e7d32;
+  margin-bottom: var(--space-2);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.html-page .desafio-resolvido h4::before {
+  content: "✅";
+  font-size: 1.2em;
+}
+
+/* Responsividade para laboratórios */
+@media (max-width: 768px) {
+  .html-page .lab-container {
+    padding: var(--space-4);
+  }
+
+  .html-page .lab-title {
+    font-size: var(--font-size-3xl);
+  }
+
+  .html-page .css-tipo-exemplo {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .html-page .lab-navigation {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .html-page .lab-nav-link {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
+  }
+}
