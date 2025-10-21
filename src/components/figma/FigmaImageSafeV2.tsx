@@ -45,6 +45,16 @@ export function FigmaImageSafe({
   const [retryCount, setRetryCount] = useState(0);
   const [currentSrc, setCurrentSrc] = useState(src);
   const imgRef = useRef<HTMLImageElement>(null);
+  
+  // DEBUG: Log do estado da imagem
+  useEffect(() => {
+    console.log(`🔍 FigmaImageSafe Estado:`, {
+      src,
+      imageState,
+      retryCount,
+      currentSrc
+    });
+  }, [src, imageState, retryCount, currentSrc]);
 
   // Função para forçar recarregamento
   const forceRetry = useCallback(() => {
@@ -56,31 +66,66 @@ export function FigmaImageSafe({
   }, [src, retryCount, maxRetries]);
 
   // Manipulador de carregamento bem-sucedido
-  const handleLoad = useCallback(() => {
+  const handleLoad = useCallback((event: React.SyntheticEvent<HTMLImageElement>) => {
+    console.log(`🟢 Imagem carregada com sucesso:`, event.currentTarget.src);
     setImageState('loaded');
     setRetryCount(0);
     onLoad?.();
   }, [onLoad]);
 
   // Manipulador de erro
-  const handleError = useCallback(() => {
+  const handleError = useCallback((event: React.SyntheticEvent<HTMLImageElement>) => {
+    console.warn(`🔴 Erro ao carregar imagem:`, event.currentTarget.src);
     setImageState('error');
     onError?.();
     
     // Tentar novamente automaticamente se habilitado
     if (enableRetry && retryCount < maxRetries) {
+      console.log(`🔄 Agendando retry ${retryCount + 1}/${maxRetries} em ${1000 * (retryCount + 1)}ms`);
       setTimeout(() => {
         forceRetry();
       }, 1000 * (retryCount + 1));
+    } else {
+      console.warn(`❌ Máximo de tentativas atingido para:`, event.currentTarget.src);
     }
   }, [enableRetry, retryCount, maxRetries, forceRetry, onError]);
 
   // Reset quando src muda
   useEffect(() => {
+    console.log(`🆕 Nova imagem definida:`, src);
     setImageState('loading');
     setRetryCount(0);
     setCurrentSrc(src);
   }, [src]);
+
+  // Fallback para imagens que já estão carregadas no cache
+  useEffect(() => {
+    if (imgRef.current && currentSrc) {
+      const img = imgRef.current;
+      
+      // Se a imagem já está completa (cache), marcar como carregada
+      if (img.complete && img.naturalWidth > 0) {
+        console.log(`🟢 Imagem já estava em cache:`, currentSrc);
+        setImageState('loaded');
+        return;
+      }
+      
+      // Timer de segurança para detectar carregamento travado
+      const fallbackTimer = setTimeout(() => {
+        if (imageState === 'loading') {
+          console.warn(`⏰ Timeout de carregamento para:`, currentSrc);
+          // Tentar forçar um reload
+          if (retryCount < maxRetries) {
+            forceRetry();
+          } else {
+            setImageState('error');
+          }
+        }
+      }, 10000); // 10 segundos de timeout
+      
+      return () => clearTimeout(fallbackTimer);
+    }
+  }, [currentSrc, imageState, retryCount, maxRetries, forceRetry]);
 
   const stats = {
     totalAttempts: retryCount + 1,
@@ -165,19 +210,20 @@ export function FigmaImageSafe({
           // Classes base para otimização visual
           "figma-image-safe w-full h-full object-cover",
           // Transições suaves
-          "transition-opacity duration-300 ease-in-out",
+          "transition-opacity duration-300 ease-in-out opacity-100",
           // Renderização otimizada
           "image-rendering-auto"
         )}
         onLoad={handleLoad}
         onError={handleError}
-        loading="lazy"
-        decoding="async"
-        referrerPolicy="no-referrer"
-        crossOrigin="anonymous"
+        loading="eager"
+        decoding="sync"
         draggable={false}
         style={{
           imageRendering: 'auto',
+          display: 'block',
+          visibility: 'visible',
+          opacity: 1,
           ...props.style
         }}
         {...props}
@@ -187,6 +233,13 @@ export function FigmaImageSafe({
       {stats.totalAttempts > 1 && (
         <div className="absolute top-2 right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full opacity-75">
           ✅ {stats.totalAttempts}ª tentativa
+        </div>
+      )}
+      
+      {/* Debug info para desenvolvimento */}
+      {process.env.NODE_ENV === 'development' && (
+        <div className="absolute bottom-2 left-2 bg-blue-500 text-white text-xs px-2 py-1 rounded opacity-75">
+          🟢 Loaded: {alt.substring(0, 20)}...
         </div>
       )}
     </div>

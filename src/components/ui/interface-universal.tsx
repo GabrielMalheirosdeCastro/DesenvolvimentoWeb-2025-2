@@ -17,6 +17,7 @@ import MorseChallenge from './morse-challenge';
 import FixedBottomNavigation from './fixed-bottom-navigation';
 import LegoNaves from './lego-naves';
 
+
 interface UniversalConfig {
   url: string;
   title: string;
@@ -570,6 +571,8 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
             Cada asset foi otimizado e integrado ao sistema de interface universal.
           </p>
         </div>
+
+
 
         {/* Galeria de imagens do espaço */}
         <div className="max-w-7xl mx-auto mt-8">
