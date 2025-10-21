@@ -4,16 +4,21 @@
 
 Este projeto agora inclui demonstrações completas dos **Fundamentos de CSS3** solicitados no laboratório acadêmico FAESA 2025-2.
 
-### 📁 Estrutura dos Laboratórios
+### 📁 Estrutura dos Laboratórios (CONSOLIDADA)
 
 ```
 📂 Laboratórios CSS3/
-├── 📄 index-lab.html           # Versão simples (formato original)
-├── 📄 style-lab.css           # CSS externo (formato original)  
-├── 📄 lab-fundamentos-css.html # Versão completa e avançada
-├── 📄 fundamentos-style.css    # CSS avançado com exemplos extras
+├── 📄 lab-fundamentos-css.html # Versão consolidada (CSS inline, interno e externo)
+├── 📄 style-lab.css           # CSS externo consolidado (recursos básicos + avançados)
 └── 📄 README-LABS.md          # Esta documentação
 ```
+
+**✅ CONSOLIDAÇÃO CONCLUÍDA (21/10/2025):**
+- ❌ Removido: `index-lab.html` (versão básica duplicada)
+- ❌ Removido: `fundamentos-style.css` (mesclado em `style-lab.css`)
+- ❌ Removido: `exemplo-html-lego-naves.html` (funcionalidade duplicada)
+- ✅ Mantido: `lab-fundamentos-css.html` (versão completa)
+- ✅ Expandido: `style-lab.css` (agora com recursos CSS3 avançados)
 
 ---
 
@@ -130,14 +135,12 @@ p {
 
 ## 🌐 **Como Acessar os Laboratórios**
 
-### 🔗 **URLs Locais (Desenvolvimento)**
-- **Lab Simples**: http://localhost:3000/index-lab.html
-- **Lab Completo**: http://localhost:3000/lab-fundamentos-css.html
+### 🔗 **URLs Consolidadas (Pós-Consolidação)**
+- **Lab Consolidado**: http://localhost:3000/lab-fundamentos-css.html
 - **Portfolio Principal**: http://localhost:3000/
 
 ### 🔗 **URLs Online (Produção)**
-- **Lab Simples**: https://desenvolvimento-web-2025-2.vercel.app/index-lab.html
-- **Lab Completo**: https://desenvolvimento-web-2025-2.vercel.app/lab-fundamentos-css.html
+- **Lab Consolidado**: https://desenvolvimento-web-2025-2.vercel.app/lab-fundamentos-css.html
 - **Portfolio Principal**: https://desenvolvimento-web-2025-2.vercel.app/
 
 ---
@@ -230,10 +233,9 @@ npm run dev
 4. **Responsividade**: Testado mobile/tablet/desktop
 5. **Criatividade**: Versão avançada com recursos extras
 
-### 📝 **Arquivos para Entrega**
-- `index-lab.html` (versão solicitada)
-- `style-lab.css` (CSS externo solicitado)
-- `lab-fundamentos-css.html` (versão avançada opcional)
+### 📝 **Arquivos Consolidados para Entrega**
+- `lab-fundamentos-css.html` (versão única consolidada)
+- `style-lab.css` (CSS externo consolidado com recursos avançados)
 
 ---
 
