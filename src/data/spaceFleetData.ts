@@ -19,9 +19,9 @@ export const spaceFleetImages: SelectableImage[] = [
   {
     id: 'x-wing-starfighter',
     src: spaceImage2,
-    alt: 'T-65 X-Wing de Star Wars',
+    alt: 'T-85 X-Wing de Star Wars',
     title: 'X-Wing Starfighter',
-    description: 'O icônico caça estelar T-65 X-Wing da Aliança Rebelde, conhecido por sua versatilidade e poder de fogo.',
+    description: 'O icônico caça estelar T-85 X-Wing da Aliança Rebelde, conhecido por sua versatilidade e poder de fogo.',
     category: 'Caças Estelares'
   },
   {
