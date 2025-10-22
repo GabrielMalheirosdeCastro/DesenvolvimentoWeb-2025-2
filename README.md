@@ -6,6 +6,30 @@
 
 Site pessoal profissional que demonstra competências em desenvolvimento web moderno, incluindo HTML5 semântico, CSS3 avançado, design responsivo e arquitetura de componentes React. O projeto converte assets do Figma para código funcional, implementando um sistema de galeria interativa, dados pessoais dinâmicos e desafio de código morse.
 
+## 🔗 **TODOS OS LINKS DO PROJETO - CONSOLIDADOS**
+
+### 🌐 **Links de Acesso Principal**
+- **🚀 Site Vercel (Principal)**: https://desenvolvimento-web-2025-2.vercel.app
+- **📁 GitHub Pages (Backup)**: https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2
+- **🏠 Desenvolvimento Local**: http://localhost:3000
+
+### 📂 **Repositório e Código**
+- **📁 Repositório GitHub**: https://github.com/GabrielMalheirosdeCastro/DesenvolvimentoWeb-2025-2
+- **🐛 Issues e Bugs**: https://github.com/GabrielMalheirosdeCastro/DesenvolvimentoWeb-2025-2/issues
+- **📊 Vercel Dashboard**: https://vercel.com/dashboard
+
+### 🎓 **Páginas dos Laboratórios**
+- **🔬 Lab CSS3 Fundamentos (Local)**: http://localhost:3000/lab-fundamentos-css.html
+- **🔬 Lab CSS3 Fundamentos (Online)**: https://desenvolvimento-web-2025-2.vercel.app/lab-fundamentos-css.html
+
+### 🚀 **Funcionalidades Especiais**
+- **🧱 Galeria LEGO Naves (Local)**: http://localhost:3000/galeria-lego-naves.html
+- **🧱 Galeria LEGO Naves (Online)**: https://desenvolvimento-web-2025-2.vercel.app/galeria-lego-naves.html
+
+### ⚙️ **Links de Configuração e Desenvolvimento**
+- **🛠️ Servidor Local com Settings**: http://localhost:3000?screen=settings
+- **🔧 Localhost Demo**: http://localhost:3000 (com componentes especiais)
+
 ## 💻 **Tecnologias Utilizadas**
 
 - **HTML5** - Estrutura semântica moderna
@@ -74,6 +98,125 @@ Site pessoal profissional de Gabriel Malheiros de Castro, desenvolvido para a di
 - 🚀 Deploy automático via Git
 - 🌐 Acessível globalmente
 
+## 🎓 **Laboratórios CSS3 - Fundamentos**
+
+### 📋 **Arquivos dos Laboratórios**
+
+Este projeto inclui demonstrações completas dos **Fundamentos de CSS3** solicitados no laboratório acadêmico FAESA 2025-2.
+
+### 📁 **Estrutura dos Laboratórios**
+
+```
+📂 Laboratórios CSS3/
+├── 📄 lab-fundamentos-css.html # Versão consolidada (CSS inline, interno e externo)
+├── 📄 style-lab.css           # CSS externo consolidado (recursos básicos + avançados)
+```
+
+### 🎯 **Três Tipos de CSS Demonstrados**
+
+#### ✅ **CSS Inline** - Aplicado diretamente no elemento HTML
+```html
+<p style="color: blue; font-size: 16px;">Texto azul</p>
+<h1 style="color: red; font-size: 2.5em; text-align: center;">Título</h1>
+```
+
+#### ✅ **CSS Interno** - Dentro da tag `<style>` no `<head>`
+```html
+<head>
+    <style>
+        p {
+            color: blue;
+            font-size: 16px;
+        }
+    </style>
+</head>
+```
+
+#### ✅ **CSS Externo** - Arquivo separado (recomendado)
+```html
+<head>
+    <link rel="stylesheet" href="style-lab.css">
+</head>
+```
+
+### 🎯 **Seletores Básicos Implementados**
+
+#### ✅ **Seletor de Elemento**
+```css
+p { 
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+```
+
+#### ✅ **Seletor de Classe**
+```css
+.destaque { 
+    background-color: #ffffcc;
+    padding: 10px;
+    border-left: 4px solid #0072bc;
+    font-weight: bold;
+}
+```
+
+#### ✅ **Seletor de ID**
+```css
+#titulo-principal {
+    color: #0072bc;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+}
+```
+
+#### ✅ **Seletor Universal**
+```css
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+```
+
+### 🚀 **Desafios dos Laboratórios Resolvidos**
+
+#### ✅ **Desafio 1: Classe .aviso**
+```css
+.aviso {
+    background-color: #ffebee; /* Fundo vermelho claro */
+    color: #c62828;            /* Texto vermelho escuro */
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #d32f2f;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+```
+
+#### ✅ **Desafio 2: Seletor Descendente**
+```css
+.conteudo p {
+    background-color: #e8f5e8;
+    padding: 12px;
+    border-radius: 6px;
+    border-left: 3px solid #4caf50;
+    margin-bottom: 10px;
+    font-style: italic;
+    color: #2e7d32;
+}
+```
+
+#### ✅ **Desafio 3: Efeito Hover**
+```css
+.destaque:hover {
+    background-color: #fff3cd;
+    transform: translateX(10px);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+```
+
 ## 🚀 **Nova Funcionalidade: Galeria LEGO Naves**
 
 **Página Especial:** `galeria-lego-naves.html`
@@ -93,7 +236,77 @@ Uma galeria HTML completamente isolada que exibe as mini naves LEGO construídas
 2. Acesse `https://desenvolvimento-web-2025-2.vercel.app/galeria-lego-naves.html`
 3. Ou clique no botão "Ver Galeria HTML" no componente React
 
----
+## 🎓 **Documentação de Entrega FAESA**
+
+### 📋 **Requisitos Atendidos**
+
+#### ✅ **1. Portfólio Pessoal Criado**
+- Interface baseada em design Figma profissional
+- Estrutura completa com React + TypeScript
+- Arquitetura de componentes moderna
+
+#### ✅ **2. Estilização CSS3 Aplicada**
+- Sistema completo de design tokens
+- Propriedades CSS personalizadas (Custom Properties)
+- Layouts responsivos com Flexbox e Grid
+- Animações e transições modernas
+
+#### ✅ **3. Seletores CSS Utilizados**
+```css
+/* Seletores de atributo */
+[data-status="deployed"] { background: hsl(var(--primary)); }
+
+/* Pseudo-elementos */
+.portfolio-link::before { content: var(--portfolio-text); }
+
+/* Combinadores descendentes */
+.portfolio-container .status-indicator { display: flex; }
+
+/* Pseudo-classes */
+.portfolio-button:hover:not(:disabled) { transform: translateY(-2px); }
+
+/* Seletores universais e de tipo */
+* { box-sizing: border-box; }
+button { cursor: pointer; }
+```
+
+#### ✅ **4. Design Responsivo**
+- Mobile-first approach
+- Breakpoints adaptativos
+- Componentes que se adaptam a diferentes telas
+- Testes em dispositivos móveis e desktop
+
+#### ✅ **5. Commits no GitHub**
+- Histórico completo de desenvolvimento
+- Mensagens descritivas seguindo padrões semânticos
+- Versionamento adequado do código
+
+### 🎨 **Técnicas CSS3 Implementadas**
+
+#### **1. Custom Properties (CSS Variables)**
+```css
+:root {
+  --portfolio-url: "https://desenvolvimento-web-2025-2.vercel.app";
+  --portfolio-status: "deployed";
+  --primary: 222.2 84% 4.9%;
+  --primary-foreground: 210 40% 98%;
+}
+```
+
+#### **2. Flexbox e Grid Layouts**
+```css
+.portfolio-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.portfolio-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+```
 
 ## 👤 **Autor e Contato**
 
@@ -103,8 +316,6 @@ Uma galeria HTML completamente isolada que exibe as mini naves LEGO construídas
 📧 Email: gabriel.malheiros@estudante.faesa.br  
 🌐 Portfólio: https://desenvolvimento-web-2025-2.vercel.app  
 📁 GitHub: [@GabrielMalheirosdeCastro](https://github.com/GabrielMalheirosdeCastro)
-
----
 
 ## 📚 **Estrutura do Projeto**
 
@@ -117,25 +328,21 @@ DesenvolvimentoWeb-2025-2/
 │   │   └── gallery/         # Galeria espacial
 │   ├── styles/              # CSS moderno
 │   ├── assets/              # Imagens e recursos
+│   │   └── lego-naves/      # Imagens das mini naves LEGO
 │   └── data/                # Dados do projeto
 ├── public/
 ├── wireframes/              # Documentação de design
+├── lab-fundamentos-css.html # Laboratório CSS3
+├── galeria-lego-naves.html  # Galeria LEGO HTML
+├── style-lab.css           # CSS do laboratório
 ├── index.html
 ├── vite.config.ts
-└── README.md
+└── README-CONSOLIDATED.md   # Este arquivo
 ```
-
-## 🔧 **Links Importantes**
-
-- 🚀 **Site Principal:** https://desenvolvimento-web-2025-2.vercel.app
-- 📁 **Repositório GitHub:** https://github.com/GabrielMalheirosdeCastro/DesenvolvimentoWeb-2025-2
-- 📁 **Backup GitHub Pages:** https://gabrielmalheirosdeciastro.github.io/DesenvolvimentoWeb-2025-2
-- 📊 **Vercel Dashboard:** https://vercel.com/dashboard
-- 🐛 **Issues:** Use GitHub Issues para reportar problemas
 
 ## 📊 **Status do Projeto**
 
-- **📝 Última atualização:** 2025-10-17
+- **📝 Última atualização:** 2025-10-21
 - **📊 Status:** ✅ ONLINE no Vercel
 - **🔗 Link ativo:** https://desenvolvimento-web-2025-2.vercel.app
 - **🎯 Ambiente:** Produção
@@ -162,4 +369,51 @@ Este é um projeto desenvolvido como trabalho de conclusão para a disciplina de
 - 📱 **Design Responsivo** - Mobile-first approach
 - 🔧 **TypeScript** - JavaScript tipado para maior robustez
 
+## 🔧 **Comandos Úteis**
+
+### **Desenvolvimento:**
+```bash
+npm run dev                    # Servidor local (http://localhost:3000)
+npm run build                  # Build + cópia automática
+npm run preview                # Preview do build localmente
+```
+
+### **Deploy:**
+```bash
+git add .
+git commit -m "feat: descrição da mudança"
+git push origin main           # Deploy automático no Vercel
+```
+
+## 🌐 **Como Acessar Todas as Funcionalidades**
+
+### **🏠 Página Principal**
+- **Local**: http://localhost:3000
+- **Online**: https://desenvolvimento-web-2025-2.vercel.app
+
+### **🔬 Laboratório CSS3**
+- **Local**: http://localhost:3000/lab-fundamentos-css.html
+- **Online**: https://desenvolvimento-web-2025-2.vercel.app/lab-fundamentos-css.html
+
+### **🧱 Galeria LEGO Naves**
+- **Local**: http://localhost:3000/galeria-lego-naves.html
+- **Online**: https://desenvolvimento-web-2025-2.vercel.app/galeria-lego-naves.html
+
+### **⚙️ Configurações e Temas**
+- **Local**: http://localhost:3000?screen=settings
+- **Online**: https://desenvolvimento-web-2025-2.vercel.app?screen=settings
+
 **🎉 Site FUNCIONANDO no endereço: https://desenvolvimento-web-2025-2.vercel.app**
+
+---
+
+## 📝 **Nota sobre Consolidação**
+
+Este arquivo `README-CONSOLIDATED.md` contém **TODOS os links e informações** que estavam espalhados nos seguintes arquivos:
+
+- ✅ `README.md` (principal)
+- ✅ `README-LABS.md` (laboratórios)
+- ✅ `ENTREGA-FAESA.md` (entrega acadêmica)
+- ✅ Links do `.github/copilot-instructions.md`
+
+**Após verificar que todas as informações estão corretas neste arquivo consolidado, os arquivos duplicados podem ser removidos com segurança.**
