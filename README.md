@@ -31,10 +31,35 @@ Site pessoal profissional que demonstra competências em desenvolvimento web mod
 ### 🌐 **Acesso ao Site**
 - **🚀 Site Principal**: https://desenvolvimento-web-2025-2.vercel.app
 
-### 📂 **Repositório**
+### � **Laboratórios Acadêmicos**
+- **🔤 Laboratório de Tipografia**: https://desenvolvimento-web-2025-2.vercel.app/tipografia.html
+- **📝 Laboratório Fundamentos CSS**: https://desenvolvimento-web-2025-2.vercel.app/lab-fundamentos-css.html
+
+### �📂 **Repositório**
 - **📁 Código GitHub**: https://github.com/GabrielMalheirosdeCastro/DesenvolvimentoWeb-2025-2
 
-## 💻 **Tecnologias Utilizadas**
+## � **Segurança e Arquitetura**
+
+### 🛡️ **Links Seguros e Funcionais**
+- ✅ **SSL/HTTPS**: Todos os links usam protocolo seguro
+- ✅ **Domínio Verificado**: URLs oficiais do projeto no Vercel
+- ✅ **Isolation CSS**: Cada laboratório usa CSS isolado para evitar conflitos
+- ✅ **Build Automatizado**: Arquivos HTML copiados automaticamente durante build
+- ✅ **Vercel Routing**: Configurado para servir arquivos HTML estaticamente
+
+### 📂 **Estrutura de Laboratórios**
+```
+projeto/
+├── public/
+│   ├── tipografia.html          # 🔤 Laboratório Tipografia  
+│   ├── lab-fundamentos-css.html # 📝 Laboratório CSS
+│   ├── tipografia-isolada.css   # 🎨 CSS isolado
+│   └── style-lab.css           # 🎨 CSS dos laboratórios
+├── src/                        # ⚛️ Código React principal
+└── dist/                       # 📦 Build final (auto-gerado)
+```
+
+## �💻 **Tecnologias Utilizadas**
 
 - **React 18** + TypeScript - Interface moderna e tipada
 - **Tailwind CSS** + CSS3 - Estilização avançada e responsiva  
@@ -64,18 +89,19 @@ npm run dev
 ### 🔤 **Laboratório 2 - Tipografia e Cores**
 Demonstração completa das propriedades tipográficas CSS e sistemas de cores:
 
-- **Arquivo**: `tipografia.html` + `tipografia.css`
-- **Propriedades Tipográficas**: font-family, font-size, font-weight, line-height, text-align, text-decoration, text-transform, letter-spacing
-- **Sistemas de Cores**: Nomes, Hexadecimal, RGB, RGBA (com transparência), HSL
-- **Google Fonts**: Integração com Roboto e Poppins
-- **Hierarquia Visual**: Demonstração de estrutura de títulos e texto
-- **Acessibilidade**: Exemplos de contraste adequado e legibilidade
-- **Acesso**: `https://desenvolvimento-web-2025-2.vercel.app/tipografia.html`
+- **📄 Arquivo**: `tipografia.html` + `tipografia-isolada.css`
+- **🌐 Acesso Direto**: **[https://desenvolvimento-web-2025-2.vercel.app/tipografia.html](https://desenvolvimento-web-2025-2.vercel.app/tipografia.html)**
+- **🎯 Foco**: Propriedades tipográficas CSS avançadas
+- **🔧 Propriedades**: font-family, font-size, font-weight, line-height, text-align, text-decoration, text-transform, letter-spacing
+- **🎨 Sistemas de Cores**: Nomes, Hexadecimal, RGB, RGBA (com transparência), HSL
+- **📱 Google Fonts**: Integração com Roboto e Poppins
+- **📐 Hierarquia Visual**: Demonstração de estrutura de títulos e texto
+- **♿ Acessibilidade**: Exemplos de contraste adequado e legibilidade
 
 ### 📝 **Laboratório 1 - Fundamentos CSS**
-- **Arquivo**: `lab-fundamentos-css.html`
-- **Conceitos**: Seletores, propriedades básicas, layout
-- **Acesso**: `https://desenvolvimento-web-2025-2.vercel.app/lab-fundamentos-css.html`
+- **📄 Arquivo**: `lab-fundamentos-css.html`
+- **🌐 Acesso Direto**: **[https://desenvolvimento-web-2025-2.vercel.app/lab-fundamentos-css.html](https://desenvolvimento-web-2025-2.vercel.app/lab-fundamentos-css.html)**
+- **🎯 Foco**: Seletores, propriedades básicas, layout
 
 ## ✨ **Funcionalidades Principais**
 

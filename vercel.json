@@ -4,6 +4,14 @@
   "framework": "vite",
   "rewrites": [
     {
+      "source": "/tipografia.html",
+      "destination": "/tipografia.html"
+    },
+    {
+      "source": "/lab-fundamentos-css.html", 
+      "destination": "/lab-fundamentos-css.html"
+    },
+    {
       "source": "/galeria-lego-naves.html",
       "destination": "/galeria-lego-naves.html"
     },
