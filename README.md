@@ -1,4 +1,24 @@
-# 🌐 Interface Gráfica Pessoal - Gabriel Malheiros
+# 🌐 Interface Gráfica Pessoal - Gabriel ## ✨ **Funcionalidades Principais**
+
+- 📷 **Galeria Figma**: Imagens espaciais interativas convertidas do Figma
+- 👤 **Dados Pessoais**: Informações completas e habilidades técnicas
+- 🔤 **Laboratório de Tipografia**: Demonstração completa de propriedades CSS de texto e cores
+- 🎯 **Desafio Morse**: Jogo interativo com código morse e áudio
+- 🎨 **Sistema de Temas**: 4 temas visuais profissionais
+- 📱 **Design Responsivo**: Funciona perfeitamente em mobile e desktop
+- ♿ **Acessibilidade**: Interface inclusiva desenvolvida com foco em todos os usuários
+
+## 🌟 **Sobre o Desenvolvedor**
+
+**Gabriel Malheiros de Castro** é um estudante autista apaixonado por tecnologia e inclusão digital. 
+
+> *"Sou um autista buscando fazer meu melhor para todos e ser alguém de confiança"*
+
+Como pessoa neurodivergente, Gabriel traz uma perspectiva única para o desenvolvimento web, focando especialmente em:
+- 🔍 **Atenção aos detalhes** e precisão técnica
+- ♿ **Acessibilidade web** e design inclusivo
+- 🎨 **Interfaces intuitivas** que funcionam para todos
+- 📚 **Aprendizado contínuo** e excelência acadêmicaos
 
 **Projeto acadêmico de portfólio pessoal desenvolvido para a disciplina de Desenvolvimento Web na FAESA (2025-2)**
 
@@ -38,6 +58,24 @@ npm run dev
 
 # 5. Abrir navegador em: http://localhost:3000
 ```
+
+## 📚 **Laboratórios Acadêmicos Incluídos**
+
+### 🔤 **Laboratório 2 - Tipografia e Cores**
+Demonstração completa das propriedades tipográficas CSS e sistemas de cores:
+
+- **Arquivo**: `tipografia.html` + `tipografia.css`
+- **Propriedades Tipográficas**: font-family, font-size, font-weight, line-height, text-align, text-decoration, text-transform, letter-spacing
+- **Sistemas de Cores**: Nomes, Hexadecimal, RGB, RGBA (com transparência), HSL
+- **Google Fonts**: Integração com Roboto e Poppins
+- **Hierarquia Visual**: Demonstração de estrutura de títulos e texto
+- **Acessibilidade**: Exemplos de contraste adequado e legibilidade
+- **Acesso**: `https://desenvolvimento-web-2025-2.vercel.app/tipografia.html`
+
+### 📝 **Laboratório 1 - Fundamentos CSS**
+- **Arquivo**: `lab-fundamentos-css.html`
+- **Conceitos**: Seletores, propriedades básicas, layout
+- **Acesso**: `https://desenvolvimento-web-2025-2.vercel.app/lab-fundamentos-css.html`
 
 ## ✨ **Funcionalidades Principais**
 

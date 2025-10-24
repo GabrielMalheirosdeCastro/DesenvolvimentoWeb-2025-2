@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="html-page">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratório 2 - Tipografia e Cores | Gabriel Malheiros FAESA</title>
+    <link rel="stylesheet" href="tipografia.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Laboratório 2 de Tipografia e Cores - Gabriel Malheiros, estudante autista na FAESA, demonstrando competências em CSS avançado">
+    <meta name="author" content="Gabriel Malheiros de Castro">
+</head>
+<body class="lab-container">
+    <!-- Banner Pessoal Especial -->
+    <section class="banner-pessoal">
+        <div class="container-banner">
+            <h1 class="titulo-pessoal">Gabriel Malheiros de Castro</h1>
+            <p class="mensagem-especial">
+                🌟 "Sou um autista buscando fazer meu melhor para todos e ser alguém de confiança" 🌟
+            </p>
+            <p class="subtitulo-banner">Estudante FAESA | Laboratório 2 - Tipografia e Cores</p>
+        </div>
+    </section>
+
+    <header class="header-principal">
+        <h1>Tipografia na Web</h1>
+        <p class="subtitulo">Explorando fontes e estilos profissionais</p>
+        <div class="lab-info">
+            <span class="lab-numero">Laboratório 2</span>
+            <span class="tema">Tipografia e Cores</span>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Seção Objetivos -->
+        <section class="objetivos">
+            <h2>📋 Objetivos do Laboratório</h2>
+            <div class="objetivo-card">
+                <h3>Objetivo Principal</h3>
+                <p>Dominar propriedades de texto e aplicar esquemas de cores profissionais para criar interfaces acessíveis e visualmente atrativas.</p>
+            </div>
+        </section>
+
+        <!-- Conceitos Teóricos - Tipografia -->
+        <article class="conceitos-tipografia">
+            <h2>🔤 Propriedades Tipográficas</h2>
+            
+            <div class="propriedade-demo">
+                <h3>font-family</h3>
+                <p class="demo-roboto">Roboto: Uma fonte moderna e legível para interfaces web</p>
+                <p class="demo-poppins">Poppins: Fonte geométrica com personalidade única</p>
+                <code>font-family: 'Roboto', sans-serif;</code>
+            </div>
+
+            <div class="propriedade-demo">
+                <h3>font-size</h3>
+                <p class="size-small">Texto pequeno (0.9em)</p>
+                <p class="size-normal">Texto normal (1em)</p>
+                <p class="size-large">Texto grande (1.5em)</p>
+                <p class="size-xlarge">Texto extra grande (2em)</p>
+                <code>font-size: 1.5em; /* ou px, rem, % */</code>
+            </div>
+
+            <div class="propriedade-demo">
+                <h3>font-weight</h3>
+                <p class="weight-light">Texto leve (300)</p>
+                <p class="weight-normal">Texto normal (400)</p>
+                <p class="weight-bold">Texto negrito (700)</p>
+                <p class="weight-black">Texto ultra negrito (900)</p>
+                <code>font-weight: 700; /* bold */</code>
+            </div>
+
+            <div class="propriedade-demo">
+                <h3>line-height</h3>
+                <p class="line-tight">
+                    Linha compacta (1.2): Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </p>
+                <p class="line-normal">
+                    Linha normal (1.6): Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </p>
+                <p class="line-loose">
+                    Linha solta (2.0): Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </p>
+                <code>line-height: 1.6;</code>
+            </div>
+
+            <div class="propriedade-demo">
+                <h3>text-align</h3>
+                <p class="align-left">Alinhamento à esquerda</p>
+                <p class="align-center">Alinhamento centralizado</p>
+                <p class="align-right">Alinhamento à direita</p>
+                <p class="align-justify">Alinhamento justificado: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <code>text-align: center;</code>
+            </div>
+
+            <div class="propriedade-demo">
+                <h3>text-decoration</h3>
+                <p class="decoration-none">Sem decoração</p>
+                <p class="decoration-underline">Texto sublinhado</p>
+                <p class="decoration-line-through">Texto riscado</p>
+                <p class="decoration-overline">Texto com linha superior</p>
+                <code>text-decoration: underline;</code>
+            </div>
+
+            <div class="propriedade-demo">
+                <h3>text-transform</h3>
+                <p class="transform-uppercase">texto em maiúsculas</p>
+                <p class="transform-lowercase">TEXTO EM MINÚSCULAS</p>
+                <p class="transform-capitalize">texto com primeira letra maiúscula</p>
+                <code>text-transform: uppercase;</code>
+            </div>
+
+            <div class="propriedade-demo">
+                <h3>letter-spacing</h3>
+                <p class="spacing-normal">Espaçamento normal</p>
+                <p class="spacing-wide">E s p a ç a m e n t o   l a r g o</p>
+                <p class="spacing-wider">E  s  p  a  ç  a  m  e  n  t  o   m  a  i  o  r</p>
+                <code>letter-spacing: 2px;</code>
+            </div>
+        </article>
+
+        <!-- Conceitos Teóricos - Cores -->
+        <article class="conceitos-cores">
+            <h2>🎨 Sistemas de Cores</h2>
+            
+            <div class="sistema-cor">
+                <h3>Nomes de Cores</h3>
+                <div class="paleta-nomes">
+                    <div class="cor-demo cor-red">red</div>
+                    <div class="cor-demo cor-blue">blue</div>
+                    <div class="cor-demo cor-green">green</div>
+                    <div class="cor-demo cor-purple">purple</div>
+                    <div class="cor-demo cor-orange">orange</div>
+                </div>
+                <code>color: red; background-color: blue;</code>
+            </div>
+
+            <div class="sistema-cor">
+                <h3>Hexadecimal</h3>
+                <div class="paleta-hex">
+                    <div class="cor-demo hex-1">#FF0000</div>
+                    <div class="cor-demo hex-2">#0072BC</div>
+                    <div class="cor-demo hex-3">#28A745</div>
+                    <div class="cor-demo hex-4">#6F42C1</div>
+                    <div class="cor-demo hex-5">#FD7E14</div>
+                </div>
+                <code>color: #FF0000; background: #0072BC;</code>
+            </div>
+
+            <div class="sistema-cor">
+                <h3>RGB</h3>
+                <div class="paleta-rgb">
+                    <div class="cor-demo rgb-1">rgb(255, 0, 0)</div>
+                    <div class="cor-demo rgb-2">rgb(0, 114, 188)</div>
+                    <div class="cor-demo rgb-3">rgb(40, 167, 69)</div>
+                    <div class="cor-demo rgb-4">rgb(111, 66, 193)</div>
+                    <div class="cor-demo rgb-5">rgb(253, 126, 20)</div>
+                </div>
+                <code>color: rgb(255, 0, 0);</code>
+            </div>
+
+            <div class="sistema-cor">
+                <h3>RGBA (com transparência)</h3>
+                <div class="paleta-rgba">
+                    <div class="cor-demo rgba-1">rgba(255, 0, 0, 0.3)</div>
+                    <div class="cor-demo rgba-2">rgba(0, 114, 188, 0.5)</div>
+                    <div class="cor-demo rgba-3">rgba(40, 167, 69, 0.7)</div>
+                    <div class="cor-demo rgba-4">rgba(111, 66, 193, 0.4)</div>
+                    <div class="cor-demo rgba-5">rgba(253, 126, 20, 0.6)</div>
+                </div>
+                <code>background: rgba(255, 0, 0, 0.5);</code>
+            </div>
+
+            <div class="sistema-cor">
+                <h3>HSL</h3>
+                <div class="paleta-hsl">
+                    <div class="cor-demo hsl-1">hsl(0, 100%, 50%)</div>
+                    <div class="cor-demo hsl-2">hsl(204, 100%, 37%)</div>
+                    <div class="cor-demo hsl-3">hsl(134, 61%, 41%)</div>
+                    <div class="cor-demo hsl-4">hsl(262, 52%, 47%)</div>
+                    <div class="cor-demo hsl-5">hsl(27, 98%, 54%)</div>
+                </div>
+                <code>background: hsl(0, 100%, 50%);</code>
+            </div>
+        </article>
+
+        <!-- Google Fonts -->
+        <article class="google-fonts">
+            <h2>📚 Google Fonts</h2>
+            <p class="intro">
+                Google Fonts oferece centenas de fontes gratuitas para uso em projetos web.
+                Esta demonstração utiliza as fontes Roboto e Poppins.
+            </p>
+            <p>
+                Para utilizar, basta adicionar o link no <code>&lt;head&gt;</code>
+                e aplicar a fonte no CSS.
+            </p>
+            
+            <div class="google-fonts-demo">
+                <div class="fonte-exemplo roboto-demo">
+                    <h4>Roboto Family</h4>
+                    <p class="roboto-light">Roboto Light (300)</p>
+                    <p class="roboto-regular">Roboto Regular (400)</p>
+                    <p class="roboto-bold">Roboto Bold (700)</p>
+                </div>
+                
+                <div class="fonte-exemplo poppins-demo">
+                    <h4>Poppins Family</h4>
+                    <p class="poppins-regular">Poppins Regular (400)</p>
+                    <p class="poppins-medium">Poppins Medium (500)</p>
+                    <p class="poppins-semibold">Poppins SemiBold (600)</p>
+                    <p class="poppins-bold">Poppins Bold (700)</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- Hierarquia Visual -->
+        <article class="destaque hierarquia">
+            <h2>🎯 Hierarquia Visual</h2>
+            <p>
+                Use diferentes tamanhos, pesos e cores para criar hierarquia visual eficaz.
+                A combinação adequada de tipografia e cores melhora a legibilidade e a experiência do usuário.
+            </p>
+            
+            <div class="exemplo-hierarquia">
+                <h1 class="h1-demo">Título Principal (H1)</h1>
+                <h2 class="h2-demo">Título Secundário (H2)</h2>
+                <h3 class="h3-demo">Título Terciário (H3)</h3>
+                <p class="paragrafo-demo">
+                    Parágrafo normal com texto descritivo. Lorem ipsum dolor sit amet, 
+                    consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </p>
+                <p class="paragrafo-small">
+                    Texto menor para informações secundárias ou notas de rodapé.
+                </p>
+            </div>
+        </article>
+
+        <!-- Seção de Acessibilidade -->
+        <article class="acessibilidade">
+            <h2>♿ Acessibilidade e Inclusão</h2>
+            <div class="acessibilidade-content">
+                <p class="intro-acessibilidade">
+                    Como pessoa autista, Gabriel entende a importância de criar interfaces acessíveis
+                    que funcionem para todos os usuários, independentemente de suas necessidades específicas.
+                </p>
+                
+                <div class="principios-acessibilidade">
+                    <div class="principio">
+                        <h4>Contraste Adequado</h4>
+                        <p>Garantir contraste mínimo de 4.5:1 para texto normal</p>
+                        <div class="exemplo-contraste bom-contraste">Bom contraste</div>
+                        <div class="exemplo-contraste mau-contraste">Contraste inadequado</div>
+                    </div>
+                    
+                    <div class="principio">
+                        <h4>Fontes Legíveis</h4>
+                        <p>Usar fontes sans-serif claras e tamanhos adequados</p>
+                        <div class="exemplo-legibilidade boa-legibilidade">Texto legível e claro</div>
+                        <div class="exemplo-legibilidade ma-legibilidade">Texto difícil de ler</div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- Footer com informações do autor -->
+    <footer class="footer-lab">
+        <div class="footer-content">
+            <div class="autor-info">
+                <h3>👨‍💻 Sobre o Autor</h3>
+                <p><strong>Gabriel Malheiros de Castro</strong></p>
+                <p>🎓 Estudante de Desenvolvimento Web - FAESA</p>
+                <p>🌟 Autista apaixonado por tecnologia e inclusão digital</p>
+                <p>📧 gabriel.m.castro@hotmail.com</p>
+            </div>
+            
+            <div class="lab-info-footer">
+                <h3>📚 Informações do Laboratório</h3>
+                <p><strong>Disciplina:</strong> Desenvolvimento de Aplicações Web I</p>
+                <p><strong>Professor:</strong> FAESA</p>
+                <p><strong>Data:</strong> Outubro 2025</p>
+                <p><strong>Objetivo:</strong> Dominar tipografia e sistemas de cores</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>
+                💙 Feito com dedicação por Gabriel Malheiros | 
+                "Sou um autista buscando fazer meu melhor para todos e ser alguém de confiança"
+            </p>
+        </div>
+    </footer>
+
+    <!-- Link para navegação -->
+    <div class="navegacao-lab">
+        <a href="index.html" class="btn-voltar">🏠 Voltar ao Portfolio</a>
+        <a href="lab-fundamentos-css.html" class="btn-lab">📝 Lab 1 - Fundamentos</a>
+        <a href="galeria-lego-naves.html" class="btn-lab">🚀 Galeria LEGO</a>
+    </div>
+</body>
+</html>

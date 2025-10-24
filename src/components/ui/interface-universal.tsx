@@ -16,6 +16,7 @@ import PersonalData from './personal-data';
 import MorseChallenge from './morse-challenge';
 import FixedBottomNavigation from './fixed-bottom-navigation';
 import LegoNaves from './lego-naves';
+import LaboratoriosLinks from './laboratorios-links';
 
 
 interface UniversalConfig {
@@ -453,6 +454,11 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
         {/* Seção de Dados Pessoais */}
         <div className="max-w-6xl mx-auto mt-16">
           <PersonalData className="mb-12" />
+        </div>
+
+        {/* Seção de Laboratórios Acadêmicos */}
+        <div className="max-w-6xl mx-auto mt-16">
+          <LaboratoriosLinks className="mb-12" />
         </div>
 
         {/* Seção do Desafio Morse */}

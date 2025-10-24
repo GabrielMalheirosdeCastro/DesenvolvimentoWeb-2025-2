@@ -210,9 +210,26 @@ export const PersonalData: React.FC<PersonalDataProps> = ({ className }) => {
         </div>
       </div>
 
+      {/* Mensagem Pessoal Especial */}
+      <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white rounded-lg p-6 shadow-lg border-2 border-white/20">
+        <h3 className="text-xl font-semibold mb-3 flex items-center gap-2">
+          🌟 Mensagem Pessoal
+        </h3>
+        <div className="bg-white/10 rounded-lg p-4 mb-4 border border-white/20">
+          <p className="text-lg font-medium text-center leading-relaxed">
+            "Sou um autista buscando fazer meu melhor para todos e ser alguém de confiança"
+          </p>
+        </div>
+        <p className="text-blue-100 leading-relaxed text-sm">
+          Como pessoa autista, Gabriel traz uma perspectiva única para o desenvolvimento web, 
+          focando em acessibilidade, atenção aos detalhes e criação de interfaces inclusivas 
+          que funcionam para todos os usuários.
+        </p>
+      </div>
+
       {/* Missão pessoal */}
       <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg p-6 shadow-lg">
-        <h3 className="text-xl font-semibold mb-3">🚀 Missão Pessoal</h3>
+        <h3 className="text-xl font-semibold mb-3">🚀 Missão Profissional</h3>
         <p className="text-purple-100 leading-relaxed">
           "Transformar designs criativos em experiências digitais incríveis, combinando tecnologia moderna 
           com design intuitivo para criar interfaces que conectam pessoas e ideias. Sempre em busca de 

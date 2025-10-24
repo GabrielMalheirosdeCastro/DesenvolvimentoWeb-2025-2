@@ -33,8 +33,13 @@ export default defineConfig({
       }
     },
     // Limite de chunk warning aumentado
-    chunkSizeWarningLimit: 1000
+    chunkSizeWarningLimit: 1000,
+    // Copiar arquivos HTML dos laboratórios
+    copyPublicDir: true
   },
+  publicDir: 'public',
+  // Configurar para incluir arquivos HTML no build
+  assetsInclude: ['**/*.html', '**/*.css'],
   server: {
     host: '0.0.0.0',
     port: 3000,
