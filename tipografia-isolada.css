@@ -1,0 +1,296 @@
+/* =================================================================
+   LABORATÓRIO 2 - TIPOGRAFIA E CORES (VERSÃO ISOLADA)
+   Autor: Gabriel Malheiros de Castro
+   Curso: Desenvolvimento Web - FAESA
+   Objetivo: Demonstrar propriedades tipográficas e sistemas de cores
+   
+   ✅ VERSÃO SEGURA: Isolada completamente do sistema React
+   ✅ SEM CONFLITOS: Namespace único --lab-tipografia-*
+   ✅ VISIBILIDADE GARANTIDA: Cores contrastantes e fontes legíveis
+   ================================================================= */
+
+/* Reset Global APENAS para página de tipografia */
+.pagina-tipografia * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Variáveis CSS ISOLADAS com namespace único */
+.pagina-tipografia {
+    /* Cores principais - Namespace isolado */
+    --lab-tipografia-cor-primaria: #2563eb;
+    --lab-tipografia-cor-secundaria: #1d4ed8;
+    --lab-tipografia-cor-destaque: #ef4444;
+    --lab-tipografia-cor-sucesso: #10b981;
+    --lab-tipografia-cor-alerta: #f59e0b;
+    --lab-tipografia-cor-texto: #0f172a;
+    --lab-tipografia-cor-texto-claro: #64748b;
+    --lab-tipografia-cor-fundo: #ffffff;
+    --lab-tipografia-cor-fundo-claro: #f8fafc;
+    --lab-tipografia-cor-border: #e2e8f0;
+    
+    /* Tipografia - Namespace isolado */
+    --lab-tipografia-fonte-principal: 'Roboto', system-ui, sans-serif;
+    --lab-tipografia-fonte-secundaria: 'Poppins', system-ui, sans-serif;
+    --lab-tipografia-tamanho-base: 16px;
+    --lab-tipografia-altura-linha-base: 1.8;
+    
+    /* Espaçamentos - Namespace isolado */
+    --lab-tipografia-espacamento-pequeno: 10px;
+    --lab-tipografia-espacamento-medio: 20px;
+    --lab-tipografia-espacamento-grande: 40px;
+    --lab-tipografia-espacamento-extra: 60px;
+    
+    /* Bordas - Namespace isolado */
+    --lab-tipografia-border-radius: 8px;
+    --lab-tipografia-border-radius-grande: 12px;
+}
+
+/* Configuração SEGURA do Body para tipografia */
+.pagina-tipografia {
+    font-family: var(--lab-tipografia-fonte-principal) !important;
+    line-height: var(--lab-tipografia-altura-linha-base) !important;
+    color: var(--lab-tipografia-cor-texto) !important;
+    background-color: var(--lab-tipografia-cor-fundo) !important;
+    font-size: var(--lab-tipografia-tamanho-base) !important;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* Banner Pessoal - Estilo ISOLADO e SEGURO */
+.pagina-tipografia .banner-pessoal {
+    background: linear-gradient(135deg, 
+        var(--lab-tipografia-cor-primaria) 0%, 
+        var(--lab-tipografia-cor-secundaria) 50%, 
+        var(--lab-tipografia-cor-destaque) 100%) !important;
+    color: white !important;
+    text-align: center !important;
+    padding: var(--lab-tipografia-espacamento-extra) var(--lab-tipografia-espacamento-medio) !important;
+    margin-bottom: var(--lab-tipografia-espacamento-grande) !important;
+}
+
+.pagina-tipografia .container-banner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.pagina-tipografia .titulo-pessoal {
+    font-size: 2.5rem !important;
+    font-weight: 700 !important;
+    margin-bottom: var(--lab-tipografia-espacamento-medio) !important;
+    color: white !important;
+    font-family: var(--lab-tipografia-fonte-secundaria) !important;
+}
+
+.pagina-tipografia .mensagem-especial {
+    font-size: 1.2rem !important;
+    font-weight: 500 !important;
+    margin: var(--lab-tipografia-espacamento-medio) 0 !important;
+    color: #fbbf24 !important;
+    font-style: italic !important;
+}
+
+.pagina-tipografia .subtitulo-banner {
+    font-size: 1rem !important;
+    color: #e2e8f0 !important;
+    font-weight: 400 !important;
+}
+
+/* Header Principal - Estilo ISOLADO */
+.pagina-tipografia .header-principal {
+    text-align: center !important;
+    margin-bottom: var(--lab-tipografia-espacamento-extra) !important;
+    padding: var(--lab-tipografia-espacamento-grande) var(--lab-tipografia-espacamento-medio) !important;
+    background-color: var(--lab-tipografia-cor-fundo-claro) !important;
+    border-bottom: 3px solid var(--lab-tipografia-cor-border) !important;
+}
+
+.pagina-tipografia .header-principal h1 {
+    font-size: 3rem !important;
+    color: var(--lab-tipografia-cor-texto) !important;
+    margin-bottom: var(--lab-tipografia-espacamento-pequeno) !important;
+    font-family: var(--lab-tipografia-fonte-secundaria) !important;
+    font-weight: 700 !important;
+}
+
+.pagina-tipografia .header-principal .subtitulo {
+    font-size: 1.25rem !important;
+    color: var(--lab-tipografia-cor-texto-claro) !important;
+    margin-bottom: var(--lab-tipografia-espacamento-medio) !important;
+}
+
+.pagina-tipografia .lab-info {
+    display: flex !important;
+    justify-content: center !important;
+    gap: var(--lab-tipografia-espacamento-medio) !important;
+    flex-wrap: wrap !important;
+}
+
+.pagina-tipografia .lab-numero {
+    background: var(--lab-tipografia-cor-primaria) !important;
+    color: white !important;
+    padding: 8px 16px !important;
+    border-radius: var(--lab-tipografia-border-radius) !important;
+    font-weight: 600 !important;
+}
+
+.pagina-tipografia .tema {
+    background: var(--lab-tipografia-cor-destaque) !important;
+    color: white !important;
+    padding: 8px 16px !important;
+    border-radius: var(--lab-tipografia-border-radius) !important;
+    font-weight: 600 !important;
+}
+
+/* Main Content - Container ISOLADO */
+.pagina-tipografia .main-content {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 var(--lab-tipografia-espacamento-medio) !important;
+    background-color: var(--lab-tipografia-cor-fundo) !important;
+}
+
+/* Seções - Estilo ISOLADO e VISÍVEL */
+.pagina-tipografia .objetivos,
+.pagina-tipografia .conceitos-tipografia,
+.pagina-tipografia .conceitos-cores {
+    margin-bottom: var(--lab-tipografia-espacamento-extra) !important;
+    padding: var(--lab-tipografia-espacamento-grande) !important;
+    background-color: var(--lab-tipografia-cor-fundo) !important;
+    border: 2px solid var(--lab-tipografia-cor-border) !important;
+    border-radius: var(--lab-tipografia-border-radius-grande) !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+.pagina-tipografia .objetivos h2,
+.pagina-tipografia .conceitos-tipografia h2,
+.pagina-tipografia .conceitos-cores h2 {
+    font-size: 2rem !important;
+    color: var(--lab-tipografia-cor-primaria) !important;
+    margin-bottom: var(--lab-tipografia-espacamento-medio) !important;
+    font-family: var(--lab-tipografia-fonte-secundaria) !important;
+    font-weight: 700 !important;
+    border-bottom: 3px solid var(--lab-tipografia-cor-primaria) !important;
+    padding-bottom: var(--lab-tipografia-espacamento-pequeno) !important;
+}
+
+/* Cards de demonstração - VISIBILIDADE GARANTIDA */
+.pagina-tipografia .objetivo-card,
+.pagina-tipografia .propriedade-demo,
+.pagina-tipografia .cor-demo {
+    background-color: var(--lab-tipografia-cor-fundo-claro) !important;
+    padding: var(--lab-tipografia-espacamento-medio) !important;
+    border-radius: var(--lab-tipografia-border-radius) !important;
+    margin-bottom: var(--lab-tipografia-espacamento-medio) !important;
+    border: 1px solid var(--lab-tipografia-cor-border) !important;
+}
+
+.pagina-tipografia .objetivo-card h3,
+.pagina-tipografia .propriedade-demo h3,
+.pagina-tipografia .cor-demo h3 {
+    font-size: 1.5rem !important;
+    color: var(--lab-tipografia-cor-texto) !important;
+    margin-bottom: var(--lab-tipografia-espacamento-pequeno) !important;
+    font-family: var(--lab-tipografia-fonte-secundaria) !important;
+    font-weight: 600 !important;
+}
+
+.pagina-tipografia .objetivo-card p,
+.pagina-tipografia .propriedade-demo p,
+.pagina-tipografia .cor-demo p {
+    color: var(--lab-tipografia-cor-texto) !important;
+    line-height: var(--lab-tipografia-altura-linha-base) !important;
+    font-size: 1rem !important;
+}
+
+/* Demonstrações de Fonte - LEGIBILIDADE MÁXIMA */
+.pagina-tipografia .demo-roboto {
+    font-family: 'Roboto', system-ui, sans-serif !important;
+    font-size: 1.125rem !important;
+    color: var(--lab-tipografia-cor-texto) !important;
+    font-weight: 400 !important;
+    margin: var(--lab-tipografia-espacamento-pequeno) 0 !important;
+}
+
+.pagina-tipografia .demo-poppins {
+    font-family: 'Poppins', system-ui, sans-serif !important;
+    font-size: 1.125rem !important;
+    color: var(--lab-tipografia-cor-texto) !important;
+    font-weight: 500 !important;
+    margin: var(--lab-tipografia-espacamento-pequeno) 0 !important;
+}
+
+/* Demonstrações de Tamanho - CLARAMENTE VISÍVEIS */
+.pagina-tipografia .tamanho-pequeno { font-size: 0.875rem !important; }
+.pagina-tipografia .tamanho-normal { font-size: 1rem !important; }
+.pagina-tipografia .tamanho-medio { font-size: 1.25rem !important; }
+.pagina-tipografia .tamanho-grande { font-size: 1.5rem !important; }
+.pagina-tipografia .tamanho-muito-grande { font-size: 2rem !important; }
+
+/* Demonstrações de Peso - CONTRASTE GARANTIDO */
+.pagina-tipografia .peso-light { font-weight: 300 !important; }
+.pagina-tipografia .peso-normal { font-weight: 400 !important; }
+.pagina-tipografia .peso-medium { font-weight: 500 !important; }
+.pagina-tipografia .peso-semibold { font-weight: 600 !important; }
+.pagina-tipografia .peso-bold { font-weight: 700 !important; }
+.pagina-tipografia .peso-extrabold { font-weight: 800 !important; }
+
+/* Demonstrações de Cores - ALTA VISIBILIDADE */
+.pagina-tipografia .cor-hexadecimal { color: #2563eb !important; }
+.pagina-tipografia .cor-rgb { color: rgb(16, 185, 129) !important; }
+.pagina-tipografia .cor-rgba { color: rgba(239, 68, 68, 0.8) !important; }
+.pagina-tipografia .cor-hsl { color: hsl(262, 83%, 58%) !important; }
+.pagina-tipografia .cor-nome { color: darkorange !important; }
+
+/* Responsive Design - FUNCIONAL EM TODOS OS TAMANHOS */
+@media (max-width: 768px) {
+    .pagina-tipografia .titulo-pessoal {
+        font-size: 2rem !important;
+    }
+    
+    .pagina-tipografia .header-principal h1 {
+        font-size: 2.25rem !important;
+    }
+    
+    .pagina-tipografia .main-content {
+        padding: 0 var(--lab-tipografia-espacamento-pequeno) !important;
+    }
+    
+    .pagina-tipografia .objetivos,
+    .pagina-tipografia .conceitos-tipografia,
+    .pagina-tipografia .conceitos-cores {
+        padding: var(--lab-tipografia-espacamento-medio) !important;
+    }
+}
+
+/* Estados de interação - FEEDBACK VISUAL CLARO */
+.pagina-tipografia .propriedade-demo:hover,
+.pagina-tipografia .cor-demo:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15) !important;
+    transition: all 0.3s ease !important;
+}
+
+/* Força máxima para garantir visibilidade */
+.pagina-tipografia h1,
+.pagina-tipografia h2,
+.pagina-tipografia h3,
+.pagina-tipografia h4,
+.pagina-tipografia h5,
+.pagina-tipografia h6 {
+    color: var(--lab-tipografia-cor-texto) !important;
+    font-weight: 600 !important;
+}
+
+.pagina-tipografia p,
+.pagina-tipografia span,
+.pagina-tipografia div {
+    color: var(--lab-tipografia-cor-texto) !important;
+}
+
+/* Garantia de que nada sobrescreva os estilos */
+.pagina-tipografia * {
+    box-sizing: border-box !important;
+}

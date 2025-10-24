@@ -1,52 +1,72 @@
-/* 🔧 CORREÇÕES VISUAIS PARA IMAGENS DO FIGMA */
+/* 🔧 CORREÇÕES VISUAIS MÁXIMAS PARA IMAGENS DO FIGMA */
 
-/* 🎯 Garantir renderização perfeita das imagens */
+/* 🎯 Garantir renderização perfeita e visibilidade total das imagens */
 .figma-image-container {
-  /* Força renderização otimizada */
+  /* Força renderização otimizada com máxima qualidade */
   image-rendering: auto !important;
   image-rendering: -webkit-optimize-contrast !important;
   image-rendering: crisp-edges !important;
   
-  /* Suavização para diferentes densidades */
+  /* Aceleração de hardware para nitidez */
   backface-visibility: hidden !important;
   transform: translateZ(0) !important;
   will-change: transform !important;
   
-  /* Prevenção de blur e problemas visuais */
+  /* Garantia contra blur e problemas visuais */
   filter: none !important;
   backdrop-filter: none !important;
   
-  /* Garantir contraste adequado */
+  /* Máximo contraste e visibilidade */
   opacity: 1 !important;
   visibility: visible !important;
+  display: block !important;
+  
+  /* Prevenção de sobreposições CSS */
+  z-index: 10 !important;
+  position: relative !important;
 }
 
-/* 🖼️ Imagens do Figma - renderização otimizada */
+/* 🖼️ Imagens do Figma - renderização de MÁXIMA QUALIDADE */
 img[src*="assets/"],
 img[src*="figma"],
-.figma-image-safe img {
-  /* Renderização de alta qualidade */
+.figma-image-safe img,
+[data-figma-image="true"] {
+  /* Renderização de altíssima qualidade */
   image-rendering: auto !important;
   image-rendering: -webkit-optimize-contrast !important;
+  image-rendering: smooth !important;
   
-  /* Suavização anti-aliasing */
+  /* Suavização anti-aliasing máxima */
   -webkit-font-smoothing: antialiased !important;
   -moz-osx-font-smoothing: grayscale !important;
   
-  /* Otimizações para nitidez */
+  /* Otimizações para nitidez cristalina */
   transform: translateZ(0) !important;
   backface-visibility: hidden !important;
   perspective: 1000px !important;
   
-  /* Prevenção de problemas de contraste */
+  /* Garantia total contra filtros interferentes */
   filter: none !important;
-  opacity: 1 !important;
+  backdrop-filter: none !important;
   
-  /* Transições suaves */
+  /* Máxima opacidade e visibilidade */
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  
+  /* Dimensões garantidas */
+  max-width: 100% !important;
+  height: auto !important;
+  
+  /* Transições suaves otimizadas */
   transition: opacity 0.3s ease, transform 0.3s ease !important;
+  
+  /* Prevenção de problemas de carregamento */
+  object-fit: cover !important;
+  object-position: center !important;
 }
 
-/* 🌟 Container de galeria - otimizações visuais */
+/* 🌟 Container de galeria - otimizações visuais MÁXIMAS */
 .space-gallery-figma {
   /* Renderização acelerada por hardware */
   transform: translateZ(0) !important;
