@@ -6,260 +6,390 @@
     <title>Galeria LEGO Naves - Gabriel Malheiros FAESA</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* ✅ ESTILOS ESPECÍFICOS - SEM CONFLITO COM REACT */
+        /* ✅ ESTILOS ISOLADOS - ZERO CONFLITOS COM REACT */
         .lego-gallery-page {
             min-height: 100vh;
-            background: var(--html-color-bg-primary);
+            background: var(--html-color-bg-primary, #ffffff);
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --lego-primary: #2563eb;
+            --lego-secondary: #1d4ed8;
+            --lego-success: #059669;
+            --lego-warning: #d97706;
+            --lego-danger: #dc2626;
         }
         
         .lego-gallery-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: var(--space-8) var(--space-4);
+            padding: 2rem 1rem;
         }
         
         .lego-gallery-header {
             text-align: center;
-            margin-bottom: var(--space-12);
-            padding: var(--space-8);
-            background: linear-gradient(135deg, var(--html-brand-primary), var(--html-brand-secondary));
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--lego-primary), var(--lego-secondary));
             color: white;
             border-radius: 16px;
-            box-shadow: var(--shadow-xl);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
         
         .lego-gallery-title {
-            font-size: var(--font-size-4xl);
+            font-size: 2.5rem;
             font-weight: 700;
-            margin-bottom: var(--space-4);
+            margin-bottom: 1rem;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         
         .lego-gallery-subtitle {
-            font-size: var(--font-size-lg);
+            font-size: 1.125rem;
             opacity: 0.95;
             max-width: 600px;
             margin: 0 auto;
+            line-height: 1.6;
         }
         
         .lego-gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: var(--space-8);
-            margin-bottom: var(--space-12);
+            gap: 2rem;
+            margin-bottom: 3rem;
         }
         
+        /* 🎨 CARDS OTIMIZADOS */
         .lego-card {
             background: white;
             border-radius: 20px;
-            box-shadow: var(--shadow-lg);
             overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
-            border: 1px solid rgba(37, 99, 235, 0.1);
+            border: 1px solid #e5e7eb;
         }
         
         .lego-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-xl);
-            border-color: var(--html-brand-primary);
+            transform: translateY(-4px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
         
         .lego-card-image-container {
             position: relative;
-            aspect-ratio: 4/3;
+            width: 100%;
+            height: 280px;
             overflow: hidden;
-            background: linear-gradient(45deg, #f0f9ff, #e0f2fe);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: linear-gradient(45deg, #f8fafc, #e2e8f0);
         }
         
+        /* ✅ SISTEMA DE FALLBACK INTELIGENTE */
         .lego-card-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.3s ease;
+            /* Optimizações visuais para casos onde há imagem */
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
         }
         
+        .lego-card-image.loaded {
+            transform: scale(1);
+        }
+        
+        .lego-card-image.error {
+            display: none !important;
+        }
+        
+        /* 🎨 PLACEHOLDERS VISUAIS MELHORADOS */
         .lego-card-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100%;
-            width: 100%;
             text-align: center;
-            font-weight: 600;
-            padding: var(--space-6);
+            font-family: system-ui, -apple-system, sans-serif;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%);
+            color: #4c1d95;
         }
         
-        .lego-card-placeholder.placeholder-1 {
-            background: linear-gradient(45deg, #e3f2fd, #bbdefb);
-            color: #1976d2;
+        .lego-card-placeholder.alpha {
+            background: linear-gradient(135deg, #bfdbfe 0%, #93c5fd 100%);
+            color: #1e40af;
         }
         
-        .lego-card-placeholder.placeholder-2 {
-            background: linear-gradient(45deg, #f3e5f5, #e1bee7);
-            color: #7b1fa2;
+        .lego-card-placeholder.beta {
+            background: linear-gradient(135deg, #fce7f3 0%, #f9a8d4 100%);
+            color: #be185d;
         }
         
-        .lego-card-placeholder.placeholder-3 {
-            background: linear-gradient(45deg, #e8f5e8, #c8e6c9);
-            color: #388e3c;
+        .lego-card-placeholder.gamma {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            color: #047857;
         }
         
-        .lego-card:hover .lego-card-image {
-            transform: scale(1.05);
+        .placeholder-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
         }
         
+        .placeholder-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .placeholder-subtitle {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+        
+        .placeholder-features {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        
+        .placeholder-instruction {
+            font-size: 0.625rem;
+            opacity: 0.5;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        /* 🎯 CONTEÚDO DOS CARDS */
         .lego-card-content {
-            padding: var(--space-6);
+            padding: 1.5rem;
         }
         
         .lego-card-title {
-            font-size: var(--font-size-xl);
+            font-size: 1.25rem;
             font-weight: 600;
-            color: var(--html-color-text-primary);
-            margin-bottom: var(--space-3);
+            color: #1f2937;
+            margin-bottom: 0.75rem;
         }
         
         .lego-card-description {
-            color: var(--html-color-text-secondary);
+            color: #6b7280;
             line-height: 1.6;
-            margin-bottom: var(--space-4);
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
         }
         
         .lego-card-specs {
-            background: var(--html-color-bg-secondary);
-            padding: var(--space-4);
+            background: #f9fafb;
+            padding: 1rem;
             border-radius: 12px;
-            margin-top: var(--space-4);
+            border: 1px solid #e5e7eb;
         }
         
         .lego-spec-item {
             display: flex;
             justify-content: space-between;
-            margin-bottom: var(--space-2);
-            font-size: var(--font-size-sm);
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+        }
+        
+        .lego-spec-item:last-child {
+            margin-bottom: 0;
         }
         
         .lego-spec-label {
             font-weight: 600;
-            color: var(--html-color-text-secondary);
+            color: #4b5563;
         }
         
         .lego-spec-value {
-            color: var(--html-brand-primary);
+            color: #1f2937;
             font-weight: 500;
         }
         
+        /* 📖 SEÇÃO HISTÓRIA */
         .lego-gallery-story {
             background: white;
-            padding: var(--space-8);
-            border-radius: 20px;
-            box-shadow: var(--shadow-md);
-            margin-top: var(--space-12);
-            border-left: 6px solid var(--html-brand-primary);
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
         
         .lego-story-title {
-            font-size: var(--font-size-2xl);
+            font-size: 1.875rem;
             font-weight: 700;
-            color: var(--html-brand-primary);
-            margin-bottom: var(--space-4);
+            color: var(--lego-primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
         }
         
         .lego-story-text {
-            font-size: var(--font-size-lg);
+            color: #374151;
             line-height: 1.7;
-            color: var(--html-color-text-primary);
-            margin-bottom: var(--space-4);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
         }
         
+        /* 🧭 NAVEGAÇÃO */
         .navigation-buttons {
             display: flex;
+            gap: 1rem;
             justify-content: center;
-            gap: var(--space-4);
-            margin-top: var(--space-8);
+            flex-wrap: wrap;
         }
         
         .nav-button {
-            padding: var(--space-4) var(--space-6);
-            background: var(--html-brand-primary);
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: var(--lego-primary);
             color: white;
             text-decoration: none;
             border-radius: 12px;
             font-weight: 600;
             transition: all 0.3s ease;
-            box-shadow: var(--shadow-md);
+            font-size: 0.875rem;
         }
         
         .nav-button:hover {
-            background: var(--html-brand-secondary);
+            background: var(--lego-secondary);
             transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
         
         .nav-button.secondary {
-            background: var(--html-color-bg-tertiary);
-            color: var(--html-color-text-primary);
-        }
-        
-        .nav-button.secondary:hover {
-            background: var(--html-color-text-muted);
+            background: #6b7280;
             color: white;
         }
         
-        /* 📱 Responsividade Mobile */
+        .nav-button.secondary:hover {
+            background: #4b5563;
+        }
+        
+        /* 📱 RESPONSIVIDADE */
         @media (max-width: 768px) {
+            .lego-gallery-container {
+                padding: 1rem 0.5rem;
+            }
+            
             .lego-gallery-grid {
                 grid-template-columns: 1fr;
-                gap: var(--space-6);
+                gap: 1.5rem;
             }
             
             .lego-gallery-title {
-                font-size: var(--font-size-3xl);
+                font-size: 2rem;
+            }
+            
+            .lego-gallery-header {
+                padding: 1.5rem;
+                margin-bottom: 2rem;
             }
             
             .navigation-buttons {
                 flex-direction: column;
                 align-items: center;
             }
+            
+            .nav-button {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+        }
+        
+        /* ✅ ANIMAÇÕES SUAVES */
+        .fade-in {
+            animation: fadeIn 0.6s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 🎯 STATUS INDICATOR */
+        .status-indicator {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: var(--lego-success);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .status-indicator.show {
+            display: block;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
     </style>
 </head>
 <body class="html-page lego-gallery-page">
+    <!-- 🎯 Indicador de Status -->
+    <div id="statusIndicator" class="status-indicator">
+        ✅ Galeria Carregada
+    </div>
+
     <div class="lego-gallery-container">
         <!-- 🎯 Cabeçalho da Galeria -->
-        <header class="lego-gallery-header">
+        <header class="lego-gallery-header fade-in">
             <h1 class="lego-gallery-title">🚀 Galeria Mini Naves LEGO</h1>
             <p class="lego-gallery-subtitle">
-                Coleção de mini naves espaciais LEGO que marcaram o início da minha jornada criativa com construções espaciais
+                Coleção de mini naves espaciais LEGO que marcaram o início da minha jornada criativa 
+                com construções espaciais. Cada mini nave representa um passo importante no desenvolvimento 
+                das técnicas que posteriormente usei para criar naves maiores e mais complexas.
             </p>
         </header>
 
-        <!-- 🖼️ Grid de Imagens -->
+        <!-- 🖼️ Grid de Imagens com Sistema Híbrido Seguro -->
         <div class="lego-gallery-grid">
-            <!-- Mini Nave 1 -->
-            <article class="lego-card">
+            <!-- Mini Nave Alpha -->
+            <article class="lego-card fade-in" data-nave="alpha">
                 <div class="lego-card-image-container">
                     <!-- ✅ SISTEMA HÍBRIDO ROBUSTO: Placeholder como padrão, imagem como enhancement -->
-                    <div class="lego-card-placeholder placeholder-1" id="placeholder-alpha">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">🚀</div>
-                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem; font-weight: 700;">Mini Nave Espacial Alpha</div>
-                        <div style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 0.5rem;">Primeira construção da série</div>
-                        <div style="font-size: 0.8rem; opacity: 0.7; text-align: center; line-height: 1.4;">
+                    <div class="lego-card-placeholder alpha" id="placeholder-alpha">
+                        <div class="placeholder-icon">🚀</div>
+                        <div class="placeholder-title">Mini Nave Espacial Alpha</div>
+                        <div class="placeholder-subtitle">Primeira construção da série</div>
+                        <div class="placeholder-features">
                             ✨ Design compacto com propulsores laterais<br>
                             🔴 Detalhes em vermelho e cinza<br>
                             ⚡ Primeira versão funcional
                         </div>
-                        <div style="font-size: 0.65rem; opacity: 0.5; margin-top: 1rem; padding: 0.5rem; background: rgba(255,255,255,0.3); border-radius: 8px;">
-                            💡 Sistema de fallback ativo - Sempre funcional
+                        <div class="placeholder-instruction">
+                            💡 Sistema de fallback ativo - Placeholder funcional garantido
                         </div>
                     </div>
                     
-                    <!-- Imagem real opcional (enhancement progressivo) -->
+                    <!-- Imagem real opcional (enhancement) -->
                     <img 
                         class="lego-card-image"
                         data-src="./assets/lego-naves/mini-nave-1.jpg"
@@ -269,18 +399,6 @@
                         onload="handleImageLoad(this, 'alpha')"
                         onerror="handleImageError(this, 'alpha')"
                     >
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">🚀</div>
-                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem; font-weight: 700;">Mini Nave Espacial Alpha</div>
-                        <div style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 0.5rem;">Primeira construção da série</div>
-                        <div style="font-size: 0.8rem; opacity: 0.7; text-align: center; line-height: 1.4;">
-                            ✨ Design compacto com propulsores laterais<br>
-                            🔴 Detalhes em vermelho e cinza<br>
-                            ⚡ Primeira versão funcional
-                        </div>
-                        <div style="font-size: 0.65rem; opacity: 0.5; margin-top: 1rem; padding: 0.5rem; background: rgba(255,255,255,0.3); border-radius: 8px;">
-                            � Para ver a imagem real, adicione: src/assets/lego-naves/mini-nave-1.jpg
-                        </div>
-                    </div>
                 </div>
                 <div class="lego-card-content">
                     <h2 class="lego-card-title">Mini Nave Espacial Alpha</h2>
@@ -305,25 +423,23 @@
                 </div>
             </article>
 
-            <!-- Mini Nave 2 -->
-            <article class="lego-card">
+            <!-- Mini Nave Beta -->
+            <article class="lego-card fade-in" data-nave="beta">
                 <div class="lego-card-image-container">
-                    <!-- ✅ SISTEMA HÍBRIDO ROBUSTO: Placeholder como padrão, imagem como enhancement -->
-                    <div class="lego-card-placeholder placeholder-2" id="placeholder-beta">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">🛸</div>
-                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem; font-weight: 700;">Mini Nave Espacial Beta</div>
-                        <div style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 0.5rem;">Segunda iteração com design complexo</div>
-                        <div style="font-size: 0.8rem; opacity: 0.7; text-align: center; line-height: 1.4;">
+                    <div class="lego-card-placeholder beta" id="placeholder-beta">
+                        <div class="placeholder-icon">🛸</div>
+                        <div class="placeholder-title">Mini Nave Espacial Beta</div>
+                        <div class="placeholder-subtitle">Segunda iteração com design complexo</div>
+                        <div class="placeholder-features">
                             ✨ Estrutura avançada multi-seções<br>
                             🌈 Múltiplas cores e detalhes<br>
                             ⚡ Sistema de propulsão duplo
                         </div>
-                        <div style="font-size: 0.65rem; opacity: 0.5; margin-top: 1rem; padding: 0.5rem; background: rgba(255,255,255,0.3); border-radius: 8px;">
-                            💡 Sistema de fallback ativo - Sempre funcional
+                        <div class="placeholder-instruction">
+                            💡 Sistema de fallback ativo - Placeholder funcional garantido
                         </div>
                     </div>
                     
-                    <!-- Imagem real opcional (enhancement progressivo) -->
                     <img 
                         class="lego-card-image"
                         data-src="./assets/lego-naves/mini-nave-2.jpg"
@@ -333,18 +449,6 @@
                         onload="handleImageLoad(this, 'beta')"
                         onerror="handleImageError(this, 'beta')"
                     >
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">🛸</div>
-                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem; font-weight: 700;">Mini Nave Espacial Beta</div>
-                        <div style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 0.5rem;">Segunda iteração com design complexo</div>
-                        <div style="font-size: 0.8rem; opacity: 0.7; text-align: center; line-height: 1.4;">
-                            ✨ Estrutura avançada multi-seções<br>
-                            🌈 Múltiplas cores e detalhes<br>
-                            ⚡ Sistema de propulsão duplo
-                        </div>
-                        <div style="font-size: 0.65rem; opacity: 0.5; margin-top: 1rem; padding: 0.5rem; background: rgba(255,255,255,0.3); border-radius: 8px;">
-                            � Para ver a imagem real, adicione: src/assets/lego-naves/mini-nave-2.jpg
-                        </div>
-                    </div>
                 </div>
                 <div class="lego-card-content">
                     <h2 class="lego-card-title">Mini Nave Espacial Beta</h2>
@@ -369,25 +473,23 @@
                 </div>
             </article>
 
-            <!-- Mini Nave 3 -->
-            <article class="lego-card">
+            <!-- Mini Nave Gamma -->
+            <article class="lego-card fade-in" data-nave="gamma">
                 <div class="lego-card-image-container">
-                    <!-- ✅ SISTEMA HÍBRIDO ROBUSTO: Placeholder como padrão, imagem como enhancement -->
-                    <div class="lego-card-placeholder placeholder-3" id="placeholder-gamma">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">🛰️</div>
-                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem; font-weight: 700;">Mini Nave Espacial Gamma</div>
-                        <div style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 0.5rem;">Terceira e mais avançada da série</div>
-                        <div style="font-size: 0.8rem; opacity: 0.7; text-align: center; line-height: 1.4;">
+                    <div class="lego-card-placeholder gamma" id="placeholder-gamma">
+                        <div class="placeholder-icon">🛰️</div>
+                        <div class="placeholder-title">Mini Nave Espacial Gamma</div>
+                        <div class="placeholder-subtitle">Terceira e mais avançada da série</div>
+                        <div class="placeholder-features">
                             ✨ Design único assimétrico<br>
                             🔧 Detalhes técnicos refinados<br>
                             ⚡ Configuração avançada
                         </div>
-                        <div style="font-size: 0.65rem; opacity: 0.5; margin-top: 1rem; padding: 0.5rem; background: rgba(255,255,255,0.3); border-radius: 8px;">
-                            💡 Sistema de fallback ativo - Sempre funcional
+                        <div class="placeholder-instruction">
+                            💡 Sistema de fallback ativo - Placeholder funcional garantido
                         </div>
                     </div>
                     
-                    <!-- Imagem real opcional (enhancement progressivo) -->
                     <img 
                         class="lego-card-image"
                         data-src="./assets/lego-naves/mini-nave-3.jpg"
@@ -397,18 +499,6 @@
                         onload="handleImageLoad(this, 'gamma')"
                         onerror="handleImageError(this, 'gamma')"
                     >
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">🛰️</div>
-                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem; font-weight: 700;">Mini Nave Espacial Gamma</div>
-                        <div style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 0.5rem;">Terceira e mais avançada da série</div>
-                        <div style="font-size: 0.8rem; opacity: 0.7; text-align: center; line-height: 1.4;">
-                            ✨ Design único assimétrico<br>
-                            🔧 Detalhes técnicos refinados<br>
-                            ⚡ Configuração avançada
-                        </div>
-                        <div style="font-size: 0.65rem; opacity: 0.5; margin-top: 1rem; padding: 0.5rem; background: rgba(255,255,255,0.3); border-radius: 8px;">
-                            � Para ver a imagem real, adicione: src/assets/lego-naves/mini-nave-3.jpg
-                        </div>
-                    </div>
                 </div>
                 <div class="lego-card-content">
                     <h2 class="lego-card-title">Mini Nave Espacial Gamma</h2>
@@ -435,7 +525,7 @@
         </div>
 
         <!-- 📖 História das Mini Naves -->
-        <section class="lego-gallery-story">
+        <section class="lego-gallery-story fade-in">
             <h2 class="lego-story-title">🏗️ A Evolução das Construções LEGO</h2>
             <p class="lego-story-text">
                 <strong>Essas mini naves de LEGO foram o começo de eu criar as naves grandes de LEGO.</strong> 
@@ -455,12 +545,12 @@
         </section>
 
         <!-- 🧭 Navegação -->
-        <nav class="navigation-buttons">
+        <nav class="navigation-buttons fade-in">
             <a href="index.html" class="nav-button">
                 🏠 Voltar ao Portfolio
             </a>
-            <a href="exemplo-html-lego-naves.html" class="nav-button secondary">
-                🔍 Ver Exemplo HTML
+            <a href="#react-gallery" class="nav-button secondary" onclick="goToReactGallery()">
+                ⚛️ Ver no React
             </a>
         </nav>
     </div>
@@ -478,8 +568,18 @@
 
             init() {
                 console.log('🚀 Inicializando Galeria LEGO com sistema híbrido seguro');
+                this.showStatus('Galeria Carregada');
                 this.setupLazyLoading();
                 this.addAnimations();
+            }
+
+            showStatus(message) {
+                const indicator = document.getElementById('statusIndicator');
+                if (indicator) {
+                    indicator.textContent = `✅ ${message}`;
+                    indicator.classList.add('show');
+                    setTimeout(() => indicator.classList.remove('show'), 3000);
+                }
             }
 
             setupLazyLoading() {
@@ -504,9 +604,7 @@
             }
 
             loadImage(img) {
-                const naveName = img.closest('[data-nave]')?.dataset.nave || 
-                               img.dataset.src.includes('mini-nave-1') ? 'alpha' :
-                               img.dataset.src.includes('mini-nave-2') ? 'beta' : 'gamma';
+                const naveName = img.closest('[data-nave]')?.dataset.nave;
                 const attempts = this.imageAttempts.get(naveName) || 0;
 
                 if (attempts >= this.maxRetries) {
@@ -544,6 +642,8 @@
                     placeholder.style.display = 'none';
                 }, 300);
             }
+
+            gallery.showStatus(`Imagem ${naveName} carregada`);
         }
 
         function handleImageError(img, naveName) {
@@ -558,6 +658,11 @@
             }
         }
 
+        function goToReactGallery() {
+            // Navegar para a galeria React na seção Figma
+            window.location.href = 'index.html#screen=figma';
+        }
+
         // 🎯 Inicializar quando DOM estiver pronto
         let gallery;
         document.addEventListener('DOMContentLoaded', () => {
@@ -568,80 +673,14 @@
         window.addEventListener('error', (e) => {
             console.log('🛡️ Erro capturado pelo sistema de fallback:', e.message);
         });
-    </script>
-                
-                // ✅ Evento de carregamento bem-sucedido
-                img.addEventListener('load', function() {
-                    clearTimeout(timeoutId);
-                    console.log(`✅ Mini Nave ${naveNumber} carregada com sucesso!`);
-                    this.style.display = 'block';
-                    if (placeholder) {
-                        placeholder.style.display = 'none';
-                    }
-                });
-                
-                // ❌ Evento de erro - mostra placeholder imediatamente
-                img.addEventListener('error', function() {
-                    clearTimeout(timeoutId);
-                    console.log(`❌ Erro ao carregar Mini Nave ${naveNumber}, exibindo placeholder`);
-                    this.style.display = 'none';
-                    if (placeholder && placeholder.classList.contains('lego-card-placeholder')) {
-                        placeholder.style.display = 'flex';
-                    }
-                });
-                
-                // 🔍 Verificação inicial imediata
-                if (img.complete) {
-                    if (img.naturalHeight === 0 || img.naturalWidth === 0) {
-                        // Imagem "carregada" mas sem dimensões = erro
-                        img.dispatchEvent(new Event('error'));
-                    } else {
-                        // Imagem realmente carregada
-                        img.dispatchEvent(new Event('load'));
-                    }
-                }
+
+        // ✅ Progressive Web App features
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                // Service worker opcional para cache
+                console.log('💾 Service Worker disponível para otimizações futuras');
             });
         }
-
-        // 🖱️ Funcionalidade de clique para expandir (otimizada para sistema híbrido)
-        function initializeImageInteraction() {
-            document.querySelectorAll('.lego-card-image, .lego-card-placeholder').forEach(element => {
-                element.style.cursor = 'pointer';
-                element.addEventListener('click', function() {
-                    if (this.classList.contains('lego-card-image')) {
-                        // Para imagens reais - zoom suave
-                        if (this.style.transform === 'scale(1.2)') {
-                            this.style.transform = 'scale(1)';
-                            this.style.cursor = 'zoom-in';
-                        } else {
-                            this.style.transform = 'scale(1.2)';
-                            this.style.cursor = 'zoom-out';
-                        }
-                        this.style.transition = 'transform 0.3s ease';
-                    } else {
-                        // Para placeholders - efeito hover
-                        this.style.transform = this.style.transform === 'scale(1.05)' ? 'scale(1)' : 'scale(1.05)';
-                        this.style.transition = 'transform 0.3s ease';
-                    }
-                });
-            });
-        }
-
-        // 🚀 Inicialização quando DOM carrega
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 Iniciando Galeria LEGO Naves com sistema híbrido...');
-            
-            // Inicializar sistema híbrido de imagens
-            initializeHybridImageSystem();
-            
-            // Inicializar interações
-            initializeImageInteraction();
-            
-            console.log('✅ Galeria LEGO Naves carregada com sucesso!');
-            console.log('📁 Imagens esperadas em: ./src/assets/lego-naves/');
-            console.log('🎯 Sistema híbrido: Imagens reais com fallback para placeholders');
-            console.log('🔧 Para adicionar imagens: Coloque mini-nave-1.jpg, mini-nave-2.jpg, mini-nave-3.jpg na pasta');
-        });
     </script>
 </body>
 </html>
