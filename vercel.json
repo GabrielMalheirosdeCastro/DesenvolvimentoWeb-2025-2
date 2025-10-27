@@ -1,7 +1,8 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "dist",
+  "outputDirectory": "dist", 
   "framework": "vite",
+  "installCommand": "npm ci",
   "rewrites": [
     {
       "source": "/tipografia.html",
@@ -12,8 +13,8 @@
       "destination": "/lab-fundamentos-css.html"
     },
     {
-      "source": "/galeria-lego-naves.html",
-      "destination": "/galeria-lego-naves.html"
+      "source": "/galeria-naves-espaciais.html",
+      "destination": "/galeria-naves-espaciais.html"
     },
     {
       "source": "/(.*)",
