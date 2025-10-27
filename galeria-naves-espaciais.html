@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="html-page">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria Naves Espaciais - Gabriel Malheiros FAESA</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ✅ ESTILOS ESPECÍFICOS - SEM CONFLITO COM REACT */
+        .naves-gallery-page {
+            min-height: 100vh;
+            background: var(--html-color-bg-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        
+        .naves-gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-4);
+        }
+        
+        .naves-gallery-header {
+            text-align: center;
+            margin-bottom: var(--space-12);
+            padding: var(--space-8);
+            background: linear-gradient(135deg, #1a202c, #2d3748, #4a5568);
+            color: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .naves-gallery-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="1" fill="white" opacity="0.3"/><circle cx="80" cy="40" r="0.5" fill="white" opacity="0.5"/><circle cx="40" cy="80" r="0.8" fill="white" opacity="0.4"/><circle cx="70" cy="70" r="0.3" fill="white" opacity="0.6"/></svg>') repeat;
+            z-index: 1;
+        }
+        
+        .naves-gallery-title {
+            font-size: var(--font-size-4xl);
+            font-weight: 700;
+            margin-bottom: var(--space-4);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .naves-gallery-subtitle {
+            font-size: var(--font-size-lg);
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .naves-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-8);
+            margin-bottom: var(--space-12);
+        }
+        
+        .nave-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 2px solid var(--html-color-border);
+        }
+        
+        .nave-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .nave-card-image-container {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1a202c, #2d3748);
+        }
+        
+        .nave-card-placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: var(--space-6);
+            transition: all 0.3s ease;
+        }
+        
+        .nave-card-placeholder.destroyer {
+            background: linear-gradient(135deg, #1a202c, #374151, #6b7280);
+            color: #f9fafb;
+        }
+        
+        .nave-card-placeholder.acclamator {
+            background: linear-gradient(135deg, #374151, #4b5563, #6b7280);
+            color: #f3f4f6;
+        }
+        
+        .nave-card-placeholder.fleet {
+            background: linear-gradient(135deg, #111827, #1f2937, #374151);
+            color: #e5e7eb;
+        }
+        
+        .nave-card-placeholder.venator {
+            background: linear-gradient(135deg, #7c2d12, #dc2626, #ef4444);
+            color: #fef2f2;
+        }
+        
+        .nave-card:hover .nave-card-image {
+            transform: scale(1.05);
+        }
+        
+        .nave-card-content {
+            padding: var(--space-6);
+        }
+        
+        .nave-card-title {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            color: var(--html-color-text-primary);
+            margin-bottom: var(--space-3);
+        }
+        
+        .nave-card-description {
+            color: var(--html-color-text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--space-4);
+        }
+        
+        .nave-card-specs {
+            background: var(--html-color-bg-secondary);
+            padding: var(--space-4);
+            border-radius: 12px;
+            margin-top: var(--space-4);
+        }
+        
+        .nave-spec-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--space-2);
+            font-size: var(--font-size-sm);
+        }
+        
+        .nave-spec-label {
+            font-weight: 600;
+            color: var(--html-color-text-secondary);
+        }
+        
+        .nave-spec-value {
+            color: var(--html-color-text-primary);
+            font-weight: 500;
+        }
+        
+        .evolution-section {
+            background: linear-gradient(135deg, var(--html-color-bg-secondary), white);
+            padding: var(--space-12);
+            border-radius: 16px;
+            margin-top: var(--space-12);
+            text-align: center;
+        }
+        
+        .evolution-title {
+            font-size: var(--font-size-3xl);
+            font-weight: 700;
+            color: var(--html-brand-primary);
+            margin-bottom: var(--space-6);
+        }
+        
+        .evolution-description {
+            font-size: var(--font-size-lg);
+            color: var(--html-color-text-secondary);
+            max-width: 800px;
+            margin: 0 auto var(--space-8);
+            line-height: 1.7;
+        }
+        
+        .navigation-links {
+            display: flex;
+            gap: var(--space-4);
+            justify-content: center;
+            margin-top: var(--space-8);
+            flex-wrap: wrap;
+        }
+        
+        .nav-link {
+            display: inline-flex;
+            align-items: center;
+            padding: var(--space-3) var(--space-6);
+            background: var(--html-brand-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background: var(--html-brand-secondary);
+            transform: translateY(-2px);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .naves-gallery-container {
+                padding: var(--space-4) var(--space-2);
+            }
+            
+            .naves-gallery-title {
+                font-size: var(--font-size-2xl);
+            }
+            
+            .naves-gallery-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-4);
+            }
+            
+            .navigation-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        /* Animações */
+        .nave-card-placeholder {
+            animation: pulseGlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulseGlow {
+            0%, 100% { 
+                box-shadow: inset 0 0 20px rgba(255,255,255,0.1); 
+            }
+            50% { 
+                box-shadow: inset 0 0 30px rgba(255,255,255,0.2); 
+            }
+        }
+    </style>
+</head>
+<body class="naves-gallery-page">
+    <div class="naves-gallery-container">
+        <header class="naves-gallery-header">
+            <h1 class="naves-gallery-title">🚀 Galeria de Naves Espaciais Épicas</h1>
+            <p class="naves-gallery-subtitle">
+                Explore a majestosidade das mais impressionantes naves da galáxia - 
+                Star Destroyers, Acclamators e frotas de combate em detalhes técnicos únicos
+            </p>
+        </header>
+        
+        <div class="naves-gallery-grid">
+            <!-- Star Destroyer Venator Class -->
+            <article class="nave-card">
+                <div class="nave-card-image-container">
+                    <div class="nave-card-placeholder destroyer" id="placeholder-destroyer">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">⭐</div>
+                        <div style="font-size: 1.4rem; margin-bottom: 0.5rem; font-weight: 700;">Star Destroyer - Venator Class</div>
+                        <div style="font-size: 1rem; opacity: 0.9; margin-bottom: 0.5rem;">A arma definitiva da República</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8; text-align: center; line-height: 1.5;">
+                            ⚔️ Comprimento: 1.137 metros<br>
+                            🛡️ Turbolasers: 52 canhões pesados<br>
+                            🚁 Caças: 420 starfighters<br>
+                            ⚡ Tripulação: 7.400 clones
+                        </div>
+                        <div style="font-size: 0.7rem; opacity: 0.6; margin-top: 1rem; padding: 0.5rem; background: rgba(255,255,255,0.2); border-radius: 8px;">
+                            💫 Design técnico com corte transversal detalhado
+                        </div>
+                    </div>
+                </div>
+                <div class="nave-card-content">
+                    <h2 class="nave-card-title">Star Destroyer - Venator Class</h2>
+                    <p class="nave-card-description">
+                        O backbone da frota da República Clone Wars. Esta nave capital combina 
+                        poder de fogo devastador com capacidade de transporte massiva, 
+                        servindo como porta-aviões e destroyer simultaneamente.
+                    </p>
+                    <div class="nave-card-specs">
+                        <div class="nave-spec-item">
+                            <span class="nave-spec-label">Classe:</span>
+                            <span class="nave-spec-value">Star Destroyer Venator</span>
+                        </div>
+                        <div class="nave-spec-item">
+                            <span class="nave-spec-label">Comprimento:</span>
+                            <span class="nave-spec-value">1.137 metros</span>
+                        </div>
+                        <div class="nave-spec-item">
+                            <span class="nave-spec-label">Armamento:</span>
+                            <span class="nave-spec-value">52 Turbolasers pesados</span>
+                        </div>
+                        <div class="nave-spec-item">
+                            <span class="nave-spec-label">Hangar:</span>
+                            <span class="nave-spec-value">420 Starfighters</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Acclamator Class Assault Ship -->
+            <article class="nave-card">
+                <div class="nave-card-image-container">
+                    <div class="nave-card-placeholder acclamator" id="placeholder-acclamator">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">🛸</div>
+                        <div style="font-size: 1.4rem; margin-bottom: 0.5rem; font-weight: 700;">Acclamator Class</div>
+                        <div style="font-size: 1rem; opacity: 0.9; margin-bottom: 0.5rem;">Transporte de Assalto Republicano</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8; text-align: center; line-height: 1.5;">
+                            ⚔️ Comprimento: 752 metros<br>
+                            🪖 Tropas: 16.000 clones<br>
+                            🚗 Veículos: AT-TEs, LAATs<br>
+                            ⚡ Missão: Invasões planetárias
+                        </div>
+                        <div style="font-size: 0.7rem; opacity: 0.6; margin-top: 1rem; padding: 0.5rem; background: rgba(255,255,255,0.2); border-radius: 8px;">
+                            💫 Corte técnico revelando interior complexo
+                        </div>
+                    </div>
+                </div>
+                <div class="nave-card-content">
+                    <h2 class="nave-card-title">Acclamator Class Assault Ship</h2>
+                    <p class="nave-card-description">
+                        Nave de assalto especializada em invasões planetárias. 
+                        Design otimizado para transporte rápido de tropas clone e 
+                        veículos blindados diretamente para zonas de combate.
+                    </p>
+                    <div class="nave-card-specs">
+                        <div class="nave-spec-item">
+                            <span class="nave-spec-label">Classe:</span>
+                            <span class="nave-spec-value">Acclamator I</span>
+                        </div>
+                        <div class="nave-spec-item">
+                            <span class="nave-spec-label">Comprimento:</span>
+                            <span class="nave-spec-value">752 metros</span>
+                        </div>
+                        <div class="nave-spec-item">
+                            <span class="nave-spec-label">Tropas:</span>
+                            <span class="nave-spec-value">16.000 soldados clone</span>
+                        </div>
+                        <div class="nave-spec-item">
+                            <span class="nave-spec-label">Especialidade:</span>
+                            <span class="nave-spec-value">Invasão planetária</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Frota de Combate -->
+            <article class="nave-card">
+                <div class="nave-card-image-container">
+                    <div class="nave-card-placeholder fleet" id="placeholder-fleet">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">🌌</div>
+                        <div style="font-size: 1.4rem; margin-bottom: 0.5rem; font-weight: 700;">Frota de Combate Militar</div>
+                        <div style="font-size: 1rem; opacity: 0.9; margin-bottom: 0.5rem;">Formação tática avançada</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8; text-align: center; line-height: 1.5;">
+                            ⚔️ Naves: Múltiplas classes<br>
+                            🛡️ Formação: Linha de batalha<br>
+                            🎯 Tática: Superioridade espacial<br>
+                            ⚡ Comando: Coordenado
+                        </div>
+                        <div style="font-size: 0.7rem; opacity: 0.6; margin-top: 1rem; padding: 0.5rem; background: rgba(255,255,255,0.2); border-radius: 8px;">
+                            💫 Esquadra em formação de combate
+                        </div>
+                    </div>
+                </div>
+                <div class="nave-card-content">
+                    <h2 class="nave-card-title">Frota de Combate Militar</h2>
+                    <p class="nave-card-description">
+                        Formação tática de múltiplas naves militares em esquadra de combate. 
+                        Demonstra a coordenação e poder combinado necessários para 
+                        dominação do espaço em conflitos galácticos.
+                    </p>
+                    <div class="nave-card-specs">
+                        <div class="nave-spec-item">
+                            <span class="nave-spec-label">Formação:</span>
+                            <span class="nave-spec-value">Esquadra de batalha</span>
+                        </div>
+                        <div class="nave-spec-item">
+                            <span class="nave-spec-label">Composição:</span>
+                            <span class="nave-spec-value">Classes mistas</span>
+                        </div>
+                        <div class="nave-spec-item">
+                            <span class="nave-spec-label">Tática:</span>
+                            <span class="nave-spec-value">Linha de frente</span>
+                        </div>
+                        <div class="nave-spec-item">
+                            <span class="nave-spec-label">Objetivo:</span>
+                            <span class="nave-spec-value">Superioridade espacial</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Classe Venator Republicana -->
+            <article class="nave-card">
+                <div class="nave-card-image-container">
+                    <div class="nave-card-placeholder venator" id="placeholder-venator">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">🔥</div>
+                        <div style="font-size: 1.4rem; margin-bottom: 0.5rem; font-weight: 700;">República Venator</div>
+                        <div style="font-size: 1rem; opacity: 0.9; margin-bottom: 0.5rem;">Comando e Controle</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8; text-align: center; line-height: 1.5;">
+                            ⚔️ Status: Nave capital<br>
+                            🛡️ Torre: Comando elevado<br>
+                            🎯 Livery: Marcas republicanas<br>
+                            ⚡ Role: Flagship
+                        </div>
+                        <div style="font-size: 0.7rem; opacity: 0.6; margin-top: 1rem; padding: 0.5rem; background: rgba(255,255,255,0.2); border-radius: 8px;">
+                            💫 Configuração com pintura de guerra
+                        </div>
+                    </div>
+                </div>
+                <div class="nave-card-content">
+                    <h2 class="nave-card-title">República Venator - Flagship</h2>
+                    <p class="nave-card-description">
+                        Versão comando da classe Venator com livery republicana distintiva. 
+                        Serve como nave-almirante coordenando operações de frota e 
+                        campanhas militares em larga escala.
+                    </p>
+                    <div class="nave-card-specs">
+                        <div class="nave-spec-item">
+                            <span class="nave-spec-label">Versão:</span>
+                            <span class="nave-spec-value">Comando Republicano</span>
+                        </div>
+                        <div class="nave-spec-item">
+                            <span class="nave-spec-label">Markings:</span>
+                            <span class="nave-spec-value">Livery oficial</span>
+                        </div>
+                        <div class="nave-spec-item">
+                            <span class="nave-spec-label">Função:</span>
+                            <span class="nave-spec-value">Nave-almirante</span>
+                        </div>
+                        <div class="nave-spec-item">
+                            <span class="nave-spec-label">Comando:</span>
+                            <span class="nave-spec-value">Operações de frota</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+        
+        <section class="evolution-section">
+            <h2 class="evolution-title">🌟 A Majestosidade do Design Espacial</h2>
+            <p class="evolution-description">
+                Estas naves representam o ápice da engenharia militar galáctica. Cada design combina 
+                funcionalidade tática com estética imponente, criando máquinas de guerra que são 
+                simultaneamente funcionais e inspiradoras. Do corte técnico detalhado do Star Destroyer 
+                às formações coordenadas de frotas de combate, cada imagem revela a complexidade e 
+                grandeza da guerra espacial em uma galáxia distante.
+            </p>
+            
+            <div class="navigation-links">
+                <a href="/" class="nav-link">🏠 Voltar ao Portfolio</a>
+                <a href="/tipografia.html" class="nav-link">📝 Ver Laboratório Tipografia</a>
+                <a href="/galeria-lego-naves.html" class="nav-link">🧱 Galeria LEGO Original</a>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

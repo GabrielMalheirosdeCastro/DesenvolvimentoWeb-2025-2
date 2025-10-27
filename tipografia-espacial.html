@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratório 2 - Tipografia Espacial | Gabriel Malheiros FAESA</title>
+    <link rel="stylesheet" href="tipografia-isolada.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <meta name="description" content="Laboratório 2 de Tipografia Espacial - Gabriel Malheiros, demonstrando competências em CSS avançado com tema Star Wars">
+    <meta name="author" content="Gabriel Malheiros de Castro">
+    <!-- Garantia de isolamento total -->
+    <style>
+        /* Reset garantido para a página */
+        * { box-sizing: border-box !important; }
+        html, body { 
+            margin: 0 !important; 
+            padding: 0 !important; 
+            font-size: 16px !important;
+            line-height: 1.6 !important;
+        }
+    </style>
+</head>
+<body class="pagina-tipografia">
+    <!-- Banner Pessoal Especial -->
+    <section class="banner-pessoal">
+        <div class="container-banner">
+            <h1 class="titulo-pessoal">Gabriel Malheiros de Castro</h1>
+            <p class="mensagem-especial">
+                🌟 "Sou um autista buscando fazer meu melhor para todos e ser alguém de confiança" 🌟
+            </p>
+            <p class="subtitulo-banner">Estudante FAESA | Laboratório 2 - Tipografia Espacial</p>
+        </div>
+    </section>
+
+    <header class="header-principal">
+        <h1>Tipografia na Web - Tema Espacial</h1>
+        <p class="subtitulo">Explorando fontes com inspiração galáctica</p>
+        <div class="lab-info">
+            <span class="lab-numero">Laboratório 2</span>
+            <span class="tema">Tipografia & Star Wars</span>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Seção Objetivos -->
+        <section class="objetivos">
+            <h2>🚀 Objetivos do Laboratório Espacial</h2>
+            <div class="objetivo-card">
+                <h3>Objetivo Principal</h3>
+                <p>Dominar propriedades tipográficas aplicadas a conteúdo de ficção científica, criando interfaces imersivas inspiradas no universo Star Wars com foco em legibilidade e impacto visual.</p>
+            </div>
+            
+            <div class="objetivos-especificos">
+                <div class="objetivo-item">
+                    <h4>⭐ Font Family</h4>
+                    <p>Aplicar famílias tipográficas que evoquem o universo espacial</p>
+                </div>
+                <div class="objetivo-item">
+                    <h4>🛸 Font Weight & Style</h4>
+                    <p>Utilizar pesos e estilos para hierarquia em conteúdo técnico militar</p>
+                </div>
+                <div class="objetivo-item">
+                    <h4>🌌 Text Properties</h4>
+                    <p>Manipular alinhamento, espaçamento e decoração para tema espacial</p>
+                </div>
+                <div class="objetivo-item">
+                    <h4>⚔️ Color Schemes</h4>
+                    <p>Implementar paletas que remetam às naves e facções galácticas</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Demonstrações de Propriedades -->
+        <section class="demonstracoes-tipografia">
+            <h2>⚡ Propriedades CSS em Ação</h2>
+
+            <div class="propriedade-demo">
+                <h3>font-family</h3>
+                <p class="font-roboto">
+                    <strong>Roboto (República):</strong> A tipografia limpa e funcional das forças republicanas, utilizada em interfaces de comando e sistemas táticos dos Star Destroyers.
+                </p>
+                <p class="font-poppins">
+                    <strong>Poppins (Império):</strong> Fonte moderna e imponente, refletindo a grandeza arquitetural do Império Galáctico em suas superestruturas militares.
+                </p>
+                <p class="font-orbitron">
+                    <strong>Orbitron (Tecnologia):</strong> Tipografia futurística para sistemas avançados, displays de naves e interfaces de combate espacial.
+                </p>
+                <code>font-family: 'Orbitron', 'Roboto', sans-serif;</code>
+            </div>
+
+            <div class="propriedade-demo">
+                <h3>font-size & font-weight</h3>
+                <p class="size-small weight-light">
+                    Especificações técnicas (12px, weight: 300): Dados de sensores e telemetria das naves Acclamator
+                </p>
+                <p class="size-medium weight-regular">
+                    Comunicações padrão (16px, weight: 400): Relatórios de missão das frotas republicanas
+                </p>
+                <p class="size-large weight-bold">
+                    Alertas de combate (20px, weight: 700): ALERTA VERMELHO - Star Destroyer aproximando
+                </p>
+                <p class="size-xlarge weight-black">
+                    Comando supremo (24px, weight: 900): ORDEM IMPERIAL EXECUTIVA
+                </p>
+                <code>font-weight: 700; /* bold para alertas militares */</code>
+            </div>
+
+            <div class="propriedade-demo">
+                <h3>line-height</h3>
+                <p class="line-tight">
+                    Briefing tático compacto (1.2): Star Destroyer classe Venator aproximando setor 7. Esquadrões de caças TIE em formação de ataque. Ativação de escudos defletores confirmada. Turbolasers carregados.
+                </p>
+                <p class="line-normal">
+                    Relatório de missão padrão (1.6): A frota republicana estabeleceu perímetro defensivo no sistema Coruscant. Naves classe Acclamator posicionadas para cobertura de tropas terrestres. Comunicações com comando central mantidas estáveis.
+                </p>
+                <p class="line-loose">
+                    Transmissão diplomática (2.0): Em nome do Senado Galáctico e da República, formalizamos o pedido de cessar-fogo imediato. Negociações podem ser conduzidas em território neutro com garantias de segurança para ambas as facções.
+                </p>
+                <code>line-height: 1.6; /* ideal para leitura de relatórios */</code>
+            </div>
+
+            <div class="propriedade-demo">
+                <h3>text-align</h3>
+                <p class="align-left">✊ República: Alinhamento à esquerda - Ordem e disciplina</p>
+                <p class="align-center">⚔️ Guerra: Centralizado - Neutralidade no conflito</p>
+                <p class="align-right">👑 Império: À direita - Autoridade e hierarquia</p>
+                <p class="align-justify">🌌 Tratados Galácticos: Texto justificado demonstra a formalidade e solenidade dos documentos oficiais que regem as relações entre sistemas estelares, planetas membros e facções em conflito através da galáxia, estabelecendo protocolos diplomáticos rigorosos.</p>
+                <code>text-align: center; /* para títulos de seção imperial */</code>
+            </div>
+        </section>
+
+        <!-- Seção Temática Star Wars -->
+        <section class="tema-espacial">
+            <h2>🌟 Análise Tipográfica das Naves</h2>
+            
+            <div class="nave-analise">
+                <h3 class="nave-titulo destroyer">⭐ Star Destroyer - Venator Class</h3>
+                <div class="nave-conteudo">
+                    <p class="nave-descricao">
+                        O <strong>Star Destroyer classe Venator</strong> representa o ápice da engenharia militar republicana. 
+                        Com seus <em>1.137 metros de comprimento</em>, esta nave capital combina poder de fogo 
+                        devastador com capacidade logística impressionante.
+                    </p>
+                    <div class="especificacoes-nave">
+                        <h4>Especificações Técnicas:</h4>
+                        <ul>
+                            <li><span class="spec-label">Comprimento:</span> 1.137 metros</li>
+                            <li><span class="spec-label">Armamento:</span> 52 turbolasers pesados</li>
+                            <li><span class="spec-label">Hangar:</span> 420 starfighters</li>
+                            <li><span class="spec-label">Tripulação:</span> 7.400 soldados clone</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nave-analise">
+                <h3 class="nave-titulo acclamator">🛸 Acclamator Class Assault Ship</h3>
+                <div class="nave-conteudo">
+                    <p class="nave-descricao">
+                        A nave <strong>Acclamator Class</strong> foi projetada especificamente para <em>invasões planetárias</em>. 
+                        Seu design otimizado permite o transporte rápido de <u>16.000 soldados clone</u> 
+                        diretamente para zonas de combate.
+                    </p>
+                    <div class="especificacoes-nave">
+                        <h4>Capacidades Militares:</h4>
+                        <ul>
+                            <li><span class="spec-label">Tropas:</span> 16.000 soldados clone</li>
+                            <li><span class="spec-label">Veículos:</span> AT-TE, LAAT/i</li>
+                            <li><span class="spec-label">Missão:</span> Assalto planetário</li>
+                            <li><span class="spec-label">Velocidade:</span> Classe 0.6 hyperdrive</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nave-analise">
+                <h3 class="nave-titulo frota">🌌 Frotas de Combate Organizadas</h3>
+                <div class="nave-conteudo">
+                    <p class="nave-descricao">
+                        As <strong>formações de frota</strong> demonstram a <em>supremacia tática</em> necessária 
+                        para controle espacial. Cada esquadrão coordenado representa anos de 
+                        <u>treinamento militar especializado</u>.
+                    </p>
+                    <div class="especificacoes-nave">
+                        <h4>Composição Tática:</h4>
+                        <ul>
+                            <li><span class="spec-label">Comando:</span> Star Destroyer flagship</li>
+                            <li><span class="spec-label">Escolta:</span> Cruisers de apoio</li>
+                            <li><span class="spec-label">Suporte:</span> Corvettes rápidas</li>
+                            <li><span class="spec-label">Cobertura:</span> Esquadrões de caças</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Cores Temáticas -->
+        <section class="cores-tematicas">
+            <h2>🎨 Paleta de Cores Galáctica</h2>
+            
+            <div class="paleta-grupo">
+                <h3>República Galáctica</h3>
+                <div class="cores-demonstracao">
+                    <div class="cor-sample republica-azul">
+                        <span class="cor-nome">Azul República</span>
+                        <span class="cor-hex">#2563eb</span>
+                    </div>
+                    <div class="cor-sample republica-dourado">
+                        <span class="cor-nome">Dourado Clone</span>
+                        <span class="cor-hex">#f59e0b</span>
+                    </div>
+                    <div class="cor-sample republica-branco">
+                        <span class="cor-nome">Branco Venator</span>
+                        <span class="cor-hex">#ffffff</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="paleta-grupo">
+                <h3>Império Galáctico</h3>
+                <div class="cores-demonstracao">
+                    <div class="cor-sample imperio-cinza">
+                        <span class="cor-nome">Cinza Imperial</span>
+                        <span class="cor-hex">#6b7280</span>
+                    </div>
+                    <div class="cor-sample imperio-preto">
+                        <span class="cor-nome">Preto Sith</span>
+                        <span class="cor-hex">#111827</span>
+                    </div>
+                    <div class="cor-sample imperio-vermelho">
+                        <span class="cor-nome">Vermelho Laser</span>
+                        <span class="cor-hex">#dc2626</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusão -->
+        <section class="conclusao-laboratorio">
+            <h2>🏆 Conclusão do Laboratório</h2>
+            <div class="conclusao-conteudo">
+                <p>
+                    Este laboratório demonstrou a aplicação prática de <strong>propriedades tipográficas CSS</strong> 
+                    em um contexto temático envolvente. Através do universo Star Wars, exploramos como 
+                    <em>font-family</em>, <em>font-weight</em>, <em>line-height</em> e <em>text-align</em> 
+                    podem criar hierarquia visual e melhorar a experiência do usuário.
+                </p>
+                
+                <div class="aprendizados">
+                    <h3>Principais Aprendizados:</h3>
+                    <ul>
+                        <li>✅ <strong>Hierarquia tipográfica</strong> através de tamanhos e pesos</li>
+                        <li>✅ <strong>Legibilidade otimizada</strong> com line-height apropriado</li>
+                        <li>✅ <strong>Alinhamento estratégico</strong> para diferentes tipos de conteúdo</li>
+                        <li>✅ <strong>Paletas temáticas</strong> que reforçam a identidade visual</li>
+                        <li>✅ <strong>Isolamento CSS</strong> para prevenir conflitos</li>
+                    </ul>
+                </div>
+
+                <div class="proximos-passos">
+                    <h3>Próximos Estudos:</h3>
+                    <p>
+                        A continuação deste estudo incluirá <u>responsive typography</u>, 
+                        <u>variable fonts</u> e <u>advanced CSS animations</u> aplicadas 
+                        a interfaces espaciais interativas.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Navegação -->
+    <nav class="navegacao-laboratorio">
+        <a href="/" class="nav-btn home">🏠 Portfolio</a>
+        <a href="/galeria-naves-espaciais.html" class="nav-btn galeria">🚀 Galeria Naves</a>
+        <a href="/galeria-lego-naves.html" class="nav-btn lego">🧱 LEGO Original</a>
+    </nav>
+
+    <!-- Footer -->
+    <footer class="footer-laboratorio">
+        <div class="footer-conteudo">
+            <p>
+                <strong>Gabriel Malheiros de Castro</strong> - Estudante FAESA<br>
+                Desenvolvimento Web 2025-2 | Laboratório 2 - Tipografia Espacial
+            </p>
+            <p class="footer-tech">
+                HTML5 • CSS3 • Tipografia Responsiva • Design Temático
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

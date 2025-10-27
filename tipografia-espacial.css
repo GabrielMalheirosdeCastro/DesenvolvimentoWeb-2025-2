@@ -1,0 +1,583 @@
+/* =================================================================
+   LABORATÓRIO 2 - TIPOGRAFIA ESPACIAL (VERSÃO ISOLADA)
+   Autor: Gabriel Malheiros de Castro
+   Curso: Desenvolvimento Web - FAESA
+   Tema: Star Wars & Naves Espaciais
+   Objetivo: Demonstrar propriedades tipográficas com tema espacial
+   
+   ✅ VERSÃO SEGURA: Isolada completamente do sistema React
+   ✅ SEM CONFLITOS: Namespace único --lab-tipografia-*
+   ✅ VISIBILIDADE GARANTIDA: Cores contrastantes e fontes legíveis
+   ✅ TEMA ESPACIAL: Paletas inspiradas em Star Wars
+   ================================================================= */
+
+/* Reset Global APENAS para página de tipografia */
+.pagina-tipografia * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Variáveis CSS ISOLADAS com namespace único e tema espacial */
+.pagina-tipografia {
+    /* Cores principais - Tema República */
+    --lab-tipografia-cor-primaria: #2563eb;
+    --lab-tipografia-cor-secundaria: #1d4ed8;
+    --lab-tipografia-cor-destaque: #ef4444;
+    --lab-tipografia-cor-sucesso: #10b981;
+    --lab-tipografia-cor-alerta: #f59e0b;
+    
+    /* Cores espaciais */
+    --lab-tipografia-republica-azul: #2563eb;
+    --lab-tipografia-republica-dourado: #f59e0b;
+    --lab-tipografia-imperio-cinza: #6b7280;
+    --lab-tipografia-imperio-preto: #111827;
+    --lab-tipografia-imperio-vermelho: #dc2626;
+    --lab-tipografia-espaco-escuro: #0f172a;
+    --lab-tipografia-estrelas-branco: #ffffff;
+    
+    /* Texto e fundos */
+    --lab-tipografia-cor-texto: #0f172a;
+    --lab-tipografia-cor-texto-claro: #64748b;
+    --lab-tipografia-cor-fundo: #ffffff;
+    --lab-tipografia-cor-fundo-claro: #f8fafc;
+    --lab-tipografia-cor-fundo-espacial: #1a202c;
+    --lab-tipografia-cor-border: #e2e8f0;
+    
+    /* Tipografia - Fontes espaciais */
+    --lab-tipografia-fonte-principal: 'Roboto', system-ui, sans-serif;
+    --lab-tipografia-fonte-secundaria: 'Poppins', system-ui, sans-serif;
+    --lab-tipografia-fonte-futurista: 'Orbitron', 'Roboto', monospace;
+    --lab-tipografia-tamanho-base: 16px;
+    --lab-tipografia-altura-linha-base: 1.8;
+    
+    /* Espaçamentos */
+    --lab-tipografia-espacamento-pequeno: 10px;
+    --lab-tipografia-espacamento-medio: 20px;
+    --lab-tipografia-espacamento-grande: 40px;
+    --lab-tipografia-espacamento-extra: 60px;
+    
+    /* Bordas e efeitos */
+    --lab-tipografia-border-radius: 8px;
+    --lab-tipografia-border-radius-grande: 12px;
+    --lab-tipografia-sombra-suave: 0 4px 6px rgba(0,0,0,0.1);
+    --lab-tipografia-sombra-forte: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+/* Configuração SEGURA do Body para tipografia */
+.pagina-tipografia {
+    font-family: var(--lab-tipografia-fonte-principal);
+    font-size: var(--lab-tipografia-tamanho-base);
+    line-height: var(--lab-tipografia-altura-linha-base);
+    color: var(--lab-tipografia-cor-texto);
+    background: linear-gradient(135deg, var(--lab-tipografia-cor-fundo), var(--lab-tipografia-cor-fundo-claro));
+    min-height: 100vh;
+}
+
+/* Banner Pessoal */
+.pagina-tipografia .banner-pessoal {
+    background: linear-gradient(135deg, var(--lab-tipografia-espaco-escuro), var(--lab-tipografia-imperio-cinza));
+    color: var(--lab-tipografia-estrelas-branco);
+    padding: var(--lab-tipografia-espacamento-extra) var(--lab-tipografia-espacamento-medio);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.pagina-tipografia .banner-pessoal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="10" cy="10" r="0.5" fill="white" opacity="0.3"/><circle cx="90" cy="20" r="0.3" fill="white" opacity="0.5"/><circle cx="30" cy="70" r="0.4" fill="white" opacity="0.4"/><circle cx="80" cy="80" r="0.2" fill="white" opacity="0.6"/><circle cx="50" cy="30" r="0.3" fill="white" opacity="0.3"/></svg>') repeat;
+    z-index: 1;
+}
+
+.pagina-tipografia .container-banner {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.pagina-tipografia .titulo-pessoal {
+    font-family: var(--lab-tipografia-fonte-futurista);
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: var(--lab-tipografia-espacamento-medio);
+    text-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    letter-spacing: 2px;
+}
+
+.pagina-tipografia .mensagem-especial {
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: var(--lab-tipografia-espacamento-medio);
+    color: var(--lab-tipografia-republica-dourado);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.pagina-tipografia .subtitulo-banner {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-weight: 400;
+}
+
+/* Header Principal */
+.pagina-tipografia .header-principal {
+    background: linear-gradient(135deg, var(--lab-tipografia-republica-azul), var(--lab-tipografia-cor-secundaria));
+    color: var(--lab-tipografia-estrelas-branco);
+    padding: var(--lab-tipografia-espacamento-grande) var(--lab-tipografia-espacamento-medio);
+    text-align: center;
+    margin-bottom: var(--lab-tipografia-espacamento-grande);
+}
+
+.pagina-tipografia .header-principal h1 {
+    font-family: var(--lab-tipografia-fonte-futurista);
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: var(--lab-tipografia-espacamento-pequeno);
+    text-shadow: 0 3px 6px rgba(0,0,0,0.3);
+}
+
+.pagina-tipografia .subtitulo {
+    font-size: 1.3rem;
+    margin-bottom: var(--lab-tipografia-espacamento-medio);
+    opacity: 0.95;
+}
+
+.pagina-tipografia .lab-info {
+    display: flex;
+    justify-content: center;
+    gap: var(--lab-tipografia-espacamento-medio);
+    flex-wrap: wrap;
+}
+
+.pagina-tipografia .lab-numero,
+.pagina-tipografia .tema {
+    background: rgba(255,255,255,0.2);
+    padding: var(--lab-tipografia-espacamento-pequeno) var(--lab-tipografia-espacamento-medio);
+    border-radius: var(--lab-tipografia-border-radius);
+    font-weight: 600;
+}
+
+/* Main Content */
+.pagina-tipografia .main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--lab-tipografia-espacamento-medio);
+}
+
+/* Seções */
+.pagina-tipografia .objetivos {
+    background: var(--lab-tipografia-estrelas-branco);
+    padding: var(--lab-tipografia-espacamento-grande);
+    border-radius: var(--lab-tipografia-border-radius-grande);
+    box-shadow: var(--lab-tipografia-sombra-suave);
+    margin-bottom: var(--lab-tipografia-espacamento-grande);
+}
+
+.pagina-tipografia .objetivos h2 {
+    font-family: var(--lab-tipografia-fonte-futurista);
+    font-size: 2.5rem;
+    color: var(--lab-tipografia-republica-azul);
+    margin-bottom: var(--lab-tipografia-espacamento-medio);
+    text-align: center;
+}
+
+.pagina-tipografia .objetivo-card {
+    background: linear-gradient(135deg, var(--lab-tipografia-cor-fundo-claro), var(--lab-tipografia-estrelas-branco));
+    padding: var(--lab-tipografia-espacamento-medio);
+    border-radius: var(--lab-tipografia-border-radius);
+    border-left: 4px solid var(--lab-tipografia-republica-azul);
+    margin-bottom: var(--lab-tipografia-espacamento-medio);
+}
+
+.pagina-tipografia .objetivo-card h3 {
+    color: var(--lab-tipografia-republica-azul);
+    font-weight: 600;
+    margin-bottom: var(--lab-tipografia-espacamento-pequeno);
+}
+
+.pagina-tipografia .objetivos-especificos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--lab-tipografia-espacamento-medio);
+    margin-top: var(--lab-tipografia-espacamento-medio);
+}
+
+.pagina-tipografia .objetivo-item {
+    background: linear-gradient(135deg, var(--lab-tipografia-republica-azul), var(--lab-tipografia-cor-secundaria));
+    color: var(--lab-tipografia-estrelas-branco);
+    padding: var(--lab-tipografia-espacamento-medio);
+    border-radius: var(--lab-tipografia-border-radius);
+    text-align: center;
+}
+
+.pagina-tipografia .objetivo-item h4 {
+    font-size: 1.2rem;
+    margin-bottom: var(--lab-tipografia-espacamento-pequeno);
+}
+
+/* Demonstrações Tipográficas */
+.pagina-tipografia .demonstracoes-tipografia {
+    background: var(--lab-tipografia-estrelas-branco);
+    padding: var(--lab-tipografia-espacamento-grande);
+    border-radius: var(--lab-tipografia-border-radius-grande);
+    box-shadow: var(--lab-tipografia-sombra-suave);
+    margin-bottom: var(--lab-tipografia-espacamento-grande);
+}
+
+.pagina-tipografia .demonstracoes-tipografia h2 {
+    font-family: var(--lab-tipografia-fonte-futurista);
+    font-size: 2.5rem;
+    color: var(--lab-tipografia-imperio-vermelho);
+    margin-bottom: var(--lab-tipografia-espacamento-grande);
+    text-align: center;
+}
+
+.pagina-tipografia .propriedade-demo {
+    background: var(--lab-tipografia-cor-fundo-claro);
+    padding: var(--lab-tipografia-espacamento-medio);
+    border-radius: var(--lab-tipografia-border-radius);
+    margin-bottom: var(--lab-tipografia-espacamento-medio);
+    border-left: 4px solid var(--lab-tipografia-imperio-vermelho);
+}
+
+.pagina-tipografia .propriedade-demo h3 {
+    font-family: var(--lab-tipografia-fonte-futurista);
+    color: var(--lab-tipografia-imperio-vermelho);
+    margin-bottom: var(--lab-tipografia-espacamento-pequeno);
+    font-weight: 700;
+}
+
+.pagina-tipografia .propriedade-demo code {
+    background: var(--lab-tipografia-espaco-escuro);
+    color: var(--lab-tipografia-republica-dourado);
+    padding: var(--lab-tipografia-espacamento-pequeno);
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    display: block;
+    margin-top: var(--lab-tipografia-espacamento-pequeno);
+    font-size: 0.9rem;
+}
+
+/* Font Families */
+.pagina-tipografia .font-roboto {
+    font-family: var(--lab-tipografia-fonte-principal) !important;
+}
+
+.pagina-tipografia .font-poppins {
+    font-family: var(--lab-tipografia-fonte-secundaria) !important;
+}
+
+.pagina-tipografia .font-orbitron {
+    font-family: var(--lab-tipografia-fonte-futurista) !important;
+}
+
+/* Tamanhos e pesos */
+.pagina-tipografia .size-small { font-size: 0.875rem !important; }
+.pagina-tipografia .size-medium { font-size: 1rem !important; }
+.pagina-tipografia .size-large { font-size: 1.25rem !important; }
+.pagina-tipografia .size-xlarge { font-size: 1.5rem !important; }
+
+.pagina-tipografia .weight-light { font-weight: 300 !important; }
+.pagina-tipografia .weight-regular { font-weight: 400 !important; }
+.pagina-tipografia .weight-bold { font-weight: 700 !important; }
+.pagina-tipografia .weight-black { font-weight: 900 !important; }
+
+/* Line Heights */
+.pagina-tipografia .line-tight { line-height: 1.2 !important; }
+.pagina-tipografia .line-normal { line-height: 1.6 !important; }
+.pagina-tipografia .line-loose { line-height: 2.0 !important; }
+
+/* Alinhamentos */
+.pagina-tipografia .align-left { text-align: left !important; }
+.pagina-tipografia .align-center { text-align: center !important; }
+.pagina-tipografia .align-right { text-align: right !important; }
+.pagina-tipografia .align-justify { text-align: justify !important; }
+
+/* Seção Temática Espacial */
+.pagina-tipografia .tema-espacial {
+    background: linear-gradient(135deg, var(--lab-tipografia-espaco-escuro), var(--lab-tipografia-imperio-preto));
+    color: var(--lab-tipografia-estrelas-branco);
+    padding: var(--lab-tipografia-espacamento-grande);
+    border-radius: var(--lab-tipografia-border-radius-grande);
+    margin-bottom: var(--lab-tipografia-espacamento-grande);
+}
+
+.pagina-tipografia .tema-espacial h2 {
+    font-family: var(--lab-tipografia-fonte-futurista);
+    font-size: 2.5rem;
+    color: var(--lab-tipografia-republica-dourado);
+    margin-bottom: var(--lab-tipografia-espacamento-grande);
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.pagina-tipografia .nave-analise {
+    background: rgba(255,255,255,0.1);
+    padding: var(--lab-tipografia-espacamento-medio);
+    border-radius: var(--lab-tipografia-border-radius);
+    margin-bottom: var(--lab-tipografia-espacamento-medio);
+    border: 2px solid rgba(255,255,255,0.2);
+}
+
+.pagina-tipografia .nave-titulo.destroyer {
+    color: var(--lab-tipografia-republica-azul);
+    font-family: var(--lab-tipografia-fonte-futurista);
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: var(--lab-tipografia-espacamento-pequeno);
+}
+
+.pagina-tipografia .nave-titulo.acclamator {
+    color: var(--lab-tipografia-imperio-cinza);
+    font-family: var(--lab-tipografia-fonte-futurista);
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: var(--lab-tipografia-espacamento-pequeno);
+}
+
+.pagina-tipografia .nave-titulo.frota {
+    color: var(--lab-tipografia-republica-dourado);
+    font-family: var(--lab-tipografia-fonte-futurista);
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: var(--lab-tipografia-espacamento-pequeno);
+}
+
+.pagina-tipografia .nave-descricao {
+    line-height: 1.7;
+    margin-bottom: var(--lab-tipografia-espacamento-medio);
+    font-size: 1.1rem;
+}
+
+.pagina-tipografia .especificacoes-nave {
+    background: rgba(0,0,0,0.3);
+    padding: var(--lab-tipografia-espacamento-pequeno);
+    border-radius: var(--lab-tipografia-border-radius);
+    border-left: 4px solid var(--lab-tipografia-republica-dourado);
+}
+
+.pagina-tipografia .especificacoes-nave h4 {
+    color: var(--lab-tipografia-republica-dourado);
+    margin-bottom: var(--lab-tipografia-espacamento-pequeno);
+    font-weight: 600;
+}
+
+.pagina-tipografia .especificacoes-nave ul {
+    list-style: none;
+}
+
+.pagina-tipografia .especificacoes-nave li {
+    margin-bottom: 5px;
+    padding-left: var(--lab-tipografia-espacamento-pequeno);
+}
+
+.pagina-tipografia .spec-label {
+    color: var(--lab-tipografia-republica-dourado);
+    font-weight: 600;
+}
+
+/* Cores Temáticas */
+.pagina-tipografia .cores-tematicas {
+    background: var(--lab-tipografia-estrelas-branco);
+    padding: var(--lab-tipografia-espacamento-grande);
+    border-radius: var(--lab-tipografia-border-radius-grande);
+    box-shadow: var(--lab-tipografia-sombra-suave);
+    margin-bottom: var(--lab-tipografia-espacamento-grande);
+}
+
+.pagina-tipografia .cores-tematicas h2 {
+    font-family: var(--lab-tipografia-fonte-futurista);
+    font-size: 2.5rem;
+    color: var(--lab-tipografia-republica-azul);
+    margin-bottom: var(--lab-tipografia-espacamento-grande);
+    text-align: center;
+}
+
+.pagina-tipografia .paleta-grupo {
+    margin-bottom: var(--lab-tipografia-espacamento-medio);
+}
+
+.pagina-tipografia .paleta-grupo h3 {
+    color: var(--lab-tipografia-espaco-escuro);
+    font-weight: 600;
+    margin-bottom: var(--lab-tipografia-espacamento-pequeno);
+}
+
+.pagina-tipografia .cores-demonstracao {
+    display: flex;
+    gap: var(--lab-tipografia-espacamento-pequeno);
+    flex-wrap: wrap;
+}
+
+.pagina-tipografia .cor-sample {
+    flex: 1;
+    min-width: 120px;
+    padding: var(--lab-tipografia-espacamento-medio);
+    border-radius: var(--lab-tipografia-border-radius);
+    text-align: center;
+    color: var(--lab-tipografia-estrelas-branco);
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.pagina-tipografia .cor-sample .cor-nome {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.pagina-tipografia .cor-sample .cor-hex {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* Cores específicas */
+.pagina-tipografia .republica-azul { background-color: var(--lab-tipografia-republica-azul); }
+.pagina-tipografia .republica-dourado { background-color: var(--lab-tipografia-republica-dourado); color: var(--lab-tipografia-espaco-escuro) !important; }
+.pagina-tipografia .republica-branco { background-color: var(--lab-tipografia-estrelas-branco); color: var(--lab-tipografia-espaco-escuro) !important; }
+.pagina-tipografia .imperio-cinza { background-color: var(--lab-tipografia-imperio-cinza); }
+.pagina-tipografia .imperio-preto { background-color: var(--lab-tipografia-imperio-preto); }
+.pagina-tipografia .imperio-vermelho { background-color: var(--lab-tipografia-imperio-vermelho); }
+
+/* Conclusão */
+.pagina-tipografia .conclusao-laboratorio {
+    background: linear-gradient(135deg, var(--lab-tipografia-cor-fundo-claro), var(--lab-tipografia-estrelas-branco));
+    padding: var(--lab-tipografia-espacamento-grande);
+    border-radius: var(--lab-tipografia-border-radius-grande);
+    box-shadow: var(--lab-tipografia-sombra-suave);
+    margin-bottom: var(--lab-tipografia-espacamento-grande);
+}
+
+.pagina-tipografia .conclusao-laboratorio h2 {
+    font-family: var(--lab-tipografia-fonte-futurista);
+    font-size: 2.5rem;
+    color: var(--lab-tipografia-republica-azul);
+    margin-bottom: var(--lab-tipografia-espacamento-medio);
+    text-align: center;
+}
+
+.pagina-tipografia .aprendizados,
+.pagina-tipografia .proximos-passos {
+    background: rgba(37, 99, 235, 0.1);
+    padding: var(--lab-tipografia-espacamento-medio);
+    border-radius: var(--lab-tipografia-border-radius);
+    margin-top: var(--lab-tipografia-espacamento-medio);
+}
+
+.pagina-tipografia .aprendizados h3,
+.pagina-tipografia .proximos-passos h3 {
+    color: var(--lab-tipografia-republica-azul);
+    font-weight: 600;
+    margin-bottom: var(--lab-tipografia-espacamento-pequeno);
+}
+
+.pagina-tipografia .aprendizados ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.pagina-tipografia .aprendizados li {
+    margin-bottom: 8px;
+    padding-left: var(--lab-tipografia-espacamento-pequeno);
+}
+
+/* Navegação */
+.pagina-tipografia .navegacao-laboratorio {
+    display: flex;
+    justify-content: center;
+    gap: var(--lab-tipografia-espacamento-medio);
+    margin: var(--lab-tipografia-espacamento-grande) 0;
+    flex-wrap: wrap;
+}
+
+.pagina-tipografia .nav-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--lab-tipografia-espacamento-pequeno) var(--lab-tipografia-espacamento-medio);
+    background: var(--lab-tipografia-republica-azul);
+    color: var(--lab-tipografia-estrelas-branco);
+    text-decoration: none;
+    border-radius: var(--lab-tipografia-border-radius);
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: var(--lab-tipografia-sombra-suave);
+}
+
+.pagina-tipografia .nav-btn:hover {
+    background: var(--lab-tipografia-cor-secundaria);
+    transform: translateY(-2px);
+    box-shadow: var(--lab-tipografia-sombra-forte);
+}
+
+.pagina-tipografia .nav-btn.galeria {
+    background: var(--lab-tipografia-imperio-vermelho);
+}
+
+.pagina-tipografia .nav-btn.lego {
+    background: var(--lab-tipografia-republica-dourado);
+    color: var(--lab-tipografia-espaco-escuro);
+}
+
+/* Footer */
+.pagina-tipografia .footer-laboratorio {
+    background: var(--lab-tipografia-espaco-escuro);
+    color: var(--lab-tipografia-estrelas-branco);
+    text-align: center;
+    padding: var(--lab-tipografia-espacamento-grande);
+    margin-top: var(--lab-tipografia-espacamento-extra);
+}
+
+.pagina-tipografia .footer-conteudo {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.pagina-tipografia .footer-tech {
+    margin-top: var(--lab-tipografia-espacamento-pequeno);
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .pagina-tipografia .titulo-pessoal {
+        font-size: 2.5rem;
+    }
+    
+    .pagina-tipografia .header-principal h1 {
+        font-size: 2rem;
+    }
+    
+    .pagina-tipografia .objetivos-especificos {
+        grid-template-columns: 1fr;
+    }
+    
+    .pagina-tipografia .cores-demonstracao {
+        flex-direction: column;
+    }
+    
+    .pagina-tipografia .navegacao-laboratorio {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Animações */
+@keyframes pulseSpace {
+    0%, 100% { 
+        box-shadow: 0 0 10px rgba(37, 99, 235, 0.3); 
+    }
+    50% { 
+        box-shadow: 0 0 20px rgba(37, 99, 235, 0.6); 
+    }
+}
+
+.pagina-tipografia .nav-btn {
+    animation: pulseSpace 3s ease-in-out infinite;
+}
