@@ -6,9 +6,10 @@ Write-Host "🔍 Testando Links dos Laboratórios..." -ForegroundColor Green
 # URLs para testar
 $urls = @(
     "http://localhost:4173/",
-    "http://localhost:4173/tipografia.html",
     "http://localhost:4173/lab-fundamentos-css.html",
-    "http://localhost:4173/galeria-lego-naves.html"
+    "http://localhost:4173/tipografia.html",
+    "http://localhost:4173/lab-boxmodel.html",
+    "http://localhost:4173/galeria-naves-espaciais.html"
 )
 
 Write-Host "📋 URLs a serem testadas:" -ForegroundColor Yellow
@@ -27,9 +28,10 @@ Write-Host "3. Pressione Ctrl+C para parar o servidor quando terminar" -Foregrou
 
 Write-Host "`n✅ Resultado Esperado:" -ForegroundColor Green
 Write-Host "• Página principal: Interface React funcionando" -ForegroundColor White
-Write-Host "• tipografia.html: Laboratório de tipografia com estilos CSS" -ForegroundColor White
-Write-Host "• lab-fundamentos-css.html: Laboratório de fundamentos" -ForegroundColor White
-Write-Host "• galeria-lego-naves.html: Galeria de naves LEGO" -ForegroundColor White
+Write-Host "• lab-fundamentos-css.html: Laboratório 1 - Fundamentos CSS" -ForegroundColor White
+Write-Host "• tipografia.html: Laboratório 2 - Tipografia e cores" -ForegroundColor White
+Write-Host "• lab-boxmodel.html: Laboratório 3 - Box Model e espaçamentos" -ForegroundColor White
+Write-Host "• galeria-naves-espaciais.html: Galeria de naves espaciais" -ForegroundColor White
 
 Write-Host "`n🔧 Executando: npm run preview..." -ForegroundColor Blue
 

@@ -519,9 +519,14 @@
     background: var(--lab-tipografia-imperio-vermelho);
 }
 
-.pagina-tipografia .nav-btn.lego {
+.pagina-tipografia .nav-btn.fundamentos {
     background: var(--lab-tipografia-republica-dourado);
     color: var(--lab-tipografia-espaco-escuro);
+}
+
+.pagina-tipografia .nav-btn.boxmodel {
+    background: var(--lab-tipografia-imperio-vermelho);
+    color: var(--lab-tipografia-estrelas-branco);
 }
 
 /* Footer */

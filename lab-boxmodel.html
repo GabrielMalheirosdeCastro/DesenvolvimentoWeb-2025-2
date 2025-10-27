@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratório 3 - Box Model e Espaçamentos | Gabriel Malheiros de Castro</title>
+    <link rel="stylesheet" href="lab-boxmodel.css">
+    <meta name="description" content="Demonstração prática do modelo de caixas CSS, margin, padding e border - Laboratório 3 do curso de Desenvolvimento Web da FAESA">
+    <meta name="author" content="Gabriel Malheiros de Castro">
+</head>
+<body>
+    <!-- Header do laboratório -->
+    <header class="lab-header">
+        <div class="container">
+            <h1>🔲 Laboratório 3 - Box Model e Espaçamentos</h1>
+            <p class="subtitle">Compreendendo o modelo de caixas do CSS: margin, padding e border</p>
+            <div class="lab-info">
+                <span class="badge">CSS Box Model</span>
+                <span class="badge">Margin & Padding</span>
+                <span class="badge">Border Properties</span>
+                <span class="badge">box-sizing</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Seção conceitos teóricos -->
+    <section class="conceitos-teoricos">
+        <div class="container">
+            <h2>📚 Conceitos Teóricos</h2>
+            
+            <!-- Box Model Visual -->
+            <div class="boxmodel-visual">
+                <h3>O Box Model</h3>
+                <p>Todo elemento HTML é uma "caixa" composta por (de dentro para fora):</p>
+                
+                <div class="boxmodel-diagram">
+                    <div class="margin-layer">
+                        <span class="layer-label">Margin</span>
+                        <div class="border-layer">
+                            <span class="layer-label">Border</span>
+                            <div class="padding-layer">
+                                <span class="layer-label">Padding</span>
+                                <div class="content-layer">
+                                    <span class="layer-label">Content</span>
+                                    <div class="content-text">Texto ou Imagem</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Propriedade box-sizing -->
+            <div class="box-sizing-demo">
+                <h3>Propriedade box-sizing</h3>
+                <p><code>box-sizing: border-box;</code> faz com que width e height incluam padding e border, facilitando cálculos de layout.</p>
+                
+                <div class="comparison">
+                    <div class="comparison-item">
+                        <h4>content-box (padrão)</h4>
+                        <div class="demo-box content-box">
+                            <span>width: 200px<br>padding: 20px<br>border: 5px<br><strong>Total: 250px</strong></span>
+                        </div>
+                    </div>
+                    <div class="comparison-item">
+                        <h4>border-box</h4>
+                        <div class="demo-box border-box">
+                            <span>width: 200px<br>padding: 20px<br>border: 5px<br><strong>Total: 200px</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sintaxe de Margin e Padding -->
+            <div class="syntax-demo">
+                <h3>Sintaxe de Margin e Padding</h3>
+                <div class="syntax-examples">
+                    <div class="syntax-item">
+                        <code>margin: 20px;</code>
+                        <span>Todos os lados</span>
+                    </div>
+                    <div class="syntax-item">
+                        <code>margin: 20px 40px;</code>
+                        <span>Vertical | Horizontal</span>
+                    </div>
+                    <div class="syntax-item">
+                        <code>margin: 10px 20px 30px;</code>
+                        <span>Top | Horizontal | Bottom</span>
+                    </div>
+                    <div class="syntax-item">
+                        <code>margin: 10px 20px 30px 40px;</code>
+                        <span>Top | Right | Bottom | Left (sentido horário)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Atividade Guiada -->
+    <section class="atividade-guiada">
+        <div class="container">
+            <h2>🎯 Atividade Guiada</h2>
+            <p class="section-description">Demonstrações práticas dos conceitos do Box Model:</p>
+            
+            <div class="boxes-demo">
+                <div class="box box1">
+                    <h3>Box 1</h3>
+                    <p>Margin: 20px | Padding: 15px</p>
+                    <div class="box-specs">
+                        <code>
+                            margin: 20px;<br>
+                            padding: 15px;<br>
+                            border: 3px solid #2980b9;
+                        </code>
+                    </div>
+                </div>
+
+                <div class="box box2">
+                    <h3>Box 2</h3>
+                    <p>Margin: 30px | Padding: 25px</p>
+                    <div class="box-specs">
+                        <code>
+                            margin: 30px;<br>
+                            padding: 25px;<br>
+                            border: 5px dashed #2c3e50;
+                        </code>
+                    </div>
+                </div>
+
+                <div class="box box3">
+                    <h3>Box 3</h3>
+                    <p>Border-radius: 15px</p>
+                    <div class="box-specs">
+                        <code>
+                            margin: 40px 20px;<br>
+                            padding: 20px 30px;<br>
+                            border: 4px solid #e74c3c;<br>
+                            border-radius: 15px;
+                        </code>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dica para DevTools -->
+            <div class="inspecao">
+                <h3>🔍 Dica de Inspeção</h3>
+                <p>Abra o DevTools (F12) e inspecione os elementos para visualizar o Box Model!</p>
+                <div class="devtools-tip">
+                    <ol>
+                        <li>Clique com botão direito em qualquer box acima</li>
+                        <li>Selecione "Inspecionar elemento"</li>
+                        <li>Na aba Elements, veja o diagrama do Box Model</li>
+                        <li>Observe como margin (laranja), border (amarelo) e padding (verde) são representados</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Desafio -->
+    <section class="desafio-section">
+        <div class="container">
+            <h2>🏆 Desafio - Card de Produto</h2>
+            <p class="section-description">Crie um card de produto usando padding, margin e border de forma adequada:</p>
+            
+            <div class="desafio-demo">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDMwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjZjFmNWY5Ii8+CjxwYXRoIGQ9Ik0xNDAgODBMMTYwIDEyMEgxMjBMMTQwIDgwWiIgZmlsbD0iIzY0NzQ4YiIvPgo8Y2lyY2xlIGN4PSIxMDAiIGN5PSI2MCIgcj0iMTAiIGZpbGw9IiNmYmJmMjQiLz4KPHRleHQgeD0iMTUwIiB5PSIxNDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmaWxsPSIjNGI1NTYzIj5JbWFnZW0gZG8gUHJvZHV0bzwvdGV4dD4KPC9zdmc+" alt="Produto Exemplo" />
+                    </div>
+                    
+                    <div class="product-content">
+                        <h3 class="product-title">Smartphone Moderno</h3>
+                        <p class="product-description">
+                            Smartphone com tela de alta resolução, processador avançado e câmera profissional. 
+                            Design elegante e tecnologia de ponta.
+                        </p>
+                        <div class="product-price">R$ 1.299,99</div>
+                        <button class="buy-button">Comprar Agora</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Especificações do desafio -->
+            <div class="desafio-specs">
+                <h3>📋 Especificações do Desafio:</h3>
+                <ul>
+                    <li>✅ <strong>Imagem no topo</strong> - aspect-ratio adequado</li>
+                    <li>✅ <strong>Título, descrição e preço</strong> - hierarquia visual clara</li>
+                    <li>✅ <strong>Botão "Comprar"</strong> - padding interno adequado</li>
+                    <li>✅ <strong>Padding, margin e border</strong> - espaçamentos harmoniosos</li>
+                    <li>✅ <strong>Sombras com box-shadow</strong> - profundidade visual</li>
+                    <li>✅ <strong>Hover effect</strong> - transform: scale() no crescimento</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exemplos Práticos Adicionais -->
+    <section class="exemplos-praticos">
+        <div class="container">
+            <h2>🧪 Exemplos Práticos</h2>
+            
+            <div class="exemplos-grid">
+                <!-- Exemplo 1: Margin Auto -->
+                <div class="exemplo-item">
+                    <h3>Margin Auto - Centralização</h3>
+                    <div class="exemplo-demo">
+                        <div class="margin-auto-demo">
+                            <div class="centered-box">margin: 0 auto;</div>
+                        </div>
+                    </div>
+                    <code>
+                        .centered-box {<br>
+                        &nbsp;&nbsp;margin: 0 auto;<br>
+                        &nbsp;&nbsp;width: 200px;<br>
+                        }
+                    </code>
+                </div>
+
+                <!-- Exemplo 2: Padding vs Margin -->
+                <div class="exemplo-item">
+                    <h3>Padding vs Margin</h3>
+                    <div class="exemplo-demo">
+                        <div class="padding-demo">Padding interno</div>
+                        <div class="margin-demo">Margin externo</div>
+                    </div>
+                    <code>
+                        .padding-demo { padding: 20px; }<br>
+                        .margin-demo { margin: 20px; }
+                    </code>
+                </div>
+
+                <!-- Exemplo 3: Border Styles -->
+                <div class="exemplo-item">
+                    <h3>Estilos de Border</h3>
+                    <div class="exemplo-demo border-styles">
+                        <div class="border-solid">solid</div>
+                        <div class="border-dashed">dashed</div>
+                        <div class="border-dotted">dotted</div>
+                        <div class="border-double">double</div>
+                    </div>
+                    <code>
+                        border: 3px solid #333;<br>
+                        border: 3px dashed #333;<br>
+                        border: 3px dotted #333;<br>
+                        border: 6px double #333;
+                    </code>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Navegação -->
+    <nav class="lab-navigation">
+        <a href="index.html" class="nav-button primary">
+            🏠 Portfolio Principal
+        </a>
+        <a href="lab-fundamentos-css.html" class="nav-button secondary">
+            📝 Lab 1 - Fundamentos CSS
+        </a>
+        <a href="tipografia.html" class="nav-button secondary">
+            🔤 Lab 2 - Tipografia
+        </a>
+        <a href="galeria-naves-espaciais.html" class="nav-button secondary">
+            🌌 Galeria Espacial
+        </a>
+    </nav>
+
+    <!-- Footer -->
+    <footer class="lab-footer">
+        <div class="container">
+            <p>&copy; 2025 Gabriel Malheiros de Castro - FAESA | Desenvolvimento Web</p>
+            <p class="footer-subtitle">Laboratório 3: Demonstração prática do CSS Box Model e propriedades de espaçamento</p>
+        </div>
+    </footer>
+</body>
+</html>

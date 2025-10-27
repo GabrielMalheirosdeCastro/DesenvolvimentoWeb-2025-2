@@ -22,7 +22,7 @@ export function UltraSimpleImage({
   ...props
 }: UltraSimpleImageProps & React.ImgHTMLAttributes<HTMLImageElement>) {
   
-  console.log(`🖼️ UltraSimpleImage renderizando:`, src);
+  console.log(`🖼️ UltraSimpleImage iniciando carregamento:`, { src, alt });
 
   return (
     <img
@@ -30,11 +30,11 @@ export function UltraSimpleImage({
       alt={alt}
       className={cn("w-full h-full object-cover", className)}
       onLoad={() => {
-        console.log(`✅ UltraSimpleImage carregada:`, src);
+        console.log(`✅ UltraSimpleImage carregada com sucesso:`, { src, alt });
         onLoad?.();
       }}
-      onError={() => {
-        console.error(`❌ UltraSimpleImage erro:`, src);
+      onError={(e) => {
+        console.error(`❌ UltraSimpleImage falha no carregamento:`, { src, alt, error: e });
         onError?.();
       }}
       loading="eager"
@@ -42,7 +42,8 @@ export function UltraSimpleImage({
       style={{
         display: 'block',
         visibility: 'visible',
-        opacity: 1
+        opacity: 1,
+        imageRendering: 'auto'
       }}
       {...props}
     />

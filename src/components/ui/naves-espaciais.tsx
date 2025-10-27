@@ -69,11 +69,14 @@ const NavesEspaciais: React.FC<NavesEspaciaisProps> = ({ className, enableHtmlIm
     <div className={cn("naves-espaciais-section", className)}>
       <div className="text-center mb-8">
         <h2 className="text-3xl font-bold text-gray-800 mb-4">
-          🌌 Galeria Naves Espaciais
+          🚀 Galeria de Naves Espaciais
         </h2>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          Coleção de naves espaciais baseadas no universo Star Wars com especificações técnicas detalhadas
+          Coleção épica de naves espaciais do universo Star Wars com especificações técnicas detalhadas e design militar avançado
         </p>
+        <div className="mt-3 inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-4 py-2 rounded-lg text-sm font-medium">
+          ⭐ Esta é a GALERIA ESPACIAL oficial do projeto
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
@@ -119,8 +122,8 @@ const NavesEspaciais: React.FC<NavesEspaciaisProps> = ({ className, enableHtmlIm
                     </div>
                   )}
                   <div className="absolute bottom-2 left-2 right-2">
-                    <div className="text-xs text-blue-300 text-center">
-                      ⚡ Preview - <a href="galeria-naves-espaciais.html" className="underline hover:text-blue-100">Ver Galeria HTML</a>
+                    <div className="text-xs text-green-300 text-center font-medium">
+                      🌌 GALERIA ESPACIAL - <a href="galeria-naves-espaciais.html" className="underline hover:text-green-100" target="_blank" rel="noopener noreferrer">Ver Versão HTML</a>
                     </div>
                   </div>
                 </div>

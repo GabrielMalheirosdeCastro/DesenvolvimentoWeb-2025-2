@@ -20,13 +20,10 @@ export default defineConfig({
     assetsDir: 'assets',
     sourcemap: false,
     minify: 'terser',
-    // Otimizações para Vercel
+    // Otimizações simplificadas para Vercel
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          utils: ['lucide-react']
-        },
+        // Remover manualChunks que estava causando chunks vazios
         assetFileNames: 'assets/[name].[hash][extname]',
         chunkFileNames: 'assets/[name].[hash].js',
         entryFileNames: 'assets/[name].[hash].js'
@@ -38,8 +35,8 @@ export default defineConfig({
     copyPublicDir: true
   },
   publicDir: 'public',
-  // Configurar para incluir arquivos HTML no build
-  assetsInclude: ['**/*.html', '**/*.css'],
+  // Remover HTML do assetsInclude (estava causando problemas)
+  assetsInclude: ['**/*.css'],
   server: {
     host: '0.0.0.0',
     port: 3000,

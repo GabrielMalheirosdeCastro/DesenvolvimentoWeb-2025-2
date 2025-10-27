@@ -2,11 +2,15 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist", 
   "framework": "vite",
-  "installCommand": "npm ci",
+  "installCommand": "npm install",
   "rewrites": [
     {
       "source": "/tipografia.html",
       "destination": "/tipografia.html"
+    },
+    {
+      "source": "/tipografia-espacial.html",
+      "destination": "/tipografia-espacial.html"
     },
     {
       "source": "/lab-fundamentos-css.html", 
