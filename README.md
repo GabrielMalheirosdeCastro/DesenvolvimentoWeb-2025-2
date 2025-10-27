@@ -67,6 +67,7 @@ npm run dev
 npm run build
 npm run preview  
 # ➜ Site: http://localhost:4173/
+# ➜ Galeria Espacial: http://localhost:4173/galeria-naves-espaciais.html
 ```
 
 ## 👤 **Desenvolvedor**

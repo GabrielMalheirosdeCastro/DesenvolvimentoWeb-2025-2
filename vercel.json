@@ -5,6 +5,10 @@
   "installCommand": "npm install",
   "rewrites": [
     {
+      "source": "/galeria-naves-espaciais.html",
+      "destination": "/galeria-naves-espaciais.html"
+    },
+    {
       "source": "/tipografia.html",
       "destination": "/tipografia.html"
     },
@@ -17,8 +21,8 @@
       "destination": "/lab-fundamentos-css.html"
     },
     {
-      "source": "/galeria-naves-espaciais.html",
-      "destination": "/galeria-naves-espaciais.html"
+      "source": "/lab-boxmodel.html",
+      "destination": "/lab-boxmodel.html"
     },
     {
       "source": "/(.*)",
