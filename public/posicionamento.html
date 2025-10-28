@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratório 5 - Posicionamento e Z-index | FAESA 2025</title>
+    <meta name="description" content="Laboratório avançado de posicionamento CSS com elementos interativos: modal, menu hambúrguer e sistema de notificações. Projeto acadêmico FAESA.">
+    <meta name="author" content="Gabriel Malheiros de Castro">
+    <link rel="stylesheet" href="posicionamento.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>">
+</head>
+<body class="pagina-posicionamento">
+    <!-- Header Fixo Moderno -->
+    <header class="header-fixo" id="headerFixo">
+        <div class="header-container">
+            <div class="header-left">
+                <h1>📐 Lab 5 - Posicionamento CSS</h1>
+                <span class="badge-curso">FAESA 2025</span>
+            </div>
+            <div class="header-right">
+                <!-- Ícone com Badge de Notificação -->
+                <div class="icone-notificacao" onclick="mostrarNotificacao()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="badge-notificacao" id="badgeNotificacao">3</span>
+                </div>
+                <!-- Menu Hambúrguer -->
+                <button class="menu-hamburguer" onclick="toggleMenu()" aria-label="Abrir menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menu Lateral Deslizante -->
+    <nav class="menu-lateral" id="menuLateral">
+        <div class="menu-header">
+            <h3>📐 Navegação</h3>
+            <button class="btn-fechar-menu" onclick="toggleMenu()" aria-label="Fechar menu">✕</button>
+        </div>
+        <ul class="menu-lista">
+            <li><a href="#posicionamento-relative" onclick="navegarPara('posicionamento-relative')">📍 Position Relative</a></li>
+            <li><a href="#posicionamento-absolute" onclick="navegarPara('posicionamento-absolute')">🎯 Position Absolute</a></li>
+            <li><a href="#posicionamento-fixed" onclick="navegarPara('posicionamento-fixed')">📌 Position Fixed</a></li>
+            <li><a href="#posicionamento-sticky" onclick="navegarPara('posicionamento-sticky')">🔄 Position Sticky</a></li>
+            <li><a href="#z-index" onclick="navegarPara('z-index')">📚 Z-index</a></li>
+            <li><a href="#elementos-interativos" onclick="navegarPara('elementos-interativos')">⚡ Interativos</a></li>
+            <li><a href="index.html">🏠 Voltar ao Início</a></li>
+        </ul>
+    </nav>
+
+    <!-- Overlay do Menu -->
+    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+
+    <!-- Conteúdo Principal -->
+    <main class="conteudo">
+        <!-- Introdução -->
+        <section class="intro-secao">
+            <div class="intro-content">
+                <h2>🎯 Objetivo do Laboratório</h2>
+                <p>Dominar as propriedades de posicionamento CSS para criar layouts complexos e elementos interativos modernos.</p>
+                <div class="intro-cards">
+                    <div class="intro-card">
+                        <div class="card-icon">📍</div>
+                        <h3>Position Types</h3>
+                        <p>static, relative, absolute, fixed, sticky</p>
+                    </div>
+                    <div class="intro-card">
+                        <div class="card-icon">📐</div>
+                        <h3>Propriedades</h3>
+                        <p>top, right, bottom, left, z-index</p>
+                    </div>
+                    <div class="intro-card">
+                        <div class="card-icon">⚡</div>
+                        <h3>Interatividade</h3>
+                        <p>Modal, Menu, Badges, Animações</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1. Posicionamento Relative -->
+        <section class="secao" id="posicionamento-relative">
+            <h2>📍 Posicionamento Relative</h2>
+            <div class="conceito">
+                <p><strong>position: relative</strong> - Move o elemento em relação à sua posição original no fluxo do documento.</p>
+            </div>
+            <div class="demonstracao">
+                <div class="box-normal">Posição Normal</div>
+                <div class="box-relative">
+                    <span class="posicao-info">left: 50px<br>top: 20px</span>
+                    Eu me movi relativamente à minha posição original
+                </div>
+                <div class="box-normal">Posição Normal</div>
+            </div>
+            <div class="codigo-exemplo">
+                <h4>💻 Código CSS:</h4>
+                <pre><code>.box-relative {
+    position: relative;
+    left: 50px;
+    top: 20px;
+    /* O espaço original é preservado */
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- 2. Posicionamento Absolute -->
+        <section class="secao" id="posicionamento-absolute">
+            <h2>🎯 Posicionamento Absolute</h2>
+            <div class="conceito">
+                <p><strong>position: absolute</strong> - Remove o elemento do fluxo e posiciona em relação ao ancestral posicionado mais próximo.</p>
+            </div>
+            <div class="container-absolute">
+                <div class="container-label">Container com position: relative</div>
+                <div class="box-absolute topo-esquerda">
+                    <span class="pos-label">top: 10px<br>left: 10px</span>
+                    Topo Esquerda
+                </div>
+                <div class="box-absolute topo-direita">
+                    <span class="pos-label">top: 10px<br>right: 10px</span>
+                    Topo Direita
+                </div>
+                <div class="box-absolute baixo-esquerda">
+                    <span class="pos-label">bottom: 10px<br>left: 10px</span>
+                    Baixo Esquerda
+                </div>
+                <div class="box-absolute baixo-direita">
+                    <span class="pos-label">bottom: 10px<br>right: 10px</span>
+                    Baixo Direita
+                </div>
+                <div class="box-absolute centro">
+                    <span class="pos-label">Centralizado<br>transform</span>
+                    Centro
+                </div>
+            </div>
+            <div class="codigo-exemplo">
+                <h4>💻 Código CSS:</h4>
+                <pre><code>.container-absolute {
+    position: relative; /* Contexto de posicionamento */
+    height: 300px;
+}
+
+.box-absolute {
+    position: absolute;
+}
+
+.topo-esquerda { top: 10px; left: 10px; }
+.centro {
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- 3. Posicionamento Fixed -->
+        <section class="secao" id="posicionamento-fixed">
+            <h2>📌 Posicionamento Fixed</h2>
+            <div class="conceito">
+                <p><strong>position: fixed</strong> - Posiciona o elemento em relação à janela do navegador (viewport).</p>
+            </div>
+            <div class="demonstracao">
+                <p>🔝 O header no topo desta página usa <code>position: fixed</code></p>
+                <p>🎈 O botão flutuante no canto inferior direito também usa <code>position: fixed</code></p>
+                <div class="exemplo-fixed">
+                    <div class="viewport-demo">
+                        <div class="mini-header">Header Fixed</div>
+                        <div class="mini-content">
+                            <p>Conteúdo que rola...</p>
+                            <p>O header permanece fixo no topo</p>
+                        </div>
+                        <div class="mini-btn">Btn</div>
+                    </div>
+                </div>
+            </div>
+            <div class="codigo-exemplo">
+                <h4>💻 Código CSS:</h4>
+                <pre><code>.header-fixo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.btn-flutuante {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- 4. Posicionamento Sticky -->
+        <section class="secao" id="posicionamento-sticky">
+            <h2>🔄 Posicionamento Sticky</h2>
+            <div class="conceito">
+                <p><strong>position: sticky</strong> - Híbrido entre relative e fixed. Gruda no topo quando atinge uma posição específica.</p>
+            </div>
+            <div class="demonstracao">
+                <div class="sticky-demo">
+                    <div class="sticky-content">
+                        <p>Conteúdo antes do elemento sticky...</p>
+                        <div class="elemento-sticky">
+                            🔄 Eu sou STICKY! Role para baixo e veja que grudo no topo
+                        </div>
+                        <p>Mais conteúdo...</p>
+                        <p>Continue rolando...</p>
+                        <p>O elemento sticky volta ao fluxo normal quando o container termina</p>
+                    </div>
+                </div>
+            </div>
+            <div class="codigo-exemplo">
+                <h4>💻 Código CSS:</h4>
+                <pre><code>.elemento-sticky {
+    position: sticky;
+    top: 100px; /* Distância do topo quando "gruda" */
+    background: #3b82f6;
+    z-index: 10;
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- 5. Z-index (Empilhamento) -->
+        <section class="secao" id="z-index">
+            <h2>📚 Z-index (Empilhamento)</h2>
+            <div class="conceito">
+                <p><strong>z-index</strong> - Controla a ordem de empilhamento dos elementos posicionados.</p>
+            </div>
+            <div class="container-z">
+                <div class="z-info">
+                    <p>📚 Elementos com z-index maior ficam na frente</p>
+                    <p>🎛️ Clique nas caixas para alterar o z-index:</p>
+                </div>
+                <div class="box-z z1" onclick="alterarZIndex(this, 1)" data-z="1">
+                    <span class="z-label">Z-index: <span class="z-valor">1</span></span>
+                    Camada 1
+                </div>
+                <div class="box-z z2" onclick="alterarZIndex(this, 2)" data-z="2">
+                    <span class="z-label">Z-index: <span class="z-valor">2</span></span>
+                    Camada 2
+                </div>
+                <div class="box-z z3" onclick="alterarZIndex(this, 3)" data-z="3">
+                    <span class="z-label">Z-index: <span class="z-valor">3</span></span>
+                    Camada 3
+                </div>
+            </div>
+            <div class="codigo-exemplo">
+                <h4>💻 Código CSS:</h4>
+                <pre><code>.box-z {
+    position: absolute;
+    z-index: 1; /* ou 2, 3, etc */
+}
+
+/* Elementos com z-index maior ficam na frente */
+.z1 { z-index: 1; }
+.z2 { z-index: 2; }
+.z3 { z-index: 3; }</code></pre>
+            </div>
+        </section>
+
+        <!-- 6. Elementos Interativos -->
+        <section class="secao" id="elementos-interativos">
+            <h2>⚡ Elementos Interativos Avançados</h2>
+            <div class="conceito">
+                <p>Aplicação prática do posicionamento em elementos modernos de interface.</p>
+            </div>
+            
+            <div class="interativos-grid">
+                <!-- Modal -->
+                <div class="interativo-card">
+                    <h3>🔲 Modal Centralizado</h3>
+                    <p>Popup sobreposto ao conteúdo</p>
+                    <button class="btn-demo" onclick="abrirModal()">Abrir Modal</button>
+                </div>
+
+                <!-- Menu Hambúrguer -->
+                <div class="interativo-card">
+                    <h3>🍔 Menu Hambúrguer</h3>
+                    <p>Menu lateral deslizante</p>
+                    <button class="btn-demo" onclick="toggleMenu()">Abrir Menu</button>
+                </div>
+
+                <!-- Badge de Notificação -->
+                <div class="interativo-card">
+                    <h3>🔔 Badge de Notificação</h3>
+                    <p>Indicador de quantidade</p>
+                    <button class="btn-demo" onclick="adicionarNotificacao()">Adicionar Notificação</button>
+                </div>
+
+                <!-- Tooltip -->
+                <div class="interativo-card">
+                    <h3>💬 Tooltip</h3>
+                    <p>Dica contextual</p>
+                    <div class="tooltip-demo">
+                        <button class="btn-demo" data-tooltip="Oi! Sou um tooltip posicionado com CSS">Hover aqui</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conteúdo para scroll -->
+        <div class="espacador">
+            <div class="espacador-content">
+                <h3>🔄 Role a página para testar:</h3>
+                <ul>
+                    <li>✅ Header fixo permanece no topo</li>
+                    <li>✅ Elemento sticky gruda ao rolar</li>
+                    <li>✅ Botão flutuante sempre visível</li>
+                    <li>✅ Menu hambúrguer funcional</li>
+                    <li>✅ Modal centralizado</li>
+                </ul>
+                <p class="espacador-info">
+                    📊 Este laboratório demonstra todos os tipos de posicionamento CSS em um projeto real.
+                    Cada elemento foi cuidadosamente posicionado para criar uma experiência de usuário moderna e funcional.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay" onclick="fecharModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h3>🔲 Modal Centralizado</h3>
+                <button class="modal-close" onclick="fecharModal()" aria-label="Fechar modal">✕</button>
+            </div>
+            <div class="modal-body">
+                <h4>✨ Como funciona:</h4>
+                <ul>
+                    <li><strong>position: fixed</strong> - Remove do fluxo, fixa na viewport</li>
+                    <li><strong>top: 0; left: 0; width: 100%; height: 100%</strong> - Ocupa toda a tela</li>
+                    <li><strong>display: flex; align-items: center; justify-content: center</strong> - Centraliza o conteúdo</li>
+                    <li><strong>z-index: 9999</strong> - Fica acima de tudo</li>
+                </ul>
+                <p>📚 Muito usado para alertas, formulários, galeria de imagens, confirmações, etc.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-modal-primary" onclick="fecharModal()">Entendi! 👍</button>
+                <button class="btn-modal-secondary" onclick="fecharModal()">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botão Flutuante -->
+    <button class="btn-flutuante" onclick="voltarAoTopo()" title="Voltar ao topo" aria-label="Voltar ao topo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 14l5-5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // Estado do menu
+        let menuAberto = false;
+        let contadorNotificacao = 3;
+
+        // Toggle Menu Hambúrguer
+        function toggleMenu() {
+            const menu = document.getElementById('menuLateral');
+            const overlay = document.getElementById('menuOverlay');
+            const hamburguer = document.querySelector('.menu-hamburguer');
+            
+            menuAberto = !menuAberto;
+            
+            if (menuAberto) {
+                menu.classList.add('ativo');
+                overlay.classList.add('ativo');
+                hamburguer.classList.add('ativo');
+                document.body.style.overflow = 'hidden';
+            } else {
+                menu.classList.remove('ativo');
+                overlay.classList.remove('ativo');
+                hamburguer.classList.remove('ativo');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Navegação interna
+        function navegarPara(secaoId) {
+            document.getElementById(secaoId).scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+            if (menuAberto) toggleMenu();
+        }
+
+        // Modal
+        function abrirModal() {
+            document.getElementById('modalOverlay').classList.add('ativo');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function fecharModal() {
+            document.getElementById('modalOverlay').classList.remove('ativo');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Z-index interativo
+        function alterarZIndex(elemento, camada) {
+            const novoZ = prompt(`Digite o novo z-index para a Camada ${camada}:`, elemento.style.zIndex || camada);
+            if (novoZ !== null && !isNaN(novoZ)) {
+                elemento.style.zIndex = novoZ;
+                elemento.querySelector('.z-valor').textContent = novoZ;
+                elemento.setAttribute('data-z', novoZ);
+            }
+        }
+
+        // Notificações
+        function adicionarNotificacao() {
+            contadorNotificacao++;
+            document.getElementById('badgeNotificacao').textContent = contadorNotificacao;
+            mostrarFeedback('✅ Notificação adicionada!');
+        }
+
+        function mostrarNotificacao() {
+            if (contadorNotificacao > 0) {
+                contadorNotificacao = Math.max(0, contadorNotificacao - 1);
+                document.getElementById('badgeNotificacao').textContent = contadorNotificacao;
+                if (contadorNotificacao === 0) {
+                    document.getElementById('badgeNotificacao').style.display = 'none';
+                }
+                mostrarFeedback('📩 Notificação visualizada!');
+            }
+        }
+
+        // Feedback visual
+        function mostrarFeedback(mensagem) {
+            const feedback = document.createElement('div');
+            feedback.className = 'feedback-toast';
+            feedback.textContent = mensagem;
+            document.body.appendChild(feedback);
+            
+            setTimeout(() => feedback.classList.add('ativo'), 10);
+            setTimeout(() => {
+                feedback.classList.remove('ativo');
+                setTimeout(() => document.body.removeChild(feedback), 300);
+            }, 2000);
+        }
+
+        // Voltar ao topo
+        function voltarAoTopo() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Animação do header no scroll
+        let ultimoScroll = 0;
+        window.addEventListener('scroll', () => {
+            const scrollAtual = window.pageYOffset;
+            const header = document.getElementById('headerFixo');
+            
+            if (scrollAtual > ultimoScroll && scrollAtual > 100) {
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                header.style.transform = 'translateY(0)';
+            }
+            ultimoScroll = scrollAtual;
+        });
+
+        // Fechar menu com ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (menuAberto) toggleMenu();
+                if (document.getElementById('modalOverlay').classList.contains('ativo')) {
+                    fecharModal();
+                }
+            }
+        });
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🚀 Laboratório de Posicionamento CSS carregado!');
+            console.log('📐 Elementos posicionados:', {
+                fixed: document.querySelectorAll('[style*="position: fixed"], .header-fixo, .btn-flutuante').length,
+                absolute: document.querySelectorAll('[style*="position: absolute"], .box-absolute').length,
+                relative: document.querySelectorAll('[style*="position: relative"], .box-relative').length,
+                sticky: document.querySelectorAll('[style*="position: sticky"], .elemento-sticky').length
+            });
+        });
+    </script>
+</body>
+</html>

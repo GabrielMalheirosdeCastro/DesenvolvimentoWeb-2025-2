@@ -38,6 +38,17 @@ Margin, padding e border com exemplos práticos
 - Sistema interativo de comando galáctico
 - Design espacial imersivo com animações
 
+### [📐 **NOVO: Posicionamento e Z-index**](https://desenvolvimento-web-2025-2.vercel.app/posicionamento.html) ⭐
+**Laboratório interativo mais avançado do projeto!**
+- ✅ Modal centralizado com backdrop blur
+- ✅ Menu hambúrguer deslizante lateral
+- ✅ Sistema de badges de notificação com contador
+- ✅ Elementos sticky e posicionamento dinâmico
+- ✅ Z-index interativo (clique para alterar camadas)
+- ✅ Tooltips contextuais
+- ✅ Botão flutuante (FAB) sempre visível
+- ✅ 100% responsivo com animações modernas
+
 ### [🌌 Galeria Espacial](https://desenvolvimento-web-2025-2.vercel.app/galeria-naves-espaciais.html)
 Galeria temática de naves espaciais com placeholders visuais interativos
 
