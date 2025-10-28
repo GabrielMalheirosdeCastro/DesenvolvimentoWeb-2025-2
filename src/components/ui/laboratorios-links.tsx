@@ -31,14 +31,25 @@ export const LaboratoriosLinks: React.FC<LaboratoriosLinksProps> = ({ className 
     },
     {
       numero: "3",
-      titulo: "Layout e Responsividade",
-      descricao: "Flexbox, Grid CSS e design responsivo moderno",
-      url: "#",
+      titulo: "Box Model e Posicionamento",
+      descricao: "Modelo de caixa CSS, posicionamento e layout básico",
+      url: "/lab-boxmodel.html",
       icon: FileText,
       cor: "from-green-500 to-green-600",
       corFundo: "bg-green-50", 
-      corTexto: "text-green-700",
-      emBreve: true
+      corTexto: "text-green-700"
+    },
+    {
+      numero: "4",
+      titulo: "Flexbox: LEGO + Ficção Científica",
+      descricao: "Layouts modernos com Flexbox - Tema: 'Gosto de LEGO, de ficção científica, ação e paz'",
+      url: "/flexbox.html",
+      icon: Code,
+      cor: "from-blue-600 to-purple-600",
+      corFundo: "bg-blue-50", 
+      corTexto: "text-blue-700",
+      destaque: true,
+      novo: true
     }
   ];
 
@@ -88,8 +99,13 @@ export const LaboratoriosLinks: React.FC<LaboratoriosLinksProps> = ({ className 
               {/* Badge de destaque */}
               {lab.destaque && (
                 <div className="absolute top-3 right-3 z-10">
-                  <span className="bg-yellow-400 text-yellow-800 px-2 py-1 rounded-full text-xs font-bold">
-                    ⭐ NOVO
+                  <span className={cn(
+                    "px-2 py-1 rounded-full text-xs font-bold",
+                    lab.novo 
+                      ? "bg-blue-400 text-blue-900" 
+                      : "bg-yellow-400 text-yellow-800"
+                  )}>
+                    {lab.novo ? "🚀 NOVO" : "⭐ NOVO"}
                   </span>
                 </div>
               )}

@@ -4,6 +4,16 @@
 
 Site pessoal que demonstra competências em HTML5, CSS3, design responsivo e React. Inclui galeria interativa, laboratórios CSS e desafio de código morse.
 
+## 🧱 **NOVO LABORATÓRIO FLEXBOX** ⭐
+
+### [🚀 **FLEXBOX: "Gosto de LEGO, de ficção científica, ação e paz"**](https://desenvolvimento-web-2025-2.vercel.app/flexbox.html)
+
+**Demonstração completa do Laboratório 4 - Flexbox**
+- ✅ Galeria responsiva (3 colunas desktop, 1 mobile)
+- ✅ Layout Holy Grail usando apenas Flexbox
+- ✅ Tema espacial imersivo com naves LEGO
+- ✅ Filosofia: construção criativa, ficção científica, ação responsável e paz galáctica
+
 ## 🚀 **Acesso Direto ao Site**
 
 ### [🌐 **CLIQUE AQUI PARA ACESSAR O SITE**](https://desenvolvimento-web-2025-2.vercel.app)
@@ -20,6 +30,13 @@ Propriedades tipográficas e sistemas de cores
 
 ### [📦 Box Model](https://desenvolvimento-web-2025-2.vercel.app/lab-boxmodel.html)
 Margin, padding e border com exemplos práticos
+
+### [🧱 **NOVO: Flexbox - LEGO + Ficção Científica**](https://desenvolvimento-web-2025-2.vercel.app/flexbox.html) ⭐
+**Tema: "Gosto de LEGO, de ficção científica, ação e paz"**
+- Galeria de naves LEGO (3 colunas desktop, 1 mobile)
+- Layout Holy Grail com apenas Flexbox
+- Sistema interativo de comando galáctico
+- Design espacial imersivo com animações
 
 ### [🌌 Galeria Espacial](https://desenvolvimento-web-2025-2.vercel.app/galeria-naves-espaciais.html)
 Galeria temática de naves espaciais com placeholders visuais interativos

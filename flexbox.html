@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratório 4 - Flexbox | Gabriel Malheiros FAESA</title>
+    <link rel="stylesheet" href="flexbox.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Laboratório 4 de Flexbox - Gabriel Malheiros, demonstrando layouts modernos com tema LEGO + ficção científica + ação + paz">
+    <meta name="author" content="Gabriel Malheiros de Castro">
+    <!-- Garantia de isolamento total -->
+    <style>
+        * { box-sizing: border-box !important; }
+        html, body { 
+            margin: 0 !important; 
+            padding: 0 !important; 
+            font-size: 16px !important;
+            line-height: 1.6 !important;
+        }
+    </style>
+</head>
+<body class="pagina-flexbox">
+    <!-- Header Fixo com navegação espacial -->
+    <header class="header">
+        <div class="logo">
+            <span class="logo-icon">🧱</span>
+            <span class="logo-text">LEGO SPACE</span>
+        </div>
+        <nav class="nav">
+            <a href="#home" class="nav-link">🏠 Base</a>
+            <a href="#galeria" class="nav-link">🚀 Naves</a>
+            <a href="#holy-grail" class="nav-link">🌌 Universo</a>
+            <a href="#missao" class="nav-link">☮️ Missão</a>
+            <a href="/" class="nav-link nav-portfolio">🎯 Portfolio</a>
+        </nav>
+    </header>
+
+    <!-- Banner Principal -->
+    <section id="home" class="banner-pessoal">
+        <div class="container-banner">
+            <h1 class="titulo-pessoal">Gabriel Malheiros de Castro</h1>
+            <p class="mensagem-especial">
+                🌟 "Sou um autista buscando fazer meu melhor para todos e ser alguém de confiança" 🌟
+            </p>
+            <p class="subtitulo-lab">
+                Laboratório 4 - Flexbox • FAESA • Desenvolvimento Web 2025-2
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Hero Section com tema -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">🧱 Bem-vindo ao Universo LEGO Espacial</h1>
+                <p class="hero-subtitle">
+                    "Gosto de LEGO, de ficção científica, ação e paz"
+                </p>
+                <p class="hero-description">
+                    Criando layouts modernos e responsivos com Flexbox, 
+                    inspirado na construção de naves espaciais LEGO para missões de paz galáctica
+                </p>
+                <div class="hero-badges">
+                    <span class="badge badge-lego">🧱 LEGO</span>
+                    <span class="badge badge-scifi">🚀 Ficção Científica</span>
+                    <span class="badge badge-action">⚡ Ação</span>
+                    <span class="badge badge-peace">☮️ Paz</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Galeria de Naves LEGO (Desafio 1: 3 colunas desktop, 1 mobile) -->
+        <section id="galeria" class="galeria-naves">
+            <div class="galeria-header">
+                <h2 class="galeria-titulo">🚀 Galeria de Naves Espaciais LEGO</h2>
+                <p class="galeria-subtitulo">
+                    Criações inspiradas em ficção científica para missões de paz no espaço
+                </p>
+            </div>
+
+            <div class="galeria-grid">
+                <!-- Nave 1: Exploração Pacífica -->
+                <div class="nave-card">
+                    <div class="nave-image">🛸</div>
+                    <div class="nave-content">
+                        <h3 class="nave-nome">USS Harmony</h3>
+                        <p class="nave-desc">Nave de exploração pacífica, equipada para missões diplomáticas e científicas</p>
+                        <div class="nave-stats">
+                            <span class="stat">🔹 Missão: Paz</span>
+                            <span class="stat">🔹 Tipo: Exploração</span>
+                            <span class="stat">🔹 Status: Ativa</span>
+                        </div>
+                        <button class="nave-btn">Ver Detalhes</button>
+                    </div>
+                </div>
+
+                <!-- Nave 2: Defesa e Proteção -->
+                <div class="nave-card">
+                    <div class="nave-image">🚀</div>
+                    <div class="nave-content">
+                        <h3 class="nave-nome">Defender Alpha</h3>
+                        <p class="nave-desc">Nave de defesa espacial, proteção de colônias e escolta de missões humanitárias</p>
+                        <div class="nave-stats">
+                            <span class="stat">🔹 Missão: Proteção</span>
+                            <span class="stat">🔹 Tipo: Defesa</span>
+                            <span class="stat">🔹 Status: Patrulha</span>
+                        </div>
+                        <button class="nave-btn">Ver Detalhes</button>
+                    </div>
+                </div>
+
+                <!-- Nave 3: Ciência e Descoberta -->
+                <div class="nave-card">
+                    <div class="nave-image">🛰️</div>
+                    <div class="nave-content">
+                        <h3 class="nave-nome">Discovery One</h3>
+                        <p class="nave-desc">Laboratório espacial para pesquisa científica e descoberta de novas formas de vida</p>
+                        <div class="nave-stats">
+                            <span class="stat">🔹 Missão: Ciência</span>
+                            <span class="stat">🔹 Tipo: Pesquisa</span>
+                            <span class="stat">🔹 Status: Investigação</span>
+                        </div>
+                        <button class="nave-btn">Ver Detalhes</button>
+                    </div>
+                </div>
+
+                <!-- Nave 4: Resgate e Emergência -->
+                <div class="nave-card">
+                    <div class="nave-image">🚁</div>
+                    <div class="nave-content">
+                        <h3 class="nave-nome">Rescue Phoenix</h3>
+                        <p class="nave-desc">Nave de resgate rápido, especializada em operações de emergência espacial</p>
+                        <div class="nave-stats">
+                            <span class="stat">🔹 Missão: Resgate</span>
+                            <span class="stat">🔹 Tipo: Emergência</span>
+                            <span class="stat">🔹 Status: Standby</span>
+                        </div>
+                        <button class="nave-btn">Ver Detalhes</button>
+                    </div>
+                </div>
+
+                <!-- Nave 5: Diplomacia Galáctica -->
+                <div class="nave-card">
+                    <div class="nave-image">🌟</div>
+                    <div class="nave-content">
+                        <h3 class="nave-nome">Peacekeeper</h3>
+                        <p class="nave-desc">Nave diplomática para negociações intergalácticas e manutenção da paz</p>
+                        <div class="nave-stats">
+                            <span class="stat">🔹 Missão: Diplomacia</span>
+                            <span class="stat">🔹 Tipo: Paz</span>
+                            <span class="stat">🔹 Status: Negociação</span>
+                        </div>
+                        <button class="nave-btn">Ver Detalhes</button>
+                    </div>
+                </div>
+
+                <!-- Nave 6: Construção Espacial -->
+                <div class="nave-card">
+                    <div class="nave-image">🏗️</div>
+                    <div class="nave-content">
+                        <h3 class="nave-nome">Builder X1</h3>
+                        <p class="nave-desc">Nave construtora para bases espaciais e infraestrutura galáctica pacífica</p>
+                        <div class="nave-stats">
+                            <span class="stat">🔹 Missão: Construção</span>
+                            <span class="stat">🔹 Tipo: Engenharia</span>
+                            <span class="stat">🔹 Status: Projeto</span>
+                        </div>
+                        <button class="nave-btn">Ver Detalhes</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Layout Holy Grail (Desafio 2) -->
+        <section id="holy-grail" class="holy-grail-section">
+            <div class="holy-grail-header">
+                <h2 class="holy-grail-titulo">🌌 Centro de Comando Galáctico (Holy Grail Layout)</h2>
+                <p class="holy-grail-subtitulo">
+                    Layout avançado com header fixo, sidebars e conteúdo central usando apenas Flexbox
+                </p>
+            </div>
+
+            <div class="holy-grail-container">
+                <!-- Header do Holy Grail -->
+                <div class="hg-header">
+                    <h3>🎯 Comando Central da Frota</h3>
+                    <div class="hg-status">Status: Operacional ✅</div>
+                </div>
+
+                <!-- Corpo principal com 3 colunas -->
+                <div class="hg-body">
+                    <!-- Sidebar Esquerda -->
+                    <aside class="hg-sidebar-left">
+                        <h4>🚀 Missões Ativas</h4>
+                        <div class="missao-item">
+                            <span class="missao-icon">🌍</span>
+                            <div>
+                                <strong>Proteção Terra</strong>
+                                <small>85% concluída</small>
+                            </div>
+                        </div>
+                        <div class="missao-item">
+                            <span class="missao-icon">🌙</span>
+                            <div>
+                                <strong>Base Lunar</strong>
+                                <small>92% concluída</small>
+                            </div>
+                        </div>
+                        <div class="missao-item">
+                            <span class="missao-icon">🪐</span>
+                            <div>
+                                <strong>Exploração Marte</strong>
+                                <small>67% concluída</small>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <!-- Conteúdo Central -->
+                    <main class="hg-main">
+                        <div class="comando-central">
+                            <h4>🎮 Controle de Missões</h4>
+                            <div class="painel-controle">
+                                <div class="controle-item">
+                                    <h5>🛡️ Sistema de Defesa</h5>
+                                    <div class="status-bar">
+                                        <div class="status-fill" style="width: 95%"></div>
+                                    </div>
+                                    <span>95% Operacional</span>
+                                </div>
+                                <div class="controle-item">
+                                    <h5>🔬 Laboratórios</h5>
+                                    <div class="status-bar">
+                                        <div class="status-fill" style="width: 88%"></div>
+                                    </div>
+                                    <span>88% Operacional</span>
+                                </div>
+                                <div class="controle-item">
+                                    <h5>☮️ Diplomacia</h5>
+                                    <div class="status-bar">
+                                        <div class="status-fill" style="width: 100%"></div>
+                                    </div>
+                                    <span>100% Ativo</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mensagem-paz">
+                                <h5>🕊️ Mensagem de Paz Galáctica</h5>
+                                <p>
+                                    "Através do LEGO e da ficção científica, criamos um futuro onde a ação 
+                                    serve à paz. Cada nave construída representa nossa esperança de um 
+                                    universo unido, onde diferentes mundos trabalham juntos pela harmonia."
+                                </p>
+                            </div>
+                        </div>
+                    </main>
+
+                    <!-- Sidebar Direita -->
+                    <aside class="hg-sidebar-right">
+                        <h4>📊 Estatísticas</h4>
+                        <div class="stat-item">
+                            <span class="stat-numero">156</span>
+                            <span class="stat-label">Naves Ativas</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-numero">89</span>
+                            <span class="stat-label">Planetas em Paz</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-numero">247</span>
+                            <span class="stat-label">Missões Diplomáticas</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-numero">∞</span>
+                            <span class="stat-label">Peças LEGO</span>
+                        </div>
+                    </aside>
+                </div>
+
+                <!-- Footer do Holy Grail -->
+                <div class="hg-footer">
+                    <p>🌟 Centro de Comando Galáctico LEGO • Mantendo a paz no universo através da construção criativa</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Missão e Filosofia -->
+        <section id="missao" class="missao-section">
+            <div class="missao-content">
+                <h2 class="missao-titulo">☮️ Nossa Missão de Paz Galáctica</h2>
+                <div class="missao-grid">
+                    <div class="filosofia-card">
+                        <div class="filosofia-icon">🧱</div>
+                        <h3>LEGO como Base</h3>
+                        <p>
+                            Cada peça LEGO representa uma oportunidade de criar algo novo. 
+                            Construímos não apenas modelos, mas sonhos de um futuro melhor.
+                        </p>
+                    </div>
+                    <div class="filosofia-card">
+                        <div class="filosofia-icon">🚀</div>
+                        <h3>Ficção Científica como Inspiração</h3>
+                        <p>
+                            A ficção científica nos mostra possibilidades infinitas. 
+                            Inspiramo-nos em histórias que imaginam um amanhã de cooperação.
+                        </p>
+                    </div>
+                    <div class="filosofia-card">
+                        <div class="filosofia-icon">⚡</div>
+                        <h3>Ação com Propósito</h3>
+                        <p>
+                            Toda ação deve ter um propósito nobre. Usamos nossa energia 
+                            para defender, proteger e unir, nunca para destruir.
+                        </p>
+                    </div>
+                    <div class="filosofia-card">
+                        <div class="filosofia-icon">☮️</div>
+                        <h3>Paz como Objetivo Final</h3>
+                        <p>
+                            A paz não é ausência de conflito, mas presença de justiça e compreensão. 
+                            Construímos pontes entre mundos e culturas.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-info">
+                <h3>Gabriel Malheiros de Castro</h3>
+                <p>Estudante Autista • FAESA • Desenvolvimento Web 2025-2</p>
+                <p>"Buscando fazer meu melhor para todos e ser alguém de confiança"</p>
+            </div>
+            <div class="footer-links">
+                <a href="/" class="footer-link">🏠 Portfolio</a>
+                <a href="/tipografia.html" class="footer-link">🎨 Tipografia</a>
+                <a href="#" class="footer-link">📚 Outros Labs</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Gabriel Malheiros de Castro • FAESA • Laboratório 4 - Flexbox • Tema: LEGO + Ficção Científica + Ação + Paz</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript para interatividade -->
+    <script>
+        // Smooth scroll para navegação
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Interatividade dos botões das naves
+        document.querySelectorAll('.nave-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const card = this.closest('.nave-card');
+                const naveName = card.querySelector('.nave-nome').textContent;
+                alert(`🚀 Acessando detalhes da ${naveName}!\n\nEsta nave representa os valores de construção criativa, ficção científica inspiradora, ação responsável e paz galáctica.`);
+            });
+        });
+
+        // Efeito parallax sutil no hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.2}px)`;
+            }
+        });
+
+        // Console log de boas-vindas
+        console.log('🧱 Bem-vindo ao Laboratório Flexbox de Gabriel Malheiros!');
+        console.log('🚀 Tema: LEGO + Ficção Científica + Ação + Paz');
+        console.log('☮️ "Construindo um futuro melhor, uma peça por vez"');
+    </script>
+</body>
+</html>
