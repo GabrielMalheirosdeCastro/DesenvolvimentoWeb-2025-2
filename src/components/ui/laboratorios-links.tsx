@@ -82,7 +82,7 @@ export const LaboratoriosLinks: React.FC<LaboratoriosLinksProps> = ({ className 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {laboratorios.map((lab) => {
           const Icon = lab.icon;
-          const isDisabled = lab.emBreve;
+          const isDisabled = false; // Todos os laboratórios estão disponíveis
           
           return (
             <div
