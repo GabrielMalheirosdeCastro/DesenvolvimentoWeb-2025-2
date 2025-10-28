@@ -5,24 +5,8 @@
   "installCommand": "npm install",
   "rewrites": [
     {
-      "source": "/galeria-naves-espaciais.html",
-      "destination": "/galeria-naves-espaciais.html"
-    },
-    {
-      "source": "/tipografia.html",
-      "destination": "/tipografia.html"
-    },
-    {
-      "source": "/tipografia-espacial.html",
-      "destination": "/tipografia-espacial.html"
-    },
-    {
-      "source": "/lab-fundamentos-css.html", 
-      "destination": "/lab-fundamentos-css.html"
-    },
-    {
-      "source": "/lab-boxmodel.html",
-      "destination": "/lab-boxmodel.html"
+      "source": "/(.*\\.(html|css|js|png|jpg|jpeg|gif|svg|ico))",
+      "destination": "/$1"
     },
     {
       "source": "/(.*)",

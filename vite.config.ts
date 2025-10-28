@@ -20,13 +20,19 @@ export default defineConfig({
     assetsDir: 'assets',
     sourcemap: false,
     minify: 'terser',
-    // Otimizações simplificadas para Vercel
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true
+      }
+    },
+    // Configuração otimizada para Vercel
     rollupOptions: {
       output: {
-        // Remover manualChunks que estava causando chunks vazios
         assetFileNames: 'assets/[name].[hash][extname]',
         chunkFileNames: 'assets/[name].[hash].js',
-        entryFileNames: 'assets/[name].[hash].js'
+        entryFileNames: 'assets/[name].[hash].js',
+        manualChunks: undefined // Remove chunks manuais problemáticos
       }
     },
     // Limite de chunk warning aumentado
