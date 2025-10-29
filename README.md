@@ -1,60 +1,158 @@
-# 🚀 **Interface Gráfica Pessoal - Gabriel Malheiros de Castro**
+# 🚀 **Portfolio de Desenvolvimento Web**# 🚀 **Portfolio de Desenvolvimento Web**
 
-> **Projeto acadêmico FAESA (2025-2) - Desenvolvimento Web Moderno**
 
-## 🌐 **Acesso Direto**
 
-### **[✨ SITE PRINCIPAL](https://desenvolvimento-web-2025-2.vercel.app)** 
-**`https://desenvolvimento-web-2025-2.vercel.app`**
+> **Gabriel Malheiros de Castro - FAESA 2025-2**> **Gabriel Malheiros de Castro - FAESA 2025-2**
 
----
+
+
+## 🌐 **Site Principal**## 🌐 **Site Principal**
+
+
+
+### **[✨ ACESSAR SITE](https://desenvolvimento-web-2025-2.vercel.app)**### **[✨ ACESSAR SITE](https://desenvolvimento-web-2025-2.vercel.app)**
+
+
+
+---## 📸 **Destaques Visuais do Projeto**
+
+
+
+## 📚 **Laboratórios CSS**### 🚀 **[Galeria de Naves Espaciais](https://desenvolvimento-web-2025-2.vercel.app/galeria-naves-espaciais.html)**
+
+- **Star Destroyer - Venator Class**: A arma definitiva da República (1.137 metros, 52 turbolasers)
+
+- **[Fundamentos CSS](https://desenvolvimento-web-2025-2.vercel.app/lab-fundamentos-css.html)** - Seletores e propriedades básicas- **Acclamator Class**: Transporte de assalto republicano (752 metros, 16.000 clones)
+
+- **[Tipografia](https://desenvolvimento-web-2025-2.vercel.app/tipografia-espacial.html)** - Fontes e hierarquia visual- **Frota de Combate Militar**: Formação tática avançada com múltiplas classes
+
+- **[Box Model](https://desenvolvimento-web-2025-2.vercel.app/lab-boxmodel.html)** - Margin, padding e dimensionamento- **República Venator**: Comando e controle (flagship com marcas republicanas)
+
+- **[Flexbox](https://desenvolvimento-web-2025-2.vercel.app/flexbox.html)** - Layout flexível com galeria LEGO
+
+- **[Responsividade](https://desenvolvimento-web-2025-2.vercel.app/responsivo.html)** - Mobile-first e breakpoints### 🧱 **[LEGO Space - Layout Flexbox](https://desenvolvimento-web-2025-2.vercel.app/flexbox.html)**
+
+- **[Portfolio Responsivo](https://desenvolvimento-web-2025-2.vercel.app/portfolio-responsivo.html)** - Projeto completo- **USS Harmony** 🛸: Nave de exploração pacífica para missões diplomáticas
+
+- **[Posicionamento](https://desenvolvimento-web-2025-2.vercel.app/posicionamento.html)** - Position, z-index e modais- **Defender Alpha** 🚀: Nave de defesa especial, proteção de colônias  
+
+- **Discovery One** 🛰️: Laboratório espacial para pesquisa científica
+
+## 🎨 **Galerias Especiais**- **Rescue Phoenix** 🚁: Nave de resgate especializada em emergências
+
+- **Peacekeeper** ⭐: Nave diplomática para negociações intergalácticas
+
+- **[Galeria Naves Espaciais](https://desenvolvimento-web-2025-2.vercel.app/galeria-naves-espaciais.html)** - Cards interativos temáticos- **Builder X1** 🏗️: Nave construtora para bases espaciais
+
+
+
+---### 🎨 **Interface Moderna e Responsiva**
+
+- **Design temático espacial** com paleta de cores profissional
+
+## 🔧 **Como Executar**- **Layout em grid adaptativo** (1→2→3→4 colunas conforme a tela)
+
+- **Navegação por abas** (Base, Naves, Universo, Missão, Portfolio)
+
+```powershell- **Cards interativos** com especificações técnicas detalhadas
+
+# 1. Clonar repositório
+
+git clone https://github.com/GabrielMalheirosdeCastro/DesenvolvimentoWeb-2025-2.git---
+
+cd DesenvolvimentoWeb-2025-2
 
 ## 🎯 **O que é este projeto?**
 
-Interface gráfica pessoal que demonstra competências modernas em:
+# 2. Instalar dependências
+
+npm installInterface gráfica pessoal que demonstra competências modernas em:
+
 - ✅ **HTML5 semântico** com estrutura acessível
-- ✅ **CSS3 avançado** com flexbox, grid e animações
-- ✅ **JavaScript puro** para interatividade
-- ✅ **React + TypeScript** para componentes modernos
+
+# 3. Executar servidor- ✅ **CSS3 avançado** com flexbox, grid e animações
+
+npm run dev- ✅ **JavaScript puro** para interatividade
+
+# Abre automaticamente: http://localhost:3000- ✅ **React + TypeScript** para componentes modernos
+
 - ✅ **Design responsivo** mobile-first
-- ✅ **Performance otimizada** com técnicas do Figma
 
----
+# 4. Build para produção- ✅ **Performance otimizada** com técnicas do Figma
 
-## � **Laboratórios CSS Desenvolvidos**
+npm run build
 
-### � **[Lab 1 - Fundamentos CSS](https://desenvolvimento-web-2025-2.vercel.app/lab-fundamentos-css.html)**
+npm run preview---
+
+# Preview: http://localhost:4173
+
+```## � **Laboratórios CSS Desenvolvidos**
+
+
+
+---### � **[Lab 1 - Fundamentos CSS](https://desenvolvimento-web-2025-2.vercel.app/lab-fundamentos-css.html)**
+
 Seletores, propriedades básicas, layout e cores
 
+## 💻 **Tecnologias**
+
 ### 🔤 **[Lab 2 - Tipografia](https://desenvolvimento-web-2025-2.vercel.app/tipografia-espacial.html)**
-Fontes, espaçamento, hierarquia e legibilidade
 
-### 📦 **[Lab 3 - Box Model](https://desenvolvimento-web-2025-2.vercel.app/lab-boxmodel.html)**
-Margin, padding, border e dimensionamento
+- **React 18** + TypeScriptFontes, espaçamento, hierarquia e legibilidade
 
-### 🧱 **[Lab 4 - Flexbox](https://desenvolvimento-web-2025-2.vercel.app/flexbox.html)**
+- **Tailwind CSS** + CSS3 avançado
+
+- **Vite** - Build tool moderno### 📦 **[Lab 3 - Box Model](https://desenvolvimento-web-2025-2.vercel.app/lab-boxmodel.html)**
+
+- **Vercel** - Deploy automáticoMargin, padding, border e dimensionamento
+
+
+
+## ✨ **Funcionalidades**### 🧱 **[Lab 4 - Flexbox](https://desenvolvimento-web-2025-2.vercel.app/flexbox.html)**
+
 Layout flexível com galeria LEGO espacial
 
-### � **[Lab 5 - Responsividade](https://desenvolvimento-web-2025-2.vercel.app/responsivo.html)**
-Mobile-first, breakpoints e media queries
+- 📷 **Galeria Figma** - Imagens espaciais interativas
 
-### � **[Lab 6 - Portfolio Responsivo](https://desenvolvimento-web-2025-2.vercel.app/portfolio-responsivo.html)**
+- 👤 **Dados Pessoais** - Habilidades e informações### � **[Lab 5 - Responsividade](https://desenvolvimento-web-2025-2.vercel.app/responsivo.html)**
+
+- 🎯 **Desafio Morse** - Jogo interativoMobile-first, breakpoints e media queries
+
+- 🎨 **4 Temas Visuais** - Troca de cores
+
+- 📱 **Design Responsivo** - Mobile e desktop### � **[Lab 6 - Portfolio Responsivo](https://desenvolvimento-web-2025-2.vercel.app/portfolio-responsivo.html)**
+
 Projeto completo com todas as técnicas
 
 ---
 
+---
+
+## 👤 **Desenvolvedor**
+
 ## 🎨 **Galerias Especiais**
 
-### � **[Galeria Naves Espaciais](https://desenvolvimento-web-2025-2.vercel.app/galeria-naves-espaciais.html)**
-- **✨ Sistema de seleção instantânea** (baseado nas técnicas do Figma)
-- **⌨️ Navegação por teclado** (setas, Enter, espaço)
-- **🎯 Seletor visual rápido** com pontos interativos
-- **📱 Design responsivo** com animações suaves
-- **🛰️ Conteúdo temático** sobre naves Star Wars
+**Gabriel Malheiros de Castro**  
 
-### 🧱 **[Galeria LEGO Naves](https://desenvolvimento-web-2025-2.vercel.app/galeria-lego-naves.html)**
+📚 FAESA - Faculdades Integradas Espírito-Santenses  ### � **[Galeria Naves Espaciais](https://desenvolvimento-web-2025-2.vercel.app/galeria-naves-espaciais.html)**
+
+🎓 Desenvolvimento Web 2025-2- **✨ Sistema de seleção instantânea** (baseado nas técnicas do Figma)
+
+- **⌨️ Navegação por teclado** (setas, Enter, espaço)
+
+**Links:**- **🎯 Seletor visual rápido** com pontos interativos
+
+- **[GitHub](https://github.com/GabrielMalheirosdeCastro)**- **📱 Design responsivo** com animações suaves
+
+- **[Site](https://desenvolvimento-web-2025-2.vercel.app)**- **🛰️ Conteúdo temático** sobre naves Star Wars
+
+
+
+---### 🧱 **[Galeria LEGO Naves](https://desenvolvimento-web-2025-2.vercel.app/galeria-lego-naves.html)**
+
 Coleção de mini naves LEGO com placeholders funcionais
 
+*Projeto desenvolvido com 💙 para a disciplina de Desenvolvimento Web da FAESA*
 ---
 
 ## ⚙️ **Como Executar o Projeto**
