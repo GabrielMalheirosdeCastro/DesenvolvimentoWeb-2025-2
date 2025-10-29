@@ -94,8 +94,10 @@ npm run dev
 # 5. Para testar as páginas HTML (build de produção)
 npm run build
 npm run preview  
-# ➜ Site: http://localhost:4173/
+# ➜ Preview: http://localhost:4173/
 # ➜ Galeria Espacial: http://localhost:4173/galeria-naves-espaciais.html
+# ➜ Flexbox: http://localhost:4173/flexbox.html
+# ➜ Tipografia: http://localhost:4173/tipografia.html
 ```
 
 ## 👤 **Desenvolvedor**
