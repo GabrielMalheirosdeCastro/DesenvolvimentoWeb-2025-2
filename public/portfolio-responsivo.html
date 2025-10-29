@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Responsivo - Desafio Lab 6 | Gabriel Malheiros</title>
+    <meta name="description" content="Portfolio responsivo demonstrando navegação hambúrguer, grid adaptativo e breakpoints customizados.">
+    <meta name="author" content="Gabriel Malheiros de Castro">
+    <link rel="stylesheet" href="portfolio-responsivo.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💼</text></svg>">
+</head>
+<body class="html-page portfolio-page">
+    <!-- Header com navegação hambúrguer -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">💼</span>
+                <span class="logo-text">Gabriel Malheiros</span>
+            </div>
+            
+            <!-- Navegação desktop -->
+            <nav class="nav-desktop">
+                <a href="#home">Início</a>
+                <a href="#about">Sobre</a>
+                <a href="#projects">Projetos</a>
+                <a href="#skills">Habilidades</a>
+                <a href="#contact">Contato</a>
+            </nav>
+            
+            <!-- Botão hambúrguer para mobile -->
+            <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+        
+        <!-- Menu lateral para mobile -->
+        <nav class="nav-mobile" id="navMobile">
+            <div class="nav-mobile-content">
+                <button class="nav-close" id="navClose" aria-label="Fechar menu">×</button>
+                <a href="#home" class="nav-link">🏠 Início</a>
+                <a href="#about" class="nav-link">👨‍💻 Sobre</a>
+                <a href="#projects" class="nav-link">🚀 Projetos</a>
+                <a href="#skills" class="nav-link">⚡ Habilidades</a>
+                <a href="#contact" class="nav-link">📞 Contato</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Gabriel Malheiros de Castro</h1>
+                    <p class="hero-subtitle">Desenvolvedor Web Frontend</p>
+                    <p class="hero-description">Especialista em design responsivo, React e experiências digitais modernas. Estudante de Desenvolvimento Web na FAESA.</p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">Ver Projetos</a>
+                        <a href="#contact" class="btn btn-secondary">Contato</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="profile-placeholder">
+                        <span class="profile-icon">👨‍💻</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2>Sobre Mim</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Sou estudante de Desenvolvimento Web na FAESA, apaixonado por criar experiências digitais responsivas e acessíveis. Especializo-me em tecnologias modernas como HTML5, CSS3, JavaScript e React.</p>
+                    <p>Este portfolio demonstra conceitos avançados de responsividade, incluindo navegação adaptativa, grids flexíveis e breakpoints customizados para garantir excelente experiência em qualquer dispositivo.</p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">15+</span>
+                        <span class="stat-label">Projetos</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">6</span>
+                        <span class="stat-label">Laboratórios CSS</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Responsivo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Grid de Projetos -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <h2>Meus Projetos</h2>
+            <p class="section-description">Portfolio de projetos acadêmicos e pessoais demonstrando diferentes técnicas de desenvolvimento web.</p>
+            
+            <!-- Grid adaptativo: 1 coluna mobile, 2 tablet, 3 desktop -->
+            <div class="projects-grid">
+                <div class="project-card featured">
+                    <div class="project-image">
+                        <span class="project-icon">🌐</span>
+                    </div>
+                    <div class="project-content">
+                        <h3>Interface Gráfica Pessoal</h3>
+                        <p>Site principal do portfolio com React, galeria interativa e sistema de temas responsivo.</p>
+                        <div class="project-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">TypeScript</span>
+                            <span class="tag">Tailwind</span>
+                        </div>
+                        <a href="https://desenvolvimento-web-2025-2.vercel.app" class="project-link">Ver Projeto</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <span class="project-icon">🧱</span>
+                    </div>
+                    <div class="project-content">
+                        <h3>Lab Flexbox - LEGO</h3>
+                        <p>Demonstração completa de Flexbox com tema espacial e galeria responsiva de naves LEGO.</p>
+                        <div class="project-tags">
+                            <span class="tag">Flexbox</span>
+                            <span class="tag">CSS3</span>
+                            <span class="tag">Responsivo</span>
+                        </div>
+                        <a href="#" class="project-link">Ver Projeto</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <span class="project-icon">📐</span>
+                    </div>
+                    <div class="project-content">
+                        <h3>Posicionamento CSS</h3>
+                        <p>Laboratório interativo com modais, menus deslizantes e sistemas de notificação.</p>
+                        <div class="project-tags">
+                            <span class="tag">Position</span>
+                            <span class="tag">Z-index</span>
+                            <span class="tag">Animations</span>
+                        </div>
+                        <a href="#" class="project-link">Ver Projeto</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <span class="project-icon">🔤</span>
+                    </div>
+                    <div class="project-content">
+                        <h3>Tipografia CSS</h3>
+                        <p>Sistema completo de tipografia com fontes Google e hierarquia visual avançada.</p>
+                        <div class="project-tags">
+                            <span class="tag">Typography</span>
+                            <span class="tag">Google Fonts</span>
+                            <span class="tag">Design System</span>
+                        </div>
+                        <a href="#" class="project-link">Ver Projeto</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <span class="project-icon">📱</span>
+                    </div>
+                    <div class="project-content">
+                        <h3>Lab Responsividade</h3>
+                        <p>Demonstração de Media Queries, Mobile First e breakpoints customizados.</p>
+                        <div class="project-tags">
+                            <span class="tag">Media Queries</span>
+                            <span class="tag">Mobile First</span>
+                            <span class="tag">Breakpoints</span>
+                        </div>
+                        <a href="#" class="project-link">Ver Projeto</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <span class="project-icon">🎮</span>
+                    </div>
+                    <div class="project-content">
+                        <h3>Desafio Morse</h3>
+                        <p>Jogo interativo de código morse com áudio e sistema de pontuação responsivo.</p>
+                        <div class="project-tags">
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Audio API</span>
+                            <span class="tag">Game Design</span>
+                        </div>
+                        <a href="#" class="project-link">Ver Projeto</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Habilidades -->
+    <section class="skills" id="skills">
+        <div class="container">
+            <h2>Habilidades Técnicas</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Frontend</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span class="skill-name">HTML5</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">CSS3</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">JavaScript</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">React</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Design</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span class="skill-name">Responsive Design</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">UI/UX</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Figma</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Typography</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Ferramentas</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <span class="skill-name">Git</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">VS Code</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Vite</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Vercel</span>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer com redes sociais -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <h3>Gabriel Malheiros de Castro</h3>
+                    <p>Desenvolvedor Web Frontend | Estudante FAESA</p>
+                    <p>Especialista em design responsivo e experiências digitais modernas</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Links Rápidos</h4>
+                    <a href="#home">Início</a>
+                    <a href="#about">Sobre</a>
+                    <a href="#projects">Projetos</a>
+                    <a href="#skills">Habilidades</a>
+                </div>
+                
+                <div class="footer-social">
+                    <h4>Redes Sociais</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link github" aria-label="GitHub">
+                            <span class="social-icon">📚</span>
+                            <span class="social-name">GitHub</span>
+                        </a>
+                        <a href="#" class="social-link linkedin" aria-label="LinkedIn">
+                            <span class="social-icon">💼</span>
+                            <span class="social-name">LinkedIn</span>
+                        </a>
+                        <a href="#" class="social-link portfolio" aria-label="Portfolio">
+                            <span class="social-icon">🌐</span>
+                            <span class="social-name">Portfolio</span>
+                        </a>
+                        <a href="#" class="social-link email" aria-label="Email">
+                            <span class="social-icon">📧</span>
+                            <span class="social-name">Email</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Gabriel Malheiros de Castro - FAESA | Projeto Acadêmico de Desenvolvimento Web</p>
+                <div class="responsive-info">
+                    <span id="deviceInfo" class="device-info">📱 Responsivo</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navegação hambúrguer
+        const hamburger = document.getElementById('hamburger');
+        const navMobile = document.getElementById('navMobile');
+        const navClose = document.getElementById('navClose');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        function toggleMenu() {
+            navMobile.classList.toggle('nav-open');
+            hamburger.classList.toggle('hamburger-active');
+            document.body.classList.toggle('nav-open');
+        }
+
+        function closeMenu() {
+            navMobile.classList.remove('nav-open');
+            hamburger.classList.remove('hamburger-active');
+            document.body.classList.remove('nav-open');
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+        navClose.addEventListener('click', closeMenu);
+
+        // Fechar menu ao clicar nos links
+        navLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        // Fechar menu ao clicar fora
+        navMobile.addEventListener('click', (e) => {
+            if (e.target === navMobile) {
+                closeMenu();
+            }
+        });
+
+        // Informação responsiva em tempo real
+        function updateDeviceInfo() {
+            const width = window.innerWidth;
+            const deviceInfo = document.getElementById('deviceInfo');
+            let info = '';
+            
+            if (width < 480) {
+                info = '📱 Muito Pequeno';
+            } else if (width < 768) {
+                info = '📱 Mobile';
+            } else if (width < 1024) {
+                info = '📊 Tablet';
+            } else if (width < 1200) {
+                info = '💻 Desktop';
+            } else {
+                info = '🖥️ Desktop Large';
+            }
+            
+            if (deviceInfo) {
+                deviceInfo.textContent = `${info} (${width}px)`;
+            }
+        }
+
+        // Smooth scroll para âncoras
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header com scroll
+        let lastScrollY = window.scrollY;
+        const header = document.querySelector('.header');
+
+        function handleScroll() {
+            const currentScrollY = window.scrollY;
+            
+            if (currentScrollY > 100) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+            
+            lastScrollY = currentScrollY;
+        }
+
+        // Event listeners
+        window.addEventListener('load', updateDeviceInfo);
+        window.addEventListener('resize', updateDeviceInfo);
+        window.addEventListener('scroll', handleScroll);
+
+        // Animação dos elementos ao entrar na viewport
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card, .skill-category, .about-stats').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Prevenir comportamento padrão em links de exemplo
+        document.querySelectorAll('a[href="#"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+            });
+        });
+    </script>
+</body>
+</html>

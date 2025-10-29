@@ -31,12 +31,31 @@ Propriedades tipográficas e sistemas de cores
 ### [📦 Box Model](https://desenvolvimento-web-2025-2.vercel.app/lab-boxmodel.html)
 Margin, padding e border com exemplos práticos
 
-### [🧱 **NOVO: Flexbox - LEGO + Ficção Científica**](https://desenvolvimento-web-2025-2.vercel.app/flexbox.html) ⭐
+### [🧱 Flexbox - LEGO + Ficção Científica](https://desenvolvimento-web-2025-2.vercel.app/flexbox.html)
 **Tema: "Gosto de LEGO, de ficção científica, ação e paz"**
 - Galeria de naves LEGO (3 colunas desktop, 1 mobile)
 - Layout Holy Grail com apenas Flexbox
 - Sistema interativo de comando galáctico
 - Design espacial imersivo com animações
+
+### [📱 **NOVO: Responsividade e Media Queries**](https://desenvolvimento-web-2025-2.vercel.app/responsivo.html) ⭐
+**Laboratório 6 - Design Responsivo Avançado**
+- ✅ Mobile First com breakpoints customizados
+- ✅ Media queries para todos os tamanhos (480px, 768px, 1024px, 1200px+)
+- ✅ Navegação adaptativa (hambúrguer em mobile)
+- ✅ Grid responsivo (1→2→3→4 colunas)
+- ✅ JavaScript para info em tempo real do dispositivo
+- ✅ Sistema de container inteligente e demonstrações práticas
+
+### [💼 **NOVO: Portfolio Responsivo - Desafio Avançado**](https://desenvolvimento-web-2025-2.vercel.app/portfolio-responsivo.html) ⭐
+**Desafio Completo do Lab 6**
+- ✅ **Navegação hambúrguer** deslizante lateral em mobile
+- ✅ **Grid de projetos** (1 coluna mobile → 2 tablet → 3 desktop → 4 ultra-wide)
+- ✅ **Footer com redes sociais** responsivo
+- ✅ **Breakpoint customizado** para telas muito pequenas (<480px)
+- ✅ **Hero section** adaptativo com imagem de perfil
+- ✅ **Animações avançadas** e transições suaves
+- ✅ **Sistema de habilidades** com barras de progresso
 
 ### [📐 **NOVO: Posicionamento e Z-index**](https://desenvolvimento-web-2025-2.vercel.app/posicionamento.html) ⭐
 **Laboratório interativo mais avançado do projeto!**

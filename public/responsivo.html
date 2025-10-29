@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 6 - Responsividade e Media Queries | Gabriel Malheiros</title>
+    <meta name="description" content="Laboratório 6 - Responsividade e Media Queries. Demonstração prática de design responsivo com Mobile First e breakpoints.">
+    <meta name="author" content="Gabriel Malheiros de Castro">
+    <link rel="stylesheet" href="responsivo.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📱</text></svg>">
+</head>
+<body class="html-page">
+    <!-- Header com navegação responsiva -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">📱</span>
+                FAESA
+            </div>
+            <nav class="nav">
+                <a href="#hero">Início</a>
+                <a href="#conceitos">Conceitos</a>
+                <a href="#exemplos">Exemplos</a>
+                <a href="#contato">Contato</a>
+            </nav>
+            <button class="menu-toggle" aria-label="Abrir menu de navegação">
+                ☰
+            </button>
+        </div>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <main class="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero" id="hero">
+                <h1>Design Responsivo</h1>
+                <p>Adapte-se a qualquer tela com elegância</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">📱</span>
+                        <span class="stat-label">Mobile First</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">📐</span>
+                        <span class="stat-label">Media Queries</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">🎯</span>
+                        <span class="stat-label">Breakpoints</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção de conceitos práticos -->
+            <section class="concepts-section" id="conceitos">
+                <h2>Conceitos Teóricos em Prática</h2>
+                
+                <!-- Viewport Meta Tag -->
+                <div class="concept-card">
+                    <h3>🌐 Viewport Meta Tag</h3>
+                    <p>Essencial para responsividade móvel:</p>
+                    <code class="code-block">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code>
+                    <div class="concept-demo">
+                        <div class="device-frame mobile">
+                            <span>Mobile</span>
+                        </div>
+                        <div class="device-frame tablet">
+                            <span>Tablet</span>
+                        </div>
+                        <div class="device-frame desktop">
+                            <span>Desktop</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Breakpoints -->
+                <div class="concept-card">
+                    <h3>📏 Breakpoints Comuns</h3>
+                    <div class="breakpoints-grid">
+                        <div class="breakpoint mobile-bp">
+                            <strong>&lt; 768px</strong>
+                            <span>Mobile</span>
+                        </div>
+                        <div class="breakpoint tablet-bp">
+                            <strong>768px - 1023px</strong>
+                            <span>Tablet</span>
+                        </div>
+                        <div class="breakpoint desktop-bp">
+                            <strong>1024px - 1199px</strong>
+                            <span>Desktop</span>
+                        </div>
+                        <div class="breakpoint large-bp">
+                            <strong>≥ 1200px</strong>
+                            <span>Desktop Large</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Grid de cards com responsividade -->
+            <section class="grid" id="exemplos">
+                <div class="card">
+                    <div class="card-icon">📱</div>
+                    <h3>Mobile First</h3>
+                    <p>Comece projetando para mobile e expanda para telas maiores. Esta abordagem garante performance e usabilidade em dispositivos menores.</p>
+                    <div class="card-badge">Fundamental</div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">📐</div>
+                    <h3>Media Queries</h3>
+                    <p>Use breakpoints para ajustar o layout em diferentes tamanhos de tela. CSS condicional baseado em largura da viewport.</p>
+                    <div class="card-badge">CSS3</div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">🧱</div>
+                    <h3>Flexbox/Grid</h3>
+                    <p>Ferramentas poderosas para layouts flexíveis e responsivos. Controle total sobre alinhamento e distribuição.</p>
+                    <div class="card-badge">Moderno</div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">🖼️</div>
+                    <h3>Imagens Responsivas</h3>
+                    <p>Use max-width: 100% para imagens fluidas que se adaptam ao container. Evite overflow horizontal.</p>
+                    <div class="card-badge">Performance</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3>Breakpoints Customizados</h3>
+                    <p>Crie breakpoints específicos para seu design. Teste em telas muito pequenas (&lt;480px) e ultra-wide.</p>
+                    <div class="card-badge">Avançado</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">⚡</div>
+                    <h3>Performance</h3>
+                    <p>Otimize carregamento com media queries para assets. Carregue recursos adequados para cada dispositivo.</p>
+                    <div class="card-badge">Otimização</div>
+                </div>
+            </section>
+
+            <!-- Demonstração de container responsivo -->
+            <section class="container-demo">
+                <h2>Demonstração de Container Responsivo</h2>
+                <div class="responsive-demo">
+                    <div class="demo-container">
+                        <div class="demo-content">
+                            <h4>Container Inteligente</h4>
+                            <p>Este container se adapta automaticamente:</p>
+                            <ul>
+                                <li><strong>Mobile:</strong> 100% width, padding 15px</li>
+                                <li><strong>Tablet:</strong> max-width 720px, centralizado</li>
+                                <li><strong>Desktop:</strong> max-width 960px</li>
+                                <li><strong>Large:</strong> max-width 1140px</li>
+                            </ul>
+                            <div class="current-size" id="currentSize">
+                                Redimensione a janela para ver as mudanças!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer responsivo -->
+    <footer class="footer" id="contato">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Laboratório 6</h4>
+                    <p>Responsividade e Media Queries</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Autor</h4>
+                    <p>Gabriel Malheiros de Castro</p>
+                    <p>FAESA - Desenvolvimento Web</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Recursos</h4>
+                    <p>HTML5 • CSS3 • Media Queries</p>
+                    <p>Mobile First • Responsive Design</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 FAESA - Projeto Acadêmico de Desenvolvimento Web</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript para mostrar tamanho atual da tela
+        function updateScreenSize() {
+            const width = window.innerWidth;
+            const sizeElement = document.getElementById('currentSize');
+            let deviceType = '';
+            
+            if (width < 480) {
+                deviceType = '📱 Muito Pequeno';
+            } else if (width < 768) {
+                deviceType = '📱 Mobile';
+            } else if (width < 1024) {
+                deviceType = '📊 Tablet';
+            } else if (width < 1200) {
+                deviceType = '💻 Desktop';
+            } else {
+                deviceType = '🖥️ Desktop Large';
+            }
+            
+            if (sizeElement) {
+                sizeElement.innerHTML = `
+                    <strong>${deviceType}</strong><br>
+                    Largura atual: ${width}px
+                `;
+            }
+        }
+
+        // Atualizar no carregamento e redimensionamento
+        window.addEventListener('load', updateScreenSize);
+        window.addEventListener('resize', updateScreenSize);
+
+        // Menu toggle para mobile
+        document.querySelector('.menu-toggle')?.addEventListener('click', function() {
+            const nav = document.querySelector('.nav');
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+        });
+    </script>
+</body>
+</html>

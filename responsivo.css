@@ -1,0 +1,713 @@
+/* ==========================================================================
+   LAB 6 - RESPONSIVIDADE E MEDIA QUERIES - FAESA
+   Autor: Gabriel Malheiros de Castro
+   Abordagem: Mobile First com namespace isolado
+   ========================================================================== */
+
+/* Reset e estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Namespace isolado para evitar conflitos com React */
+.html-page {
+    --resp-primary: #2c3e50;
+    --resp-secondary: #3498db;
+    --resp-accent: #e74c3c;
+    --resp-success: #27ae60;
+    --resp-warning: #f39c12;
+    --resp-light: #ecf0f1;
+    --resp-dark: #34495e;
+    --resp-white: #ffffff;
+    --resp-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --resp-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --resp-shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.html-page body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--resp-primary);
+    background-color: var(--resp-white);
+}
+
+/* CONTAINER SYSTEM - MOBILE FIRST */
+.html-page .container {
+    width: 100%;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   HEADER - MOBILE FIRST
+   ========================================================================== */
+.html-page .header {
+    background-color: var(--resp-primary);
+    color: var(--resp-white);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--resp-shadow);
+}
+
+.html-page .header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.html-page .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.html-page .logo-icon {
+    font-size: 1.2em;
+}
+
+/* NAVEGAÇÃO - Mobile First (oculta em mobile) */
+.html-page .nav {
+    display: none;
+    gap: 20px;
+}
+
+.html-page .nav a {
+    color: var(--resp-white);
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.html-page .nav a:hover {
+    background-color: var(--resp-secondary);
+    transform: translateY(-2px);
+}
+
+/* BOTÃO MENU HAMBÚRGUER - Visível em mobile */
+.html-page .menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    color: var(--resp-white);
+    font-size: 2em;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.html-page .menu-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ==========================================================================
+   HERO SECTION - MOBILE FIRST
+   ========================================================================== */
+.html-page .hero {
+    text-align: center;
+    padding: 40px 20px;
+    background: var(--resp-gradient);
+    color: var(--resp-white);
+    margin: 20px 0;
+    border-radius: 10px;
+    box-shadow: var(--resp-shadow);
+}
+
+.html-page .hero h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.html-page .hero p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.html-page .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.html-page .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.html-page .stat-number {
+    font-size: 2em;
+    display: block;
+}
+
+.html-page .stat-label {
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+/* ==========================================================================
+   CONCEITOS SECTION
+   ========================================================================== */
+.html-page .concepts-section {
+    margin: 40px 0;
+}
+
+.html-page .concepts-section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--resp-primary);
+    font-size: 1.8em;
+}
+
+.html-page .concept-card {
+    background: var(--resp-light);
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    box-shadow: var(--resp-shadow);
+    transition: transform 0.3s ease;
+}
+
+.html-page .concept-card:hover {
+    transform: translateY(-5px);
+}
+
+.html-page .concept-card h3 {
+    color: var(--resp-primary);
+    margin-bottom: 15px;
+    font-size: 1.3em;
+}
+
+.html-page .code-block {
+    display: block;
+    background: var(--resp-dark);
+    color: #00ff00;
+    padding: 15px;
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    margin: 15px 0;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+/* DEMONSTRAÇÃO DE DISPOSITIVOS */
+.html-page .concept-demo {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.html-page .device-frame {
+    border: 3px solid var(--resp-dark);
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    min-width: 80px;
+    transition: all 0.3s ease;
+}
+
+.html-page .device-frame:hover {
+    transform: scale(1.05);
+    box-shadow: var(--resp-shadow-hover);
+}
+
+.html-page .mobile {
+    background: var(--resp-warning);
+    color: var(--resp-white);
+}
+
+.html-page .tablet {
+    background: var(--resp-secondary);
+    color: var(--resp-white);
+}
+
+.html-page .desktop {
+    background: var(--resp-success);
+    color: var(--resp-white);
+}
+
+/* BREAKPOINTS GRID */
+.html-page .breakpoints-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.html-page .breakpoint {
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    transition: transform 0.3s ease;
+}
+
+.html-page .breakpoint:hover {
+    transform: translateY(-3px);
+}
+
+.html-page .mobile-bp {
+    background: #ff6b6b;
+    color: white;
+}
+
+.html-page .tablet-bp {
+    background: #4ecdc4;
+    color: white;
+}
+
+.html-page .desktop-bp {
+    background: #45b7d1;
+    color: white;
+}
+
+.html-page .large-bp {
+    background: #96ceb4;
+    color: white;
+}
+
+/* ==========================================================================
+   GRID DE CARDS - MOBILE FIRST (1 coluna)
+   ========================================================================== */
+.html-page .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px 0;
+    margin: 40px 0;
+}
+
+.html-page .card {
+    background-color: var(--resp-white);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: var(--resp-shadow);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(52, 73, 94, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.html-page .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--resp-gradient);
+}
+
+.html-page .card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--resp-shadow-hover);
+}
+
+.html-page .card-icon {
+    font-size: 3em;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.html-page .card h3 {
+    color: var(--resp-primary);
+    margin-bottom: 15px;
+    font-size: 1.4em;
+}
+
+.html-page .card p {
+    color: var(--resp-dark);
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.html-page .card-badge {
+    background: var(--resp-gradient);
+    color: var(--resp-white);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+/* ==========================================================================
+   CONTAINER DEMO
+   ========================================================================== */
+.html-page .container-demo {
+    margin: 40px 0;
+    text-align: center;
+}
+
+.html-page .container-demo h2 {
+    margin-bottom: 30px;
+    color: var(--resp-primary);
+}
+
+.html-page .responsive-demo {
+    background: var(--resp-light);
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px dashed var(--resp-secondary);
+}
+
+.html-page .demo-container {
+    background: var(--resp-white);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: var(--resp-shadow);
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+.html-page .demo-content h4 {
+    color: var(--resp-primary);
+    margin-bottom: 15px;
+}
+
+.html-page .demo-content ul {
+    text-align: left;
+    margin: 15px 0;
+    padding-left: 20px;
+}
+
+.html-page .demo-content li {
+    margin-bottom: 8px;
+}
+
+.html-page .current-size {
+    background: var(--resp-gradient);
+    color: var(--resp-white);
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.html-page .footer {
+    background-color: var(--resp-primary);
+    color: var(--resp-white);
+    padding: 40px 0 20px;
+    margin-top: 60px;
+}
+
+.html-page .footer-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.html-page .footer-section h4 {
+    margin-bottom: 10px;
+    color: var(--resp-secondary);
+}
+
+.html-page .footer-section p {
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+.html-page .footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    opacity: 0.8;
+}
+
+/* ==========================================================================
+   BREAKPOINT CUSTOMIZADO - TELAS MUITO PEQUENAS (<480px)
+   ========================================================================== */
+@media (max-width: 479px) {
+    .html-page .hero {
+        padding: 30px 15px;
+        margin: 15px 0;
+    }
+    
+    .html-page .hero h1 {
+        font-size: 1.6em;
+    }
+    
+    .html-page .hero-stats {
+        gap: 15px;
+    }
+    
+    .html-page .stat-number {
+        font-size: 1.5em;
+    }
+    
+    .html-page .card {
+        padding: 20px;
+    }
+    
+    .html-page .card-icon {
+        font-size: 2.5em;
+    }
+    
+    .html-page .concept-card {
+        padding: 20px;
+    }
+    
+    .html-page .code-block {
+        font-size: 0.8em;
+        padding: 12px;
+    }
+    
+    .html-page .device-frame {
+        min-width: 60px;
+        padding: 8px;
+        font-size: 0.9em;
+    }
+}
+
+/* ==========================================================================
+   TABLET (768px ou mais)
+   ========================================================================== */
+@media (min-width: 768px) {
+    .html-page .container {
+        max-width: 720px;
+    }
+    
+    .html-page .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+    
+    .html-page .hero h1 {
+        font-size: 2.5em;
+    }
+    
+    .html-page .hero {
+        padding: 60px 40px;
+    }
+    
+    .html-page .hero-stats {
+        gap: 40px;
+    }
+    
+    .html-page .stat-number {
+        font-size: 2.5em;
+    }
+    
+    .html-page .breakpoints-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .html-page .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+    
+    .html-page .concept-demo {
+        gap: 20px;
+    }
+    
+    .html-page .device-frame {
+        min-width: 100px;
+        padding: 15px;
+    }
+}
+
+/* ==========================================================================
+   DESKTOP (1024px ou mais)
+   ========================================================================== */
+@media (min-width: 1024px) {
+    .html-page .container {
+        max-width: 960px;
+    }
+    
+    /* Mostra navegação normal em desktop */
+    .html-page .nav {
+        display: flex;
+    }
+    
+    /* Esconde botão hambúrguer em desktop */
+    .html-page .menu-toggle {
+        display: none;
+    }
+    
+    .html-page .grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+    }
+    
+    .html-page .hero h1 {
+        font-size: 3em;
+    }
+    
+    .html-page .hero {
+        padding: 80px 60px;
+    }
+    
+    .html-page .breakpoints-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .html-page .footer-content {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .html-page .hero-stats {
+        gap: 60px;
+    }
+    
+    .html-page .stat-number {
+        font-size: 3em;
+    }
+}
+
+/* ==========================================================================
+   DESKTOP LARGE (1200px ou mais)
+   ========================================================================== */
+@media (min-width: 1200px) {
+    .html-page .container {
+        max-width: 1140px;
+    }
+    
+    .html-page .hero h1 {
+        font-size: 3.5em;
+    }
+    
+    .html-page .grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 35px;
+    }
+    
+    .html-page .hero {
+        padding: 100px 80px;
+    }
+}
+
+/* ==========================================================================
+   ULTRA-WIDE (1400px ou mais)
+   ========================================================================== */
+@media (min-width: 1400px) {
+    .html-page .container {
+        max-width: 1320px;
+    }
+    
+    .html-page .grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ==========================================================================
+   MEDIA QUERY PARA IMPRESSÃO
+   ========================================================================== */
+@media print {
+    .html-page .header,
+    .html-page .menu-toggle,
+    .html-page .current-size {
+        display: none;
+    }
+    
+    .html-page body {
+        font-size: 12pt;
+        color: black;
+        background: white;
+    }
+    
+    .html-page .hero {
+        background: none;
+        color: black;
+        border: 2px solid black;
+    }
+    
+    .html-page .card {
+        break-inside: avoid;
+        border: 1px solid #ccc;
+    }
+    
+    .html-page .grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+/* ==========================================================================
+   MEDIA QUERY PARA MODO ESCURO (preferência do usuário)
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+    .html-page {
+        --resp-white: #1a1a1a;
+        --resp-light: #2d2d2d;
+        --resp-primary: #e8e8e8;
+        --resp-dark: #b8b8b8;
+    }
+    
+    .html-page body {
+        background-color: var(--resp-white);
+        color: var(--resp-primary);
+    }
+    
+    .html-page .card {
+        background-color: var(--resp-light);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .html-page .demo-container {
+        background-color: var(--resp-light);
+    }
+}
+
+/* ==========================================================================
+   ANIMAÇÕES E TRANSIÇÕES AVANÇADAS
+   ========================================================================== */
+.html-page .card,
+.html-page .concept-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.html-page .card:nth-child(2) { animation-delay: 0.1s; }
+.html-page .card:nth-child(3) { animation-delay: 0.2s; }
+.html-page .card:nth-child(4) { animation-delay: 0.3s; }
+.html-page .card:nth-child(5) { animation-delay: 0.4s; }
+.html-page .card:nth-child(6) { animation-delay: 0.5s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================================================
+   FOCO E ACESSIBILIDADE
+   ========================================================================== */
+.html-page .nav a:focus,
+.html-page .menu-toggle:focus {
+    outline: 2px solid var(--resp-secondary);
+    outline-offset: 2px;
+}
+
+.html-page .card:focus-within {
+    transform: translateY(-5px);
+    box-shadow: var(--resp-shadow-hover);
+}

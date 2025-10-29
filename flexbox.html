@@ -77,6 +77,17 @@
                 <p class="galeria-subtitulo">
                     Criações inspiradas em ficção científica para missões de paz no espaço
                 </p>
+                <div style="margin-top: 1rem;">
+                    <a href="/galeria-naves-espaciais.html" 
+                       style="display: inline-block; background: linear-gradient(135deg, var(--cor-scifi), var(--cor-secundaria)); 
+                              color: white; padding: 0.8rem 1.5rem; border-radius: 12px; text-decoration: none; 
+                              font-weight: 600; border: 2px solid rgba(255,255,255,0.2); 
+                              box-shadow: 0 4px 6px rgba(0,0,0,0.3); transition: all 0.3s ease;"
+                       onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.4)'"
+                       onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.3)'">
+                        🌌 Ver Galeria de Naves Épicas Star Wars
+                    </a>
+                </div>
             </div>
 
             <div class="galeria-grid">
@@ -91,7 +102,7 @@
                             <span class="stat">🔹 Tipo: Exploração</span>
                             <span class="stat">🔹 Status: Ativa</span>
                         </div>
-                        <button class="nave-btn">Ver Detalhes</button>
+                        <button class="nave-btn" onclick="openImageModal(0)">Ver Detalhes</button>
                     </div>
                 </div>
 
@@ -106,7 +117,7 @@
                             <span class="stat">🔹 Tipo: Defesa</span>
                             <span class="stat">🔹 Status: Patrulha</span>
                         </div>
-                        <button class="nave-btn">Ver Detalhes</button>
+                        <button class="nave-btn" onclick="openImageModal(1)">Ver Detalhes</button>
                     </div>
                 </div>
 
@@ -121,7 +132,7 @@
                             <span class="stat">🔹 Tipo: Pesquisa</span>
                             <span class="stat">🔹 Status: Investigação</span>
                         </div>
-                        <button class="nave-btn">Ver Detalhes</button>
+                        <button class="nave-btn" onclick="openImageModal(2)">Ver Detalhes</button>
                     </div>
                 </div>
 
@@ -136,7 +147,7 @@
                             <span class="stat">🔹 Tipo: Emergência</span>
                             <span class="stat">🔹 Status: Standby</span>
                         </div>
-                        <button class="nave-btn">Ver Detalhes</button>
+                        <button class="nave-btn" onclick="openImageModal(3)">Ver Detalhes</button>
                     </div>
                 </div>
 
@@ -151,7 +162,7 @@
                             <span class="stat">🔹 Tipo: Paz</span>
                             <span class="stat">🔹 Status: Negociação</span>
                         </div>
-                        <button class="nave-btn">Ver Detalhes</button>
+                        <button class="nave-btn" onclick="openImageModal(4)">Ver Detalhes</button>
                     </div>
                 </div>
 
@@ -166,7 +177,7 @@
                             <span class="stat">🔹 Tipo: Engenharia</span>
                             <span class="stat">🔹 Status: Projeto</span>
                         </div>
-                        <button class="nave-btn">Ver Detalhes</button>
+                        <button class="nave-btn" onclick="openImageModal(5)">Ver Detalhes</button>
                     </div>
                 </div>
             </div>
@@ -337,6 +348,7 @@
             <div class="footer-links">
                 <a href="/" class="footer-link">🏠 Portfolio</a>
                 <a href="/tipografia.html" class="footer-link">🎨 Tipografia</a>
+                <a href="/galeria-naves-espaciais.html" class="footer-link">🚀 Naves Espaciais</a>
                 <a href="#" class="footer-link">📚 Outros Labs</a>
             </div>
         </div>
@@ -345,8 +357,153 @@
         </div>
     </footer>
 
+    <!-- Modal de visualização em tela cheia -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeImageModal()">&times;</span>
+            <button class="modal-nav modal-prev" onclick="prevImage()">&#8249;</button>
+            <button class="modal-nav modal-next" onclick="nextImage()">&#8250;</button>
+            
+            <div class="modal-image-container">
+                <div id="modalImage" class="modal-image-placeholder">
+                    <div class="placeholder-content">
+                        <div class="placeholder-icon">🛸</div>
+                        <div class="placeholder-title">USS Harmony</div>
+                        <div class="placeholder-description">Nave de exploração pacífica</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-info">
+                <h3 id="modalTitle">USS Harmony</h3>
+                <p id="modalDescription">Nave de exploração pacífica, equipada para missões diplomáticas e científicas</p>
+                <div id="modalStats">
+                    <span class="modal-stat">🔹 Missão: Paz</span>
+                    <span class="modal-stat">🔹 Tipo: Exploração</span>
+                    <span class="modal-stat">🔹 Status: Ativa</span>
+                </div>
+            </div>
+            
+            <div class="modal-counter">
+                <span id="modalCounter">1 / 6</span>
+            </div>
+        </div>
+    </div>
+
     <!-- JavaScript para interatividade -->
     <script>
+        // Dados das naves para o modal
+        const navesData = [
+            {
+                icon: "🛸",
+                title: "USS Harmony",
+                description: "Nave de exploração pacífica, equipada para missões diplomáticas e científicas avançadas. Dotada de laboratórios de pesquisa, salas de negociação e tecnologia de comunicação intergaláctica.",
+                stats: ["🔹 Missão: Paz", "🔹 Tipo: Exploração", "🔹 Status: Ativa"]
+            },
+            {
+                icon: "🚀",
+                title: "Defender Alpha",
+                description: "Nave de defesa espacial especializada na proteção de colônias e escolta de missões humanitárias. Equipada com sistemas de defesa não-letal e tecnologia de interceptação.",
+                stats: ["🔹 Missão: Proteção", "🔹 Tipo: Defesa", "🔹 Status: Patrulha"]
+            },
+            {
+                icon: "🛰️",
+                title: "Discovery One",
+                description: "Laboratório espacial avançado para pesquisa científica e descoberta de novas formas de vida. Possui equipamentos de análise molecular e telescópios de longo alcance.",
+                stats: ["🔹 Missão: Ciência", "🔹 Tipo: Pesquisa", "🔹 Status: Investigação"]
+            },
+            {
+                icon: "🚁",
+                title: "Rescue Phoenix",
+                description: "Nave de resgate rápido especializada em operações de emergência espacial e salvamento. Equipada com câmaras médicas e tecnologia de teleporte de emergência.",
+                stats: ["🔹 Missão: Resgate", "🔹 Tipo: Emergência", "🔹 Status: Standby"]
+            },
+            {
+                icon: "🌟",
+                title: "Peacekeeper",
+                description: "Nave diplomática dedicada a negociações intergalácticas e manutenção da paz universal. Possui salas de conferência holográficas e tradutores universais.",
+                stats: ["🔹 Missão: Diplomacia", "🔹 Tipo: Paz", "🔹 Status: Negociação"]
+            },
+            {
+                icon: "🏗️",
+                title: "Builder X1",
+                description: "Nave construtora avançada para bases espaciais e infraestrutura galáctica pacífica. Equipada com nanobots construtores e impressoras 3D moleculares.",
+                stats: ["🔹 Missão: Construção", "🔹 Tipo: Engenharia", "🔹 Status: Projeto"]
+            }
+        ];
+
+        let currentImageIndex = 0;
+
+        // Funções do modal
+        function openImageModal(index) {
+            currentImageIndex = index;
+            updateModalContent();
+            document.getElementById('imageModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Previne scroll do body
+        }
+
+        function closeImageModal() {
+            document.getElementById('imageModal').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restaura scroll do body
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % navesData.length;
+            updateModalContent();
+        }
+
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + navesData.length) % navesData.length;
+            updateModalContent();
+        }
+
+        function updateModalContent() {
+            const nave = navesData[currentImageIndex];
+            
+            // Atualizar placeholder visual
+            const modalImage = document.getElementById('modalImage');
+            modalImage.innerHTML = `
+                <div class="placeholder-content">
+                    <div class="placeholder-icon">${nave.icon}</div>
+                    <div class="placeholder-title">${nave.title}</div>
+                    <div class="placeholder-description">${nave.description.substring(0, 50)}...</div>
+                </div>
+            `;
+            
+            // Atualizar informações
+            document.getElementById('modalTitle').textContent = nave.title;
+            document.getElementById('modalDescription').textContent = nave.description;
+            document.getElementById('modalStats').innerHTML = nave.stats.map(stat => 
+                `<span class="modal-stat">${stat}</span>`
+            ).join('');
+            document.getElementById('modalCounter').textContent = `${currentImageIndex + 1} / ${navesData.length}`;
+        }
+
+        // Navegação por teclado
+        document.addEventListener('keydown', function(e) {
+            const modal = document.getElementById('imageModal');
+            if (modal.style.display === 'flex') {
+                switch(e.key) {
+                    case 'Escape':
+                        closeImageModal();
+                        break;
+                    case 'ArrowLeft':
+                        prevImage();
+                        break;
+                    case 'ArrowRight':
+                        nextImage();
+                        break;
+                }
+            }
+        });
+
+        // Fechar modal clicando fora do conteúdo
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeImageModal();
+            }
+        });
+
         // Smooth scroll para navegação
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -358,15 +515,6 @@
                         block: 'start'
                     });
                 }
-            });
-        });
-
-        // Interatividade dos botões das naves
-        document.querySelectorAll('.nave-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const card = this.closest('.nave-card');
-                const naveName = card.querySelector('.nave-nome').textContent;
-                alert(`🚀 Acessando detalhes da ${naveName}!\n\nEsta nave representa os valores de construção criativa, ficção científica inspiradora, ação responsável e paz galáctica.`);
             });
         });
 

@@ -1,0 +1,1032 @@
+/* ==========================================================================
+   PORTFOLIO RESPONSIVO - DESAFIO LAB 6 - FAESA
+   Autor: Gabriel Malheiros de Castro
+   Funcionalidades: Navegação hambúrguer, Grid adaptativo, Breakpoints customizados
+   ========================================================================== */
+
+/* Reset e configuração base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Variáveis CSS isoladas para portfolio */
+.html-page.portfolio-page {
+    --portfolio-primary: #2c3e50;
+    --portfolio-secondary: #3498db;
+    --portfolio-accent: #e74c3c;
+    --portfolio-success: #27ae60;
+    --portfolio-warning: #f39c12;
+    --portfolio-light: #ecf0f1;
+    --portfolio-dark: #34495e;
+    --portfolio-white: #ffffff;
+    --portfolio-black: #2c3e50;
+    --portfolio-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --portfolio-gradient-alt: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --portfolio-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --portfolio-shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+    --portfolio-border-radius: 12px;
+    --portfolio-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.html-page.portfolio-page body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--portfolio-primary);
+    background-color: var(--portfolio-white);
+    overflow-x: hidden;
+}
+
+/* Prevent scroll when mobile menu is open */
+.html-page.portfolio-page body.nav-open {
+    overflow: hidden;
+}
+
+/* Container responsivo */
+.html-page.portfolio-page .container {
+    width: 100%;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   HEADER E NAVEGAÇÃO - MOBILE FIRST
+   ========================================================================== */
+.html-page.portfolio-page .header {
+    background-color: var(--portfolio-white);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(44, 62, 80, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transition: var(--portfolio-transition);
+}
+
+.html-page.portfolio-page .header.header-scrolled {
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: var(--portfolio-shadow);
+}
+
+.html-page.portfolio-page .header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+.html-page.portfolio-page .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--portfolio-primary);
+    text-decoration: none;
+}
+
+.html-page.portfolio-page .logo-icon {
+    font-size: 1.2em;
+}
+
+.html-page.portfolio-page .logo-text {
+    display: none; /* Oculto em mobile */
+}
+
+/* Navegação desktop - oculta em mobile */
+.html-page.portfolio-page .nav-desktop {
+    display: none;
+    gap: 30px;
+}
+
+.html-page.portfolio-page .nav-desktop a {
+    color: var(--portfolio-primary);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: var(--portfolio-transition);
+    position: relative;
+}
+
+.html-page.portfolio-page .nav-desktop a:hover {
+    color: var(--portfolio-secondary);
+    background-color: rgba(52, 152, 219, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Botão hambúrguer - visível em mobile */
+.html-page.portfolio-page .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    transition: var(--portfolio-transition);
+}
+
+.html-page.portfolio-page .hamburger:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+.html-page.portfolio-page .hamburger-line {
+    width: 25px;
+    height: 3px;
+    background-color: var(--portfolio-primary);
+    border-radius: 2px;
+    transition: var(--portfolio-transition);
+}
+
+/* Animação do hamburger quando ativo */
+.html-page.portfolio-page .hamburger.hamburger-active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.html-page.portfolio-page .hamburger.hamburger-active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.html-page.portfolio-page .hamburger.hamburger-active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Menu lateral mobile */
+.html-page.portfolio-page .nav-mobile {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 300px;
+    height: 100vh;
+    background: var(--portfolio-white);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.html-page.portfolio-page .nav-mobile.nav-open {
+    right: 0;
+}
+
+.html-page.portfolio-page .nav-mobile-content {
+    padding: 80px 30px 30px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.html-page.portfolio-page .nav-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 2em;
+    color: var(--portfolio-primary);
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--portfolio-transition);
+}
+
+.html-page.portfolio-page .nav-close:hover {
+    background-color: var(--portfolio-light);
+}
+
+.html-page.portfolio-page .nav-link {
+    color: var(--portfolio-primary);
+    text-decoration: none;
+    padding: 15px 20px;
+    border-radius: var(--portfolio-border-radius);
+    font-weight: 500;
+    font-size: 1.1em;
+    transition: var(--portfolio-transition);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.html-page.portfolio-page .nav-link:hover {
+    background: var(--portfolio-gradient);
+    color: var(--portfolio-white);
+    transform: translateX(10px);
+}
+
+/* ==========================================================================
+   HERO SECTION - MOBILE FIRST
+   ========================================================================== */
+.html-page.portfolio-page .hero {
+    background: var(--portfolio-gradient);
+    color: var(--portfolio-white);
+    padding: 120px 0 80px;
+    margin-top: 70px;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+}
+
+.html-page.portfolio-page .hero-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.html-page.portfolio-page .hero-text {
+    text-align: center;
+}
+
+.html-page.portfolio-page .hero h1 {
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    line-height: 1.2;
+}
+
+.html-page.portfolio-page .hero-subtitle {
+    font-size: 1.3em;
+    font-weight: 500;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+.html-page.portfolio-page .hero-description {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+    opacity: 0.8;
+    line-height: 1.6;
+}
+
+.html-page.portfolio-page .hero-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.html-page.portfolio-page .btn {
+    padding: 12px 30px;
+    border-radius: var(--portfolio-border-radius);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--portfolio-transition);
+    display: inline-block;
+    text-align: center;
+    min-width: 140px;
+}
+
+.html-page.portfolio-page .btn-primary {
+    background-color: var(--portfolio-white);
+    color: var(--portfolio-primary);
+}
+
+.html-page.portfolio-page .btn-primary:hover {
+    background-color: var(--portfolio-light);
+    transform: translateY(-3px);
+    box-shadow: var(--portfolio-shadow-lg);
+}
+
+.html-page.portfolio-page .btn-secondary {
+    background-color: transparent;
+    color: var(--portfolio-white);
+    border: 2px solid var(--portfolio-white);
+}
+
+.html-page.portfolio-page .btn-secondary:hover {
+    background-color: var(--portfolio-white);
+    color: var(--portfolio-primary);
+    transform: translateY(-3px);
+}
+
+.html-page.portfolio-page .hero-image {
+    display: flex;
+    justify-content: center;
+}
+
+.html-page.portfolio-page .profile-placeholder {
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.html-page.portfolio-page .profile-icon {
+    font-size: 4em;
+}
+
+/* ==========================================================================
+   SEÇÃO SOBRE - MOBILE FIRST
+   ========================================================================== */
+.html-page.portfolio-page .about {
+    padding: 80px 0;
+    background-color: var(--portfolio-light);
+}
+
+.html-page.portfolio-page .about h2 {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 50px;
+    color: var(--portfolio-primary);
+}
+
+.html-page.portfolio-page .about-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.html-page.portfolio-page .about-text p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    color: var(--portfolio-dark);
+    line-height: 1.8;
+}
+
+.html-page.portfolio-page .about-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    text-align: center;
+}
+
+.html-page.portfolio-page .stat-item {
+    padding: 20px;
+    background: var(--portfolio-white);
+    border-radius: var(--portfolio-border-radius);
+    box-shadow: var(--portfolio-shadow);
+    transition: var(--portfolio-transition);
+}
+
+.html-page.portfolio-page .stat-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--portfolio-shadow-lg);
+}
+
+.html-page.portfolio-page .stat-number {
+    display: block;
+    font-size: 2.5em;
+    font-weight: 700;
+    color: var(--portfolio-secondary);
+    margin-bottom: 5px;
+}
+
+.html-page.portfolio-page .stat-label {
+    font-weight: 500;
+    color: var(--portfolio-dark);
+}
+
+/* ==========================================================================
+   PROJETOS - GRID RESPONSIVO (1 coluna mobile, 2 tablet, 3 desktop)
+   ========================================================================== */
+.html-page.portfolio-page .projects {
+    padding: 80px 0;
+}
+
+.html-page.portfolio-page .projects h2 {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: var(--portfolio-primary);
+}
+
+.html-page.portfolio-page .section-description {
+    text-align: center;
+    font-size: 1.1em;
+    color: var(--portfolio-dark);
+    margin-bottom: 50px;
+    opacity: 0.8;
+}
+
+.html-page.portfolio-page .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* 1 coluna em mobile */
+    gap: 30px;
+}
+
+.html-page.portfolio-page .project-card {
+    background: var(--portfolio-white);
+    border-radius: var(--portfolio-border-radius);
+    overflow: hidden;
+    box-shadow: var(--portfolio-shadow);
+    transition: var(--portfolio-transition);
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.html-page.portfolio-page .project-card.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.html-page.portfolio-page .project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--portfolio-shadow-lg);
+}
+
+.html-page.portfolio-page .project-card.featured {
+    border: 2px solid var(--portfolio-secondary);
+    position: relative;
+}
+
+.html-page.portfolio-page .project-card.featured::before {
+    content: '⭐ Destaque';
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--portfolio-gradient);
+    color: var(--portfolio-white);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    font-weight: 600;
+    z-index: 1;
+}
+
+.html-page.portfolio-page .project-image {
+    height: 150px;
+    background: var(--portfolio-gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.html-page.portfolio-page .project-icon {
+    font-size: 4em;
+    color: var(--portfolio-white);
+}
+
+.html-page.portfolio-page .project-content {
+    padding: 25px;
+}
+
+.html-page.portfolio-page .project-content h3 {
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    color: var(--portfolio-primary);
+}
+
+.html-page.portfolio-page .project-content p {
+    color: var(--portfolio-dark);
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.html-page.portfolio-page .project-tags {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.html-page.portfolio-page .tag {
+    background: var(--portfolio-light);
+    color: var(--portfolio-primary);
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.85em;
+    font-weight: 500;
+}
+
+.html-page.portfolio-page .project-link {
+    color: var(--portfolio-secondary);
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--portfolio-transition);
+}
+
+.html-page.portfolio-page .project-link:hover {
+    color: var(--portfolio-primary);
+    transform: translateX(5px);
+}
+
+.html-page.portfolio-page .project-link::after {
+    content: '→';
+    transition: var(--portfolio-transition);
+}
+
+.html-page.portfolio-page .project-link:hover::after {
+    transform: translateX(3px);
+}
+
+/* ==========================================================================
+   HABILIDADES
+   ========================================================================== */
+.html-page.portfolio-page .skills {
+    padding: 80px 0;
+    background: var(--portfolio-light);
+}
+
+.html-page.portfolio-page .skills h2 {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 50px;
+    color: var(--portfolio-primary);
+}
+
+.html-page.portfolio-page .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+}
+
+.html-page.portfolio-page .skill-category {
+    background: var(--portfolio-white);
+    padding: 30px;
+    border-radius: var(--portfolio-border-radius);
+    box-shadow: var(--portfolio-shadow);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: var(--portfolio-transition);
+}
+
+.html-page.portfolio-page .skill-category.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.html-page.portfolio-page .skill-category h3 {
+    font-size: 1.5em;
+    margin-bottom: 25px;
+    color: var(--portfolio-primary);
+    text-align: center;
+}
+
+.html-page.portfolio-page .skill-items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.html-page.portfolio-page .skill-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.html-page.portfolio-page .skill-name {
+    font-weight: 500;
+    color: var(--portfolio-dark);
+}
+
+.html-page.portfolio-page .skill-bar {
+    height: 8px;
+    background: var(--portfolio-light);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.html-page.portfolio-page .skill-progress {
+    height: 100%;
+    background: var(--portfolio-gradient);
+    border-radius: 4px;
+    transition: width 1s ease-out;
+}
+
+/* ==========================================================================
+   FOOTER COM REDES SOCIAIS
+   ========================================================================== */
+.html-page.portfolio-page .footer {
+    background: var(--portfolio-primary);
+    color: var(--portfolio-white);
+    padding: 60px 0 30px;
+}
+
+.html-page.portfolio-page .footer-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.html-page.portfolio-page .footer-main h3 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: var(--portfolio-secondary);
+}
+
+.html-page.portfolio-page .footer-main p {
+    opacity: 0.9;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.html-page.portfolio-page .footer-links h4 {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    color: var(--portfolio-secondary);
+}
+
+.html-page.portfolio-page .footer-links a {
+    color: var(--portfolio-white);
+    text-decoration: none;
+    display: block;
+    padding: 5px 0;
+    transition: var(--portfolio-transition);
+    opacity: 0.8;
+}
+
+.html-page.portfolio-page .footer-links a:hover {
+    opacity: 1;
+    color: var(--portfolio-secondary);
+    transform: translateX(5px);
+}
+
+.html-page.portfolio-page .footer-social h4 {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: var(--portfolio-secondary);
+}
+
+.html-page.portfolio-page .social-links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.html-page.portfolio-page .social-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--portfolio-border-radius);
+    text-decoration: none;
+    color: var(--portfolio-white);
+    transition: var(--portfolio-transition);
+}
+
+.html-page.portfolio-page .social-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+}
+
+.html-page.portfolio-page .social-icon {
+    font-size: 1.2em;
+}
+
+.html-page.portfolio-page .social-name {
+    font-weight: 500;
+}
+
+.html-page.portfolio-page .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 30px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.html-page.portfolio-page .footer-bottom p {
+    opacity: 0.8;
+}
+
+.html-page.portfolio-page .device-info {
+    background: var(--portfolio-gradient);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 500;
+    display: inline-block;
+}
+
+/* ==========================================================================
+   BREAKPOINT CUSTOMIZADO - TELAS MUITO PEQUENAS (<480px)
+   ========================================================================== */
+@media (max-width: 479px) {
+    .html-page.portfolio-page .container {
+        padding: 0 15px;
+    }
+    
+    .html-page.portfolio-page .hero {
+        padding: 100px 0 60px;
+        min-height: 80vh;
+    }
+    
+    .html-page.portfolio-page .hero h1 {
+        font-size: 2em;
+    }
+    
+    .html-page.portfolio-page .hero-subtitle {
+        font-size: 1.1em;
+    }
+    
+    .html-page.portfolio-page .hero-description {
+        font-size: 1em;
+    }
+    
+    .html-page.portfolio-page .btn {
+        padding: 10px 20px;
+        min-width: 120px;
+        font-size: 0.9em;
+    }
+    
+    .html-page.portfolio-page .profile-placeholder {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .html-page.portfolio-page .profile-icon {
+        font-size: 3em;
+    }
+    
+    .html-page.portfolio-page .about-stats {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .html-page.portfolio-page .stat-number {
+        font-size: 2em;
+    }
+    
+    .html-page.portfolio-page .nav-mobile {
+        width: 100%;
+        right: -100%;
+    }
+    
+    .html-page.portfolio-page .social-links {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================================
+   TABLET (768px ou mais)
+   ========================================================================== */
+@media (min-width: 768px) {
+    .html-page.portfolio-page .container {
+        max-width: 720px;
+    }
+    
+    .html-page.portfolio-page .logo-text {
+        display: block; /* Mostra texto do logo em tablet+ */
+    }
+    
+    .html-page.portfolio-page .hero-content {
+        grid-template-columns: 1fr 300px;
+        gap: 60px;
+    }
+    
+    .html-page.portfolio-page .hero-text {
+        text-align: left;
+    }
+    
+    .html-page.portfolio-page .hero-buttons {
+        justify-content: flex-start;
+    }
+    
+    .html-page.portfolio-page .projects-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 colunas em tablet */
+    }
+    
+    .html-page.portfolio-page .about-content {
+        grid-template-columns: 1fr 300px;
+        gap: 60px;
+    }
+    
+    .html-page.portfolio-page .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .html-page.portfolio-page .footer-content {
+        grid-template-columns: 2fr 1fr 1fr;
+    }
+    
+    .html-page.portfolio-page .social-links {
+        grid-template-columns: 1fr;
+    }
+    
+    .html-page.portfolio-page .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+/* ==========================================================================
+   DESKTOP (1024px ou mais)
+   ========================================================================== */
+@media (min-width: 1024px) {
+    .html-page.portfolio-page .container {
+        max-width: 960px;
+    }
+    
+    /* Mostra navegação desktop, esconde hambúrguer */
+    .html-page.portfolio-page .nav-desktop {
+        display: flex;
+    }
+    
+    .html-page.portfolio-page .hamburger {
+        display: none;
+    }
+    
+    .html-page.portfolio-page .hero-content {
+        grid-template-columns: 1fr 350px;
+        gap: 80px;
+    }
+    
+    .html-page.portfolio-page .hero h1 {
+        font-size: 3.5em;
+    }
+    
+    .html-page.portfolio-page .hero-subtitle {
+        font-size: 1.5em;
+    }
+    
+    .html-page.portfolio-page .projects-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 colunas em desktop */
+    }
+    
+    .html-page.portfolio-page .skills-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .html-page.portfolio-page .social-links {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ==========================================================================
+   DESKTOP LARGE (1200px ou mais)
+   ========================================================================== */
+@media (min-width: 1200px) {
+    .html-page.portfolio-page .container {
+        max-width: 1140px;
+    }
+    
+    .html-page.portfolio-page .hero h1 {
+        font-size: 4em;
+    }
+    
+    .html-page.portfolio-page .hero-content {
+        grid-template-columns: 1fr 400px;
+        gap: 100px;
+    }
+}
+
+/* ==========================================================================
+   ULTRA-WIDE (1400px ou mais)
+   ========================================================================== */
+@media (min-width: 1400px) {
+    .html-page.portfolio-page .container {
+        max-width: 1320px;
+    }
+    
+    .html-page.portfolio-page .projects-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ==========================================================================
+   ANIMAÇÕES AVANÇADAS
+   ========================================================================== */
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.html-page.portfolio-page .hero-text {
+    animation: slideInFromLeft 0.8s ease-out;
+}
+
+.html-page.portfolio-page .hero-image {
+    animation: slideInFromRight 0.8s ease-out 0.2s both;
+}
+
+.html-page.portfolio-page .project-card:nth-child(1) { animation-delay: 0.1s; }
+.html-page.portfolio-page .project-card:nth-child(2) { animation-delay: 0.2s; }
+.html-page.portfolio-page .project-card:nth-child(3) { animation-delay: 0.3s; }
+.html-page.portfolio-page .project-card:nth-child(4) { animation-delay: 0.4s; }
+.html-page.portfolio-page .project-card:nth-child(5) { animation-delay: 0.5s; }
+.html-page.portfolio-page .project-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* ==========================================================================
+   MODO ESCURO (preferência do usuário)
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+    .html-page.portfolio-page {
+        --portfolio-white: #1a1a1a;
+        --portfolio-light: #2d2d2d;
+        --portfolio-primary: #e8e8e8;
+        --portfolio-dark: #b8b8b8;
+    }
+    
+    .html-page.portfolio-page body {
+        background-color: var(--portfolio-white);
+        color: var(--portfolio-primary);
+    }
+    
+    .html-page.portfolio-page .header {
+        background-color: rgba(26, 26, 26, 0.95);
+        border-bottom-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .html-page.portfolio-page .nav-mobile {
+        background: var(--portfolio-white);
+    }
+}
+
+/* ==========================================================================
+   MEDIA QUERY PARA IMPRESSÃO
+   ========================================================================== */
+@media print {
+    .html-page.portfolio-page .header,
+    .html-page.portfolio-page .nav-mobile,
+    .html-page.portfolio-page .hamburger,
+    .html-page.portfolio-page .device-info {
+        display: none;
+    }
+    
+    .html-page.portfolio-page body {
+        font-size: 12pt;
+        color: black;
+        background: white;
+    }
+    
+    .html-page.portfolio-page .hero {
+        background: none;
+        color: black;
+        page-break-after: always;
+    }
+    
+    .html-page.portfolio-page .project-card,
+    .html-page.portfolio-page .skill-category {
+        break-inside: avoid;
+        border: 1px solid #ccc;
+    }
+}
+
+/* ==========================================================================
+   ACESSIBILIDADE E FOCO
+   ========================================================================== */
+.html-page.portfolio-page .nav-desktop a:focus,
+.html-page.portfolio-page .hamburger:focus,
+.html-page.portfolio-page .nav-link:focus,
+.html-page.portfolio-page .btn:focus,
+.html-page.portfolio-page .project-link:focus,
+.html-page.portfolio-page .social-link:focus {
+    outline: 2px solid var(--portfolio-secondary);
+    outline-offset: 2px;
+}
+
+.html-page.portfolio-page .project-card:focus-within,
+.html-page.portfolio-page .skill-category:focus-within {
+    transform: translateY(-5px);
+    box-shadow: var(--portfolio-shadow-lg);
+}
+
+/* Reduzir movimento para usuários que preferem menos animação */
+@media (prefers-reduced-motion: reduce) {
+    .html-page.portfolio-page * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

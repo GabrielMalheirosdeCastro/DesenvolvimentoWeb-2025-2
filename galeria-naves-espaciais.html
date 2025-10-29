@@ -9,283 +9,417 @@
         /* ✅ ESTILOS ESPECÍFICOS - SEM CONFLITO COM REACT */
         .naves-gallery-page {
             min-height: 100vh;
-            background: var(--html-color-bg-primary);
+            background: var(--html-color-bg-primary, #f8fafc);
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--html-color-text-primary, #1f2937);
         }
         
         .naves-gallery-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: var(--space-8) var(--space-4);
+            padding: 2rem 1rem;
         }
-        
+
+        /* Header da galeria */
         .naves-gallery-header {
             text-align: center;
-            margin-bottom: var(--space-12);
-            padding: var(--space-8);
-            background: linear-gradient(135deg, #1a202c, #2d3748, #4a5568);
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
             color: white;
             border-radius: 16px;
-            box-shadow: var(--shadow-xl);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .naves-gallery-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .naves-gallery-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        /* Grid das naves */
+        .naves-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Cards das naves */
+        .nave-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .nave-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: #3b82f6;
+        }
+
+        .nave-card-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
             position: relative;
             overflow: hidden;
         }
-        
-        .naves-gallery-header::before {
+
+        .nave-card-header::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="1" fill="white" opacity="0.3"/><circle cx="80" cy="40" r="0.5" fill="white" opacity="0.5"/><circle cx="40" cy="80" r="0.8" fill="white" opacity="0.4"/><circle cx="70" cy="70" r="0.3" fill="white" opacity="0.6"/></svg>') repeat;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="90" cy="20" r="0.5" fill="rgba(255,255,255,0.1)"/><circle cx="20" cy="80" r="0.8" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="90" r="0.6" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: starField 20s linear infinite;
+        }
+
+        @keyframes starField {
+            from { transform: translateX(0) translateY(0); }
+            to { transform: translateX(-20px) translateY(-20px); }
+        }
+
+        .nave-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        }
+
+        .nave-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            position: relative;
             z-index: 1;
         }
-        
-        .naves-gallery-title {
-            font-size: var(--font-size-4xl);
-            font-weight: 700;
-            margin-bottom: var(--space-4);
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+
+        .nave-type {
+            font-size: 1rem;
+            opacity: 0.9;
             position: relative;
-            z-index: 2;
+            z-index: 1;
         }
-        
-        .naves-gallery-subtitle {
-            font-size: var(--font-size-lg);
-            opacity: 0.95;
-            max-width: 600px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
+
+        .nave-card-body {
+            padding: 1.5rem;
         }
-        
-        .naves-gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: var(--space-8);
-            margin-bottom: var(--space-12);
-        }
-        
-        .nave-card {
-            background: white;
-            border-radius: 16px;
-            box-shadow: var(--shadow-lg);
-            overflow: hidden;
-            transition: all 0.3s ease;
-            border: 2px solid var(--html-color-border);
-        }
-        
-        .nave-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-xl);
-        }
-        
-        .nave-card-image-container {
-            position: relative;
-            height: 250px;
-            overflow: hidden;
-            background: linear-gradient(135deg, #1a202c, #2d3748);
-        }
-        
-        .nave-card-placeholder {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: var(--space-6);
-            transition: all 0.3s ease;
-        }
-        
-        .nave-card-placeholder.destroyer {
-            background: linear-gradient(135deg, #1a202c, #374151, #6b7280);
-            color: #f9fafb;
-        }
-        
-        .nave-card-placeholder.acclamator {
-            background: linear-gradient(135deg, #374151, #4b5563, #6b7280);
-            color: #f3f4f6;
-        }
-        
-        .nave-card-placeholder.fleet {
-            background: linear-gradient(135deg, #111827, #1f2937, #374151);
-            color: #e5e7eb;
-        }
-        
-        .nave-card-placeholder.venator {
-            background: linear-gradient(135deg, #7c2d12, #dc2626, #ef4444);
-            color: #fef2f2;
-        }
-        
-        .nave-card:hover .nave-card-image {
-            transform: scale(1.05);
-        }
-        
-        .nave-card-content {
-            padding: var(--space-6);
-        }
-        
-        .nave-card-title {
-            font-size: var(--font-size-xl);
-            font-weight: 600;
-            color: var(--html-color-text-primary);
-            margin-bottom: var(--space-3);
-        }
-        
-        .nave-card-description {
-            color: var(--html-color-text-secondary);
+
+        .nave-description {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
             line-height: 1.6;
-            margin-bottom: var(--space-4);
         }
-        
-        .nave-card-specs {
-            background: var(--html-color-bg-secondary);
-            padding: var(--space-4);
-            border-radius: 12px;
-            margin-top: var(--space-4);
+
+        .nave-specs {
+            margin-bottom: 1.5rem;
         }
-        
+
         .nave-spec-item {
             display: flex;
             justify-content: space-between;
-            margin-bottom: var(--space-2);
-            font-size: var(--font-size-sm);
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f3f4f6;
         }
-        
+
+        .nave-spec-item:last-child {
+            border-bottom: none;
+        }
+
         .nave-spec-label {
-            font-weight: 600;
-            color: var(--html-color-text-secondary);
-        }
-        
-        .nave-spec-value {
-            color: var(--html-color-text-primary);
+            color: #6b7280;
             font-weight: 500;
         }
-        
-        .evolution-section {
-            background: linear-gradient(135deg, var(--html-color-bg-secondary), white);
-            padding: var(--space-12);
-            border-radius: 16px;
-            margin-top: var(--space-12);
-            text-align: center;
+
+        .nave-spec-value {
+            color: #1f2937;
+            font-weight: 600;
         }
-        
-        .evolution-title {
-            font-size: var(--font-size-3xl);
-            font-weight: 700;
-            color: var(--html-brand-primary);
-            margin-bottom: var(--space-6);
+
+        .nave-card-footer {
+            padding: 1rem 1.5rem;
+            background: #f9fafb;
+            border-top: 1px solid #f3f4f6;
         }
-        
-        .evolution-description {
-            font-size: var(--font-size-lg);
-            color: var(--html-color-text-secondary);
-            max-width: 800px;
-            margin: 0 auto var(--space-8);
-            line-height: 1.7;
+
+        .ver-detalhes-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
-        
+
+        .ver-detalhes-btn:hover {
+            background: linear-gradient(135deg, #1d4ed8, #1e40af);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Links de navegação */
         .navigation-links {
             display: flex;
-            gap: var(--space-4);
-            justify-content: center;
-            margin-top: var(--space-8);
             flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
-        
+
         .nav-link {
-            display: inline-flex;
-            align-items: center;
-            padding: var(--space-3) var(--space-6);
-            background: var(--html-brand-primary);
-            color: white;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+            color: #374151;
             text-decoration: none;
             border-radius: 8px;
             font-weight: 600;
             transition: all 0.3s ease;
+            border: 2px solid transparent;
         }
-        
+
         .nav-link:hover {
-            background: var(--html-brand-secondary);
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
             transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
         }
-        
-        /* Responsive Design */
+
+        /* Modal para visualização em tela cheia */
+        .space-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            align-items: center;
+            justify-content: center;
+            animation: spaceModalFadeIn 0.4s ease-out;
+        }
+
+        @keyframes spaceModalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .space-modal-content {
+            position: relative;
+            background: linear-gradient(135deg, #1a202c, #2d3748, #4a5568);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem;
+            max-width: 90vw;
+            max-height: 90vh;
+            width: 900px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .space-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .space-modal-title {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .space-modal-close {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 2px solid rgba(239, 68, 68, 0.3);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .space-modal-close:hover {
+            background: rgba(239, 68, 68, 0.4);
+            transform: scale(1.1);
+        }
+
+        .space-modal-image-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 350px;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .space-modal-image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(135deg, #1a202c, #374151, #6b7280);
+            transition: all 0.3s ease;
+        }
+
+        .space-placeholder-icon {
+            font-size: 6rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .space-placeholder-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .space-placeholder-specs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .space-placeholder-spec {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .space-placeholder-spec-label {
+            color: #cbd5e1;
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .space-placeholder-spec-value {
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* Responsividade */
         @media (max-width: 768px) {
-            .naves-gallery-container {
-                padding: var(--space-4) var(--space-2);
-            }
-            
             .naves-gallery-title {
-                font-size: var(--font-size-2xl);
+                font-size: 2rem;
             }
             
-            .naves-gallery-grid {
+            .naves-grid {
                 grid-template-columns: 1fr;
-                gap: var(--space-4);
+                gap: 1.5rem;
             }
             
             .navigation-links {
                 flex-direction: column;
                 align-items: center;
             }
-        }
-        
-        /* Animações */
-        .nave-card-placeholder {
-            animation: pulseGlow 3s ease-in-out infinite;
-        }
-        
-        @keyframes pulseGlow {
-            0%, 100% { 
-                box-shadow: inset 0 0 20px rgba(255,255,255,0.1); 
+            
+            .space-modal-content {
+                margin: 1rem;
+                padding: 1.5rem;
             }
-            50% { 
-                box-shadow: inset 0 0 30px rgba(255,255,255,0.2); 
+        }
+
+        @media (max-width: 480px) {
+            .naves-gallery-container {
+                padding: 1rem 0.5rem;
+            }
+            
+            .space-modal-content {
+                margin: 0.5rem;
+                padding: 1rem;
+            }
+            
+            .space-placeholder-title {
+                font-size: 1.5rem;
+            }
+            
+            .space-placeholder-icon {
+                font-size: 4rem;
             }
         }
     </style>
 </head>
 <body class="naves-gallery-page">
     <div class="naves-gallery-container">
+        <!-- Header da galeria -->
         <header class="naves-gallery-header">
-            <h1 class="naves-gallery-title">🚀 Galeria de Naves Espaciais Épicas</h1>
+            <h1 class="naves-gallery-title">🌌 Galeria de Naves Espaciais</h1>
             <p class="naves-gallery-subtitle">
-                Explore a majestosidade das mais impressionantes naves da galáxia - 
-                Star Destroyers, Acclamators e frotas de combate em detalhes técnicos únicos
+                Explore as mais avançadas naves da República Galáctica e suas especificações técnicas
             </p>
         </header>
-        
-        <div class="naves-gallery-grid">
-            <!-- Star Destroyer Venator Class -->
-            <article class="nave-card">
-                <div class="nave-card-image-container">
-                    <div class="nave-card-placeholder destroyer" id="placeholder-destroyer">
-                        <div style="font-size: 4rem; margin-bottom: 1rem;">⭐</div>
-                        <div style="font-size: 1.4rem; margin-bottom: 0.5rem; font-weight: 700;">Star Destroyer - Venator Class</div>
-                        <div style="font-size: 1rem; opacity: 0.9; margin-bottom: 0.5rem;">A arma definitiva da República</div>
-                        <div style="font-size: 0.9rem; opacity: 0.8; text-align: center; line-height: 1.5;">
-                            ⚔️ Comprimento: 1.137 metros<br>
-                            🛡️ Turbolasers: 52 canhões pesados<br>
-                            🚁 Caças: 420 starfighters<br>
-                            ⚡ Tripulação: 7.400 clones
-                        </div>
-                        <div style="font-size: 0.7rem; opacity: 0.6; margin-top: 1rem; padding: 0.5rem; background: rgba(255,255,255,0.2); border-radius: 8px;">
-                            💫 Design técnico com corte transversal detalhado
-                        </div>
-                    </div>
+
+        <!-- Grid das naves -->
+        <div class="naves-grid">
+            <!-- Star Destroyer - Venator Class -->
+            <div class="nave-card" onclick="openSpaceModal('destroyer')">
+                <div class="nave-card-header">
+                    <div class="nave-icon">⭐</div>
+                    <h3 class="nave-name">Star Destroyer - Venator Class</h3>
+                    <p class="nave-type">A arma definitiva da República</p>
                 </div>
-                <div class="nave-card-content">
-                    <h2 class="nave-card-title">Star Destroyer - Venator Class</h2>
-                    <p class="nave-card-description">
-                        O backbone da frota da República Clone Wars. Esta nave capital combina 
-                        poder de fogo devastador com capacidade de transporte massiva, 
-                        servindo como porta-aviões e destroyer simultaneamente.
+                <div class="nave-card-body">
+                    <p class="nave-description">
+                        O backbone da frota da República Clone Wars. Esta nave capital combina poder de fogo devastador com
+                        capacidade de transporte massiva, servindo como porta-aviões e destroyer simultaneamente.
                     </p>
-                    <div class="nave-card-specs">
+                    <div class="nave-specs">
                         <div class="nave-spec-item">
                             <span class="nave-spec-label">Classe:</span>
                             <span class="nave-spec-value">Star Destroyer Venator</span>
@@ -304,34 +438,26 @@
                         </div>
                     </div>
                 </div>
-            </article>
-
-            <!-- Acclamator Class Assault Ship -->
-            <article class="nave-card">
-                <div class="nave-card-image-container">
-                    <div class="nave-card-placeholder acclamator" id="placeholder-acclamator">
-                        <div style="font-size: 4rem; margin-bottom: 1rem;">🛸</div>
-                        <div style="font-size: 1.4rem; margin-bottom: 0.5rem; font-weight: 700;">Acclamator Class</div>
-                        <div style="font-size: 1rem; opacity: 0.9; margin-bottom: 0.5rem;">Transporte de Assalto Republicano</div>
-                        <div style="font-size: 0.9rem; opacity: 0.8; text-align: center; line-height: 1.5;">
-                            ⚔️ Comprimento: 752 metros<br>
-                            🪖 Tropas: 16.000 clones<br>
-                            🚗 Veículos: AT-TEs, LAATs<br>
-                            ⚡ Missão: Invasões planetárias
-                        </div>
-                        <div style="font-size: 0.7rem; opacity: 0.6; margin-top: 1rem; padding: 0.5rem; background: rgba(255,255,255,0.2); border-radius: 8px;">
-                            💫 Corte técnico revelando interior complexo
-                        </div>
-                    </div>
+                <div class="nave-card-footer">
+                    <button class="ver-detalhes-btn">Ver Detalhes</button>
                 </div>
-                <div class="nave-card-content">
-                    <h2 class="nave-card-title">Acclamator Class Assault Ship</h2>
-                    <p class="nave-card-description">
-                        Nave de assalto especializada em invasões planetárias. 
-                        Design otimizado para transporte rápido de tropas clone e 
-                        veículos blindados diretamente para zonas de combate.
+            </div>
+
+            <!-- Acclamator Class -->
+            <div class="nave-card" onclick="openSpaceModal('acclamator')">
+                <div class="nave-card-header">
+                    <div class="nave-icon">🛸</div>
+                    <h3 class="nave-name">Acclamator Class</h3>
+                    <p class="nave-type">Transporte de Assalto Republicano</p>
+                </div>
+                <div class="nave-card-body">
+                    <p class="nave-description">
+                        Nave de assalto especializada em invasões planetárias.
+                        Design otimizado para transporte rápido de tropas
+                        clone e veículos blindados diretamente para zonas de
+                        combate.
                     </p>
-                    <div class="nave-card-specs">
+                    <div class="nave-specs">
                         <div class="nave-spec-item">
                             <span class="nave-spec-label">Classe:</span>
                             <span class="nave-spec-value">Acclamator I</span>
@@ -350,34 +476,26 @@
                         </div>
                     </div>
                 </div>
-            </article>
-
-            <!-- Frota de Combate -->
-            <article class="nave-card">
-                <div class="nave-card-image-container">
-                    <div class="nave-card-placeholder fleet" id="placeholder-fleet">
-                        <div style="font-size: 4rem; margin-bottom: 1rem;">🌌</div>
-                        <div style="font-size: 1.4rem; margin-bottom: 0.5rem; font-weight: 700;">Frota de Combate Militar</div>
-                        <div style="font-size: 1rem; opacity: 0.9; margin-bottom: 0.5rem;">Formação tática avançada</div>
-                        <div style="font-size: 0.9rem; opacity: 0.8; text-align: center; line-height: 1.5;">
-                            ⚔️ Naves: Múltiplas classes<br>
-                            🛡️ Formação: Linha de batalha<br>
-                            🎯 Tática: Superioridade espacial<br>
-                            ⚡ Comando: Coordenado
-                        </div>
-                        <div style="font-size: 0.7rem; opacity: 0.6; margin-top: 1rem; padding: 0.5rem; background: rgba(255,255,255,0.2); border-radius: 8px;">
-                            💫 Esquadra em formação de combate
-                        </div>
-                    </div>
+                <div class="nave-card-footer">
+                    <button class="ver-detalhes-btn">Ver Detalhes</button>
                 </div>
-                <div class="nave-card-content">
-                    <h2 class="nave-card-title">Frota de Combate Militar</h2>
-                    <p class="nave-card-description">
-                        Formação tática de múltiplas naves militares em esquadra de combate. 
-                        Demonstra a coordenação e poder combinado necessários para 
-                        dominação do espaço em conflitos galácticos.
+            </div>
+
+            <!-- Frota de Combate Militar -->
+            <div class="nave-card" onclick="openSpaceModal('frota')">
+                <div class="nave-card-header">
+                    <div class="nave-icon">🛰️</div>
+                    <h3 class="nave-name">Frota de Combate Militar</h3>
+                    <p class="nave-type">Formação tática avançada</p>
+                </div>
+                <div class="nave-card-body">
+                    <p class="nave-description">
+                        Formação tática de múltiplas naves militares em
+                        esquadra de combate. Demonstra a coordenação e
+                        poder combinado necessários para dominação do
+                        espaço em conflitos galácticos.
                     </p>
-                    <div class="nave-card-specs">
+                    <div class="nave-specs">
                         <div class="nave-spec-item">
                             <span class="nave-spec-label">Formação:</span>
                             <span class="nave-spec-value">Esquadra de batalha</span>
@@ -396,72 +514,173 @@
                         </div>
                     </div>
                 </div>
-            </article>
-
-            <!-- Classe Venator Republicana -->
-            <article class="nave-card">
-                <div class="nave-card-image-container">
-                    <div class="nave-card-placeholder venator" id="placeholder-venator">
-                        <div style="font-size: 4rem; margin-bottom: 1rem;">🔥</div>
-                        <div style="font-size: 1.4rem; margin-bottom: 0.5rem; font-weight: 700;">República Venator</div>
-                        <div style="font-size: 1rem; opacity: 0.9; margin-bottom: 0.5rem;">Comando e Controle</div>
-                        <div style="font-size: 0.9rem; opacity: 0.8; text-align: center; line-height: 1.5;">
-                            ⚔️ Status: Nave capital<br>
-                            🛡️ Torre: Comando elevado<br>
-                            🎯 Livery: Marcas republicanas<br>
-                            ⚡ Role: Flagship
-                        </div>
-                        <div style="font-size: 0.7rem; opacity: 0.6; margin-top: 1rem; padding: 0.5rem; background: rgba(255,255,255,0.2); border-radius: 8px;">
-                            💫 Configuração com pintura de guerra
-                        </div>
-                    </div>
+                <div class="nave-card-footer">
+                    <button class="ver-detalhes-btn">Ver Detalhes</button>
                 </div>
-                <div class="nave-card-content">
-                    <h2 class="nave-card-title">República Venator - Flagship</h2>
-                    <p class="nave-card-description">
-                        Versão comando da classe Venator com livery republicana distintiva. 
-                        Serve como nave-almirante coordenando operações de frota e 
-                        campanhas militares em larga escala.
-                    </p>
-                    <div class="nave-card-specs">
-                        <div class="nave-spec-item">
-                            <span class="nave-spec-label">Versão:</span>
-                            <span class="nave-spec-value">Comando Republicano</span>
-                        </div>
-                        <div class="nave-spec-item">
-                            <span class="nave-spec-label">Markings:</span>
-                            <span class="nave-spec-value">Livery oficial</span>
-                        </div>
-                        <div class="nave-spec-item">
-                            <span class="nave-spec-label">Função:</span>
-                            <span class="nave-spec-value">Nave-almirante</span>
-                        </div>
-                        <div class="nave-spec-item">
-                            <span class="nave-spec-label">Comando:</span>
-                            <span class="nave-spec-value">Operações de frota</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </div>
-        
-        <section class="evolution-section">
-            <h2 class="evolution-title">🌟 A Majestosidade do Design Espacial</h2>
-            <p class="evolution-description">
-                Estas naves representam o ápice da engenharia militar galáctica. Cada design combina 
-                funcionalidade tática com estética imponente, criando máquinas de guerra que são 
-                simultaneamente funcionais e inspiradoras. Do corte técnico detalhado do Star Destroyer 
-                às formações coordenadas de frotas de combate, cada imagem revela a complexidade e 
-                grandeza da guerra espacial em uma galáxia distante.
-            </p>
-            
-            <div class="navigation-links">
-                <a href="/" class="nav-link">🏠 Voltar ao Portfolio</a>
-                <a href="/lab-fundamentos-css.html" class="nav-link">📝 Lab 1 - Fundamentos</a>
-                <a href="/tipografia.html" class="nav-link">� Lab 2 - Tipografia</a>
-                <a href="/lab-boxmodel.html" class="nav-link">� Lab 3 - Box Model</a>
             </div>
-        </section>
+
+            <!-- República Venator - Flagship -->
+            <div class="nave-card" onclick="openSpaceModal('flagship')">
+                <div class="nave-card-header">
+                    <div class="nave-icon">🔴</div>
+                    <h3 class="nave-name">República Venator</h3>
+                    <p class="nave-type">Comando e Controle</p>
+                </div>
+                <div class="nave-card-body">
+                    <p class="nave-description">
+                        Nave capital da República com status de flagship.
+                        Torre de comando elevada e marcas republicanas
+                        distintivas. Centro de operações para grandes
+                        campanhas militares.
+                    </p>
+                    <div class="nave-specs">
+                        <div class="nave-spec-item">
+                            <span class="nave-spec-label">Status:</span>
+                            <span class="nave-spec-value">Nave capital</span>
+                        </div>
+                        <div class="nave-spec-item">
+                            <span class="nave-spec-label">Torre:</span>
+                            <span class="nave-spec-value">Comando elevado</span>
+                        </div>
+                        <div class="nave-spec-item">
+                            <span class="nave-spec-label">Livery:</span>
+                            <span class="nave-spec-value">Marcas republicanas</span>
+                        </div>
+                        <div class="nave-spec-item">
+                            <span class="nave-spec-label">Role:</span>
+                            <span class="nave-spec-value">Flagship</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="nave-card-footer">
+                    <button class="ver-detalhes-btn">Ver Detalhes</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Links de navegação -->
+        <div class="navigation-links">
+            <a href="/" class="nav-link">🏠 Voltar ao Portfolio</a>
+            <a href="/flexbox.html" class="nav-link">🧱 Galeria LEGO Naves</a>
+            <a href="/lab-fundamentos-css.html" class="nav-link">📝 Lab 1 - Fundamentos</a>
+            <a href="/tipografia.html" class="nav-link">✍️ Lab 2 - Tipografia</a>
+            <a href="/lab-boxmodel.html" class="nav-link">📦 Lab 3 - Box Model</a>
+        </div>
     </div>
+
+    <!-- Modal para visualização em tela cheia -->
+    <div id="spaceModal" class="space-modal">
+        <div class="space-modal-content">
+            <div class="space-modal-header">
+                <h2 id="spaceModalTitle" class="space-modal-title">Detalhes da Nave</h2>
+                <button class="space-modal-close" onclick="closeSpaceModal()">×</button>
+            </div>
+            <div class="space-modal-image-container">
+                <div id="spaceModalContent" class="space-modal-image-placeholder">
+                    <!-- Conteúdo dinâmico aqui -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ✅ JavaScript para funcionamento dos modais e interações
+        const spaceShipsData = {
+            destroyer: {
+                title: 'Star Destroyer - Venator Class',
+                icon: '⭐',
+                specs: [
+                    { label: 'Classe', value: 'Star Destroyer Venator' },
+                    { label: 'Comprimento', value: '1.137 metros' },
+                    { label: 'Armamento', value: '52 Turbolasers pesados' },
+                    { label: 'Hangar', value: '420 Starfighters' },
+                    { label: 'Tripulação', value: '7.400 clones' },
+                    { label: 'Defesas', value: 'Escudos ray shields' }
+                ]
+            },
+            acclamator: {
+                title: 'Acclamator Class Assault Ship',
+                icon: '🛸',
+                specs: [
+                    { label: 'Classe', value: 'Acclamator I' },
+                    { label: 'Comprimento', value: '752 metros' },
+                    { label: 'Tropas', value: '16.000 soldados clone' },
+                    { label: 'Veículos', value: 'AT-TEs, LAATs' },
+                    { label: 'Missão', value: 'Invasões planetárias' },
+                    { label: 'Velocidade', value: 'Classe 0.6 hiperdrive' }
+                ]
+            },
+            frota: {
+                title: 'Frota de Combate Militar',
+                icon: '🛰️',
+                specs: [
+                    { label: 'Formação', value: 'Esquadra de batalha' },
+                    { label: 'Naves', value: 'Múltiplas classes' },
+                    { label: 'Tática', value: 'Linha de frente' },
+                    { label: 'Comando', value: 'Coordenado' },
+                    { label: 'Objetivo', value: 'Superioridade espacial' },
+                    { label: 'Cobertura', value: 'Setor galáctico' }
+                ]
+            },
+            flagship: {
+                title: 'República Venator - Flagship',
+                icon: '🔴',
+                specs: [
+                    { label: 'Status', value: 'Nave capital' },
+                    { label: 'Torre', value: 'Comando elevado' },
+                    { label: 'Livery', value: 'Marcas republicanas' },
+                    { label: 'Role', value: 'Flagship' },
+                    { label: 'Comando', value: 'Operações de frota' },
+                    { label: 'Importância', value: 'Estratégica máxima' }
+                ]
+            }
+        };
+
+        function openSpaceModal(shipType) {
+            const modal = document.getElementById('spaceModal');
+            const title = document.getElementById('spaceModalTitle');
+            const content = document.getElementById('spaceModalContent');
+            
+            const ship = spaceShipsData[shipType];
+            
+            title.textContent = ship.title;
+            
+            content.innerHTML = `
+                <div class="space-placeholder-icon">${ship.icon}</div>
+                <div class="space-placeholder-title">${ship.title}</div>
+                <div class="space-placeholder-specs">
+                    ${ship.specs.map(spec => `
+                        <div class="space-placeholder-spec">
+                            <div class="space-placeholder-spec-label">${spec.label}:</div>
+                            <div class="space-placeholder-spec-value">${spec.value}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSpaceModal() {
+            const modal = document.getElementById('spaceModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Fechar modal com ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeSpaceModal();
+            }
+        });
+
+        // Fechar modal clicando fora do conteúdo
+        document.getElementById('spaceModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeSpaceModal();
+            }
+        });
+    </script>
 </body>
 </html>
