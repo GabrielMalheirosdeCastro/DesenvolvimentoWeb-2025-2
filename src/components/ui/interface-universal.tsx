@@ -15,7 +15,6 @@ import { spaceFleetImages } from '../../data/spaceFleetData';
 import PersonalData from './personal-data';
 import MorseChallenge from './morse-challenge';
 import FixedBottomNavigation from './fixed-bottom-navigation';
-import NavesEspaciais from './naves-espaciais';
 import LaboratoriosLinks from './laboratorios-links';
 
 
@@ -645,9 +644,19 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
           </div>
         </div>
 
-        {/* Seção Naves Espaciais */}
-        <div className="max-w-7xl mx-auto mt-16">
-          <NavesEspaciais className="mb-8" />
+        {/* Link discreto para galeria espacial */}
+        <div className="max-w-4xl mx-auto mt-12 text-center">
+          <a 
+            href="galeria-naves-espaciais.html" 
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:from-purple-700 hover:to-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            🌌 Ver Galeria de Naves Espaciais
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
         </div>
 
         {/* Seção de dados pessoais */}
