@@ -20,8 +20,15 @@ export default defineConfig({
     assetsDir: 'assets',
     sourcemap: false,
     minify: 'terser',
+    // Copia arquivos estáticos para o build
+    copyPublicDir: true,
     // Otimizações para Vercel
     rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        galeria: path.resolve(__dirname, 'galeria-lego-naves.html'),
+        lab: path.resolve(__dirname, 'lab-fundamentos-css.html')
+      },
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
