@@ -9,7 +9,7 @@ Site pessoal profissional que demonstra competências em desenvolvimento web mod
 ## 🔗 **Links Principais**
 
 ### 🌐 **Acesso ao Site**
-- **🚀 Site Principal**: https://desenvolvimento-web-2025-2.vercel.app
+- **🚀 Site Principal**: https://desenvolvimento-web-2025-2-2gwgg326v.vercel.app
 
 ### 📂 **Repositório**
 - **📁 Código GitHub**: https://github.com/GabrielMalheirosdeCastro/DesenvolvimentoWeb-2025-2
@@ -53,7 +53,7 @@ npm run dev
 📚 FAESA - Faculdades Integradas Espírito-Santenses  
 🎓 Desenvolvimento Web 2025-2  
 📧 gabriel.malheiros@estudante.faesa.br  
-🌐 Portfólio: https://desenvolvimento-web-2025-2.vercel.app
+🌐 Portfólio: https://desenvolvimento-web-2025-2-2gwgg326v.vercel.app
 
 ## � **Status do Projeto**
 
