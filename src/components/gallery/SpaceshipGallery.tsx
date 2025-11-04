@@ -42,6 +42,9 @@ export const SpaceshipGallery: React.FC<SpaceshipGalleryProps> = ({
   onImageLoad,
   onImageError
 }) => {
+  // Log de montagem do componente
+  console.log('🚀 [SpaceshipGallery] Componente montando...');
+  
   // 🔍 Estados para debugging
   const [debugLogs, setDebugLogs] = useState<DebugInfo[]>([]);
   const [isDebugVisible, setIsDebugVisible] = useState(false);
@@ -139,8 +142,29 @@ export const SpaceshipGallery: React.FC<SpaceshipGalleryProps> = ({
       }
     ];
 
+    // 🔍 Teste de disponibilidade das imagens
+    spaceshipData.forEach(async (ship, index) => {
+      try {
+        const response = await fetch(ship.src, { method: 'HEAD' });
+        if (response.ok) {
+          console.log(`✅ [${index + 1}/${spaceshipData.length}] Imagem encontrada: ${ship.title}`);
+          addDebugLog('IMAGE_AVAILABLE', { id: ship.id, src: ship.src, title: ship.title });
+        } else {
+          console.error(`❌ [${index + 1}/${spaceshipData.length}] Imagem não encontrada: ${ship.title} - Status: ${response.status}`);
+          addDebugLog('IMAGE_NOT_FOUND', { id: ship.id, src: ship.src, title: ship.title, status: response.status });
+        }
+      } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Erro desconhecido';
+        console.error(`❌ [${index + 1}/${spaceshipData.length}] Erro ao verificar imagem: ${ship.title}`, error);
+        addDebugLog('IMAGE_CHECK_ERROR', { id: ship.id, src: ship.src, title: ship.title, error: errorMessage });
+      }
+    });
+
     setImages(spaceshipData);
-    addDebugLog('IMAGES_INITIALIZED', { count: spaceshipData.length, images: spaceshipData.map(img => img.title) });
+    addDebugLog('IMAGES_INITIALIZED', { 
+      count: spaceshipData.length, 
+      images: spaceshipData.map(img => ({ id: img.id, title: img.title, src: img.src }))
+    });
   }, [addDebugLog]);
 
   // 🔄 Função para atualizar status de carregamento

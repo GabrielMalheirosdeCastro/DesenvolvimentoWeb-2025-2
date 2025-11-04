@@ -11,7 +11,7 @@ import {
 } from 'lucide-react';
 import { cn } from './utils';
 import SpaceGallery from '../gallery/SpaceGallery';
-import SpaceshipGallery from '../gallery/SpaceshipGallery';
+import { SpaceshipGallery } from '../gallery/SpaceshipGallery';
 import { spaceFleetImages } from '../../data/spaceFleetData';
 import PersonalData from './personal-data';
 import MorseChallenge from './morse-challenge';
@@ -558,30 +558,34 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
   );
 
   // 🚀 Renderizar tela de galeria de naves espaciais
-  const renderSpaceshipsScreen = () => (
-    <div className="interface-main">
-      <div className="layout-container">
-        <div className="interface-header">
-          <h1 className="interface-title flex items-center justify-center gap-3">
-            <Rocket className="w-8 h-8 text-blue-600" />
-            Galeria de Naves Espaciais
-          </h1>
-          <p className="interface-subtitle">
-            Coleção épica de naves dos universos Star Wars e Halo com debugging avançado
-          </p>
-        </div>
+  const renderSpaceshipsScreen = () => {
+    console.log('🚀 [DEBUG] Renderizando tela de naves espaciais...');
+    
+    return (
+      <div className="interface-main">
+        <div className="layout-container">
+          <div className="interface-header">
+            <h1 className="interface-title flex items-center justify-center gap-3">
+              <Rocket className="w-8 h-8 text-blue-600" />
+              Galeria de Naves Espaciais
+            </h1>
+            <p className="interface-subtitle">
+              Coleção épica de naves dos universos Star Wars e Halo com debugging avançado
+            </p>
+          </div>
 
-        <div className="interface-content">
-          <SpaceshipGallery 
-            className="w-full"
-            enableDebug={true}
-            onImageLoad={(imageId) => console.log(`✅ Nave carregada: ${imageId}`)}
-            onImageError={(imageId, error) => console.error(`❌ Erro na nave ${imageId}:`, error)}
-          />
+          <div className="interface-content">
+            <SpaceshipGallery 
+              className="w-full"
+              enableDebug={true}
+              onImageLoad={(imageId) => console.log(`✅ Nave carregada: ${imageId}`)}
+              onImageError={(imageId, error) => console.error(`❌ Erro na nave ${imageId}:`, error)}
+            />
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   // 🎨 Renderizar tela da galeria do Figma
   const renderFigmaScreen = () => (
@@ -1006,12 +1010,24 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
 
   // 🎯 Renderizar tela atual
   const renderCurrentScreen = () => {
+    console.log(`🎯 [DEBUG] Renderizando tela: ${currentScreen}`);
+    
     switch (currentScreen) {
-      case 'gallery': return renderGalleryScreen();
-      case 'spaceships': return renderSpaceshipsScreen();
-      case 'figma': return renderFigmaScreen();
-      case 'settings': return renderSettingsScreen();
-      default: return renderMainScreen();
+      case 'gallery': 
+        console.log('🖼️ [DEBUG] Carregando galeria Figma...');
+        return renderGalleryScreen();
+      case 'spaceships': 
+        console.log('🚀 [DEBUG] Carregando galeria de naves espaciais...');
+        return renderSpaceshipsScreen();
+      case 'figma': 
+        console.log('🎨 [DEBUG] Carregando tela Figma...');
+        return renderFigmaScreen();
+      case 'settings': 
+        console.log('⚙️ [DEBUG] Carregando configurações...');
+        return renderSettingsScreen();
+      default: 
+        console.log('🏠 [DEBUG] Carregando tela principal...');
+        return renderMainScreen();
     }
   };
 
