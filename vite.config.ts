@@ -27,7 +27,8 @@ export default defineConfig({
       input: {
         main: path.resolve(__dirname, 'index.html'),
         galeria: path.resolve(__dirname, 'galeria-lego-naves.html'),
-        lab: path.resolve(__dirname, 'lab-fundamentos-css.html')
+        lab: path.resolve(__dirname, 'lab-fundamentos-css.html'),
+        tipografia: path.resolve(__dirname, 'tipografia.html')
       },
       output: {
         manualChunks: {

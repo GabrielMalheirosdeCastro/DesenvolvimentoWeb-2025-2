@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="html-page">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratório de Tipografia | Gabriel Malheiros FAESA</title>
+    
+    <!-- Meta tags -->
+    <meta name="description" content="Demonstração completa de tipografia web - Gabriel Malheiros de Castro, FAESA 2025-2">
+    <meta name="author" content="Gabriel Malheiros de Castro">
+    <meta name="keywords" content="tipografia, fonts, CSS3, design web, FAESA">
+    
+    <!-- Google Fonts para demonstração -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Preload das fontes principais para performance -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS Externos -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="tipografia.css">
+</head>
+<body class="html-page typography-page">
+    
+    <!-- 🎨 Container Principal -->
+    <div class="typography-container">
+        
+        <!-- 📚 Header -->
+        <header class="typography-header">
+            <div class="header-content">
+                <h1 class="typography-main-title">
+                    <span class="title-gradient">Laboratório de Tipografia</span>
+                </h1>
+                <p class="typography-subtitle">
+                    Demonstração completa de hierarquia tipográfica, estilos de texto e sistemas de design
+                </p>
+                <div class="typography-meta">
+                    <span class="author-info">
+                        👨‍💻 Gabriel Malheiros de Castro • FAESA 2025-2 • 📚 Desenvolvimento Web
+                    </span>
+                </div>
+            </div>
+        </header>
+
+        <!-- 🎯 Navegação Rápida -->
+        <nav class="typography-nav">
+            <div class="nav-links">
+                <a href="#headings" class="nav-link">Hierarquia</a>
+                <a href="#paragraphs" class="nav-link">Parágrafos</a>
+                <a href="#lists" class="nav-link">Listas</a>
+                <a href="#quotes" class="nav-link">Citações</a>
+                <a href="#code" class="nav-link">Código</a>
+                <a href="#tables" class="nav-link">Tabelas</a>
+                <a href="#typography-samples" class="nav-link">Exemplos</a>
+                <a href="#font-stacks" class="nav-link">Font Stacks</a>
+            </div>
+        </nav>
+
+        <!-- 📊 Conteúdo Principal -->
+        <main class="typography-main">
+            
+            <!-- 🏷️ Seção 1: Hierarquia de Headings -->
+            <section id="headings" class="typography-section">
+                <div class="section-header">
+                    <h2 class="section-title">🏷️ Hierarquia de Headings</h2>
+                    <p class="section-description">Demonstração da escala tipográfica e hierarquia visual</p>
+                </div>
+                
+                <div class="examples-grid">
+                    <div class="example-card">
+                        <div class="example-demo">
+                            <h1 class="demo-h1">H1 - Título Principal</h1>
+                            <h2 class="demo-h2">H2 - Subtítulo Seção</h2>
+                            <h3 class="demo-h3">H3 - Subtítulo Menor</h3>
+                            <h4 class="demo-h4">H4 - Títulos de Cards</h4>
+                            <h5 class="demo-h5">H5 - Labels Importantes</h5>
+                            <h6 class="demo-h6">H6 - Micro Títulos</h6>
+                        </div>
+                        <div class="example-code">
+                            <h4>CSS Variables Utilizadas:</h4>
+                            <pre><code>--font-size-4xl: 2.25rem; /* H1 */
+--font-size-3xl: 1.875rem; /* H2 */
+--font-size-2xl: 1.5rem;   /* H3 */
+--font-size-xl: 1.25rem;   /* H4 */
+--font-size-lg: 1.125rem;  /* H5 */
+--font-size-base: 1rem;    /* H6 */</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 📝 Seção 2: Estilos de Parágrafos -->
+            <section id="paragraphs" class="typography-section">
+                <div class="section-header">
+                    <h2 class="section-title">📝 Estilos de Parágrafos</h2>
+                    <p class="section-description">Diferentes variações de texto corrido e utilitários</p>
+                </div>
+                
+                <div class="examples-grid">
+                    <div class="example-card">
+                        <div class="example-demo">
+                            <p class="paragraph-large">
+                                <strong>Parágrafo Large:</strong> Este é um parágrafo com tamanho aumentado, 
+                                ideal para introduções e textos de destaque. Possui maior legibilidade 
+                                e impacto visual.
+                            </p>
+                            
+                            <p class="paragraph-regular">
+                                <strong>Parágrafo Regular:</strong> Este é o parágrafo padrão do sistema, 
+                                otimizado para leitura confortável em textos longos. Line-height de 1.6 
+                                garante boa legibilidade.
+                            </p>
+                            
+                            <p class="paragraph-small">
+                                <strong>Parágrafo Small:</strong> Texto menor para informações 
+                                secundárias, metadados ou notas de rodapé. Mantém boa legibilidade 
+                                em tamanho reduzido.
+                            </p>
+                            
+                            <p class="paragraph-muted">
+                                <strong>Parágrafo Muted:</strong> Texto com cor mais sutil para 
+                                informações de apoio ou contexto adicional.
+                            </p>
+                        </div>
+                        
+                        <div class="example-code">
+                            <h4>Classes Utilitárias:</h4>
+                            <pre><code>.paragraph-large  { font-size: var(--font-size-lg); }
+.paragraph-regular { font-size: var(--font-size-base); }
+.paragraph-small   { font-size: var(--font-size-sm); }
+.paragraph-muted   { color: var(--html-color-text-muted); }</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 📋 Seção 3: Listas -->
+            <section id="lists" class="typography-section">
+                <div class="section-header">
+                    <h2 class="section-title">📋 Estilos de Listas</h2>
+                    <p class="section-description">Listas ordenadas, não-ordenadas e de definição</p>
+                </div>
+                
+                <div class="examples-grid">
+                    <div class="example-card">
+                        <div class="example-demo">
+                            <div class="lists-showcase">
+                                <div class="list-group">
+                                    <h4>Lista Não-Ordenada Styled</h4>
+                                    <ul class="list-styled">
+                                        <li>🎨 Design System completo</li>
+                                        <li>🎯 Tipografia responsiva</li>
+                                        <li>🌐 Compatibilidade cross-browser</li>
+                                        <li>📱 Mobile-first approach</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="list-group">
+                                    <h4>Lista Ordenada com Steps</h4>
+                                    <ol class="list-steps">
+                                        <li>Definir hierarquia tipográfica</li>
+                                        <li>Estabelecer escala modular</li>
+                                        <li>Configurar variáveis CSS</li>
+                                        <li>Testar em diferentes devices</li>
+                                    </ol>
+                                </div>
+                                
+                                <div class="list-group">
+                                    <h4>Lista de Definição</h4>
+                                    <dl class="definition-list">
+                                        <dt>Font-weight</dt>
+                                        <dd>Define a espessura das letras (100-900)</dd>
+                                        
+                                        <dt>Line-height</dt>
+                                        <dd>Controla o espaço entre linhas do texto</dd>
+                                        
+                                        <dt>Letter-spacing</dt>
+                                        <dd>Ajusta o espaçamento entre caracteres</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 💬 Seção 4: Citações -->
+            <section id="quotes" class="typography-section">
+                <div class="section-header">
+                    <h2 class="section-title">💬 Citações e Destaques</h2>
+                    <p class="section-description">Blockquotes, citações inline e elementos de destaque</p>
+                </div>
+                
+                <div class="examples-grid">
+                    <div class="example-card">
+                        <div class="example-demo">
+                            <blockquote class="blockquote-primary">
+                                <p>
+                                    "A tipografia é a arte de organizar letras, números e símbolos 
+                                    para tornar a linguagem escrita legível, compreensível e atraente 
+                                    quando exibida."
+                                </p>
+                                <cite>— International Typographic Style</cite>
+                            </blockquote>
+                            
+                            <blockquote class="blockquote-accent">
+                                <p>
+                                    "Good typography is invisible. Great typography is invisible 
+                                    and makes the reader feel something."
+                                </p>
+                                <cite>— Zuzana Licko</cite>
+                            </blockquote>
+                            
+                            <p class="quote-inline-demo">
+                                No meio do texto podemos ter 
+                                <q class="quote-inline">citações inline que se integram naturalmente</q> 
+                                com o fluxo da leitura.
+                            </p>
+                            
+                            <div class="highlight-box">
+                                <h4>💡 Dica Importante</h4>
+                                <p>
+                                    Uma boa hierarquia tipográfica guia o olhar do usuário através 
+                                    do conteúdo de forma natural e intuitiva.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 💻 Seção 5: Código -->
+            <section id="code" class="typography-section">
+                <div class="section-header">
+                    <h2 class="section-title">💻 Elementos de Código</h2>
+                    <p class="section-description">Inline code, blocos de código e syntax highlighting</p>
+                </div>
+                
+                <div class="examples-grid">
+                    <div class="example-card">
+                        <div class="example-demo">
+                            <p>
+                                Para definir variáveis CSS, usamos a sintaxe 
+                                <code class="code-inline">:root { --variable: value; }</code> 
+                                no início do arquivo.
+                            </p>
+                            
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="code-language">CSS</span>
+                                    <span class="code-filename">tipografia.css</span>
+                                </div>
+                                <pre><code class="code-content">/* Exemplo de escala tipográfica modular */
+:root {
+  --font-scale: 1.25;
+  --font-size-sm: calc(1rem / var(--font-scale));
+  --font-size-base: 1rem;
+  --font-size-lg: calc(1rem * var(--font-scale));
+  --font-size-xl: calc(var(--font-size-lg) * var(--font-scale));
+  --font-size-2xl: calc(var(--font-size-xl) * var(--font-scale));
+}</code></pre>
+                            </div>
+                            
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="code-language">HTML</span>
+                                    <span class="code-filename">index.html</span>
+                                </div>
+                                <pre><code class="code-content">&lt;h1 class="title-gradient"&gt;
+  Título com Gradiente
+&lt;/h1&gt;
+
+&lt;p class="paragraph-large"&gt;
+  Parágrafo com tamanho aumentado para destaque.
+&lt;/p&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 📊 Seção 6: Tabelas -->
+            <section id="tables" class="typography-section">
+                <div class="section-header">
+                    <h2 class="section-title">📊 Tabelas de Dados</h2>
+                    <p class="section-description">Tabelas responsivas com boa hierarquia tipográfica</p>
+                </div>
+                
+                <div class="examples-grid">
+                    <div class="example-card">
+                        <div class="example-demo">
+                            <div class="table-container">
+                                <table class="typography-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Elemento</th>
+                                            <th>Font Size</th>
+                                            <th>Font Weight</th>
+                                            <th>Use Case</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><code>h1</code></td>
+                                            <td>2.25rem</td>
+                                            <td>800</td>
+                                            <td>Título principal da página</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>h2</code></td>
+                                            <td>1.875rem</td>
+                                            <td>700</td>
+                                            <td>Títulos de seções</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>h3</code></td>
+                                            <td>1.5rem</td>
+                                            <td>600</td>
+                                            <td>Subtítulos importantes</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>p</code></td>
+                                            <td>1rem</td>
+                                            <td>400</td>
+                                            <td>Texto de corpo padrão</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>small</code></td>
+                                            <td>0.875rem</td>
+                                            <td>400</td>
+                                            <td>Textos secundários</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 🎨 Seção 7: Exemplos de Typography -->
+            <section id="typography-samples" class="typography-section">
+                <div class="section-header">
+                    <h2 class="section-title">🎨 Exemplos Práticos</h2>
+                    <p class="section-description">Combinações e layouts reais usando o sistema tipográfico</p>
+                </div>
+                
+                <div class="examples-grid">
+                    <div class="example-card">
+                        <div class="example-demo">
+                            <article class="sample-article">
+                                <h3 class="article-title">O Futuro da Tipografia Digital</h3>
+                                <div class="article-meta">
+                                    <span class="author">Gabriel Malheiros</span> • 
+                                    <span class="date">4 de Novembro, 2025</span> • 
+                                    <span class="read-time">5 min de leitura</span>
+                                </div>
+                                
+                                <p class="article-lead">
+                                    A tipografia web está evoluindo rapidamente com novas tecnologias 
+                                    como variable fonts, melhor suporte a OpenType features e CSS 
+                                    Grid Layout para composições mais complexas.
+                                </p>
+                                
+                                <p>
+                                    Com o crescimento do design responsivo, os designers precisam 
+                                    pensar em tipografia que funcione bem em <em>múltiplos contextos</em> 
+                                    e dispositivos. As <strong>variáveis CSS</strong> tornaram-se 
+                                    essenciais para manter consistência.
+                                </p>
+                                
+                                <ul class="article-list">
+                                    <li>Variable fonts permitem interpolação suave</li>
+                                    <li>CSS Grid oferece controle preciso de layout</li>
+                                    <li>Clamp() permite tipografia verdadeiramente fluida</li>
+                                </ul>
+                                
+                                <div class="article-callout">
+                                    <p>
+                                        <strong>Dica:</strong> Use <code>clamp()</code> para criar 
+                                        tipografia que escala suavemente entre breakpoints sem 
+                                        media queries adicionais.
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 🔤 Seção 8: Font Stacks -->
+            <section id="font-stacks" class="typography-section">
+                <div class="section-header">
+                    <h2 class="section-title">🔤 Font Stacks e Web Fonts</h2>
+                    <p class="section-description">Diferentes pilhas de fontes e suas aplicações</p>
+                </div>
+                
+                <div class="examples-grid">
+                    <div class="example-card">
+                        <div class="example-demo">
+                            <div class="font-samples">
+                                <div class="font-sample">
+                                    <h4 class="font-name">System UI (Padrão)</h4>
+                                    <p class="font-demo font-system">
+                                        Esta é a fonte padrão do sistema, otimizada para legibilidade 
+                                        e performance. Inclui -apple-system, BlinkMacSystemFont, Segoe UI.
+                                    </p>
+                                    <code class="font-stack">font-family: system-ui, -apple-system, "Segoe UI", Roboto;</code>
+                                </div>
+                                
+                                <div class="font-sample">
+                                    <h4 class="font-name">Inter (Moderna)</h4>
+                                    <p class="font-demo font-inter">
+                                        Inter é uma fonte moderna especialmente projetada para interfaces digitais, 
+                                        com excelente legibilidade em tamanhos pequenos.
+                                    </p>
+                                    <code class="font-stack">font-family: 'Inter', system-ui, sans-serif;</code>
+                                </div>
+                                
+                                <div class="font-sample">
+                                    <h4 class="font-name">Playfair Display (Elegante)</h4>
+                                    <p class="font-demo font-playfair">
+                                        Playfair Display é uma fonte serif elegante, ideal para títulos 
+                                        e elementos que precisam de maior personalidade visual.
+                                    </p>
+                                    <code class="font-stack">font-family: 'Playfair Display', Georgia, serif;</code>
+                                </div>
+                                
+                                <div class="font-sample">
+                                    <h4 class="font-name">JetBrains Mono (Código)</h4>
+                                    <p class="font-demo font-mono">
+                                        JetBrains Mono é otimizada para código, com ligaduras 
+                                        especiais e excelente distinção entre caracteres similares.
+                                    </p>
+                                    <code class="font-stack">font-family: 'JetBrains Mono', 'Courier New', monospace;</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- 🧭 Navegação de Rodapé -->
+        <footer class="typography-footer">
+            <div class="footer-navigation">
+                <nav class="footer-nav">
+                    <a href="index.html" class="footer-nav-link primary">
+                        🏠 Portfolio Principal
+                    </a>
+                    <a href="lab-fundamentos-css.html" class="footer-nav-link">
+                        📚 Lab CSS Fundamentals
+                    </a>
+                    <a href="galeria-lego-naves.html" class="footer-nav-link">
+                        🖼️ Galeria LEGO Naves
+                    </a>
+                </nav>
+            </div>
+            
+            <div class="footer-info">
+                <p class="footer-author">
+                    👨‍💻 <strong>Gabriel Malheiros de Castro</strong> • 
+                    🎓 FAESA 2025-2 • 
+                    📚 Desenvolvimento Web
+                </p>
+                <p class="footer-description">
+                    Demonstração completa de tipografia web com CSS3 moderno e design responsivo
+                </p>
+            </div>
+        </footer>
+        
+    </div>
+
+    <!-- 📱 JavaScript para navegação suave -->
+    <script>
+        // Navegação suave para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Highlight da seção ativa na navegação
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '-100px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const id = entry.target.getAttribute('id');
+                const navLink = document.querySelector(`.nav-link[href="#${id}"]`);
+                
+                if (entry.isIntersecting) {
+                    document.querySelectorAll('.nav-link').forEach(link => 
+                        link.classList.remove('active'));
+                    if (navLink) navLink.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        // Observar todas as seções
+        document.querySelectorAll('.typography-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Console log para debug
+        console.log('🎨 Laboratório de Tipografia carregado com sucesso!');
+        console.log('📊 Seções observadas:', document.querySelectorAll('.typography-section').length);
+    </script>
+
+</body>
+</html>

@@ -6,10 +6,10 @@
   "description": "Site Pessoal - Interface Gráfica - Gabriel Malheiros - FAESA 2025-2",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && npm run copy-html-pages",
-    "build:github": "cross-env GITHUB_PAGES=true vite build && npm run copy-html-pages && npm run copy-to-root",
-    "build-with-types": "tsc && vite build && npm run copy-html-pages",
-    "copy-html-pages": "cp galeria-lego-naves.html dist/galeria-lego-naves.html 2>/dev/null || copy galeria-lego-naves.html dist\\galeria-lego-naves.html",
+    "build": "vite build",
+    "build:github": "cross-env GITHUB_PAGES=true vite build && npm run copy-to-root",
+    "build-with-types": "tsc && vite build",
+    "copy-html-pages": "echo 'HTML pages are now processed by Vite build'",
     "copy-to-root": "cp -r dist/* . 2>/dev/null || xcopy /E /Y dist\\* .",
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"

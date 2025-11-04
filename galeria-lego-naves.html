@@ -4,13 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galeria LEGO Naves - Gabriel Malheiros FAESA</title>
+    
+    <!-- Google Fonts para melhor tipografia -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
     <style>
         /* ✅ ESTILOS ESPECÍFICOS - SEM CONFLITO COM REACT */
+        :root {
+            /* Tipografia melhorada */
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-display: 'Playfair Display', Georgia, serif;
+            
+            /* Line heights otimizados */
+            --line-height-tight: 1.2;
+            --line-height-normal: 1.5;
+            --line-height-relaxed: 1.6;
+            --line-height-loose: 1.8;
+            
+            /* Letter spacing */
+            --letter-spacing-tight: -0.025em;
+            --letter-spacing-normal: 0;
+            --letter-spacing-wide: 0.025em;
+        }
+
         .lego-gallery-page {
             min-height: 100vh;
             background: var(--html-color-bg-primary);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: var(--font-primary);
+            line-height: var(--line-height-relaxed);
+            font-feature-settings: "liga" 1, "kern" 1;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
         }
         
         .lego-gallery-container {
@@ -30,17 +58,24 @@
         }
         
         .lego-gallery-title {
+            font-family: var(--font-display);
             font-size: var(--font-size-4xl);
             font-weight: 700;
             margin-bottom: var(--space-4);
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: var(--letter-spacing-tight);
+            line-height: var(--line-height-tight);
         }
         
         .lego-gallery-subtitle {
+            font-family: var(--font-primary);
             font-size: var(--font-size-lg);
             opacity: 0.95;
             max-width: 600px;
             margin: 0 auto;
+            font-weight: 400;
+            letter-spacing: var(--letter-spacing-normal);
+            line-height: var(--line-height-normal);
         }
         
         .lego-gallery-grid {
@@ -117,19 +152,6 @@
             padding: var(--space-6);
         }
         
-        .lego-card-title {
-            font-size: var(--font-size-xl);
-            font-weight: 600;
-            color: var(--html-color-text-primary);
-            margin-bottom: var(--space-3);
-        }
-        
-        .lego-card-description {
-            color: var(--html-color-text-secondary);
-            line-height: 1.6;
-            margin-bottom: var(--space-4);
-        }
-        
         .lego-card-specs {
             background: var(--html-color-bg-secondary);
             padding: var(--space-4);
@@ -144,16 +166,6 @@
             font-size: var(--font-size-sm);
         }
         
-        .lego-spec-label {
-            font-weight: 600;
-            color: var(--html-color-text-secondary);
-        }
-        
-        .lego-spec-value {
-            color: var(--html-brand-primary);
-            font-weight: 500;
-        }
-        
         .lego-gallery-story {
             background: white;
             padding: var(--space-8);
@@ -161,20 +173,6 @@
             box-shadow: var(--shadow-md);
             margin-top: var(--space-12);
             border-left: 6px solid var(--html-brand-primary);
-        }
-        
-        .lego-story-title {
-            font-size: var(--font-size-2xl);
-            font-weight: 700;
-            color: var(--html-brand-primary);
-            margin-bottom: var(--space-4);
-        }
-        
-        .lego-story-text {
-            font-size: var(--font-size-lg);
-            line-height: 1.7;
-            color: var(--html-color-text-primary);
-            margin-bottom: var(--space-4);
         }
         
         .navigation-buttons {
@@ -199,6 +197,233 @@
             background: var(--html-brand-secondary);
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
+        }
+
+        /* 🖼️ MODAL DE TELA CHEIA PARA IMAGENS */
+        .fullscreen-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .fullscreen-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .fullscreen-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: modalZoomIn 0.3s ease;
+            padding: var(--space-4);
+        }
+
+        @keyframes modalZoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .fullscreen-image {
+            max-width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            background: white;
+        }
+
+        .fullscreen-info {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); /* Safari support */
+            padding: var(--space-6);
+            border-radius: 16px;
+            margin-top: var(--space-4);
+            max-width: 500px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); /* Safari support */
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10000;
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        .close-modal:focus {
+            outline: 2px solid white;
+            outline-offset: 2px;
+        }
+
+        /* 🎯 MELHORIAS TIPOGRÁFICAS NOS CARDS */
+        .lego-card-title {
+            font-family: var(--font-display);
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            color: var(--html-color-text-primary);
+            margin-bottom: var(--space-3);
+            letter-spacing: var(--letter-spacing-tight);
+            line-height: var(--line-height-tight);
+        }
+        
+        .lego-card-description {
+            font-family: var(--font-primary);
+            color: var(--html-color-text-secondary);
+            line-height: var(--line-height-loose);
+            margin-bottom: var(--space-4);
+            font-size: var(--font-size-base);
+            font-weight: 400;
+            letter-spacing: var(--letter-spacing-normal);
+        }
+
+        .lego-spec-label {
+            font-family: var(--font-primary);
+            font-weight: 600;
+            color: var(--html-color-text-secondary);
+            font-size: var(--font-size-sm);
+            letter-spacing: var(--letter-spacing-wide);
+            text-transform: uppercase;
+        }
+
+        .lego-spec-value {
+            font-family: var(--font-primary);
+            color: var(--html-brand-primary);
+            font-weight: 500;
+            font-size: var(--font-size-sm);
+            letter-spacing: var(--letter-spacing-normal);
+        }
+
+        .lego-story-title {
+            font-family: var(--font-display);
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            color: var(--html-brand-primary);
+            margin-bottom: var(--space-4);
+            letter-spacing: var(--letter-spacing-tight);
+            line-height: var(--line-height-tight);
+        }
+        
+        .lego-story-text {
+            font-family: var(--font-primary);
+            font-size: var(--font-size-lg);
+            line-height: var(--line-height-loose);
+            color: var(--html-color-text-primary);
+            margin-bottom: var(--space-4);
+            font-weight: 400;
+            letter-spacing: var(--letter-spacing-normal);
+        }
+
+        /* Melhorias no modal */
+        .fullscreen-title {
+            font-family: var(--font-display);
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            color: var(--html-color-text-primary);
+            margin-bottom: var(--space-2);
+            letter-spacing: var(--letter-spacing-tight);
+            line-height: var(--line-height-tight);
+        }
+
+        .fullscreen-description {
+            font-family: var(--font-primary);
+            color: var(--html-color-text-secondary);
+            line-height: var(--line-height-relaxed);
+            font-size: var(--font-size-base);
+            letter-spacing: var(--letter-spacing-normal);
+        }
+
+        /* 📱 RESPONSIVIDADE PARA MOBILE */
+        @media (max-width: 768px) {
+            .fullscreen-content {
+                max-width: 95vw;
+                max-height: 95vh;
+                padding: var(--space-2);
+            }
+
+            .fullscreen-image {
+                max-height: 60vh;
+                border-radius: 8px;
+            }
+
+            .fullscreen-info {
+                padding: var(--space-4);
+                margin-top: var(--space-2);
+                border-radius: 12px;
+            }
+
+            .fullscreen-title {
+                font-size: var(--font-size-lg);
+            }
+
+            .fullscreen-description {
+                font-size: var(--font-size-sm);
+            }
+
+            .close-modal {
+                width: 40px;
+                height: 40px;
+                top: 10px;
+                right: 10px;
+                font-size: 20px;
+            }
+
+            .lego-gallery-title {
+                font-size: var(--font-size-3xl);
+            }
+
+            .lego-card-title {
+                font-size: var(--font-size-lg);
+            }
+        }
+
+        /* 🖥️ MELHORIAS PARA DESKTOP */
+        @media (min-width: 1200px) {
+            .fullscreen-image {
+                max-height: 75vh;
+            }
+
+            .fullscreen-info {
+                max-width: 600px;
+            }
         }
         
         .nav-button.secondary {
@@ -242,7 +467,10 @@
         <!-- 🖼️ Grid de Imagens -->
         <div class="lego-gallery-grid">
             <!-- Mini Nave 1 -->
-            <article class="lego-card">
+            <article class="lego-card" 
+                     data-title="Mini Nave Espacial Alpha" 
+                     data-description="Primeira mini nave da série, construída com foco em simplicidade e elegância. Design compacto com detalhes em vermelho e cinza, perfeita para missões de reconhecimento."
+                     data-image="./src/assets/lego-naves/mini-nave-1.jpg">
                 <div class="lego-card-image-container">
                     <!-- ✅ Sistema híbrido: Imagem real + Placeholder como fallback -->
                     <img 
@@ -293,7 +521,10 @@
             </article>
 
             <!-- Mini Nave 2 -->
-            <article class="lego-card">
+            <article class="lego-card"
+                     data-title="Mini Nave Espacial Beta"
+                     data-description="Segunda mini nave da série, apresentando estrutura multi-seções mais avançada. Incorpora sistema de propulsão duplo e cockpit detalhado com transparências."
+                     data-image="./src/assets/lego-naves/mini-nave-2.jpg">
                 <div class="lego-card-image-container">
                     <!-- ✅ Sistema híbrido: Imagem real + Placeholder como fallback -->
                     <img 
@@ -344,7 +575,10 @@
             </article>
 
             <!-- Mini Nave 3 -->
-            <article class="lego-card">
+            <article class="lego-card"
+                     data-title="Mini Nave Espacial Gamma"
+                     data-description="Terceira e mais avançada mini nave da série. Design único com configuração assimétrica e detalhes técnicos refinados."
+                     data-image="./src/assets/lego-naves/mini-nave-3.jpg">
                 <div class="lego-card-image-container">
                     <!-- ✅ Sistema híbrido: Imagem real + Placeholder como fallback -->
                     <img 
@@ -420,10 +654,28 @@
             <a href="index.html" class="nav-button">
                 🏠 Voltar ao Portfolio
             </a>
+            <a href="tipografia.html" class="nav-button secondary">
+                🎨 Lab Tipografia
+            </a>
+            <a href="lab-fundamentos-css.html" class="nav-button secondary">
+                📚 Lab CSS Fundamentals
+            </a>
             <a href="exemplo-html-lego-naves.html" class="nav-button secondary">
                 🔍 Ver Exemplo HTML
             </a>
         </nav>
+    </div>
+
+    <!-- 🖼️ MODAL DE TELA CHEIA -->
+    <div id="fullscreenModal" class="fullscreen-modal">
+        <button class="close-modal" onclick="closeFullscreen()">&times;</button>
+        <div class="fullscreen-content">
+            <img id="fullscreenImage" class="fullscreen-image" src="" alt="">
+            <div class="fullscreen-info">
+                <h3 id="fullscreenTitle" class="fullscreen-title"></h3>
+                <p id="fullscreenDescription" class="fullscreen-description"></p>
+            </div>
+        </div>
     </div>
 
     <!-- ✅ JavaScript para Sistema Híbrido Otimizado -->
@@ -482,27 +734,122 @@
             });
         }
 
-        // 🖱️ Funcionalidade de clique para expandir (otimizada para sistema híbrido)
+        // 🖱️ Funcionalidade de modal de tela cheia
         function initializeImageInteraction() {
+            // Adicionar cursor pointer e eventos de clique
             document.querySelectorAll('.lego-card-image, .lego-card-placeholder').forEach(element => {
                 element.style.cursor = 'pointer';
+                
                 element.addEventListener('click', function() {
-                    if (this.classList.contains('lego-card-image')) {
-                        // Para imagens reais - zoom suave
-                        if (this.style.transform === 'scale(1.2)') {
-                            this.style.transform = 'scale(1)';
-                            this.style.cursor = 'zoom-in';
-                        } else {
-                            this.style.transform = 'scale(1.2)';
-                            this.style.cursor = 'zoom-out';
-                        }
-                        this.style.transition = 'transform 0.3s ease';
-                    } else {
-                        // Para placeholders - efeito hover
-                        this.style.transform = this.style.transform === 'scale(1.05)' ? 'scale(1)' : 'scale(1.05)';
-                        this.style.transition = 'transform 0.3s ease';
+                    const card = this.closest('.lego-card');
+                    if (card) {
+                        openFullscreen(card);
                     }
                 });
+            });
+
+            // Também permitir clique no card inteiro
+            document.querySelectorAll('.lego-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // Evitar abrir modal se clicou em links ou buttons
+                    if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
+                        return;
+                    }
+                    openFullscreen(this);
+                });
+            });
+        }
+
+        // 📖 Função para abrir modal em tela cheia
+        function openFullscreen(card) {
+            const modal = document.getElementById('fullscreenModal');
+            const image = document.getElementById('fullscreenImage');
+            const title = document.getElementById('fullscreenTitle');
+            const description = document.getElementById('fullscreenDescription');
+            
+            if (!modal || !image || !title || !description) {
+                console.error('❌ Elementos do modal não encontrados');
+                return;
+            }
+            
+            const cardTitle = card.getAttribute('data-title');
+            const cardDescription = card.getAttribute('data-description');
+            const cardImage = card.getAttribute('data-image');
+            
+            // Verificar se existe imagem real ou usar placeholder
+            const realImage = card.querySelector('.lego-card-image');
+            const placeholder = card.querySelector('.lego-card-placeholder');
+            
+            title.textContent = cardTitle || 'Mini Nave LEGO';
+            description.textContent = cardDescription || 'Construção em LEGO da série de mini naves espaciais.';
+            
+            if (realImage && realImage.style.display !== 'none' && realImage.complete && realImage.naturalWidth > 0) {
+                // Usar imagem real
+                image.src = cardImage;
+                image.alt = realImage.alt;
+                image.style.display = 'block';
+                
+                // Aguardar imagem carregar no modal
+                image.onload = function() {
+                    console.log(`🖼️ Imagem carregada no modal: ${cardTitle}`);
+                };
+                
+                image.onerror = function() {
+                    console.warn(`⚠️ Erro ao carregar imagem no modal: ${cardTitle}`);
+                    this.style.display = 'none';
+                };
+            } else {
+                // Fallback: usar uma imagem placeholder ou ocultar
+                image.style.display = 'none';
+                console.log(`📦 Usando placeholder para: ${cardTitle}`);
+            }
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevenir scroll
+            
+            // Acessibilidade: focar no botão de fechar
+            const closeButton = modal.querySelector('.close-modal');
+            if (closeButton) {
+                setTimeout(() => closeButton.focus(), 100);
+            }
+            
+            console.log(`🖼️ Modal aberto para: ${cardTitle}`);
+        }
+
+        // ❌ Função para fechar modal
+        function closeFullscreen() {
+            const modal = document.getElementById('fullscreenModal');
+            if (!modal) return;
+            
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restaurar scroll
+            
+            // Limpar imagem para evitar problemas de cache
+            const image = document.getElementById('fullscreenImage');
+            if (image) {
+                image.src = '';
+            }
+            
+            console.log('❌ Modal fechado');
+        }
+
+        // ⌨️ Navegação por teclado
+        function initializeKeyboardNavigation() {
+            document.addEventListener('keydown', function(e) {
+                const modal = document.getElementById('fullscreenModal');
+                
+                if (modal.classList.contains('active')) {
+                    if (e.key === 'Escape') {
+                        closeFullscreen();
+                    }
+                }
+            });
+
+            // Fechar modal clicando fora da imagem
+            document.getElementById('fullscreenModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeFullscreen();
+                }
             });
         }
 
@@ -513,12 +860,17 @@
             // Inicializar sistema híbrido de imagens
             initializeHybridImageSystem();
             
-            // Inicializar interações
+            // Inicializar interações e modal
             initializeImageInteraction();
+            
+            // Inicializar navegação por teclado
+            initializeKeyboardNavigation();
             
             console.log('✅ Galeria LEGO Naves carregada com sucesso!');
             console.log('📁 Imagens esperadas em: ./src/assets/lego-naves/');
             console.log('🎯 Sistema híbrido: Imagens reais com fallback para placeholders');
+            console.log('🖼️ Modal de tela cheia ativado - clique nas imagens para expandir');
+            console.log('⌨️  Navegação: ESC para fechar modal');
             console.log('🔧 Para adicionar imagens: Coloque mini-nave-1.jpg, mini-nave-2.jpg, mini-nave-3.jpg na pasta');
         });
     </script>

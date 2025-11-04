@@ -1,0 +1,1144 @@
+/* 🎨 LABORATÓRIO DE TIPOGRAFIA - CSS */
+/* Gabriel Malheiros de Castro - FAESA 2025-2 */
+/* Arquivo: tipografia.css */
+
+/* ================================================================
+   🔧 EXTENDS SISTEMA DE DESIGN EXISTENTE
+   ================================================================ */
+
+/* 📝 Importa e estende as variáveis do style.css */
+/* Este CSS funciona em conjunto com o sistema existente */
+
+/* ================================================================
+   ✨ VARIÁVEIS TIPOGRÁFICAS ESPECÍFICAS
+   ================================================================ */
+:root {
+  /* 🎯 Font Stacks Específicos */
+  --font-system: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-inter: 'Inter', var(--font-system);
+  --font-playfair: 'Playfair Display', Georgia, "Times New Roman", serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Cascadia Code', 'Consolas', 'Courier New', monospace;
+  
+  /* 📏 Line Heights Específicos */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.6;
+  --line-height-loose: 1.8;
+  
+  /* 🎛️ Letter Spacing */
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+  --letter-spacing-wider: 0.05em;
+  
+  /* 🎨 Typography Colors */
+  --text-primary: var(--html-color-text-primary);
+  --text-secondary: var(--html-color-text-secondary);
+  --text-muted: var(--html-color-text-muted);
+  --text-accent: var(--html-brand-primary);
+  
+  /* 📐 Borders e Spacing Específicos */
+  --typography-border-radius: 12px;
+  --typography-section-gap: var(--space-16);
+}
+
+/* ================================================================
+   📖 LAYOUT PRINCIPAL DA PÁGINA TIPOGRAFIA
+   ================================================================ */
+
+.typography-page {
+  font-family: var(--font-inter);
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  line-height: var(--line-height-relaxed);
+}
+
+.typography-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--space-6);
+}
+
+/* ================================================================
+   🎯 HEADER DA PÁGINA
+   ================================================================ */
+
+.typography-header {
+  text-align: center;
+  padding: var(--space-12) 0 var(--space-8);
+  background: linear-gradient(135deg, var(--html-brand-primary) 0%, var(--html-brand-accent) 100%);
+  border-radius: var(--typography-border-radius);
+  margin-bottom: var(--space-8);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.typography-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="white" opacity="0.1"/><circle cx="80" cy="40" r="1" fill="white" opacity="0.1"/><circle cx="40" cy="80" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+  opacity: 0.3;
+}
+
+.header-content {
+  position: relative;
+  z-index: 1;
+}
+
+.typography-main-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  margin-bottom: var(--space-4);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.title-gradient {
+  /* Fallback: cor sólida para navegadores sem suporte */
+  color: #ffffff;
+  /* Gradiente para navegadores com suporte */
+  background: linear-gradient(45deg, #ffffff 0%, #e2e8f0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
+  /* Fallback adicional usando feature queries */
+  @supports not (-webkit-background-clip: text) {
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.typography-subtitle {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--space-6);
+  opacity: 0.9;
+  font-weight: 400;
+  line-height: var(--line-height-normal);
+}
+
+.typography-meta {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  padding: var(--space-3) var(--space-6);
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+}
+
+.author-info {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+}
+
+/* ================================================================
+   🧭 NAVEGAÇÃO INTERNA
+   ================================================================ */
+
+.typography-nav {
+  background: white;
+  border-radius: var(--typography-border-radius);
+  padding: var(--space-4);
+  margin-bottom: var(--space-8);
+  box-shadow: var(--shadow-lg);
+  position: sticky;
+  top: var(--space-4);
+  z-index: 10;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  justify-content: center;
+}
+
+.nav-link {
+  padding: var(--space-2) var(--space-4);
+  background: var(--html-color-bg-secondary);
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background: var(--html-brand-primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ================================================================
+   📚 SEÇÕES E CONTENT LAYOUT
+   ================================================================ */
+
+.typography-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--typography-section-gap);
+}
+
+.typography-section {
+  background: white;
+  border-radius: var(--typography-border-radius);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--html-color-bg-tertiary);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: var(--space-8);
+}
+
+.section-title {
+  font-family: var(--font-playfair);
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--text-accent);
+  margin-bottom: var(--space-3);
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -var(--space-2);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--html-brand-primary), var(--html-brand-accent));
+  border-radius: 2px;
+}
+
+.section-description {
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ================================================================
+   🎨 CARDS E EXAMPLES
+   ================================================================ */
+
+.examples-grid {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.example-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  background: var(--html-color-bg-secondary);
+  border-radius: var(--typography-border-radius);
+  padding: var(--space-6);
+  border: 1px solid var(--html-color-bg-tertiary);
+}
+
+.example-demo {
+  background: white;
+  padding: var(--space-6);
+  border-radius: 8px;
+  border: 1px solid var(--html-color-bg-tertiary);
+}
+
+.example-code {
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: var(--space-4);
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  overflow-x: auto;
+}
+
+.example-code h4 {
+  color: #94a3b8;
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-3);
+  font-weight: 600;
+}
+
+.example-code pre {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.example-code code {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+  color: #e2e8f0;
+}
+
+/* ================================================================
+   🏷️ DEMONSTRAÇÕES DE HIERARQUIA
+   ================================================================ */
+
+.demo-h1 {
+  font-size: var(--font-size-4xl);
+  font-weight: 800;
+  color: var(--text-accent);
+  margin-bottom: var(--space-3);
+  line-height: var(--line-height-tight);
+}
+
+.demo-h2 {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+  line-height: var(--line-height-tight);
+}
+
+.demo-h3 {
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+  line-height: var(--line-height-normal);
+}
+
+.demo-h4 {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+  line-height: var(--line-height-normal);
+}
+
+.demo-h5 {
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-2);
+  line-height: var(--line-height-normal);
+}
+
+.demo-h6 {
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-bottom: var(--space-2);
+  line-height: var(--line-height-normal);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+/* ================================================================
+   📝 ESTILOS DE PARÁGRAFOS
+   ================================================================ */
+
+.paragraph-large {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.paragraph-regular {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.paragraph-small {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+}
+
+.paragraph-muted {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+  color: var(--text-muted);
+  margin-bottom: var(--space-4);
+}
+
+/* ================================================================
+   📋 ESTILOS DE LISTAS
+   ================================================================ */
+
+.lists-showcase {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-6);
+}
+
+.list-group h4 {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--text-accent);
+  margin-bottom: var(--space-3);
+}
+
+.list-styled {
+  list-style: none;
+  padding: 0;
+}
+
+.list-styled li {
+  padding: var(--space-2) 0;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--html-color-bg-tertiary);
+}
+
+.list-styled li:last-child {
+  border-bottom: none;
+}
+
+.list-steps {
+  counter-reset: step-counter;
+  list-style: none;
+  padding: 0;
+}
+
+.list-steps li {
+  counter-increment: step-counter;
+  padding: var(--space-3) 0 var(--space-3) var(--space-8);
+  position: relative;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--html-color-bg-tertiary);
+}
+
+.list-steps li:last-child {
+  border-bottom: none;
+}
+
+.list-steps li::before {
+  content: counter(step-counter);
+  position: absolute;
+  left: 0;
+  top: var(--space-3);
+  width: 24px;
+  height: 24px;
+  background: var(--html-brand-primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.definition-list {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.definition-list dt {
+  font-weight: 600;
+  color: var(--text-accent);
+  font-size: var(--font-size-base);
+}
+
+.definition-list dd {
+  color: var(--text-secondary);
+  margin-left: var(--space-4);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+/* ================================================================
+   💬 BLOCKQUOTES E CITAÇÕES
+   ================================================================ */
+
+.blockquote-primary {
+  background: linear-gradient(135deg, var(--html-color-bg-secondary) 0%, white 100%);
+  border-left: 4px solid var(--html-brand-primary);
+  padding: var(--space-6);
+  margin: var(--space-6) 0;
+  border-radius: 0 var(--typography-border-radius) var(--typography-border-radius) 0;
+  position: relative;
+}
+
+.blockquote-primary::before {
+  content: '"';
+  font-family: var(--font-playfair);
+  font-size: 4rem;
+  color: var(--html-brand-primary);
+  opacity: 0.3;
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-4);
+  line-height: 1;
+}
+
+.blockquote-primary p {
+  font-family: var(--font-playfair);
+  font-size: var(--font-size-lg);
+  font-style: italic;
+  line-height: var(--line-height-relaxed);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-4);
+  padding-left: var(--space-8);
+}
+
+.blockquote-primary cite {
+  display: block;
+  text-align: right;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.blockquote-accent {
+  background: linear-gradient(135deg, var(--html-brand-accent) 0%, var(--html-brand-primary) 100%);
+  color: white;
+  padding: var(--space-6);
+  margin: var(--space-6) 0;
+  border-radius: var(--typography-border-radius);
+  position: relative;
+}
+
+.blockquote-accent p {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+  margin: 0 0 var(--space-4);
+}
+
+.blockquote-accent cite {
+  display: block;
+  text-align: right;
+  font-size: var(--font-size-sm);
+  opacity: 0.9;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.quote-inline-demo {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+  color: var(--text-primary);
+}
+
+.quote-inline {
+  font-style: italic;
+  color: var(--text-accent);
+  position: relative;
+}
+
+.highlight-box {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 1px solid #f59e0b;
+  border-radius: var(--typography-border-radius);
+  padding: var(--space-6);
+  margin: var(--space-6) 0;
+}
+
+.highlight-box h4 {
+  color: #92400e;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+}
+
+.highlight-box p {
+  color: #78350f;
+  margin: 0;
+  line-height: var(--line-height-relaxed);
+}
+
+/* ================================================================
+   💻 ELEMENTOS DE CÓDIGO
+   ================================================================ */
+
+.code-inline {
+  background: var(--html-color-bg-tertiary);
+  color: var(--html-brand-primary);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  font-weight: 500;
+  border: 1px solid var(--html-color-bg-tertiary);
+}
+
+.code-block {
+  background: #1e293b;
+  border-radius: var(--typography-border-radius);
+  overflow: hidden;
+  margin: var(--space-4) 0;
+  border: 1px solid #334155;
+}
+
+.code-header {
+  background: #334155;
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #475569;
+}
+
+.code-language {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: #94a3b8;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+.code-filename {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: #e2e8f0;
+}
+
+.code-content {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+  color: #e2e8f0;
+  padding: var(--space-4);
+  overflow-x: auto;
+  margin: 0;
+  background: transparent;
+}
+
+/* ================================================================
+   📊 TABELAS
+   ================================================================ */
+
+.table-container {
+  overflow-x: auto;
+  border-radius: var(--typography-border-radius);
+  border: 1px solid var(--html-color-bg-tertiary);
+}
+
+.typography-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-sm);
+  background: white;
+}
+
+.typography-table th {
+  background: var(--html-brand-primary);
+  color: white;
+  padding: var(--space-4);
+  text-align: left;
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+.typography-table th:first-child {
+  border-top-left-radius: var(--typography-border-radius);
+}
+
+.typography-table th:last-child {
+  border-top-right-radius: var(--typography-border-radius);
+}
+
+.typography-table td {
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--html-color-bg-tertiary);
+  color: var(--text-primary);
+  line-height: var(--line-height-normal);
+}
+
+.typography-table tbody tr:hover {
+  background: var(--html-color-bg-secondary);
+}
+
+.typography-table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: var(--typography-border-radius);
+}
+
+.typography-table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: var(--typography-border-radius);
+}
+
+.typography-table code {
+  background: var(--html-color-bg-tertiary);
+  color: var(--html-brand-primary);
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+
+/* ================================================================
+   🎨 EXEMPLO DE ARTIGO
+   ================================================================ */
+
+.sample-article {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.article-title {
+  font-family: var(--font-playfair);
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+  line-height: var(--line-height-tight);
+}
+
+.article-meta {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--html-color-bg-tertiary);
+}
+
+.article-meta .author {
+  font-weight: 600;
+  color: var(--text-accent);
+}
+
+.article-lead {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+  color: var(--text-primary);
+  margin-bottom: var(--space-6);
+  font-weight: 400;
+}
+
+.article-list {
+  margin: var(--space-4) 0;
+  padding-left: var(--space-6);
+}
+
+.article-list li {
+  margin-bottom: var(--space-2);
+  line-height: var(--line-height-normal);
+}
+
+.article-callout {
+  background: var(--html-color-bg-secondary);
+  border-left: 4px solid var(--html-brand-accent);
+  padding: var(--space-4);
+  margin: var(--space-6) 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.article-callout p {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+/* ================================================================
+   🔤 FONT SAMPLES
+   ================================================================ */
+
+.font-samples {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.font-sample {
+  padding: var(--space-6);
+  background: var(--html-color-bg-secondary);
+  border-radius: var(--typography-border-radius);
+  border: 1px solid var(--html-color-bg-tertiary);
+}
+
+.font-name {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--text-accent);
+  margin-bottom: var(--space-3);
+}
+
+.font-demo {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+  padding: var(--space-4);
+  background: white;
+  border-radius: 8px;
+  border: 1px solid var(--html-color-bg-tertiary);
+}
+
+.font-system {
+  font-family: var(--font-system);
+}
+
+.font-inter {
+  font-family: var(--font-inter);
+}
+
+.font-playfair {
+  font-family: var(--font-playfair);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.font-stack {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  background: var(--html-color-bg-tertiary);
+  padding: var(--space-2) var(--space-3);
+  border-radius: 4px;
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+/* ================================================================
+   🧭 FOOTER
+   ================================================================ */
+
+.typography-footer {
+  background: white;
+  border-radius: var(--typography-border-radius);
+  padding: var(--space-8);
+  margin-top: var(--space-8);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--html-color-bg-tertiary);
+  text-align: center;
+}
+
+.footer-navigation {
+  margin-bottom: var(--space-6);
+}
+
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  justify-content: center;
+}
+
+.footer-nav-link {
+  padding: var(--space-3) var(--space-6);
+  background: var(--html-color-bg-secondary);
+  color: var(--text-primary);
+  text-decoration: none;
+  border-radius: 50px;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.footer-nav-link:hover {
+  background: var(--html-brand-primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.footer-nav-link.primary {
+  background: var(--html-brand-primary);
+  color: white;
+}
+
+.footer-nav-link.primary:hover {
+  background: var(--html-brand-secondary);
+}
+
+.footer-info {
+  border-top: 1px solid var(--html-color-bg-tertiary);
+  padding-top: var(--space-6);
+}
+
+.footer-author {
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+  font-weight: 500;
+}
+
+.footer-description {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* ================================================================
+   📱 RESPONSIVIDADE
+   ================================================================ */
+
+@media (max-width: 1200px) {
+  .typography-container {
+    padding: var(--space-4);
+  }
+  
+  .example-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .typography-container {
+    padding: var(--space-3);
+  }
+  
+  .typography-header {
+    padding: var(--space-8) var(--space-4);
+  }
+  
+  .typography-main-title {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .typography-subtitle {
+    font-size: var(--font-size-lg);
+  }
+  
+  .nav-links {
+    gap: var(--space-1);
+  }
+  
+  .nav-link {
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--font-size-xs);
+  }
+  
+  .typography-section {
+    padding: var(--space-4);
+  }
+  
+  .section-title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .section-description {
+    font-size: var(--font-size-base);
+  }
+  
+  .lists-showcase {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-nav {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .footer-nav-link {
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .typography-nav {
+    position: static;
+  }
+  
+  .nav-links {
+    flex-direction: column;
+  }
+  
+  .nav-link {
+    text-align: center;
+  }
+  
+  .demo-h1 {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .demo-h2 {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .demo-h3 {
+    font-size: var(--font-size-xl);
+  }
+  
+  .code-block {
+    overflow-x: auto;
+  }
+  
+  .code-header {
+    flex-direction: column;
+    gap: var(--space-1);
+    align-items: flex-start;
+  }
+}
+
+/* ================================================================
+   🎯 MELHORIAS DE ACESSIBILIDADE
+   ================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.nav-link:focus,
+.footer-nav-link:focus {
+  outline: 2px solid var(--html-brand-primary);
+  outline-offset: 2px;
+}
+
+/* ================================================================
+   🖨️ PRINT STYLES
+   ================================================================ */
+
+@media print {
+  .typography-nav,
+  .footer-navigation {
+    display: none;
+  }
+  
+  .typography-page {
+    background: white;
+  }
+  
+  .typography-header {
+    background: white;
+    color: black;
+    box-shadow: none;
+  }
+  
+  .title-gradient {
+    /* Para impressão, usar cor sólida */
+    color: black !important;
+    -webkit-text-fill-color: black !important;
+    background: none !important;
+    text-shadow: none !important;
+  }
+  
+  .typography-section {
+    box-shadow: none;
+    border: 1px solid #ccc;
+    break-inside: avoid;
+  }
+  
+  .example-code {
+    background: #f5f5f5;
+    color: black;
+    border: 1px solid #ccc;
+  }
+}
+
+/* ================================================================
+   ✨ ANIMAÇÕES E EFEITOS ESPECIAIS
+   ================================================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.typography-section {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.typography-section:nth-child(even) {
+  animation-delay: 0.1s;
+}
+
+.typography-section:nth-child(odd) {
+  animation-delay: 0.2s;
+}
+
+/* Scroll suave para navegação interna */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Highlight de seleção personalizado */
+::selection {
+  background: var(--html-brand-primary);
+  color: white;
+}
+
+::-moz-selection {
+  background: var(--html-brand-primary);
+  color: white;
+}
+
+/* ================================================================
+   🔧 UTILITÁRIOS FINAIS
+   ================================================================ */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Debug helper (remover em produção) */
+.debug-grid {
+  background-image: 
+    linear-gradient(rgba(255,0,0,0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,0,0,0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Console log style para debugging */
+.console-log {
+  font-family: var(--font-mono);
+  background: #1a1a1a;
+  color: #00ff00;
+  padding: var(--space-2);
+  border-radius: 4px;
+  font-size: var(--font-size-xs);
+}
+
+/* ================================================================
+   ⚡ OTIMIZAÇÕES DE PERFORMANCE TIPOGRÁFICA
+   ================================================================ */
+
+/* Otimização para renderização de fontes */
+html {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevenção de layout shifts */
+.typography-page {
+  font-display: swap;
+}
+
+/* Otimização para fontes grandes */
+.typography-main-title,
+.demo-h1,
+.demo-h2 {
+  text-rendering: optimizeLegibility;
+}
+
+/* Otimização para código */
+.code-content,
+.code-inline {
+  text-rendering: optimizeSpeed;
+  font-variant-ligatures: none;
+}
