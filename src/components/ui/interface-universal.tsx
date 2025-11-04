@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { cn } from './utils';
 import SpaceGallery from '../gallery/SpaceGallery';
+import SpaceshipGallery from '../gallery/SpaceshipGallery';
 import { spaceFleetImages } from '../../data/spaceFleetData';
 import PersonalData from './personal-data';
 import MorseChallenge from './morse-challenge';
@@ -31,7 +32,7 @@ interface InterfaceUniversalProps {
   className?: string;
   showMultipleScreens?: boolean;
   enableThemeSelector?: boolean;
-  initialScreen?: 'main' | 'gallery' | 'figma' | 'settings';
+  initialScreen?: 'main' | 'gallery' | 'spaceships' | 'figma' | 'settings';
 }
 
 export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
@@ -40,7 +41,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
   initialScreen
 }) => {
   // 🔍 Detectar tela inicial baseada em parâmetros URL ou prop
-  const getInitialScreen = (): 'main' | 'gallery' | 'figma' | 'settings' => {
+  const getInitialScreen = (): 'main' | 'gallery' | 'spaceships' | 'figma' | 'settings' => {
     // Se foi passada uma tela inicial, usar ela
     if (initialScreen) return initialScreen;
     
@@ -51,6 +52,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
     // Verificar parâmetros da URL
     if (screenParam === 'figma' || hashParam === 'figma') return 'figma';
     if (screenParam === 'gallery' || hashParam === 'gallery') return 'gallery';
+    if (screenParam === 'spaceships' || hashParam === 'spaceships') return 'spaceships';
     if (screenParam === 'settings' || hashParam === 'settings') return 'settings';
     
     return 'main';
@@ -65,7 +67,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
     theme: 'modern'
   });
 
-  const [currentScreen, setCurrentScreen] = useState<'main' | 'gallery' | 'figma' | 'settings'>(getInitialScreen());
+  const [currentScreen, setCurrentScreen] = useState<'main' | 'gallery' | 'spaceships' | 'figma' | 'settings'>(getInitialScreen());
   const [viewport, setViewport] = useState<'mobile' | 'tablet' | 'desktop'>('desktop');
   const [forceUpdate, setForceUpdate] = useState(0); // Para forçar re-render quando tema muda
 
@@ -364,7 +366,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
   }, []);
 
   // 🎯 Navegar entre telas com atualização de URL
-  const navigateToScreen = useCallback((screen: 'main' | 'gallery' | 'figma' | 'settings') => {
+  const navigateToScreen = useCallback((screen: 'main' | 'gallery' | 'spaceships' | 'figma' | 'settings') => {
     setCurrentScreen(screen);
     
     // Atualizar URL baseado na tela
@@ -550,6 +552,32 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
             <Home size={20} />
             Voltar à Tela Principal
           </button>
+        </div>
+      </div>
+    </div>
+  );
+
+  // 🚀 Renderizar tela de galeria de naves espaciais
+  const renderSpaceshipsScreen = () => (
+    <div className="interface-main">
+      <div className="layout-container">
+        <div className="interface-header">
+          <h1 className="interface-title flex items-center justify-center gap-3">
+            <Rocket className="w-8 h-8 text-blue-600" />
+            Galeria de Naves Espaciais
+          </h1>
+          <p className="interface-subtitle">
+            Coleção épica de naves dos universos Star Wars e Halo com debugging avançado
+          </p>
+        </div>
+
+        <div className="interface-content">
+          <SpaceshipGallery 
+            className="w-full"
+            enableDebug={true}
+            onImageLoad={(imageId) => console.log(`✅ Nave carregada: ${imageId}`)}
+            onImageError={(imageId, error) => console.error(`❌ Erro na nave ${imageId}:`, error)}
+          />
         </div>
       </div>
     </div>
@@ -980,6 +1008,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
   const renderCurrentScreen = () => {
     switch (currentScreen) {
       case 'gallery': return renderGalleryScreen();
+      case 'spaceships': return renderSpaceshipsScreen();
       case 'figma': return renderFigmaScreen();
       case 'settings': return renderSettingsScreen();
       default: return renderMainScreen();
