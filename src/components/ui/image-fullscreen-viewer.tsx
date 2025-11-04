@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { X, ChevronLeft, ChevronRight, Download, Info } from 'lucide-react';
-import { cn } from './utils';
 import { SelectableImage } from '../../hooks/useImageSelection';
 
 interface ImageFullscreenViewerProps {
@@ -175,10 +174,9 @@ export const ImageFullscreenViewer: React.FC<ImageFullscreenViewerProps> = ({
           <img
             src={currentImage.src}
             alt={currentImage.alt}
-            className={cn(
-              "max-w-full max-h-full object-contain rounded-lg shadow-2xl transition-opacity duration-300",
+            className={`max-w-full max-h-full object-contain rounded-lg shadow-2xl transition-opacity duration-300 ${
               isLoading ? "opacity-0" : "opacity-100"
-            )}
+            }`}
             onLoad={handleImageLoad}
             onClick={(e) => e.stopPropagation()}
           />
@@ -215,10 +213,9 @@ export const ImageFullscreenViewer: React.FC<ImageFullscreenViewerProps> = ({
           <img
             src={currentImage.src}
             alt={currentImage.alt}
-            className={cn(
-              "max-w-full max-h-full object-contain rounded-lg shadow-2xl transition-opacity duration-300",
+            className={`max-w-full max-h-full object-contain rounded-lg shadow-2xl transition-opacity duration-300 ${
               isLoading ? "opacity-0" : "opacity-100"
-            )}
+            }`}
             onLoad={handleImageLoad}
             onClick={(e) => e.stopPropagation()}
           />
@@ -267,10 +264,9 @@ export const ImageFullscreenViewer: React.FC<ImageFullscreenViewerProps> = ({
               setIsLoading(true);
               onImageChange?.(images[index].id);
             }}
-            className={cn(
-              "w-2 h-2 rounded-full transition-colors",
+            className={`w-2 h-2 rounded-full transition-colors ${
               index === currentIndex ? "bg-white" : "bg-white/40"
-            )}
+            }`}
           />
         ))}
       </div>
