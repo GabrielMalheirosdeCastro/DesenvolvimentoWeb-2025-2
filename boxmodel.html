@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="html-page">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Adivinha a Nave Espacial | Gabriel Malheiros FAESA</title>
+    
+    <!-- CSS do sistema existente para manter consistência -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- CSS específico do Box Model para este jogo -->
+    <link rel="stylesheet" href="boxmodel.css">
+    
+    <meta name="description" content="Jogo de adivinhação de naves espaciais - Teste seus conhecimentos sobre naves de Star Wars, Halo e LEGO!">
+    <meta name="author" content="Gabriel Malheiros de Castro - FAESA 2025-2">
+</head>
+<body class="html-page boxmodel-game-page">
+    <!-- 🚀 Container Principal do Jogo -->
+    <div class="game-container">
+        <!-- 🎯 Cabeçalho do Jogo -->
+        <header class="game-header">
+            <h1 class="game-title">
+                🚀 Adivinha a Nave Espacial
+            </h1>
+            <p class="game-subtitle">
+                Teste seus conhecimentos sobre naves espaciais de diferentes universos!
+            </p>
+            
+            <!-- 📊 Placar e Estatísticas -->
+            <div class="score-board">
+                <div class="score-item">
+                    <span class="score-label">Pontuação:</span>
+                    <span class="score-value" id="current-score">0</span>
+                </div>
+                <div class="score-item">
+                    <span class="score-label">Acertos:</span>
+                    <span class="score-value" id="correct-answers">0</span>
+                </div>
+                <div class="score-item">
+                    <span class="score-label">Total:</span>
+                    <span class="score-value" id="total-attempts">0</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- 🎮 Área Principal do Jogo -->
+        <main class="game-main">
+            <!-- 🖼️ Container da Imagem com Box Model -->
+            <section class="image-section">
+                <div class="image-container" id="image-container">
+                    <div class="image-frame">
+                        <img id="spaceship-image" 
+                             src="" 
+                             alt="Nave espacial para adivinhação" 
+                             class="spaceship-image"
+                             style="display: none;">
+                        
+                        <!-- Loading placeholder -->
+                        <div class="image-placeholder" id="image-placeholder">
+                            <div class="placeholder-icon">🚀</div>
+                            <div class="placeholder-text">Carregando próxima nave...</div>
+                        </div>
+                        
+                        <!-- Error fallback -->
+                        <div class="image-error" id="image-error" style="display: none;">
+                            <div class="error-icon">❌</div>
+                            <div class="error-text">Erro ao carregar imagem</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 📝 Informações da Categoria -->
+                    <div class="category-hint" id="category-hint">
+                        <span class="hint-label">Categoria:</span>
+                        <span class="hint-value" id="category-value">-</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 🎯 Área de Resposta -->
+            <section class="answer-section">
+                <div class="answer-container">
+                    <div class="question-text">
+                        <h2>Qual é o nome desta nave espacial?</h2>
+                        <p class="question-subtitle">Digite sua resposta abaixo:</p>
+                    </div>
+                    
+                    <!-- 📝 Input de Resposta -->
+                    <div class="input-container">
+                        <input type="text" 
+                               id="answer-input" 
+                               class="answer-input" 
+                               placeholder="Digite o nome da nave..."
+                               autocomplete="off"
+                               maxlength="50">
+                        
+                        <button id="submit-answer" class="submit-button" type="button">
+                            <span class="button-text">Responder</span>
+                            <span class="button-icon">✨</span>
+                        </button>
+                    </div>
+                    
+                    <!-- 💡 Dicas -->
+                    <div class="hints-container" id="hints-container" style="display: none;">
+                        <h3 class="hints-title">💡 Dicas:</h3>
+                        <ul class="hints-list" id="hints-list">
+                            <!-- Dicas serão inseridas dinamicamente -->
+                        </ul>
+                        <button id="show-hint" class="hint-button">
+                            Mostrar Dica
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ✅❌ Área de Feedback -->
+            <section class="feedback-section" id="feedback-section" style="display: none;">
+                <div class="feedback-container">
+                    <div class="feedback-content" id="feedback-content">
+                        <!-- Feedback será inserido dinamicamente -->
+                    </div>
+                    
+                    <div class="feedback-actions">
+                        <button id="next-question" class="next-button">
+                            Próxima Nave 🚀
+                        </button>
+                        <button id="reveal-info" class="info-button">
+                            Ver Detalhes 📖
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 📖 Informações Detalhadas -->
+            <section class="details-section" id="details-section" style="display: none;">
+                <div class="details-container">
+                    <h3 class="details-title">📖 Informações da Nave</h3>
+                    <div class="details-content" id="details-content">
+                        <!-- Detalhes serão inseridos dinamicamente -->
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- 🎛️ Controles do Jogo -->
+        <aside class="game-controls">
+            <div class="controls-container">
+                <h3 class="controls-title">🎛️ Controles</h3>
+                
+                <div class="controls-grid">
+                    <button id="new-game" class="control-button new-game">
+                        <span class="control-icon">🔄</span>
+                        <span class="control-text">Novo Jogo</span>
+                    </button>
+                    
+                    <button id="skip-question" class="control-button skip">
+                        <span class="control-icon">⏭️</span>
+                        <span class="control-text">Pular</span>
+                    </button>
+                    
+                    <button id="toggle-difficulty" class="control-button difficulty">
+                        <span class="control-icon">⚙️</span>
+                        <span class="control-text">Dificuldade</span>
+                    </button>
+                    
+                    <button id="show-stats" class="control-button stats">
+                        <span class="control-icon">📊</span>
+                        <span class="control-text">Estatísticas</span>
+                    </button>
+                </div>
+                
+                <!-- 🎚️ Configurações -->
+                <div class="game-settings" id="game-settings" style="display: none;">
+                    <h4>⚙️ Configurações</h4>
+                    <div class="setting-item">
+                        <label for="difficulty-select">Dificuldade:</label>
+                        <select id="difficulty-select" class="setting-select">
+                            <option value="easy">Fácil (com dicas)</option>
+                            <option value="medium" selected>Médio (dicas limitadas)</option>
+                            <option value="hard">Difícil (sem dicas)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <label for="category-filter">Categoria:</label>
+                        <select id="category-filter" class="setting-select">
+                            <option value="all">Todas as categorias</option>
+                            <option value="star-wars">Star Wars</option>
+                            <option value="halo">Halo</option>
+                            <option value="lego">LEGO</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- 📊 Modal de Estatísticas -->
+        <div class="modal" id="stats-modal" style="display: none;">
+            <div class="modal-overlay" id="modal-overlay"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">📊 Suas Estatísticas</h3>
+                    <button class="modal-close" id="close-stats">×</button>
+                </div>
+                <div class="modal-body" id="stats-content">
+                    <!-- Estatísticas serão inseridas dinamicamente -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🧭 Navegação -->
+    <nav class="navigation-section">
+        <div class="nav-container">
+            <h3 class="nav-title">🧭 Navegação</h3>
+            <div class="nav-buttons">
+                <a href="index.html" class="nav-button primary">
+                    <span class="nav-icon">🏠</span>
+                    <span class="nav-text">Portfolio Principal</span>
+                </a>
+                
+                <a href="galeria-lego-naves.html" class="nav-button secondary">
+                    <span class="nav-icon">🧱</span>
+                    <span class="nav-text">Galeria LEGO</span>
+                </a>
+                
+                <a href="lab-fundamentos-css.html" class="nav-button secondary">
+                    <span class="nav-icon">🎨</span>
+                    <span class="nav-text">Lab CSS</span>
+                </a>
+                
+                <a href="tipografia.html" class="nav-button secondary">
+                    <span class="nav-icon">📝</span>
+                    <span class="nav-text">Tipografia</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 📜 Scripts -->
+    <script>
+        // 🚀 Dados das naves espaciais
+        const spaceshipData = [
+            // Naves Star Wars
+            {
+                id: 'venator-upgraded',
+                name: 'Venator Star Destroyer Melhorado',
+                image: '/assets/naves-espaciais/Star wars Venator upgraded.jpg',
+                category: 'Star Wars',
+                difficulty: 'medium',
+                hints: ['É uma nave capital da República', 'Tem formato triangular', 'Foi usada nas Guerras Clone'],
+                description: 'Uma versão aprimorada do icônico Venator-class Star Destroyer da República Galáctica.',
+                specifications: {
+                    length: '1,137 metros',
+                    crew: '7,400 soldados clone',
+                    armament: 'Turbolasers duplos pesados'
+                }
+            },
+            {
+                id: 'venator-standard',
+                name: 'Venator Star Destroyer',
+                image: '/assets/naves-espaciais/Star wars venator.jpg',
+                category: 'Star Wars',
+                difficulty: 'easy',
+                hints: ['Nave capital da República', 'Formato triangular icônico', 'Protagonista nas Guerras Clone'],
+                description: 'O backbone da frota da República durante as Guerras Clone.',
+                specifications: {
+                    length: '1,137 metros',
+                    crew: '7,400 soldados clone',
+                    armament: 'Turbolasers e canhões de íons'
+                }
+            },
+            {
+                id: 'acclamator',
+                name: 'Acclamator Assault Ship',
+                image: '/assets/naves-espaciais/starwars acclamator 2.jpg',
+                category: 'Star Wars',
+                difficulty: 'hard',
+                hints: ['Nave de transporte e assalto', 'Usada pela República', 'Menor que um Star Destroyer'],
+                description: 'Nave de assalto e transporte de tropas da República.',
+                specifications: {
+                    length: '752 metros',
+                    crew: '700 soldados + 16,000 tropas',
+                    armament: 'Turbolasers quádruplos'
+                }
+            },
+            // Naves Halo
+            {
+                id: 'unsc-frigate',
+                name: 'UNSC Frigate',
+                image: '/assets/naves-espaciais/unsc frigate.jpg',
+                category: 'Halo',
+                difficulty: 'medium',
+                hints: ['Nave da UNSC', 'Universo Halo', 'Classe Frigate'],
+                description: 'Nave de guerra da Força Espacial das Nações Unidas.',
+                specifications: {
+                    length: '478 metros',
+                    crew: '250-300 tripulantes',
+                    armament: 'MAC Gun e mísseis Archer'
+                }
+            },
+            // Naves LEGO
+            {
+                id: 'mini-nave-1',
+                name: 'Mini Nave Alpha',
+                image: './src/assets/lego-naves/mini-nave-1.jpg',
+                category: 'LEGO',
+                difficulty: 'easy',
+                hints: ['Mini nave LEGO', 'Primeira da série', 'Construção compacta'],
+                description: 'Primeira mini nave da série de construções LEGO espaciais.',
+                specifications: {
+                    size: 'Pequeno (6x4 studs)',
+                    pieces: '~25 peças',
+                    colors: 'Vermelho, Cinza, Preto'
+                }
+            },
+            {
+                id: 'mini-nave-2',
+                name: 'Mini Nave Beta',
+                image: './src/assets/lego-naves/mini-nave-2.jpg',
+                category: 'LEGO',
+                difficulty: 'medium',
+                hints: ['Mini nave LEGO', 'Segunda da série', 'Design mais complexo'],
+                description: 'Segunda mini nave com estrutura multi-seções mais avançada.',
+                specifications: {
+                    size: 'Médio (8x6 studs)',
+                    pieces: '~35 peças',
+                    colors: 'Azul, Cinza, Preto'
+                }
+            },
+            {
+                id: 'mini-nave-3',
+                name: 'Mini Nave Gamma',
+                image: './src/assets/lego-naves/mini-nave-3.jpg',
+                category: 'LEGO',
+                difficulty: 'hard',
+                hints: ['Mini nave LEGO', 'Terceira da série', 'Design único'],
+                description: 'Terceira e mais avançada mini nave da série com design assimétrico.',
+                specifications: {
+                    size: 'Grande (10x8 studs)',
+                    pieces: '~45 peças',
+                    colors: 'Verde, Cinza, Preto'
+                }
+            }
+        ];
+
+        // 🎮 Estado do jogo
+        let gameState = {
+            currentShip: null,
+            score: 0,
+            correctAnswers: 0,
+            totalAttempts: 0,
+            difficulty: 'medium',
+            categoryFilter: 'all',
+            hintsUsed: 0,
+            gameHistory: []
+        };
+
+        // 🔧 Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Iniciando jogo de adivinhação de naves...');
+            
+            // Inicializar elementos
+            initializeGame();
+            loadNextQuestion();
+            
+            // Event listeners
+            setupEventListeners();
+            
+            // Log de inicialização
+            console.log('✅ Jogo inicializado com sucesso!');
+        });
+
+        // 🔧 Inicializar o jogo
+        function initializeGame() {
+            updateScoreDisplay();
+            resetFeedback();
+            
+            // Carregar configurações salvas (localStorage)
+            if (localStorage.getItem('spaceshipGameStats')) {
+                const savedStats = JSON.parse(localStorage.getItem('spaceshipGameStats'));
+                gameState.score = savedStats.score || 0;
+                gameState.correctAnswers = savedStats.correctAnswers || 0;
+                gameState.totalAttempts = savedStats.totalAttempts || 0;
+                updateScoreDisplay();
+            }
+        }
+
+        // 🎯 Carregar próxima pergunta
+        function loadNextQuestion() {
+            console.log('🔄 Carregando próxima pergunta...');
+            
+            // Filtrar naves por categoria
+            let availableShips = spaceshipData;
+            if (gameState.categoryFilter !== 'all') {
+                availableShips = spaceshipData.filter(ship => 
+                    ship.category.toLowerCase().replace(' ', '-') === gameState.categoryFilter
+                );
+            }
+            
+            // Selecionar nave aleatória
+            const randomIndex = Math.floor(Math.random() * availableShips.length);
+            gameState.currentShip = availableShips[randomIndex];
+            gameState.hintsUsed = 0;
+            
+            // Resetar interface
+            resetFeedback();
+            document.getElementById('answer-input').value = '';
+            document.getElementById('answer-input').focus();
+            
+            // Carregar imagem
+            loadShipImage();
+            
+            // Atualizar categoria
+            document.getElementById('category-value').textContent = gameState.currentShip.category;
+            
+            console.log(`✅ Nova nave carregada: ${gameState.currentShip.name}`);
+        }
+
+        // 🖼️ Carregar imagem da nave
+        function loadShipImage() {
+            const img = document.getElementById('spaceship-image');
+            const placeholder = document.getElementById('image-placeholder');
+            const errorDiv = document.getElementById('image-error');
+            
+            // Mostrar placeholder
+            placeholder.style.display = 'flex';
+            img.style.display = 'none';
+            errorDiv.style.display = 'none';
+            
+            // Carregar imagem
+            img.onload = function() {
+                placeholder.style.display = 'none';
+                img.style.display = 'block';
+                console.log('✅ Imagem carregada com sucesso');
+            };
+            
+            img.onerror = function() {
+                placeholder.style.display = 'none';
+                errorDiv.style.display = 'flex';
+                console.error('❌ Erro ao carregar imagem:', gameState.currentShip.image);
+            };
+            
+            img.src = gameState.currentShip.image;
+            img.alt = `Nave espacial: ${gameState.currentShip.name}`;
+        }
+
+        // 📝 Event listeners
+        function setupEventListeners() {
+            // Resposta
+            document.getElementById('submit-answer').addEventListener('click', submitAnswer);
+            document.getElementById('answer-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    submitAnswer();
+                }
+            });
+            
+            // Controles
+            document.getElementById('new-game').addEventListener('click', newGame);
+            document.getElementById('skip-question').addEventListener('click', skipQuestion);
+            document.getElementById('next-question').addEventListener('click', loadNextQuestion);
+            document.getElementById('reveal-info').addEventListener('click', toggleDetails);
+            document.getElementById('show-hint').addEventListener('click', showHint);
+            
+            // Configurações
+            document.getElementById('toggle-difficulty').addEventListener('click', toggleSettings);
+            document.getElementById('difficulty-select').addEventListener('change', updateDifficulty);
+            document.getElementById('category-filter').addEventListener('change', updateCategoryFilter);
+            
+            // Modal
+            document.getElementById('show-stats').addEventListener('click', showStats);
+            document.getElementById('close-stats').addEventListener('click', closeStats);
+            document.getElementById('modal-overlay').addEventListener('click', closeStats);
+        }
+
+        // ✅ Submeter resposta
+        function submitAnswer() {
+            const answer = document.getElementById('answer-input').value.trim();
+            
+            if (!answer) {
+                alert('Por favor, digite uma resposta!');
+                return;
+            }
+            
+            const isCorrect = checkAnswer(answer);
+            gameState.totalAttempts++;
+            
+            if (isCorrect) {
+                gameState.correctAnswers++;
+                gameState.score += calculateScore();
+                showFeedback(true, answer);
+            } else {
+                showFeedback(false, answer);
+            }
+            
+            updateScoreDisplay();
+            saveGameStats();
+        }
+
+        // 🔍 Verificar resposta
+        function checkAnswer(answer) {
+            const correctName = gameState.currentShip.name.toLowerCase();
+            const userAnswer = answer.toLowerCase();
+            
+            // Verificação exata
+            if (userAnswer === correctName) {
+                return true;
+            }
+            
+            // Verificação parcial (palavras-chave)
+            const keywords = correctName.split(' ');
+            const matchedKeywords = keywords.filter(keyword => 
+                userAnswer.includes(keyword) && keyword.length > 2
+            );
+            
+            return matchedKeywords.length >= Math.ceil(keywords.length / 2);
+        }
+
+        // 📊 Calcular pontuação
+        function calculateScore() {
+            let baseScore = 100;
+            
+            // Penalizar por dicas usadas
+            baseScore -= (gameState.hintsUsed * 20);
+            
+            // Bonus por dificuldade
+            if (gameState.currentShip.difficulty === 'hard') {
+                baseScore += 50;
+            } else if (gameState.currentShip.difficulty === 'medium') {
+                baseScore += 25;
+            }
+            
+            return Math.max(baseScore, 10); // Mínimo 10 pontos
+        }
+
+        // 💬 Mostrar feedback
+        function showFeedback(isCorrect, userAnswer) {
+            const feedbackSection = document.getElementById('feedback-section');
+            const feedbackContent = document.getElementById('feedback-content');
+            
+            if (isCorrect) {
+                feedbackContent.innerHTML = `
+                    <div class="feedback-success">
+                        <div class="feedback-icon">🎉</div>
+                        <div class="feedback-message">
+                            <h3>Parabéns! Resposta correta!</h3>
+                            <p>Você acertou: <strong>${gameState.currentShip.name}</strong></p>
+                            <p class="score-earned">+${calculateScore()} pontos</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                feedbackContent.innerHTML = `
+                    <div class="feedback-error">
+                        <div class="feedback-icon">😞</div>
+                        <div class="feedback-message">
+                            <h3>Resposta incorreta!</h3>
+                            <p>Você disse: <em>"${userAnswer}"</em></p>
+                            <p>A resposta correta é: <strong>${gameState.currentShip.name}</strong></p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            feedbackSection.style.display = 'block';
+        }
+
+        // 💡 Mostrar dica
+        function showHint() {
+            if (gameState.hintsUsed >= gameState.currentShip.hints.length) {
+                alert('Não há mais dicas disponíveis!');
+                return;
+            }
+            
+            const hintsContainer = document.getElementById('hints-container');
+            const hintsList = document.getElementById('hints-list');
+            
+            const hint = gameState.currentShip.hints[gameState.hintsUsed];
+            const listItem = document.createElement('li');
+            listItem.textContent = hint;
+            hintsList.appendChild(listItem);
+            
+            gameState.hintsUsed++;
+            hintsContainer.style.display = 'block';
+            
+            if (gameState.hintsUsed >= gameState.currentShip.hints.length) {
+                document.getElementById('show-hint').style.display = 'none';
+            }
+        }
+
+        // 📖 Toggle detalhes
+        function toggleDetails() {
+            const detailsSection = document.getElementById('details-section');
+            const detailsContent = document.getElementById('details-content');
+            
+            if (detailsSection.style.display === 'none') {
+                detailsContent.innerHTML = generateDetailsHTML();
+                detailsSection.style.display = 'block';
+            } else {
+                detailsSection.style.display = 'none';
+            }
+        }
+
+        // 📝 Gerar HTML dos detalhes
+        function generateDetailsHTML() {
+            const ship = gameState.currentShip;
+            
+            let specificationsHTML = '';
+            if (ship.specifications) {
+                specificationsHTML = '<div class="specifications"><h4>📊 Especificações:</h4><ul>';
+                for (const [key, value] of Object.entries(ship.specifications)) {
+                    specificationsHTML += `<li><strong>${key}:</strong> ${value}</li>`;
+                }
+                specificationsHTML += '</ul></div>';
+            }
+            
+            return `
+                <div class="ship-details">
+                    <h4>${ship.name}</h4>
+                    <p><strong>Categoria:</strong> ${ship.category}</p>
+                    <p><strong>Dificuldade:</strong> ${ship.difficulty}</p>
+                    <div class="description">
+                        <h4>📖 Descrição:</h4>
+                        <p>${ship.description}</p>
+                    </div>
+                    ${specificationsHTML}
+                </div>
+            `;
+        }
+
+        // 🔄 Funções de controle
+        function newGame() {
+            if (confirm('Tem certeza que deseja começar um novo jogo? O progresso atual será perdido.')) {
+                gameState.score = 0;
+                gameState.correctAnswers = 0;
+                gameState.totalAttempts = 0;
+                gameState.gameHistory = [];
+                updateScoreDisplay();
+                loadNextQuestion();
+                saveGameStats();
+            }
+        }
+
+        function skipQuestion() {
+            if (confirm('Tem certeza que deseja pular esta pergunta?')) {
+                gameState.totalAttempts++;
+                updateScoreDisplay();
+                loadNextQuestion();
+                saveGameStats();
+            }
+        }
+
+        function toggleSettings() {
+            const settings = document.getElementById('game-settings');
+            settings.style.display = settings.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function updateDifficulty() {
+            gameState.difficulty = document.getElementById('difficulty-select').value;
+            console.log('Dificuldade alterada para:', gameState.difficulty);
+        }
+
+        function updateCategoryFilter() {
+            gameState.categoryFilter = document.getElementById('category-filter').value;
+            console.log('Filtro de categoria alterado para:', gameState.categoryFilter);
+        }
+
+        // 📊 Estatísticas
+        function showStats() {
+            const modal = document.getElementById('stats-modal');
+            const content = document.getElementById('stats-content');
+            
+            const accuracy = gameState.totalAttempts > 0 ? 
+                Math.round((gameState.correctAnswers / gameState.totalAttempts) * 100) : 0;
+            
+            content.innerHTML = `
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">${gameState.score}</div>
+                        <div class="stat-label">Pontuação Total</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${gameState.correctAnswers}</div>
+                        <div class="stat-label">Respostas Corretas</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${gameState.totalAttempts}</div>
+                        <div class="stat-label">Total de Tentativas</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${accuracy}%</div>
+                        <div class="stat-label">Taxa de Acerto</div>
+                    </div>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+        }
+
+        function closeStats() {
+            document.getElementById('stats-modal').style.display = 'none';
+        }
+
+        // 💾 Salvar/Carregar dados
+        function saveGameStats() {
+            const stats = {
+                score: gameState.score,
+                correctAnswers: gameState.correctAnswers,
+                totalAttempts: gameState.totalAttempts,
+                lastPlayed: new Date().toISOString()
+            };
+            localStorage.setItem('spaceshipGameStats', JSON.stringify(stats));
+        }
+
+        // 🔄 Funções utilitárias
+        function updateScoreDisplay() {
+            document.getElementById('current-score').textContent = gameState.score;
+            document.getElementById('correct-answers').textContent = gameState.correctAnswers;
+            document.getElementById('total-attempts').textContent = gameState.totalAttempts;
+        }
+
+        function resetFeedback() {
+            document.getElementById('feedback-section').style.display = 'none';
+            document.getElementById('details-section').style.display = 'none';
+            document.getElementById('hints-container').style.display = 'none';
+            document.getElementById('hints-list').innerHTML = '';
+            document.getElementById('show-hint').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
