@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Lab 5- Posicionamento</title>
+<link rel="stylesheet" href="posicionamento.css">
+</head>
+<body>
+<!--Header fixo-->
+<header class="header-fixo">
+<h1>Header Fixo</h1>
+</header>
+
+<!--Conteúdo principal-->
+<main class="conteudo">
+<section class="secao">
+<h2>Posicionamento Relative</h2>
+<div class="box-relative">
+Eu me movo relativamente minha posição original
+</div>
+</section>
+
+<section class="secao">
+<h2>Posicionamento Absolute</h2>
+<div class="container-absolute">
+<div class="box-absolute topo-esquerda">Topo Esquerda</div>
+<div class="box-absolute topo-direita">Topo Direita</div>
+<div class="box-absolute baixo-esquerda">Baixo Esquerda</div>
+<div class="box-absolute baixo-direita">Baixo Direita</div>
+</div>
+</section>
+
+<section class="secao">
+<h2>Z-index (Empilhamento)</h2>
+<div class="container-z">
+<div class="box-z z1">Z-index: 1</div>
+<div class="box-z z2">Z-index: 2</div>
+<div class="box-z z3">Z-index: 3</div>
+</div>
+</section>
+
+<!--Conteúdo para scroll-->
+<div class="espacador">
+<p>Role a página para ver o header fixo em ação...</p>
+</div>
+</main>
+
+<!--Botão flutuante-->
+<button class="btn-flutuante" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+
+<script>
+// Script adicional para demonstrar funcionalidade JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    const botaoFlutuante = document.querySelector('.btn-flutuante');
+    
+    // Mostra/esconde o botão baseado na posição do scroll
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+            botaoFlutuante.style.opacity = '1';
+            botaoFlutuante.style.visibility = 'visible';
+        } else {
+            botaoFlutuante.style.opacity = '0.5';
+            botaoFlutuante.style.visibility = 'visible';
+        }
+    });
+});
+</script>
+</body>
+</html>
