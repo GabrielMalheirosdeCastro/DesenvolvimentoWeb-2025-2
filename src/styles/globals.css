@@ -1,5 +1,8 @@
 /* 🌐 Sistema de Interface Gráfica Universal - gabrielmalheiros.com.br */
 
+/* Importar estilos específicos do componente autism-section */
+@import url('./autism-section.css');
+
 :root {
   /* 🎨 Design System Próprio - Não depende de Figma */
   --brand-primary: #2563eb;

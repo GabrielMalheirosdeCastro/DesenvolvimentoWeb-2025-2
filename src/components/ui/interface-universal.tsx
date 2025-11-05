@@ -17,6 +17,7 @@ import PersonalData from './personal-data';
 import MorseChallenge from './morse-challenge';
 import FixedBottomNavigation from './fixed-bottom-navigation';
 import LegoNaves from './lego-naves';
+import AutismSection from './autism-section';
 
 
 interface UniversalConfig {
@@ -456,6 +457,9 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
         <div className="max-w-6xl mx-auto mt-16">
           <PersonalData className="mb-12" />
         </div>
+
+        {/* Nova Seção: Sou um autista mas faço meu melhor */}
+        <AutismSection />
 
         {/* Seção do Desafio Morse */}
         <div className="max-w-4xl mx-auto mt-12">
