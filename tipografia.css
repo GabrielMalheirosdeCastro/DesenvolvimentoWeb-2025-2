@@ -31,6 +31,27 @@
   --letter-spacing-wide: 0.025em;
   --letter-spacing-wider: 0.05em;
   
+  /* 📏 Tamanhos de Fonte Responsivos Aprimorados */
+  --font-size-display: clamp(3rem, 8vw, 5rem);
+  --font-size-hero: clamp(2.5rem, 6vw, 4rem);
+  --font-size-h1: clamp(2rem, 5vw, 3.5rem);
+  --font-size-h2: clamp(1.75rem, 4vw, 2.5rem);
+  --font-size-h3: clamp(1.5rem, 3.5vw, 2rem);
+  --font-size-h4: clamp(1.25rem, 3vw, 1.75rem);
+  --font-size-h5: clamp(1.125rem, 2.5vw, 1.5rem);
+  --font-size-h6: clamp(1rem, 2vw, 1.25rem);
+  --font-size-large: clamp(1.125rem, 2.5vw, 1.375rem);
+  --font-size-medium: clamp(1rem, 2vw, 1.125rem);
+  --font-size-small: clamp(0.875rem, 1.5vw, 1rem);
+  --font-size-tiny: clamp(0.75rem, 1.2vw, 0.875rem);
+  
+  /* 🖼️ Tamanhos de Imagem Responsivos */
+  --image-size-hero: clamp(300px, 50vw, 800px);
+  --image-size-large: clamp(250px, 40vw, 600px);
+  --image-size-medium: clamp(200px, 30vw, 400px);
+  --image-size-small: clamp(150px, 25vw, 300px);
+  --image-size-thumbnail: clamp(80px, 15vw, 150px);
+  
   /* 🎨 Typography Colors */
   --text-primary: var(--html-color-text-primary);
   --text-secondary: var(--html-color-text-secondary);
@@ -90,10 +111,11 @@
 }
 
 .typography-main-title {
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: var(--font-size-hero);
   font-weight: 800;
   margin-bottom: var(--space-4);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  letter-spacing: var(--letter-spacing-tight);
 }
 
 .title-gradient {
@@ -113,7 +135,7 @@
 }
 
 .typography-subtitle {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-large);
   margin-bottom: var(--space-6);
   opacity: 0.9;
   font-weight: 400;
@@ -129,7 +151,7 @@
 }
 
 .author-info {
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-small);
   font-weight: 500;
 }
 
@@ -284,31 +306,34 @@
    ================================================================ */
 
 .demo-h1 {
-  font-size: var(--font-size-4xl);
+  font-size: var(--font-size-h1);
   font-weight: 800;
   color: var(--text-accent);
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-4);
   line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .demo-h2 {
-  font-size: var(--font-size-3xl);
+  font-size: var(--font-size-h2);
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: var(--space-3);
   line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
 }
 
 .demo-h3 {
-  font-size: var(--font-size-2xl);
+  font-size: var(--font-size-h3);
   font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-3);
   line-height: var(--line-height-normal);
 }
 
 .demo-h4 {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-h4);
   font-weight: 600;
   color: var(--text-primary);
   margin-bottom: var(--space-2);
@@ -316,7 +341,7 @@
 }
 
 .demo-h5 {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-h5);
   font-weight: 500;
   color: var(--text-secondary);
   margin-bottom: var(--space-2);
@@ -324,7 +349,7 @@
 }
 
 .demo-h6 {
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-h6);
   font-weight: 500;
   color: var(--text-muted);
   margin-bottom: var(--space-2);
@@ -334,35 +359,52 @@
 }
 
 /* ================================================================
-   📝 ESTILOS DE PARÁGRAFOS
+   📝 ESTILOS DE PARÁGRAFOS APRIMORADOS
    ================================================================ */
 
 .paragraph-large {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-large);
   line-height: var(--line-height-relaxed);
   color: var(--text-primary);
   margin-bottom: var(--space-4);
 }
 
 .paragraph-regular {
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-medium);
   line-height: var(--line-height-relaxed);
   color: var(--text-primary);
   margin-bottom: var(--space-4);
 }
 
 .paragraph-small {
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-small);
   line-height: var(--line-height-normal);
   color: var(--text-primary);
   margin-bottom: var(--space-3);
 }
 
+.paragraph-tiny {
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-normal);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-2);
+}
+
 .paragraph-muted {
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-medium);
   line-height: var(--line-height-relaxed);
   color: var(--text-muted);
   margin-bottom: var(--space-4);
+}
+
+/* Paragraph destaque */
+.paragraph-highlight {
+  font-size: var(--font-size-large);
+  line-height: var(--line-height-relaxed);
+  color: var(--text-accent);
+  font-weight: 500;
+  margin-bottom: var(--space-4);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 /* ================================================================
@@ -1141,4 +1183,145 @@ html {
 .code-inline {
   text-rendering: optimizeSpeed;
   font-variant-ligatures: none;
+}
+
+/* ================================================================
+   🖼️ SISTEMA DE IMAGENS RESPONSIVAS APRIMORADO
+   ================================================================ */
+
+/* Base para todas as imagens */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Classes de tamanho específicas */
+.image-hero {
+  width: var(--image-size-hero);
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image-large {
+  width: var(--image-size-large);
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.image-medium {
+  width: var(--image-size-medium);
+  aspect-ratio: 3/2;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.10);
+}
+
+.image-small {
+  width: var(--image-size-small);
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.image-thumbnail {
+  width: var(--image-size-thumbnail);
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+/* Efeitos de hover para imagens */
+.image-hero:hover,
+.image-large:hover,
+.image-medium:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+}
+
+.image-small:hover,
+.image-thumbnail:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Container para galeria de imagens */
+.image-gallery {
+  display: grid;
+  gap: var(--space-4);
+  margin: var(--space-6) 0;
+}
+
+.image-gallery-2col {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.image-gallery-3col {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.image-gallery-4col {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+/* Figura com caption melhorada */
+.figure-enhanced {
+  margin: var(--space-6) 0;
+  text-align: center;
+}
+
+.figure-enhanced img {
+  margin-bottom: var(--space-3);
+}
+
+.figure-enhanced figcaption {
+  font-size: var(--font-size-small);
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: var(--line-height-relaxed);
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 var(--space-2);
+}
+
+/* Imagens com moldura decorativa */
+.image-framed {
+  padding: var(--space-3);
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--html-color-bg-tertiary);
+}
+
+.image-framed img {
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+  .image-gallery-2col,
+  .image-gallery-3col,
+  .image-gallery-4col {
+    grid-template-columns: 1fr;
+  }
+  
+  .image-hero,
+  .image-large {
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .image-medium {
+    width: 100%;
+    max-width: 400px;
+  }
 }

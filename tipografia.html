@@ -53,6 +53,7 @@
                 <a href="#quotes" class="nav-link">Citações</a>
                 <a href="#code" class="nav-link">Código</a>
                 <a href="#tables" class="nav-link">Tabelas</a>
+                <a href="#images" class="nav-link">Imagens</a>
                 <a href="#typography-samples" class="nav-link">Exemplos</a>
                 <a href="#font-stacks" class="nav-link">Font Stacks</a>
             </div>
@@ -340,7 +341,88 @@
                 </div>
             </section>
 
-            <!-- 🎨 Seção 7: Exemplos de Typography -->
+            <!-- 🖼️ Seção 7: Sistema de Imagens Responsivas -->
+            <section id="images" class="typography-section">
+                <div class="section-header">
+                    <h2 class="section-title">🖼️ Sistema de Imagens Responsivas</h2>
+                    <p class="section-description">Demonstração dos novos tamanhos e estilos de imagem aprimorados</p>
+                </div>
+                
+                <div class="examples-grid">
+                    <!-- Exemplo de tamanhos de imagem -->
+                    <div class="example-card">
+                        <div class="example-demo">
+                            <h3 class="demo-h3">Tamanhos de Imagem</h3>
+                            
+                            <!-- Imagem Hero -->
+                            <div class="figure-enhanced">
+                                <img src="https://picsum.photos/800/450?random=1" alt="Imagem Hero" class="image-hero">
+                                <figcaption>Imagem Hero - Tamanho responsivo com aspect-ratio 16:9</figcaption>
+                            </div>
+                            
+                            <!-- Galeria 2 colunas -->
+                            <div class="image-gallery image-gallery-2col">
+                                <img src="https://picsum.photos/600/450?random=2" alt="Imagem Grande" class="image-large">
+                                <img src="https://picsum.photos/400/300?random=3" alt="Imagem Média" class="image-medium">
+                            </div>
+                            
+                            <!-- Galeria 3 colunas -->
+                            <div class="image-gallery image-gallery-3col">
+                                <img src="https://picsum.photos/300/300?random=4" alt="Imagem Pequena 1" class="image-small">
+                                <img src="https://picsum.photos/300/300?random=5" alt="Imagem Pequena 2" class="image-small">
+                                <img src="https://picsum.photos/300/300?random=6" alt="Imagem Pequena 3" class="image-small">
+                            </div>
+                            
+                            <!-- Thumbnails -->
+                            <div class="image-gallery image-gallery-4col">
+                                <img src="https://picsum.photos/150/150?random=7" alt="Thumbnail 1" class="image-thumbnail">
+                                <img src="https://picsum.photos/150/150?random=8" alt="Thumbnail 2" class="image-thumbnail">
+                                <img src="https://picsum.photos/150/150?random=9" alt="Thumbnail 3" class="image-thumbnail">
+                                <img src="https://picsum.photos/150/150?random=10" alt="Thumbnail 4" class="image-thumbnail">
+                            </div>
+                        </div>
+                        
+                        <div class="example-code">
+                            <h4>Classes de Imagem Utilizadas:</h4>
+                            <pre><code>/* Tamanhos responsivos com clamp() */
+.image-hero    { width: clamp(300px, 50vw, 800px); }
+.image-large   { width: clamp(250px, 40vw, 600px); }
+.image-medium  { width: clamp(200px, 30vw, 400px); }
+.image-small   { width: clamp(150px, 25vw, 300px); }
+.image-thumbnail { width: clamp(80px, 15vw, 150px); }
+
+/* Efeitos de hover e transições */
+.image-hero:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+}</code></pre>
+                        </div>
+                    </div>
+                    
+                    <!-- Exemplo de imagem com moldura -->
+                    <div class="example-card">
+                        <div class="example-demo">
+                            <h3 class="demo-h3">Imagem com Moldura</h3>
+                            <div class="image-framed">
+                                <img src="https://picsum.photos/400/300?random=11" alt="Imagem com moldura" class="image-medium">
+                            </div>
+                        </div>
+                        
+                        <div class="example-code">
+                            <h4>Estilo de Moldura:</h4>
+                            <pre><code>.image-framed {
+  padding: var(--space-3);
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--html-color-bg-tertiary);
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 🎨 Seção 8: Exemplos de Typography -->
             <section id="typography-samples" class="typography-section">
                 <div class="section-header">
                     <h2 class="section-title">🎨 Exemplos Práticos</h2>
