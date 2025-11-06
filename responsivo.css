@@ -7,9 +7,9 @@
   --responsivo-secondary: #764ba2;
   --responsivo-accent: #f093fb;
   --responsivo-text: #ffffff;
-  --responsivo-text-secondary: rgba(255, 255, 255, 0.8);
-  --responsivo-card-bg: rgba(255, 255, 255, 0.1);
-  --responsivo-border: rgba(255, 255, 255, 0.2);
+  --responsivo-text-secondary: rgba(255, 255, 255, 0.95);
+  --responsivo-card-bg: rgba(0, 0, 0, 0.4);
+  --responsivo-border: rgba(255, 255, 255, 0.3);
   
   /* Breakpoints */
   --mobile: 320px;
@@ -50,43 +50,45 @@
 .responsivo-text-container {
     text-align: center;
     max-width: 800px;
-    background: var(--responsivo-card-bg);
-    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(15px);
     border-radius: 20px;
-    border: 1px solid var(--responsivo-border);
+    border: 2px solid rgba(255, 255, 255, 0.3);
     padding: clamp(2rem, 6vw, 3rem);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .responsivo-title {
     font-size: clamp(2.5rem, 8vw, 4rem);
     font-weight: 900;
-    color: var(--responsivo-text);
+    color: #ffffff;
     margin: 0 0 2rem 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
     letter-spacing: -0.02em;
 }
 
 .responsivo-quote {
     margin: 2rem 0;
     padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.3);
     border-radius: 15px;
     border-left: 4px solid var(--responsivo-accent);
 }
 
 .quote-text {
     font-size: clamp(1.1rem, 3vw, 1.3rem);
-    color: var(--responsivo-text-secondary);
+    color: #ffffff;
     font-style: italic;
     margin: 0;
     line-height: 1.7;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 .description-text {
     font-size: clamp(1rem, 2.5vw, 1.2rem);
-    color: var(--responsivo-text-secondary);
+    color: #ffffff;
     margin: 0 0 1.5rem 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 .responsivo-features {
@@ -100,10 +102,11 @@
 
 .responsivo-features li {
     font-size: clamp(0.9rem, 2.2vw, 1.1rem);
-    color: var(--responsivo-text);
+    color: #ffffff;
     margin: 0.8rem 0;
     padding-left: 1rem;
     position: relative;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 .responsivo-features li::before {
@@ -121,10 +124,10 @@
 .video-section-title {
     font-size: clamp(2rem, 6vw, 2.8rem);
     font-weight: 700;
-    color: var(--responsivo-text);
+    color: #ffffff;
     text-align: center;
     margin: 0 0 3rem 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
 }
 
 .videos-container {
@@ -136,12 +139,12 @@
 }
 
 .video-item {
-    background: var(--responsivo-card-bg);
-    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(15px);
     border-radius: 20px;
-    border: 1px solid var(--responsivo-border);
+    border: 2px solid rgba(255, 255, 255, 0.3);
     padding: clamp(1.5rem, 4vw, 2rem);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
 }
 
@@ -153,7 +156,8 @@
 .video-wrapper {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 9;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
     border-radius: 15px;
     overflow: hidden;
     background: #000;
@@ -161,9 +165,11 @@
 }
 
 .responsive-video {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
     border-radius: 15px;
     background: linear-gradient(45deg, var(--responsivo-primary), var(--responsivo-secondary));
 }
@@ -175,16 +181,18 @@
 .video-title {
     font-size: clamp(1.3rem, 3vw, 1.6rem);
     font-weight: 600;
-    color: var(--responsivo-text);
+    color: #ffffff;
     margin: 0 0 1rem 0;
     line-height: 1.4;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 .video-description {
     font-size: clamp(0.9rem, 2.2vw, 1.1rem);
-    color: var(--responsivo-text-secondary);
+    color: #ffffff;
     margin: 0;
     line-height: 1.6;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
 
 /* === SEÇÃO DE TÉCNICAS === */
@@ -195,10 +203,10 @@
 .techniques-title {
     font-size: clamp(2rem, 6vw, 2.8rem);
     font-weight: 700;
-    color: var(--responsivo-text);
+    color: #ffffff;
     text-align: center;
     margin: 0 0 3rem 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
 }
 
 .techniques-grid {
@@ -210,13 +218,13 @@
 }
 
 .technique-card {
-    background: var(--responsivo-card-bg);
-    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(15px);
     border-radius: 20px;
-    border: 1px solid var(--responsivo-border);
+    border: 2px solid rgba(255, 255, 255, 0.3);
     padding: clamp(1.5rem, 4vw, 2rem);
     text-align: center;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
 }
 
@@ -234,15 +242,17 @@
 .technique-card h3 {
     font-size: clamp(1.2rem, 3vw, 1.5rem);
     font-weight: 600;
-    color: var(--responsivo-text);
+    color: #ffffff;
     margin: 0 0 1rem 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 .technique-card p {
     font-size: clamp(0.9rem, 2.2vw, 1rem);
-    color: var(--responsivo-text-secondary);
+    color: #ffffff;
     margin: 0;
     line-height: 1.6;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
 
 /* === NAVEGAÇÃO === */
@@ -252,10 +262,10 @@
     align-items: center;
     gap: clamp(1rem, 3vw, 2rem);
     padding: clamp(1.5rem, 4vw, 2rem);
-    background: var(--responsivo-card-bg);
-    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(15px);
     border-radius: 20px;
-    border: 1px solid var(--responsivo-border);
+    border: 2px solid rgba(255, 255, 255, 0.3);
     margin-top: auto;
     flex-wrap: wrap;
 }
@@ -400,11 +410,11 @@
 
 .image-section-title {
     font-size: clamp(2rem, 5vw, 3.5rem);
-    color: var(--responsivo-text);
+    color: #ffffff;
     text-align: center;
     margin-bottom: clamp(2rem, 6vw, 4rem);
     font-weight: 700;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
 }
 
 .images-container {
@@ -415,13 +425,13 @@
 }
 
 .image-item {
-    background: var(--responsivo-card-bg);
-    border: 1px solid var(--responsivo-border);
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 1rem;
     padding: clamp(1rem, 3vw, 1.5rem);
     transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .image-item:hover {
@@ -446,7 +456,7 @@
     border-radius: 0.75rem;
     transition: all 0.3s ease;
     object-fit: cover;
-    aspect-ratio: 16/9;
+    max-height: 300px;
 }
 
 .responsive-image:hover {
@@ -459,16 +469,18 @@
 
 .image-title {
     font-size: clamp(1.3rem, 3.5vw, 1.8rem);
-    color: var(--responsivo-text);
+    color: #ffffff;
     margin-bottom: clamp(0.5rem, 2vw, 1rem);
     font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 .image-description {
     font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-    color: var(--responsivo-text-secondary);
+    color: #ffffff;
     line-height: 1.6;
     margin: 0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
 
 /* Media Queries para Imagens */
@@ -480,11 +492,15 @@
     }
     
     .responsive-image {
-        aspect-ratio: 4/3;
+        max-height: 250px;
     }
     
     .image-item {
         padding: clamp(1rem, 4vw, 1.5rem);
+    }
+    
+    .video-wrapper {
+        padding-bottom: 50%; /* Melhor para mobile */
     }
 }
 
