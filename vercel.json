@@ -12,6 +12,10 @@
       "destination": "/boxmodel.html"
     },
     {
+      "source": "/flexbox.html",
+      "destination": "/flexbox.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

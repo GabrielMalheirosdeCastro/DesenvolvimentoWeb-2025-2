@@ -205,6 +205,22 @@ const LegoNaves: React.FC<LegoNavesProps> = ({ className, enableHtmlImages = fal
           >
             🚀 Jogo Box Model - Adivinha a Nave
           </a>
+          <a 
+            href="flexbox.html" 
+            className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-semibold shadow-lg hover:shadow-xl"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            📐 Flexbox - Layout Responsivo
+          </a>
+          <a 
+            href="flexbox.html" 
+            className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-semibold shadow-lg hover:shadow-xl"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            📐 Flexbox - Layout Flexível
+          </a>
           <span className="text-sm text-gray-600 self-center">
             Página HTML separada com imagens em alta qualidade
           </span>
