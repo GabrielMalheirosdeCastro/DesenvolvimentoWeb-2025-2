@@ -197,6 +197,14 @@ const LegoNaves: React.FC<LegoNavesProps> = ({ className, enableHtmlImages = fal
           >
             🖼️ Ver Galeria HTML Completa
           </a>
+          <a 
+            href="boxmodel.html" 
+            className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-semibold shadow-lg hover:shadow-xl"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            🚀 Jogo Box Model - Adivinha a Nave
+          </a>
           <span className="text-sm text-gray-600 self-center">
             Página HTML separada com imagens em alta qualidade
           </span>

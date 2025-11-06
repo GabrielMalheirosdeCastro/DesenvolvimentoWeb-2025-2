@@ -8,6 +8,10 @@
       "destination": "/galeria-lego-naves.html"
     },
     {
+      "source": "/boxmodel.html",
+      "destination": "/boxmodel.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
