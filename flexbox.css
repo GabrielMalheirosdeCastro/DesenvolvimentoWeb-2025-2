@@ -1,0 +1,197 @@
+/* 📦 Flexbox CSS - Gabriel Malheiros FAESA 2025-2 */
+/* CSS específico para demonstração de Flexbox */
+
+/* === CONTAINER PRINCIPAL === */
+.flexbox-page {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.flexbox-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: var(--space-6);
+    gap: var(--space-8);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* === CONTEÚDO PRINCIPAL === */
+.flexbox-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding: var(--space-8);
+}
+
+.flexbox-text-container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    padding: var(--space-10);
+    box-shadow: var(--shadow-xl);
+    text-align: center;
+    max-width: 800px;
+    width: 100%;
+}
+
+/* === TÍTULO === */
+.flexbox-title {
+    font-size: var(--font-size-4xl);
+    font-weight: bold;
+    color: var(--html-brand-primary);
+    margin-bottom: var(--space-6);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* === CITAÇÃO DESTACADA === */
+.flexbox-quote {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+    border-radius: 12px;
+    padding: var(--space-6);
+    margin: var(--space-6) 0;
+    border-left: 4px solid var(--html-brand-accent);
+}
+
+.quote-text {
+    font-size: var(--font-size-xl);
+    font-style: italic;
+    color: #2d3748;
+    margin: 0;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+/* === DESCRIÇÃO === */
+.flexbox-description {
+    margin-top: var(--space-8);
+}
+
+.description-text {
+    font-size: var(--font-size-lg);
+    color: var(--html-color-text-primary);
+    margin-bottom: var(--space-4);
+    line-height: 1.6;
+}
+
+.flexbox-features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    list-style: none;
+    padding: 0;
+    margin: var(--space-4) 0;
+}
+
+.flexbox-features li {
+    background: rgba(37, 99, 235, 0.1);
+    padding: var(--space-3) var(--space-4);
+    border-radius: 8px;
+    font-size: var(--font-size-base);
+    color: var(--html-color-text-primary);
+    border-left: 3px solid var(--html-brand-primary);
+}
+
+/* === DEMONSTRAÇÃO VISUAL === */
+.flexbox-demo {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    padding: var(--space-8);
+    box-shadow: var(--shadow-lg);
+}
+
+.demo-title {
+    font-size: var(--font-size-2xl);
+    color: var(--html-brand-secondary);
+    text-align: center;
+    margin-bottom: var(--space-6);
+}
+
+.demo-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: var(--space-4);
+    background: #f7fafc;
+    border-radius: 12px;
+    padding: var(--space-6);
+    border: 2px dashed var(--html-brand-accent);
+}
+
+.flex-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--html-brand-primary), var(--html-brand-accent));
+    color: white;
+    font-size: var(--font-size-xl);
+    font-weight: bold;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.flex-item:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: var(--shadow-xl);
+}
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 768px) {
+    .flexbox-container {
+        padding: var(--space-4);
+        gap: var(--space-6);
+    }
+    
+    .flexbox-content {
+        padding: var(--space-4);
+    }
+    
+    .flexbox-text-container {
+        padding: var(--space-6);
+    }
+    
+    .flexbox-title {
+        font-size: var(--font-size-3xl);
+    }
+    
+    .quote-text {
+        font-size: var(--font-size-lg);
+    }
+    
+    .demo-container {
+        flex-direction: column;
+        gap: var(--space-3);
+    }
+    
+    .flex-item {
+        width: 60px;
+        height: 60px;
+        font-size: var(--font-size-lg);
+    }
+}
+
+@media (max-width: 480px) {
+    .flexbox-features {
+        gap: var(--space-2);
+    }
+    
+    .flexbox-features li {
+        padding: var(--space-2) var(--space-3);
+        font-size: var(--font-size-sm);
+    }
+    
+    .flexbox-title {
+        font-size: var(--font-size-2xl);
+    }
+    
+    .quote-text {
+        font-size: var(--font-size-base);
+    }
+}
