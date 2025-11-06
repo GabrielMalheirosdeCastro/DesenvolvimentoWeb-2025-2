@@ -31,7 +31,8 @@ export default defineConfig({
         tipografia: path.resolve(__dirname, 'tipografia.html'),
         posicionamento: path.resolve(__dirname, 'posicionamento.html'),
         boxmodel: path.resolve(__dirname, 'boxmodel.html'),
-        flexbox: path.resolve(__dirname, 'flexbox.html')
+        flexbox: path.resolve(__dirname, 'flexbox.html'),
+        responsivo: path.resolve(__dirname, 'responsivo.html')
       },
       output: {
         manualChunks: {
