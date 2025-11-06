@@ -16,6 +16,22 @@
       "destination": "/flexbox.html"
     },
     {
+      "source": "/responsivo.html",
+      "destination": "/responsivo.html"
+    },
+    {
+      "source": "/posicionamento.html",
+      "destination": "/posicionamento.html"
+    },
+    {
+      "source": "/tipografia.html",
+      "destination": "/tipografia.html"
+    },
+    {
+      "source": "/lab-fundamentos-css.html",
+      "destination": "/lab-fundamentos-css.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
