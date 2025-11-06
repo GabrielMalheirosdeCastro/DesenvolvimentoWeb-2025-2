@@ -24,8 +24,10 @@
     min-height: 100vh;
     margin: 0;
     padding: 0;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Arial', 'Helvetica', sans-serif;
     line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .responsivo-container {
@@ -172,6 +174,7 @@
     height: 100%;
     border-radius: 15px;
     background: linear-gradient(45deg, var(--responsivo-primary), var(--responsivo-secondary));
+    object-fit: contain; /* Changed from cover to contain for better video display */
 }
 
 .video-info {
@@ -317,6 +320,14 @@
         width: 100%;
         text-align: center;
         padding: 1rem;
+    }
+    
+    .video-wrapper {
+        padding-bottom: 60%; /* Better aspect ratio for small screens */
+    }
+    
+    .responsivo-title {
+        font-size: clamp(2rem, 8vw, 3rem) !important;
     }
 }
 
@@ -500,7 +511,16 @@
     }
     
     .video-wrapper {
-        padding-bottom: 50%; /* Melhor para mobile */
+        padding-bottom: 56.25%; /* Keep standard 16:9 for tablets */
+    }
+    
+    .videos-container {
+        gap: 2rem;
+    }
+    
+    .techniques-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
     }
 }
 
