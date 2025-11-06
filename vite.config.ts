@@ -30,7 +30,8 @@ export default defineConfig({
         lab: path.resolve(__dirname, 'lab-fundamentos-css.html'),
         tipografia: path.resolve(__dirname, 'tipografia.html'),
         posicionamento: path.resolve(__dirname, 'posicionamento.html'),
-        boxmodel: path.resolve(__dirname, 'boxmodel.html')
+        boxmodel: path.resolve(__dirname, 'boxmodel.html'),
+        flexbox: path.resolve(__dirname, 'flexbox.html')
       },
       output: {
         manualChunks: {
