@@ -408,6 +408,76 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
 
         {/* Acesso direto apenas via navegação externa - sem botões localhost */}
 
+        {/* Seção de Páginas HTML Estáticas */}
+        <div className="max-w-4xl mx-auto mt-12">
+          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 border-2 border-blue-200 shadow-lg">
+            <div className="text-center mb-6">
+              <h2 className="text-3xl font-bold text-blue-800 mb-3 flex items-center justify-center gap-3">
+                <Monitor size={32} className="text-blue-600" />
+                📄 Demonstrações HTML + CSS
+              </h2>
+              <p className="text-lg text-blue-700 mb-4">
+                Explore nossas demonstrações de CSS fundamentais e design responsivo
+              </p>
+              
+              <div className="grid md:grid-cols-2 gap-4 mb-6">
+                <div className="bg-white/70 rounded-lg p-4 border border-blue-200">
+                  <div className="text-2xl mb-2">📱</div>
+                  <h3 className="font-semibold text-blue-800 mb-1">Design Responsivo</h3>
+                  <p className="text-sm text-blue-600 mb-3">Demonstração com vídeos e imagens responsivas</p>
+                  <a 
+                    href="/responsivo.html" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+                  >
+                    Acessar Demo Responsivo
+                  </a>
+                </div>
+                <div className="bg-white/70 rounded-lg p-4 border border-blue-200">
+                  <div className="text-2xl mb-2">📦</div>
+                  <h3 className="font-semibold text-blue-800 mb-1">Flexbox Layout</h3>
+                  <p className="text-sm text-blue-600 mb-3">Estudos avançados de layout flexível</p>
+                  <a 
+                    href="/flexbox.html" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+                  >
+                    Acessar Demo Flexbox
+                  </a>
+                </div>
+                <div className="bg-white/70 rounded-lg p-4 border border-blue-200">
+                  <div className="text-2xl mb-2">📝</div>
+                  <h3 className="font-semibold text-blue-800 mb-1">Tipografia CSS</h3>
+                  <p className="text-sm text-blue-600 mb-3">Estudo de fontes e hierarquia visual</p>
+                  <a 
+                    href="/tipografia.html" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+                  >
+                    Acessar Demo Tipografia
+                  </a>
+                </div>
+                <div className="bg-white/70 rounded-lg p-4 border border-blue-200">
+                  <div className="text-2xl mb-2">📍</div>
+                  <h3 className="font-semibold text-blue-800 mb-1">Posicionamento</h3>
+                  <p className="text-sm text-blue-600 mb-3">Técnicas avançadas de posicionamento CSS</p>
+                  <a 
+                    href="/posicionamento.html" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+                  >
+                    Acessar Demo Posicionamento
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Seção Destacada - Galeria Figma */}
         <div className="max-w-4xl mx-auto mt-12">
           <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl p-8 border-2 border-purple-200 shadow-lg">
