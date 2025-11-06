@@ -64,4 +64,4 @@ npm run dev
 
 ---
 
-*Projeto desenvolvido com � para a disciplina de Desenvolvimento Web da FAESA (2025-2)*
+*Projeto desenvolvido com � para a disciplina de Desenvolvimento Web da FAESA (2025-2)*# Cache bust 11/06/2025 19:48:58
