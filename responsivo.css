@@ -118,86 +118,6 @@
     top: 0;
 }
 
-/* === SEÇÃO DE VÍDEOS === */
-.responsivo-videos {
-    padding: clamp(2rem, 6vw, 4rem) 0;
-}
-
-.video-section-title {
-    font-size: clamp(2rem, 6vw, 2.8rem);
-    font-weight: 700;
-    color: #ffffff;
-    text-align: center;
-    margin: 0 0 3rem 0;
-    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
-}
-
-.videos-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 600px), 1fr));
-    gap: clamp(2rem, 4vw, 3rem);
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.video-item {
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(15px);
-    border-radius: 20px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    padding: clamp(1.5rem, 4vw, 2rem);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-}
-
-.video-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
-}
-
-.video-wrapper {
-    position: relative;
-    width: 100%;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
-    height: 0;
-    border-radius: 15px;
-    overflow: hidden;
-    background: #000;
-    margin-bottom: 1.5rem;
-}
-
-.responsive-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 15px;
-    background: linear-gradient(45deg, var(--responsivo-primary), var(--responsivo-secondary));
-    object-fit: contain; /* Changed from cover to contain for better video display */
-}
-
-.video-info {
-    text-align: left;
-}
-
-.video-title {
-    font-size: clamp(1.3rem, 3vw, 1.6rem);
-    font-weight: 600;
-    color: #ffffff;
-    margin: 0 0 1rem 0;
-    line-height: 1.4;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
-
-.video-description {
-    font-size: clamp(0.9rem, 2.2vw, 1.1rem);
-    color: #ffffff;
-    margin: 0;
-    line-height: 1.6;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-}
-
 /* === SEÇÃO DE TÉCNICAS === */
 .responsivo-techniques {
     padding: clamp(2rem, 6vw, 4rem) 0;
@@ -333,10 +253,6 @@
 
 /* Tablet (768px+) */
 @media (min-width: 768px) {
-    .videos-container {
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    }
-    
     .techniques-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -344,10 +260,6 @@
 
 /* Desktop (1024px+) */
 @media (min-width: 1024px) {
-    .videos-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
     .techniques-grid {
         grid-template-columns: repeat(4, 1fr);
     }
@@ -368,15 +280,15 @@
 
 /* === ACESSIBILIDADE === */
 @media (prefers-reduced-motion: reduce) {
-    .video-item,
     .technique-card,
-    .nav-link {
+    .nav-link,
+    .image-item {
         transition: none;
     }
     
-    .video-item:hover,
     .technique-card:hover,
-    .nav-link:hover {
+    .nav-link:hover,
+    .image-item:hover {
         transform: none;
     }
 }
@@ -398,16 +310,12 @@
         color: black;
     }
     
-    .video-wrapper {
-        display: none;
-    }
-    
     .responsivo-navigation {
         display: none;
     }
     
     .technique-card,
-    .video-item {
+    .image-item {
         break-inside: avoid;
         page-break-inside: avoid;
     }
