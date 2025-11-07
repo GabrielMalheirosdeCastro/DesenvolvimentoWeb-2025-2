@@ -237,6 +237,7 @@
     </nav>
 
     <!-- 📜 Scripts -->
+    <script src="./src/utils/error-handling-system.js"></script>
     <script>
         // 🚀 Dados das naves espaciais
         const spaceshipData = [
@@ -343,7 +344,7 @@
             }
         ];
 
-        // 🎮 Estado do jogo
+        // 🚀 Estado do jogo aprimorado
         let gameState = {
             currentShip: null,
             score: 0,
@@ -352,22 +353,45 @@
             difficulty: 'medium',
             categoryFilter: 'all',
             hintsUsed: 0,
-            gameHistory: []
+            gameHistory: [],
+            streak: 0,
+            bestStreak: 0,
+            startTime: null,
+            sessionStats: {
+                totalTime: 0,
+                averageTime: 0,
+                fastestCorrect: null,
+                slowestCorrect: null
+            },
+            performance: {
+                imageLoadTimes: [],
+                responseAccuracy: [],
+                hintEffectiveness: {}
+            }
         };
 
-        // 🔧 Inicialização
+        // 🔧 Inicialização aprimorada
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 Iniciando jogo de adivinhação de naves...');
+            console.log('🚀 Iniciando jogo de adivinhação de naves espaciais v2.0...');
             
-            // Inicializar elementos
-            initializeGame();
-            loadNextQuestion();
-            
-            // Event listeners
-            setupEventListeners();
-            
-            // Log de inicialização
-            console.log('✅ Jogo inicializado com sucesso!');
+            try {
+                // Inicializar elementos
+                initializeGame();
+                loadNextQuestion();
+                
+                // Event listeners
+                setupEventListeners();
+                
+                // Sistemas avançados
+                initializePerformanceMonitoring();
+                setupOfflineDetection();
+                loadUserPreferences();
+                
+                console.log('✅ Jogo inicializado com sucesso!');
+            } catch (error) {
+                console.error('❌ Erro na inicialização:', error);
+                showErrorRecovery('Erro na inicialização do jogo');
+            }
         });
 
         // 🔧 Inicializar o jogo
@@ -375,73 +399,690 @@
             updateScoreDisplay();
             resetFeedback();
             
-            // Carregar configurações salvas (localStorage)
-            if (localStorage.getItem('spaceshipGameStats')) {
-                const savedStats = JSON.parse(localStorage.getItem('spaceshipGameStats'));
-                gameState.score = savedStats.score || 0;
-                gameState.correctAnswers = savedStats.correctAnswers || 0;
-                gameState.totalAttempts = savedStats.totalAttempts || 0;
-                updateScoreDisplay();
+            // Carregar configurações salvas
+            loadSavedStats();
+            
+            // Inicializar analytics locais
+            initializeAnalytics();
+            
+            // Setup de accessibility
+            setupAccessibilityFeatures();
+            
+            // Sistema de cache de imagens
+            initializeImageCache();
+        }
+
+        // 📊 Sistema de monitoramento de performance
+        function initializePerformanceMonitoring() {
+            // Monitorar tempo de carregamento de páginas
+            if ('PerformanceObserver' in window) {
+                const observer = new PerformanceObserver((list) => {
+                    for (const entry of list.getEntries()) {
+                        if (entry.entryType === 'paint') {
+                            console.log(`🎨 ${entry.name}: ${entry.startTime.toFixed(2)}ms`);
+                        }
+                    }
+                });
+                observer.observe({entryTypes: ['paint']});
+            }
+
+            // Detectar mudanças de rede
+            if ('connection' in navigator) {
+                navigator.connection.addEventListener('change', handleNetworkChange);
             }
         }
 
-        // 🎯 Carregar próxima pergunta
+        // 🌐 Sistema de detecção offline
+        function setupOfflineDetection() {
+            window.addEventListener('online', () => {
+                showTemporaryMessage('🌐 Conexão restaurada!', 'success');
+                enableOnlineFeatures();
+            });
+
+            window.addEventListener('offline', () => {
+                showTemporaryMessage('📱 Modo offline ativado', 'warning');
+                enableOfflineMode();
+            });
+
+            // Verificar status inicial
+            if (!navigator.onLine) {
+                enableOfflineMode();
+            }
+        }
+
+        // 💾 Carregar preferências do usuário
+        function loadUserPreferences() {
+            try {
+                const prefs = JSON.parse(localStorage.getItem('gamePreferences') || '{}');
+                
+                // Aplicar tema salvo
+                if (prefs.theme) {
+                    document.body.classList.add(`theme-${prefs.theme}`);
+                }
+                
+                // Aplicar configurações de som
+                if (prefs.soundEnabled !== undefined) {
+                    gameState.soundEnabled = prefs.soundEnabled;
+                }
+                
+                // Aplicar dificuldade preferida
+                if (prefs.preferredDifficulty) {
+                    gameState.difficulty = prefs.preferredDifficulty;
+                    const difficultySelect = document.getElementById('difficulty-select');
+                    if (difficultySelect) difficultySelect.value = prefs.preferredDifficulty;
+                }
+                
+                console.log('✅ Preferências carregadas:', prefs);
+            } catch (error) {
+                console.warn('⚠️ Erro ao carregar preferências:', error);
+            }
+        }
+
+        // ♿ Recursos de acessibilidade
+        function setupAccessibilityFeatures() {
+            // Suporte a leitor de tela
+            const gameArea = document.querySelector('.game-area');
+            if (gameArea) {
+                gameArea.setAttribute('aria-live', 'polite');
+                gameArea.setAttribute('aria-label', 'Área do jogo de adivinhação de naves espaciais');
+            }
+
+            // Atalhos do teclado
+            document.addEventListener('keydown', handleKeyboardShortcuts);
+
+            // Alto contraste
+            if (window.matchMedia('(prefers-contrast: high)').matches) {
+                document.body.classList.add('high-contrast');
+            }
+        }
+
+        // ⌨️ Atalhos do teclado
+        function handleKeyboardShortcuts(event) {
+            const { key, ctrlKey, altKey } = event;
+            
+            switch (true) {
+                case key === 'Enter' && !ctrlKey && !altKey:
+                    event.preventDefault();
+                    submitAnswer();
+                    break;
+                    
+                case key === 'h' && ctrlKey:
+                    event.preventDefault();
+                    showHint();
+                    break;
+                    
+                case key === 'n' && ctrlKey:
+                    event.preventDefault();
+                    loadNextQuestion();
+                    break;
+                    
+                case key === 'r' && ctrlKey:
+                    event.preventDefault();
+                    resetChallenge();
+                    break;
+                    
+                case key === 's' && ctrlKey:
+                    event.preventDefault();
+                    showStats();
+                    break;
+                    
+                case key === 'Escape':
+                    event.preventDefault();
+                    closeAllModals();
+                    break;
+            }
+        }
+
+        // 🏃‍♂️ Sistema de cache de imagens
+        function initializeImageCache() {
+            // Pre-carregar próximas imagens em background
+            const imagesToPreload = spaceshipData
+                .slice(0, 5)
+                .map(ship => ship.image);
+                
+            imagesToPreload.forEach(imagePath => {
+                const img = new Image();
+                img.onload = () => console.log(`✅ Imagem pré-carregada: ${imagePath}`);
+                img.onerror = () => console.warn(`❌ Erro ao pré-carregar: ${imagePath}`);
+                img.src = imagePath;
+            });
+        }
+
+        // 📊 Sistema de analytics local
+        function initializeAnalytics() {
+            gameState.sessionStats.startTime = Date.now();
+            
+            // Registrar sessão
+            const sessions = JSON.parse(localStorage.getItem('gameSessions') || '[]');
+            const currentSession = {
+                startTime: Date.now(),
+                userAgent: navigator.userAgent,
+                screenResolution: `${screen.width}x${screen.height}`,
+                language: navigator.language
+            };
+            
+            sessions.push(currentSession);
+            if (sessions.length > 50) sessions.shift(); // Manter apenas últimas 50 sessões
+            
+            localStorage.setItem('gameSessions', JSON.stringify(sessions));
+        }
+
+        // 🔄 Carregar estatísticas salvas
+        function loadSavedStats() {
+            try {
+                const saved = localStorage.getItem('spaceshipGameStats');
+                if (saved) {
+                    const stats = JSON.parse(saved);
+                    gameState.score = stats.score || 0;
+                    gameState.correctAnswers = stats.correctAnswers || 0;
+                    gameState.totalAttempts = stats.totalAttempts || 0;
+                    gameState.bestStreak = stats.bestStreak || 0;
+                    gameState.sessionStats = { ...gameState.sessionStats, ...stats.sessionStats };
+                    updateScoreDisplay();
+                }
+            } catch (error) {
+                console.warn('⚠️ Erro ao carregar estatísticas:', error);
+                // Reset para valores padrão em caso de corrupção
+                resetGameState();
+            }
+        }
+
+        // 🎯 Carregar próxima pergunta aprimorada
         function loadNextQuestion() {
             console.log('🔄 Carregando próxima pergunta...');
             
-            // Filtrar naves por categoria
-            let availableShips = spaceshipData;
+            try {
+                gameState.startTime = Date.now();
+                
+                // Filtrar naves por categoria e dificuldade
+                let availableShips = filterShipsByPreferences();
+                
+                // Evitar repetir a mesma nave nas últimas 3
+                availableShips = avoidRecentShips(availableShips);
+                
+                if (availableShips.length === 0) {
+                    availableShips = spaceshipData; // Fallback
+                }
+                
+                // Selecionar nave com algoritmo inteligente
+                const selectedShip = selectShipIntelligently(availableShips);
+                gameState.currentShip = selectedShip;
+                gameState.hintsUsed = 0;
+                
+                // Resetar interface
+                resetFeedback();
+                clearInputField();
+                
+                // Carregar imagem com fallback
+                loadShipImageWithFallback();
+                
+                // Atualizar interface
+                updateChallengeInterface();
+                
+                // Log analytics
+                trackQuestionLoad();
+                
+                console.log(`✅ Nova nave carregada: ${gameState.currentShip.name}`);
+                
+            } catch (error) {
+                console.error('❌ Erro ao carregar pergunta:', error);
+                showErrorRecovery('Erro ao carregar nova pergunta');
+            }
+        }
+
+        // 🔍 Filtrar naves por preferências
+        function filterShipsByPreferences() {
+            let ships = [...spaceshipData];
+            
+            // Filtro por categoria
             if (gameState.categoryFilter !== 'all') {
-                availableShips = spaceshipData.filter(ship => 
+                ships = ships.filter(ship => 
                     ship.category.toLowerCase().replace(' ', '-') === gameState.categoryFilter
                 );
             }
             
-            // Selecionar nave aleatória
-            const randomIndex = Math.floor(Math.random() * availableShips.length);
-            gameState.currentShip = availableShips[randomIndex];
-            gameState.hintsUsed = 0;
+            // Filtro por dificuldade adaptativa
+            if (gameState.difficulty !== 'mixed') {
+                ships = ships.filter(ship => ship.difficulty === gameState.difficulty);
+            } else {
+                // Modo adaptativo: ajustar dificuldade baseada na performance
+                const accuracy = gameState.totalAttempts > 0 ? 
+                    gameState.correctAnswers / gameState.totalAttempts : 0.5;
+                    
+                if (accuracy > 0.8) {
+                    ships = ships.filter(ship => ship.difficulty === 'hard');
+                } else if (accuracy < 0.4) {
+                    ships = ships.filter(ship => ship.difficulty === 'easy');
+                }
+            }
             
-            // Resetar interface
-            resetFeedback();
-            document.getElementById('answer-input').value = '';
-            document.getElementById('answer-input').focus();
-            
-            // Carregar imagem
-            loadShipImage();
-            
-            // Atualizar categoria
-            document.getElementById('category-value').textContent = gameState.currentShip.category;
-            
-            console.log(`✅ Nova nave carregada: ${gameState.currentShip.name}`);
+            return ships;
         }
 
-        // 🖼️ Carregar imagem da nave
-        function loadShipImage() {
+        // 🔄 Evitar naves recentes
+        function avoidRecentShips(ships) {
+            const recentShips = gameState.gameHistory
+                .slice(-3)
+                .map(entry => entry.shipId);
+                
+            return ships.filter(ship => !recentShips.includes(ship.id));
+        }
+
+        // 🧠 Seleção inteligente de nave
+        function selectShipIntelligently(ships) {
+            // Priorizar naves que o usuário tem mais dificuldade
+            const userPerformance = getUserPerformanceData();
+            
+            // Calcular peso baseado na performance
+            const weighedShips = ships.map(ship => ({
+                ...ship,
+                weight: calculateShipWeight(ship, userPerformance)
+            }));
+            
+            // Selecionar usando distribuição ponderada
+            return selectWeightedRandom(weighedShips);
+        }
+
+        // 📈 Obter dados de performance do usuário
+        function getUserPerformanceData() {
+            const history = gameState.gameHistory;
+            const performance = {};
+            
+            history.forEach(entry => {
+                if (!performance[entry.shipId]) {
+                    performance[entry.shipId] = { attempts: 0, correct: 0 };
+                }
+                performance[entry.shipId].attempts++;
+                if (entry.correct) performance[entry.shipId].correct++;
+            });
+            
+            return performance;
+        }
+
+        // ⚖️ Calcular peso da nave
+        function calculateShipWeight(ship, userPerformance) {
+            const shipPerf = userPerformance[ship.id];
+            
+            if (!shipPerf) return 1; // Nave nunca vista
+            
+            const accuracy = shipPerf.correct / shipPerf.attempts;
+            
+            // Priorizar naves com baixa precisão
+            return accuracy < 0.5 ? 2 : 0.5;
+        }
+
+        // 🎲 Seleção ponderada aleatória
+        function selectWeightedRandom(weighedItems) {
+            const totalWeight = weighedItems.reduce((sum, item) => sum + item.weight, 0);
+            let random = Math.random() * totalWeight;
+            
+            for (const item of weighedItems) {
+                random -= item.weight;
+                if (random <= 0) return item;
+            }
+            
+            return weighedItems[0]; // Fallback
+        }
+
+        // 🖼️ Carregar imagem com fallback aprimorado
+        function loadShipImageWithFallback() {
             const img = document.getElementById('spaceship-image');
             const placeholder = document.getElementById('image-placeholder');
             const errorDiv = document.getElementById('image-error');
+            const loadingIndicator = createLoadingIndicator();
             
-            // Mostrar placeholder
+            // Mostrar indicador de carregamento
             placeholder.style.display = 'flex';
+            placeholder.appendChild(loadingIndicator);
             img.style.display = 'none';
             errorDiv.style.display = 'none';
             
-            // Carregar imagem
+            // Registrar tempo de início
+            const loadStartTime = performance.now();
+            
+            // Configurar carregamento de imagem
             img.onload = function() {
+                const loadTime = performance.now() - loadStartTime;
+                gameState.performance.imageLoadTimes.push(loadTime);
+                
                 placeholder.style.display = 'none';
                 img.style.display = 'block';
-                console.log('✅ Imagem carregada com sucesso');
+                
+                // Animação de entrada
+                img.style.opacity = '0';
+                img.style.transform = 'scale(0.9)';
+                img.style.transition = 'all 0.3s ease';
+                
+                setTimeout(() => {
+                    img.style.opacity = '1';
+                    img.style.transform = 'scale(1)';
+                }, 10);
+                
+                console.log(`✅ Imagem carregada em ${loadTime.toFixed(2)}ms`);
             };
             
             img.onerror = function() {
+                const loadTime = performance.now() - loadStartTime;
+                
                 placeholder.style.display = 'none';
                 errorDiv.style.display = 'flex';
-                console.error('❌ Erro ao carregar imagem:', gameState.currentShip.image);
+                
+                // Tentar fallback
+                attemptImageFallback(img, errorDiv);
+                
+                console.error(`❌ Erro ao carregar imagem em ${loadTime.toFixed(2)}ms:`, gameState.currentShip.image);
+                trackImageError(gameState.currentShip.image, loadTime);
             };
             
             img.src = gameState.currentShip.image;
             img.alt = `Nave espacial: ${gameState.currentShip.name}`;
+        }
+
+        // 🔄 Tentar fallback de imagem
+        function attemptImageFallback(img, errorDiv) {
+            // Tentar URLs de fallback
+            const fallbackUrls = [
+                gameState.currentShip.image.replace('.jpg', '_alt.jpg'),
+                gameState.currentShip.image.replace('.jpg', '.png'),
+                './assets/placeholder-spaceship.jpg',
+                'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjNmNGY2Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzM3NDE1MSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5hdmUgRXNwYWNpYWw8L3RleHQ+PC9zdmc+'
+            ];
+            
+            let fallbackIndex = 0;
+            
+            const tryNextFallback = () => {
+                if (fallbackIndex < fallbackUrls.length) {
+                    const fallbackUrl = fallbackUrls[fallbackIndex];
+                    fallbackIndex++;
+                    
+                    const testImg = new Image();
+                    testImg.onload = () => {
+                        errorDiv.style.display = 'none';
+                        img.src = fallbackUrl;
+                        img.style.display = 'block';
+                        console.log(`✅ Fallback ${fallbackIndex} funcionou:`, fallbackUrl);
+                    };
+                    testImg.onerror = tryNextFallback;
+                    testImg.src = fallbackUrl;
+                } else {
+                    // Todos os fallbacks falharam, mostrar erro final
+                    showImageErrorWithRecovery();
+                }
+            };
+            
+            tryNextFallback();
+        }
+
+        // 💫 Criar indicador de carregamento
+        function createLoadingIndicator() {
+            const loader = document.createElement('div');
+            loader.className = 'loading-indicator';
+            loader.innerHTML = `
+                <div class="spinner"></div>
+                <p>Carregando nave espacial...</p>
+            `;
+            
+            loader.style.cssText = `
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                color: #666;
+                font-size: 14px;
+            `;
+            
+            // Adicionar CSS do spinner se não existir
+            if (!document.querySelector('#loading-styles')) {
+                const style = document.createElement('style');
+                style.id = 'loading-styles';
+                style.textContent = `
+                    .spinner {
+                        width: 40px;
+                        height: 40px;
+                        border: 4px solid #f3f4f6;
+                        border-top: 4px solid #3b82f6;
+                        border-radius: 50%;
+                        animation: spin 1s linear infinite;
+                    }
+                    
+                    @keyframes spin {
+                        0% { transform: rotate(0deg); }
+                        100% { transform: rotate(360deg); }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            return loader;
+        }
+
+        // 📊 Rastrear erro de imagem
+        function trackImageError(imagePath, loadTime) {
+            const errorLog = JSON.parse(localStorage.getItem('imageErrors') || '[]');
+            errorLog.push({
+                path: imagePath,
+                timestamp: Date.now(),
+                loadTime: loadTime,
+                userAgent: navigator.userAgent
+            });
+            
+            // Manter apenas últimos 20 erros
+            if (errorLog.length > 20) errorLog.shift();
+            
+            localStorage.setItem('imageErrors', JSON.stringify(errorLog));
+        }
+
+        // 🚨 Mostrar erro de imagem com recuperação
+        function showImageErrorWithRecovery() {
+            const errorDiv = document.getElementById('image-error');
+            errorDiv.innerHTML = `
+                <div class="error-content">
+                    <div class="error-icon">❌</div>
+                    <div class="error-message">
+                        <h4>Erro ao carregar imagem</h4>
+                        <p>Não foi possível carregar a imagem desta nave espacial.</p>
+                        <button onclick="reloadCurrentImage()" class="retry-button">
+                            🔄 Tentar novamente
+                        </button>
+                        <button onclick="skipToNextShip()" class="skip-button">
+                            ⏭️ Pular para próxima
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            errorDiv.style.display = 'flex';
+        }
+
+        // 🔄 Recarregar imagem atual
+        function reloadCurrentImage() {
+            loadShipImageWithFallback();
+        }
+
+        // ⏭️ Pular para próxima nave
+        function skipToNextShip() {
+            showTemporaryMessage('⏭️ Pulando para próxima nave...', 'info');
+            setTimeout(() => {
+                loadNextQuestion();
+            }, 1000);
+        }
+
+        // 💬 Mostrar mensagem temporária
+        function showTemporaryMessage(message, type = 'info') {
+            const messageEl = document.createElement('div');
+            messageEl.className = `temporary-message ${type}`;
+            messageEl.textContent = message;
+            
+            const colors = {
+                success: '#10b981',
+                error: '#ef4444',
+                warning: '#f59e0b',
+                info: '#3b82f6'
+            };
+            
+            messageEl.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${colors[type]};
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                z-index: 10000;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                animation: slideInFromRight 0.3s ease;
+                font-weight: 500;
+            `;
+            
+            document.body.appendChild(messageEl);
+            
+            setTimeout(() => {
+                messageEl.style.animation = 'slideOutToRight 0.3s ease';
+                setTimeout(() => {
+                    if (messageEl.parentNode) {
+                        messageEl.parentNode.removeChild(messageEl);
+                    }
+                }, 300);
+            }, 3000);
+            
+            // Adicionar animações se não existem
+            addTemporaryMessageStyles();
+        }
+
+        // 🎨 Adicionar estilos de mensagem temporária
+        function addTemporaryMessageStyles() {
+            if (!document.querySelector('#temp-message-styles')) {
+                const style = document.createElement('style');
+                style.id = 'temp-message-styles';
+                style.textContent = `
+                    @keyframes slideInFromRight {
+                        from {
+                            transform: translateX(100%);
+                            opacity: 0;
+                        }
+                        to {
+                            transform: translateX(0);
+                            opacity: 1;
+                        }
+                    }
+                    
+                    @keyframes slideOutToRight {
+                        from {
+                            transform: translateX(0);
+                            opacity: 1;
+                        }
+                        to {
+                            transform: translateX(100%);
+                            opacity: 0;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
+        // 🔧 Atualizar interface do desafio
+        function updateChallengeInterface() {
+            // Atualizar categoria
+            const categoryEl = document.getElementById('category-value');
+            if (categoryEl) categoryEl.textContent = gameState.currentShip.category;
+            
+            // Atualizar progresso
+            const progressEl = document.getElementById('progress-indicator');
+            if (progressEl) {
+                const progress = (gameState.totalAttempts / spaceshipData.length) * 100;
+                progressEl.style.width = `${Math.min(progress, 100)}%`;
+            }
+            
+            // Focar no input
+            const answerInput = document.getElementById('answer-input');
+            if (answerInput) {
+                answerInput.focus();
+                answerInput.select();
+            }
+            
+            // Atualizar dificuldade visual
+            updateDifficultyIndicator();
+            
+            // Atualizar contador de streak
+            updateStreakDisplay();
+        }
+
+        // 🎯 Atualizar indicador de dificuldade
+        function updateDifficultyIndicator() {
+            const difficultyEl = document.getElementById('difficulty-indicator');
+            if (!difficultyEl) return;
+            
+            const difficulty = gameState.currentShip.difficulty;
+            const colors = {
+                easy: '#10b981',
+                medium: '#f59e0b', 
+                hard: '#ef4444'
+            };
+            
+            const labels = {
+                easy: 'Fácil',
+                medium: 'Médio',
+                hard: 'Difícil'
+            };
+            
+            difficultyEl.textContent = labels[difficulty];
+            difficultyEl.style.background = colors[difficulty];
+        }
+
+        // 🔥 Atualizar display de streak
+        function updateStreakDisplay() {
+            const streakEl = document.getElementById('streak-counter');
+            if (!streakEl) return;
+            
+            if (gameState.streak > 0) {
+                streakEl.textContent = `🔥 ${gameState.streak}x`;
+                streakEl.style.display = 'inline-block';
+                
+                // Animação especial para streak alto
+                if (gameState.streak >= 5) {
+                    streakEl.style.animation = 'pulse 0.5s infinite';
+                }
+            } else {
+                streakEl.style.display = 'none';
+            }
+        }
+
+        // 🧹 Limpar campo de input
+        function clearInputField() {
+            const answerInput = document.getElementById('answer-input');
+            if (answerInput) {
+                answerInput.value = '';
+                answerInput.classList.remove('input-error', 'input-partial');
+            }
+        }
+
+        // 📊 Rastrear carregamento de pergunta
+        function trackQuestionLoad() {
+            const questionData = {
+                shipId: gameState.currentShip.id,
+                shipName: gameState.currentShip.name,
+                difficulty: gameState.currentShip.difficulty,
+                category: gameState.currentShip.category,
+                loadTime: Date.now(),
+                sessionTime: Date.now() - gameState.sessionStats.startTime
+            };
+            
+            // Adicionar ao histórico
+            gameState.gameHistory.push(questionData);
+            
+            // Analytics local
+            const analytics = JSON.parse(localStorage.getItem('gameAnalytics') || '{}');
+            if (!analytics.questionsLoaded) analytics.questionsLoaded = [];
+            
+            analytics.questionsLoaded.push(questionData);
+            
+            // Limitar histórico
+            if (analytics.questionsLoaded.length > 100) {
+                analytics.questionsLoaded.shift();
+            }
+            
+            localStorage.setItem('gameAnalytics', JSON.stringify(analytics));
         }
 
         // 📝 Event listeners
@@ -472,49 +1113,65 @@
             document.getElementById('modal-overlay').addEventListener('click', closeStats);
         }
 
-        // ✅ Submeter resposta - VERSÃO APRIMORADA
+        // ✅ Submeter resposta - VERSÃO APRIMORADA COM ERROR HANDLING
         function submitAnswer() {
-            const answer = document.getElementById('answer-input').value.trim();
-            
-            // 🔍 Validação de entrada aprimorada
-            if (!answer) {
-                showInputError('Por favor, digite uma resposta antes de submeter!');
-                focusAnswerInput();
-                return;
-            }
-            
-            if (answer.length < 2) {
-                showInputError('A resposta deve ter pelo menos 2 caracteres!');
-                focusAnswerInput();
-                return;
-            }
-            
-            // 🛡️ Sanitização de entrada
-            const sanitizedAnswer = sanitizeInput(answer);
-            
-            // 🎯 Verificação de resposta com feedback detalhado
-            const validationResult = checkAnswerAdvanced(sanitizedAnswer);
-            gameState.totalAttempts++;
-            
-            if (validationResult.isCorrect) {
-                gameState.correctAnswers++;
-                gameState.score += calculateScore();
-                showFeedback(true, sanitizedAnswer, validationResult);
+            return window.safeExecute(() => {
+                const answer = document.getElementById('answer-input').value.trim();
                 
-                // 🎊 Efeito visual de acerto
-                celebrateCorrectAnswer();
-            } else {
-                showFeedback(false, sanitizedAnswer, validationResult);
-                
-                // 💡 Sugestões inteligentes
-                if (validationResult.suggestions.length > 0) {
-                    showSuggestions(validationResult.suggestions);
+                // 🔍 Validação de entrada aprimorada
+                if (!answer) {
+                    showInputError('Por favor, digite uma resposta antes de submeter!');
+                    focusAnswerInput();
+                    return;
                 }
-            }
-            
-            updateScoreDisplay();
-            saveGameStats();
-            logUserActivity(sanitizedAnswer, validationResult.isCorrect);
+                
+                if (answer.length < 2) {
+                    showInputError('A resposta deve ter pelo menos 2 caracteres!');
+                    focusAnswerInput();
+                    return;
+                }
+                
+                // 🛡️ Sanitização de entrada
+                const sanitizedAnswer = sanitizeInput(answer);
+                
+                // 🎯 Verificação de resposta com feedback detalhado
+                const validationResult = checkAnswerAdvanced(sanitizedAnswer);
+                const endTime = Date.now();
+                const responseTime = gameState.startTime ? endTime - gameState.startTime : 0;
+                
+                gameState.totalAttempts++;
+                
+                if (validationResult.isCorrect) {
+                    gameState.correctAnswers++;
+                    gameState.streak++;
+                    gameState.bestStreak = Math.max(gameState.bestStreak, gameState.streak);
+                    gameState.score += calculateScoreWithBonus(responseTime);
+                    
+                    // 📊 Analytics de performance
+                    trackResponseTime(responseTime, true);
+                    showFeedback(true, sanitizedAnswer, validationResult);
+                    celebrateCorrectAnswer();
+                    
+                    // Auto-avançar após delay
+                    setTimeout(() => loadNextQuestion(), 2000);
+                } else {
+                    gameState.streak = 0; // Reset streak
+                    trackResponseTime(responseTime, false);
+                    showFeedback(false, sanitizedAnswer, validationResult);
+                    
+                    // 💡 Sugestões inteligentes
+                    if (validationResult.suggestions.length > 0) {
+                        showSuggestions(validationResult.suggestions);
+                    }
+                }
+                
+                updateScoreDisplay();
+                saveGameStats();
+                logUserActivity(sanitizedAnswer, validationResult.isCorrect, responseTime);
+            }, () => {
+                // Fallback em caso de erro
+                showTemporaryMessage('❌ Erro ao processar resposta. Tente novamente.', 'error');
+            });
         }
         
         // 🛡️ Função de sanitização de entrada
@@ -833,30 +1490,61 @@
             }, 5000);
         }
         
-        // 📝 Log de atividade do usuário
-        function logUserActivity(answer, wasCorrect) {
-            const activity = {
-                timestamp: new Date().toISOString(),
-                question: gameState.currentShip.name,
-                userAnswer: answer,
-                correct: wasCorrect,
-                attempts: gameState.totalAttempts,
-                hintsUsed: gameState.hintsUsed,
-                score: gameState.score
-            };
-            
-            console.log('📊 Atividade do usuário:', activity);
-            
-            // Salvar histórico local (opcional)
-            const history = JSON.parse(localStorage.getItem('boxmodel-history') || '[]');
-            history.push(activity);
-            
-            // Manter apenas últimas 50 tentativas
-            if (history.length > 50) {
-                history.splice(0, history.length - 50);
-            }
-            
-            localStorage.setItem('boxmodel-history', JSON.stringify(history));
+        // 📝 Log de atividade do usuário aprimorado
+        function logUserActivity(answer, wasCorrect, responseTime) {
+            return window.safeExecute(() => {
+                const activity = {
+                    timestamp: new Date().toISOString(),
+                    sessionId: sessionStorage.getItem('sessionId') || 'unknown',
+                    question: gameState.currentShip.name,
+                    questionId: gameState.currentShip.id,
+                    userAnswer: answer,
+                    correct: wasCorrect,
+                    responseTime: responseTime,
+                    attempts: gameState.totalAttempts,
+                    hintsUsed: gameState.hintsUsed,
+                    score: gameState.score,
+                    streak: gameState.streak,
+                    difficulty: gameState.currentShip.difficulty,
+                    category: gameState.currentShip.category,
+                    userAgent: navigator.userAgent.substring(0, 100), // Truncar para economia de espaço
+                    screenResolution: `${screen.width}x${screen.height}`,
+                    isOnline: navigator.onLine
+                };
+                
+                console.log('📊 Atividade do usuário:', activity);
+                
+                // Salvar histórico local com backup
+                try {
+                    const history = JSON.parse(localStorage.getItem('boxmodel-history') || '[]');
+                    history.push(activity);
+                    
+                    // Manter apenas últimas 100 tentativas
+                    if (history.length > 100) {
+                        history.splice(0, history.length - 100);
+                    }
+                    
+                    localStorage.setItem('boxmodel-history', JSON.stringify(history));
+                    
+                    // Backup em sessionStorage
+                    const sessionHistory = JSON.parse(sessionStorage.getItem('session-activity') || '[]');
+                    sessionHistory.push(activity);
+                    sessionStorage.setItem('session-activity', JSON.stringify(sessionHistory));
+                    
+                } catch (storageError) {
+                    // Se localStorage falhar, usar apenas sessionStorage
+                    console.warn('⚠️ localStorage indisponível, usando sessionStorage');
+                    const sessionHistory = JSON.parse(sessionStorage.getItem('session-activity') || '[]');
+                    sessionHistory.push(activity);
+                    sessionStorage.setItem('session-activity', JSON.stringify(sessionHistory));
+                }
+                
+                // Analytics de performance em tempo real
+                updatePerformanceMetrics(activity);
+                
+            }, () => {
+                console.warn('⚠️ Erro ao fazer log da atividade do usuário');
+            });
         }
 
         // 🔍 Verificar resposta
@@ -878,21 +1566,373 @@
             return matchedKeywords.length >= Math.ceil(keywords.length / 2);
         }
 
-        // 📊 Calcular pontuação
-        function calculateScore() {
-            let baseScore = 100;
+        // 📊 Calcular pontuação com bonus de tempo
+        function calculateScoreWithBonus(responseTime) {
+            let baseScore = calculateScore();
             
-            // Penalizar por dicas usadas
-            baseScore -= (gameState.hintsUsed * 20);
+            // Bonus por velocidade (máximo 50 pontos extras)
+            const timeBonus = Math.max(0, 50 - Math.floor(responseTime / 1000));
             
-            // Bonus por dificuldade
-            if (gameState.currentShip.difficulty === 'hard') {
-                baseScore += 50;
-            } else if (gameState.currentShip.difficulty === 'medium') {
-                baseScore += 25;
-            }
+            // Bonus por streak
+            const streakBonus = gameState.streak > 1 ? (gameState.streak - 1) * 10 : 0;
             
-            return Math.max(baseScore, 10); // Mínimo 10 pontos
+            return baseScore + timeBonus + streakBonus;
+        }
+
+        // ⏱️ Rastrear tempo de resposta
+        function trackResponseTime(responseTime, wasCorrect) {
+            return window.safeExecute(() => {
+                const timeData = {
+                    time: responseTime,
+                    correct: wasCorrect,
+                    shipId: gameState.currentShip.id,
+                    difficulty: gameState.currentShip.difficulty,
+                    timestamp: Date.now()
+                };
+                
+                // Atualizar estatísticas de sessão
+                gameState.sessionStats.totalTime += responseTime;
+                
+                if (wasCorrect) {
+                    if (!gameState.sessionStats.fastestCorrect || responseTime < gameState.sessionStats.fastestCorrect) {
+                        gameState.sessionStats.fastestCorrect = responseTime;
+                    }
+                    
+                    if (!gameState.sessionStats.slowestCorrect || responseTime > gameState.sessionStats.slowestCorrect) {
+                        gameState.sessionStats.slowestCorrect = responseTime;
+                    }
+                }
+                
+                // Calcular tempo médio
+                const correctResponses = gameState.gameHistory.filter(h => h.correct).length;
+                if (correctResponses > 0) {
+                    gameState.sessionStats.averageTime = gameState.sessionStats.totalTime / correctResponses;
+                }
+                
+                // Analytics local
+                const responseAnalytics = JSON.parse(localStorage.getItem('responseAnalytics') || '[]');
+                responseAnalytics.push(timeData);
+                
+                // Manter últimas 100 respostas
+                if (responseAnalytics.length > 100) {
+                    responseAnalytics.shift();
+                }
+                
+                localStorage.setItem('responseAnalytics', JSON.stringify(responseAnalytics));
+            }, () => {
+                console.warn('⚠️ Erro ao rastrear tempo de resposta');
+            });
+        }
+
+        // 🌐 Ativar recursos online
+        function enableOnlineFeatures() {
+            return window.safeExecute(() => {
+                // Reabilitar elementos que requerem internet
+                const onlineElements = document.querySelectorAll('[data-requires-online]');
+                onlineElements.forEach(element => {
+                    element.disabled = false;
+                    element.style.opacity = '1';
+                    element.title = '';
+                });
+
+                // Tentar sincronizar dados pendentes
+                syncPendingData();
+                
+                console.log('🌐 Recursos online ativados');
+            });
+        }
+
+        // 📱 Ativar modo offline
+        function enableOfflineMode() {
+            return window.safeExecute(() => {
+                // Desabilitar elementos que requerem internet
+                const onlineElements = document.querySelectorAll('[data-requires-online]');
+                onlineElements.forEach(element => {
+                    element.disabled = true;
+                    element.style.opacity = '0.5';
+                    element.title = 'Requer conexão com internet';
+                });
+
+                // Mostrar indicador de modo offline
+                showOfflineIndicator();
+                
+                console.log('📱 Modo offline ativado');
+            });
+        }
+
+        // 📡 Sincronizar dados pendentes
+        function syncPendingData() {
+            return window.safeAsyncExecute(async () => {
+                const pendingData = JSON.parse(localStorage.getItem('pendingSync') || '[]');
+                
+                if (pendingData.length > 0) {
+                    console.log(`📤 Sincronizando ${pendingData.length} itens pendentes...`);
+                    
+                    // Simular sincronização (aqui você enviaria para um servidor)
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    
+                    // Limpar dados pendentes após sincronização
+                    localStorage.removeItem('pendingSync');
+                    
+                    showTemporaryMessage(`✅ ${pendingData.length} itens sincronizados!`, 'success');
+                }
+            }, async () => {
+                console.warn('⚠️ Falha na sincronização de dados pendentes');
+            });
+        }
+
+        // 🔴 Mostrar indicador de modo offline
+        function showOfflineIndicator() {
+            if (document.getElementById('offline-indicator')) return;
+            
+            const indicator = document.createElement('div');
+            indicator.id = 'offline-indicator';
+            indicator.innerHTML = '📱 Modo Offline';
+            indicator.style.cssText = `
+                position: fixed;
+                top: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #f59e0b;
+                color: white;
+                padding: 8px 16px;
+                border-radius: 20px;
+                font-size: 12px;
+                z-index: 10000;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                animation: fadeInDown 0.3s ease;
+            `;
+            
+            document.body.appendChild(indicator);
+        }
+
+        // 🔄 Funções de recuperação de erro
+        function showErrorRecovery(errorMessage) {
+            return window.safeExecute(() => {
+                const recoveryModal = document.createElement('div');
+                recoveryModal.className = 'error-recovery-modal';
+                recoveryModal.innerHTML = `
+                    <div class="recovery-content">
+                        <div class="recovery-icon">🚨</div>
+                        <h3>Oops! Algo deu errado</h3>
+                        <p>${errorMessage}</p>
+                        <div class="recovery-actions">
+                            <button onclick="location.reload()" class="recovery-btn primary">
+                                🔄 Recarregar Página
+                            </button>
+                            <button onclick="resetGameToSafeState()" class="recovery-btn secondary">
+                                🎮 Reset Seguro
+                            </button>
+                            <button onclick="this.parentElement.parentElement.parentElement.remove()" class="recovery-btn tertiary">
+                                ❌ Fechar
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                recoveryModal.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0,0,0,0.8);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 20000;
+                    animation: fadeIn 0.3s ease;
+                `;
+                
+                document.body.appendChild(recoveryModal);
+                addRecoveryModalStyles();
+            }, () => {
+                // Fallback absoluto
+                alert(`Erro crítico: ${errorMessage}. A página será recarregada.`);
+                location.reload();
+            });
+        }
+
+        // 🎨 Adicionar estilos do modal de recuperação
+        function addRecoveryModalStyles() {
+            if (document.getElementById('recovery-modal-styles')) return;
+            
+            const style = document.createElement('style');
+            style.id = 'recovery-modal-styles';
+            style.textContent = `
+                .recovery-content {
+                    background: white;
+                    padding: 30px;
+                    border-radius: 15px;
+                    text-align: center;
+                    max-width: 400px;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                }
+                
+                .recovery-icon {
+                    font-size: 48px;
+                    margin-bottom: 15px;
+                }
+                
+                .recovery-content h3 {
+                    color: #dc2626;
+                    margin-bottom: 10px;
+                    font-size: 24px;
+                }
+                
+                .recovery-content p {
+                    color: #666;
+                    margin-bottom: 25px;
+                    line-height: 1.5;
+                }
+                
+                .recovery-actions {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                }
+                
+                .recovery-btn {
+                    padding: 12px 24px;
+                    border: none;
+                    border-radius: 8px;
+                    font-size: 16px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                }
+                
+                .recovery-btn.primary {
+                    background: #3b82f6;
+                    color: white;
+                }
+                
+                .recovery-btn.primary:hover {
+                    background: #2563eb;
+                    transform: translateY(-2px);
+                }
+                
+                .recovery-btn.secondary {
+                    background: #f59e0b;
+                    color: white;
+                }
+                
+                .recovery-btn.secondary:hover {
+                    background: #d97706;
+                }
+                
+                .recovery-btn.tertiary {
+                    background: #6b7280;
+                    color: white;
+                }
+                
+                .recovery-btn.tertiary:hover {
+                    background: #4b5563;
+                }
+                
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+                
+                @keyframes fadeInDown {
+                    from { 
+                        opacity: 0; 
+                        transform: translateX(-50%) translateY(-20px);
+                    }
+                    to { 
+                        opacity: 1; 
+                        transform: translateX(-50%) translateY(0);
+                    }
+                }
+            `;
+            
+            document.head.appendChild(style);
+        }
+
+        // 🔒 Reset para estado seguro
+        function resetGameToSafeState() {
+            return window.safeExecute(() => {
+                // Limpar dados corrompidos
+                ['spaceshipGameStats', 'gameAnalytics', 'errorLog'].forEach(key => {
+                    localStorage.removeItem(key);
+                });
+                
+                // Reset do estado do jogo
+                gameState = {
+                    currentShip: null,
+                    score: 0,
+                    correctAnswers: 0,
+                    totalAttempts: 0,
+                    difficulty: 'medium',
+                    categoryFilter: 'all',
+                    hintsUsed: 0,
+                    gameHistory: [],
+                    streak: 0,
+                    bestStreak: 0,
+                    startTime: null,
+                    sessionStats: {
+                        totalTime: 0,
+                        averageTime: 0,
+                        fastestCorrect: null,
+                        slowestCorrect: null
+                    },
+                    performance: {
+                        imageLoadTimes: [],
+                        responseAccuracy: [],
+                        hintEffectiveness: {}
+                    }
+                };
+                
+                // Reinicializar jogo
+                initializeGame();
+                loadNextQuestion();
+                
+                // Fechar modal
+                const modal = document.querySelector('.error-recovery-modal');
+                if (modal) modal.remove();
+                
+                showTemporaryMessage('✅ Jogo reinicializado com sucesso!', 'success');
+            }, () => {
+                // Se nem o reset funcionar, forçar recarga
+                location.reload();
+            });
+        }
+
+        // ❌ Fechar todos os modais
+        function closeAllModals() {
+            return window.safeExecute(() => {
+                const modals = document.querySelectorAll('.modal, .error-recovery-modal, .stats-modal');
+                modals.forEach(modal => modal.remove());
+            });
+        }
+
+        // 🔄 Tratar mudança de rede
+        function handleNetworkChange() {
+            return window.safeExecute(() => {
+                if (navigator.connection) {
+                    const connection = navigator.connection;
+                    const effectiveType = connection.effectiveType;
+                    
+                    console.log(`🌐 Rede alterada: ${effectiveType}`);
+                    
+                    // Ajustar qualidade com base na conexão
+                    if (effectiveType === 'slow-2g' || effectiveType === '2g') {
+                        enableLowBandwidthMode();
+                    } else {
+                        disableLowBandwidthMode();
+                    }
+                }
+            });
+        }
+
+        // 📱 Modo baixa largura de banda
+        function enableLowBandwidthMode() {
+            document.body.classList.add('low-bandwidth');
+            showTemporaryMessage('📱 Modo de economia de dados ativado', 'info');
+        }
+
+        function disableLowBandwidthMode() {
+            document.body.classList.remove('low-bandwidth');
         }
 
         // 💬 Mostrar feedback
