@@ -49,20 +49,323 @@ Eu me movo relativamente minha posição original
 <button class="btn-flutuante" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
 
 <script>
-// Script adicional para demonstrar funcionalidade JavaScript
+// ===============================================
+// 🚀 JAVASCRIPT APRIMORADO - POSICIONAMENTO CSS
+// 📅 Desenvolvido por: Gabriel Malheiros de Castro
+// 🏫 FAESA 2025-2 - Desenvolvimento Web
+// ===============================================
+
 document.addEventListener('DOMContentLoaded', function() {
-    const botaoFlutuante = document.querySelector('.btn-flutuante');
+    console.log('🎯 Laboratório de Posicionamento CSS carregado!');
+    console.log('👨‍💻 Desenvolvido por: Gabriel Malheiros de Castro');
+    console.log('🏫 FAESA 2025-2 - Desenvolvimento Web');
     
-    // Mostra/esconde o botão baseado na posição do scroll
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 300) {
+    // ==========================================
+    // 🔝 FUNCIONALIDADE DO BOTÃO FLUTUANTE
+    // ==========================================
+    const botaoFlutuante = document.querySelector('.btn-flutuante');
+    let scrollAnterior = 0;
+    
+    // Animação melhorada do botão flutuante
+    function atualizarBotaoFlutuante() {
+        const scrollAtual = window.scrollY;
+        
+        if (scrollAtual > 300) {
             botaoFlutuante.style.opacity = '1';
             botaoFlutuante.style.visibility = 'visible';
-        } else {
-            botaoFlutuante.style.opacity = '0.5';
+            botaoFlutuante.style.transform = 'translateY(0)';
+        } else if (scrollAtual > 100) {
+            botaoFlutuante.style.opacity = '0.7';
             botaoFlutuante.style.visibility = 'visible';
+            botaoFlutuante.style.transform = 'translateY(0)';
+        } else {
+            botaoFlutuante.style.opacity = '0';
+            botaoFlutuante.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                if (window.scrollY <= 100) {
+                    botaoFlutuante.style.visibility = 'hidden';
+                }
+            }, 300);
+        }
+        
+        // Efeito de esconder/mostrar baseado na direção do scroll
+        if (scrollAtual > scrollAnterior && scrollAtual > 500) {
+            // Scrolling para baixo - esconder temporariamente
+            botaoFlutuante.style.transform = 'translateY(100px)';
+        } else {
+            // Scrolling para cima - mostrar
+            botaoFlutuante.style.transform = 'translateY(0)';
+        }
+        
+        scrollAnterior = scrollAtual;
+    }
+    
+    // Event listener otimizado com throttling
+    let ticking = false;
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            requestAnimationFrame(function() {
+                atualizarBotaoFlutuante();
+                ticking = false;
+            });
+            ticking = true;
         }
     });
+    
+    // ==========================================
+    // 🎨 INTERATIVIDADE DOS ELEMENTOS DE POSICIONAMENTO
+    // ==========================================
+    
+    // Adicionar efeitos hover e click aos boxes
+    const boxRelative = document.querySelector('.box-relative');
+    const boxesAbsolute = document.querySelectorAll('.box-absolute');
+    const boxesZ = document.querySelectorAll('.box-z');
+    
+    // Efeito especial para box relative
+    if (boxRelative) {
+        boxRelative.addEventListener('click', function() {
+            this.style.transform = 'translate(20px, 10px) rotate(5deg) scale(1.1)';
+            this.style.transition = 'transform 0.3s ease';
+            
+            setTimeout(() => {
+                this.style.transform = 'translate(0, 0) rotate(0deg) scale(1)';
+            }, 1000);
+            
+            console.log('📦 Box Relative clicado! Demonstrando transform CSS.');
+        });
+        
+        boxRelative.addEventListener('dblclick', function() {
+            const mensagem = 'Este é um elemento com position: relative!\n\n' +
+                           '• Ele se move relativamente à sua posição original\n' +
+                           '• Mantém seu espaço no fluxo normal do documento\n' +
+                           '• Outros elementos não ocupam seu lugar';
+            
+            alert(mensagem);
+        });
+    }
+    
+    // Interatividade para boxes absolute
+    boxesAbsolute.forEach((box, index) => {
+        box.addEventListener('click', function() {
+            // Animação de pulso
+            this.style.animation = 'pulse 0.6s ease-in-out';
+            
+            setTimeout(() => {
+                this.style.animation = '';
+            }, 600);
+            
+            // Informações no console
+            const posicao = ['Topo Esquerda', 'Topo Direita', 'Baixo Esquerda', 'Baixo Direita'][index];
+            console.log(`🎯 Box Absolute clicado: ${posicao}`);
+            
+            // Feedback visual melhorado
+            const infoDiv = document.createElement('div');
+            infoDiv.innerHTML = `📍 ${posicao}`;
+            infoDiv.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: rgba(0,0,0,0.8);
+                color: white;
+                padding: 10px 15px;
+                border-radius: 5px;
+                z-index: 9999;
+                font-size: 14px;
+                transition: opacity 0.3s ease;
+            `;
+            
+            document.body.appendChild(infoDiv);
+            
+            setTimeout(() => {
+                infoDiv.style.opacity = '0';
+                setTimeout(() => {
+                    if (infoDiv.parentNode) {
+                        infoDiv.parentNode.removeChild(infoDiv);
+                    }
+                }, 300);
+            }, 2000);
+        });
+        
+        // Efeito hover aprimorado
+        box.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.1) rotate(2deg)';
+            this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.3)';
+            this.style.transition = 'all 0.3s ease';
+        });
+        
+        box.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1) rotate(0deg)';
+            this.style.boxShadow = '';
+        });
+    });
+    
+    // Demonstração de Z-index interativa
+    boxesZ.forEach((box, index) => {
+        box.addEventListener('click', function() {
+            // Resetar z-index de todos
+            boxesZ.forEach(b => {
+                b.style.zIndex = b.classList.contains('z1') ? '1' : 
+                                 b.classList.contains('z2') ? '2' : '3';
+            });
+            
+            // Colocar o clicado no topo
+            this.style.zIndex = '10';
+            this.style.transform = 'scale(1.2) rotate(5deg)';
+            this.style.transition = 'all 0.3s ease';
+            
+            console.log(`🔝 Z-index alterado! Box ${index + 1} agora está no topo.`);
+            
+            setTimeout(() => {
+                this.style.transform = 'scale(1) rotate(0deg)';
+                setTimeout(() => {
+                    this.style.zIndex = this.classList.contains('z1') ? '1' : 
+                                       this.classList.contains('z2') ? '2' : '3';
+                }, 500);
+            }, 1000);
+        });
+    });
+    
+    // ==========================================
+    // 🔍 INFORMAÇÕES DE DEBUG E VIEWPORT
+    // ==========================================
+    
+    function mostrarInfoViewport() {
+        const info = {
+            largura: window.innerWidth,
+            altura: window.innerHeight,
+            scrollX: window.scrollX,
+            scrollY: window.scrollY,
+            userAgent: navigator.userAgent.substring(0, 50) + '...'
+        };
+        
+        console.log('🖥️ Informações do Viewport:', info);
+        return info;
+    }
+    
+    // Mostrar info viewport a cada resize
+    window.addEventListener('resize', function() {
+        setTimeout(mostrarInfoViewport, 100);
+    });
+    
+    // ==========================================
+    // 🎮 EASTER EGGS E FUNCIONALIDADES ESPECIAIS
+    // ==========================================
+    
+    // Contador de cliques
+    let totalCliques = 0;
+    document.addEventListener('click', function() {
+        totalCliques++;
+        
+        if (totalCliques === 10) {
+            console.log('🎉 Parabéns! Você fez 10 cliques explorando a página!');
+        } else if (totalCliques === 25) {
+            alert('🏆 Explorador Expert! 25 cliques na página de posicionamento!\n\nVocê realmente está testando tudo! 🚀');
+        }
+    });
+    
+    // Teclas especiais
+    document.addEventListener('keydown', function(e) {
+        // Tecla 'i' para informações
+        if (e.key.toLowerCase() === 'i') {
+            const info = mostrarInfoViewport();
+            alert(`ℹ️ Informações da Página:
+            
+📐 Viewport: ${info.largura} × ${info.altura}
+📜 Scroll: X=${info.scrollX}, Y=${info.scrollY}
+🖱️ Total de cliques: ${totalCliques}
+⏰ Tempo na página: ${Math.floor(performance.now() / 1000)}s`);
+        }
+        
+        // Tecla 'h' para ajuda
+        if (e.key.toLowerCase() === 'h') {
+            const ajuda = `🆘 AJUDA - Laboratório de Posicionamento:
+
+🖱️ CLIQUES:
+• Boxes → Demonstra animações e efeitos
+• Box Relative → Transform e rotação
+• Box Z → Altera z-index dinamicamente
+
+⌨️ TECLAS:
+• 'i' → Informações do viewport
+• 'h' → Esta ajuda
+• 'r' → Reset de todos os efeitos
+
+🎯 DICAS:
+• Duplo-clique no box relative para explicação
+• Use o DevTools (F12) para ver logs
+• Scroll para testar o botão flutuante`;
+            
+            alert(ajuda);
+        }
+        
+        // Tecla 'r' para reset
+        if (e.key.toLowerCase() === 'r') {
+            location.reload();
+        }
+    });
+    
+    // ==========================================
+    // 📊 ANALYTICS E PERFORMANCE
+    // ==========================================
+    
+    // Medir performance da página
+    window.addEventListener('load', function() {
+        setTimeout(() => {
+            const perfData = performance.getEntriesByType('navigation')[0];
+            const loadTime = perfData.loadEventEnd - perfData.loadEventStart;
+            
+            console.log('⚡ Performance da Página:');
+            console.log(`• Tempo de carregamento: ${loadTime.toFixed(2)}ms`);
+            console.log(`• DOM carregado em: ${(perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart).toFixed(2)}ms`);
+            console.log(`• Tempo total: ${performance.now().toFixed(2)}ms`);
+        }, 100);
+    });
+    
+    // ==========================================
+    // 🎨 ESTILOS DINÂMICOS E ANIMAÇÕES
+    // ==========================================
+    
+    // Adicionar estilos de animação dinamicamente
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(255,255,255,0.5); }
+            100% { transform: scale(1); }
+        }
+        
+        .btn-flutuante {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .btn-flutuante:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .btn-flutuante:active {
+            transform: translateY(-2px) scale(1.05);
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // ==========================================
+    // 🏁 FINALIZAÇÃO DA INICIALIZAÇÃO
+    // ==========================================
+    
+    console.log('✅ JavaScript inicializado com sucesso!');
+    console.log('💡 Dicas: Pressione "h" para ajuda ou "i" para informações');
+    console.log('🔧 Use F12 para abrir DevTools e explorar o console');
+    
+    // Mensagem de boas-vindas após um delay
+    setTimeout(() => {
+        console.log('🎓 Bem-vindo ao Laboratório de Posicionamento CSS!');
+        console.log('🎯 Explore os elementos clicando neles para ver demonstrações interativas');
+    }, 2000);
+    
+    // Inicializar informações do viewport
+    mostrarInfoViewport();
 });
 </script>
 </body>

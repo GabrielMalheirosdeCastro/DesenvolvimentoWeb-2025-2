@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primeiros Passos com JavaScript - Gabriel Malheiros</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 📱 Estilos específicos para a página de JavaScript */
+        .javascript-page {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .javascript-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .javascript-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .javascript-title {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .javascript-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .code-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #ffd700;
+        }
+        
+        .code-block {
+            background: #1f2937;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #10b981;
+            overflow-x: auto;
+            border-left: 4px solid #10b981;
+        }
+        
+        .demo-button {
+            background: linear-gradient(45deg, #4ade80, #22c55e);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .demo-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+        
+        .demo-button:active {
+            transform: translateY(0);
+        }
+        
+        .demo-area {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+        }
+        
+        .resultado-demo {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: monospace;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navigation-footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+        }
+        
+        .nav-link {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            margin: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        /* Animações */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .code-section {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .code-section:nth-child(1) { animation-delay: 0.1s; }
+        .code-section:nth-child(2) { animation-delay: 0.2s; }
+        .code-section:nth-child(3) { animation-delay: 0.3s; }
+        .code-section:nth-child(4) { animation-delay: 0.4s; }
+        
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .javascript-title {
+                font-size: 2rem;
+            }
+            
+            .code-section {
+                padding: 20px;
+            }
+            
+            .demo-button {
+                display: block;
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body class="javascript-page">
+    <div class="javascript-container">
+        <!-- 📖 Header -->
+        <header class="javascript-header">
+            <h1 class="javascript-title">🚀 Nosso Primeiro Exercício JavaScript</h1>
+            <p class="javascript-subtitle">
+                Agora que você já criou seu primeiro exercício JavaScript, vamos ao código.
+            </p>
+        </header>
+
+        <!-- 📝 Seção 1: Estrutura Básica HTML -->
+        <section class="code-section">
+            <h2 class="section-title">1. 📄 Estrutura Básica HTML + JavaScript</h2>
+            <p>Vamos começar com a estrutura HTML básica que inclui JavaScript:</p>
+            
+            <div class="code-block">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Primeiro JavaScript&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Primeiro JavaScript&lt;/h1&gt;
+    &lt;script&gt;
+        window.alert('Olá, Mundo!');
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+            </div>
+            
+            <p><strong>Nota:</strong> A maneira mais simples de usar JS é incluindo o script em um documento HTML. 
+            Sendo assim, se você está fazendo o nosso <strong>Curso de HTML</strong> com a gente 
+            (recomendo muito), você já consegue identificar e classificar quase todas as linhas do 
+            documento acima. Apenas as <strong>linhas 10, 11 e 12</strong> são uma novidade!</p>
+        </section>
+
+        <!-- 🎯 Seção 2: Demonstrações Interativas -->
+        <section class="code-section">
+            <h2 class="section-title">2. 🎯 Demonstrações Interativas</h2>
+            <p>Clique nos botões abaixo para ver o JavaScript em ação:</p>
+            
+            <div class="demo-area">
+                <button class="demo-button" onclick="demonstrarAlert()">
+                    🚨 Demonstrar Alert
+                </button>
+                
+                <button class="demo-button" onclick="demonstrarPrompt()">
+                    ❓ Demonstrar Prompt
+                </button>
+                
+                <button class="demo-button" onclick="demonstrarConsoleLog()">
+                    📊 Demonstrar Console.log
+                </button>
+                
+                <button class="demo-button" onclick="demonstrarDocumentWrite()">
+                    ✍️ Document.write
+                </button>
+                
+                <div class="resultado-demo" id="resultado">
+                    💡 Clique nos botões para ver os resultados aqui!
+                </div>
+            </div>
+        </section>
+
+        <!-- 🔧 Seção 3: DevTools -->
+        <section class="code-section">
+            <h2 class="section-title">3. 🔧 Trabalhando com DevTools v2.0</h2>
+            <p>
+                Se algo do tipo acontecer com você, vá até o Chrome, clique com o botão direito 
+                do mouse sobre uma área em branco do fundo do seu site e escolha a opção 
+                <strong>Inspecionar</strong> (veja a tela ao lado). Outra forma é pressionando 
+                <strong>Ctrl + Alt + I</strong> no teclado ou clicar nos três pontos no canto 
+                superior direito da janela e escolher <strong>Mais Ferramentas > Ferramentas do Desenvolvedor</strong>.
+            </p>
+            
+            <div class="demo-area">
+                <button class="demo-button" onclick="abrirDevTools()">
+                    🛠️ Instruções DevTools
+                </button>
+                
+                <button class="demo-button" onclick="demonstrarErroProposital()">
+                    🐛 Simular Erro (para Debug)
+                </button>
+            </div>
+        </section>
+
+        <!-- 📚 Seção 4: Conceitos Básicos -->
+        <section class="code-section">
+            <h2 class="section-title">4. 📚 Conceitos Fundamentais JavaScript</h2>
+            
+            <div class="demo-area">
+                <h3>🔢 Trabalhando com Variáveis</h3>
+                <button class="demo-button" onclick="demonstrarVariaveis()">
+                    Demonstrar Variáveis
+                </button>
+                
+                <h3>🧮 Operações Matemáticas</h3>
+                <button class="demo-button" onclick="demonstrarOperacoes()">
+                    Calculadora Simples
+                </button>
+                
+                <h3>🎯 Condicionais (if/else)</h3>
+                <button class="demo-button" onclick="demonstrarCondicionais()">
+                    Teste de Idade
+                </button>
+                
+                <h3>🔄 Laços de Repetição</h3>
+                <button class="demo-button" onclick="demonstrarLacos()">
+                    Contar de 1 a 10
+                </button>
+                
+                <div class="resultado-demo" id="resultado-conceitos">
+                    📋 Resultados dos conceitos aparecerão aqui...
+                </div>
+            </div>
+        </section>
+
+        <!-- 🧭 Navegação -->
+        <nav class="navigation-footer">
+            <h3>🧭 Navegação do Laboratório</h3>
+            <a href="index.html" class="nav-link">🏠 Portfolio Principal</a>
+            <a href="lab-fundamentos-css.html" class="nav-link">📚 Lab CSS Fundamentals</a>
+            <a href="tipografia.html" class="nav-link">📝 Tipografia</a>
+            <a href="posicionamento.html" class="nav-link">📐 Posicionamento</a>
+            <a href="boxmodel.html" class="nav-link">🚀 Jogo Box Model</a>
+            <a href="flexbox.html" class="nav-link">🔄 Flexbox</a>
+            <a href="galeria-lego-naves.html" class="nav-link">🖼️ Galeria LEGO</a>
+            
+            <!-- 📊 Informações do Estudante -->
+            <div style="margin-top: 30px; padding: 20px; background: rgba(0,0,0,0.2); border-radius: 10px;">
+                <p><strong>👨‍🎓 Estudante:</strong> Gabriel Malheiros de Castro</p>
+                <p><strong>🏫 Instituição:</strong> FAESA - 2025-2</p>
+                <p><strong>📚 Disciplina:</strong> Desenvolvimento Web</p>
+                <p><strong>📅 Data:</strong> <span id="data-atual"></span></p>
+            </div>
+        </nav>
+    </div>
+
+    <!-- 🚀 JavaScript -->
+    <script>
+        // ==========================================
+        // 🎯 FUNÇÕES DE DEMONSTRAÇÃO BÁSICAS
+        // ==========================================
+        
+        // Função 1: Alert simples
+        function demonstrarAlert() {
+            window.alert('Olá, Mundo! Este é um exemplo de alert() em JavaScript!');
+            document.getElementById('resultado').innerHTML = 
+                '✅ Alert executado! Você viu a caixa de diálogo?';
+        }
+        
+        // Função 2: Prompt para interação
+        function demonstrarPrompt() {
+            const nome = window.prompt('Qual é o seu nome?', 'Digite seu nome aqui...');
+            
+            if (nome !== null && nome !== '') {
+                document.getElementById('resultado').innerHTML = 
+                    `👋 Olá, ${nome}! Prazer em conhecê-lo(a)!`;
+                
+                // Bonus: segundo prompt
+                const idade = window.prompt(`${nome}, quantos anos você tem?`, '18');
+                if (idade !== null && !isNaN(idade) && idade > 0) {
+                    document.getElementById('resultado').innerHTML += 
+                        `<br>🎂 Você tem ${idade} anos. ` + 
+                        (idade >= 18 ? 'Você é maior de idade!' : 'Você é menor de idade.');
+                }
+            } else {
+                document.getElementById('resultado').innerHTML = 
+                    '❌ Operação cancelada ou nome vazio.';
+            }
+        }
+        
+        // Função 3: Console.log (fundamental para debug)
+        function demonstrarConsoleLog() {
+            const mensagem = 'Esta mensagem foi enviada para o Console do navegador!';
+            console.log('🎯 ' + mensagem);
+            console.log('📊 Informações do navegador:', {
+                userAgent: navigator.userAgent,
+                linguagem: navigator.language,
+                timestamp: new Date().toLocaleString()
+            });
+            
+            document.getElementById('resultado').innerHTML = 
+                '📊 Mensagem enviada para o Console! Abra o DevTools (F12) e veja a aba Console.';
+        }
+        
+        // Função 4: Document.write (não recomendado para produção, mas educativo)
+        function demonstrarDocumentWrite() {
+            const confirmacao = window.confirm(
+                '⚠️ AVISO: document.write() vai substituir todo o conteúdo da página. ' +
+                'Isso é apenas para demonstração educativa. Deseja continuar?'
+            );
+            
+            if (confirmacao) {
+                document.write(`
+                    <html>
+                    <head>
+                        <title>Demonstração document.write()</title>
+                        <style>
+                            body { 
+                                font-family: Arial; 
+                                text-align: center; 
+                                background: linear-gradient(45deg, #667eea, #764ba2);
+                                color: white;
+                                padding: 50px;
+                            }
+                            .voltar { 
+                                background: #4ade80; 
+                                color: white; 
+                                padding: 15px 30px; 
+                                border: none; 
+                                border-radius: 8px; 
+                                font-size: 16px; 
+                                cursor: pointer; 
+                                margin-top: 20px;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>✍️ Demonstração de document.write()</h1>
+                        <p>Esta página foi completamente substituída usando document.write()!</p>
+                        <p><strong>Data/Hora:</strong> ${new Date().toLocaleString()}</p>
+                        <button class="voltar" onclick="history.back()">🔙 Voltar</button>
+                        <br><br>
+                        <p style="font-size: 14px; opacity: 0.8;">
+                            <strong>Nota:</strong> document.write() não é recomendado em aplicações modernas,
+                            pois substitui todo o conteúdo. Use innerHTML, textContent ou DOM manipulation.
+                        </p>
+                    </body>
+                    </html>
+                `);
+            } else {
+                document.getElementById('resultado').innerHTML = 
+                    '✅ Operação cancelada. Boa escolha! document.write() pode ser destrutivo.';
+            }
+        }
+        
+        // ==========================================
+        // 🔧 FUNÇÕES DE DEVTOOLS E DEBUG
+        // ==========================================
+        
+        function abrirDevTools() {
+            console.log('🔧 === INSTRUÇÕES PARA ABRIR DEVTOOLS ===');
+            console.log('1. Pressione F12');
+            console.log('2. Ou clique com botão direito > Inspecionar');
+            console.log('3. Ou Ctrl + Shift + I (Windows/Linux)');
+            console.log('4. Ou Cmd + Option + I (Mac)');
+            console.log('🎯 Agora vá para a aba "Console" para ver as mensagens JavaScript!');
+            
+            alert('🛠️ Instruções enviadas para o Console! Abra o DevTools (F12) para ver.');
+            
+            document.getElementById('resultado').innerHTML = 
+                '🛠️ DevTools: Pressione <strong>F12</strong> ou <strong>Ctrl+Shift+I</strong> e vá para a aba Console!';
+        }
+        
+        function demonstrarErroProposital() {
+            console.log('🐛 Criando erro proposital para demonstração...');
+            
+            try {
+                // Erro proposital: tentar chamar função inexistente
+                funcaoQueNaoExiste();
+            } catch (erro) {
+                console.error('❌ Erro capturado:', erro.message);
+                console.log('✅ Este erro foi capturado propositalmente para demonstração!');
+                
+                document.getElementById('resultado').innerHTML = 
+                    '🐛 Erro criado e capturado! Veja o Console (F12) para detalhes. ' +
+                    'Este é um exemplo de como debugar problemas.';
+            }
+        }
+        
+        // ==========================================
+        // 📚 CONCEITOS FUNDAMENTAIS
+        // ==========================================
+        
+        function demonstrarVariaveis() {
+            // Diferentes tipos de variáveis
+            let nome = 'JavaScript';
+            const ano = 2024;
+            var mensagem = 'Aprendendo variáveis!';
+            let ativo = true;
+            let numero = 42;
+            
+            const resultado = `
+                📦 <strong>Variáveis Criadas:</strong><br>
+                • let nome = "${nome}" (string)<br>
+                • const ano = ${ano} (number)<br>
+                • var mensagem = "${mensagem}" (string)<br>
+                • let ativo = ${ativo} (boolean)<br>
+                • let numero = ${numero} (number)
+            `;
+            
+            document.getElementById('resultado-conceitos').innerHTML = resultado;
+            console.log('📦 Variáveis demonstradas:', { nome, ano, mensagem, ativo, numero });
+        }
+        
+        function demonstrarOperacoes() {
+            const num1 = Number(prompt('Digite o primeiro número:', '10')) || 10;
+            const num2 = Number(prompt('Digite o segundo número:', '5')) || 5;
+            
+            const soma = num1 + num2;
+            const subtracao = num1 - num2;
+            const multiplicacao = num1 * num2;
+            const divisao = num1 / num2;
+            
+            const resultado = `
+                🧮 <strong>Calculadora Simples:</strong><br>
+                • ${num1} + ${num2} = ${soma}<br>
+                • ${num1} - ${num2} = ${subtracao}<br>
+                • ${num1} × ${num2} = ${multiplicacao}<br>
+                • ${num1} ÷ ${num2} = ${divisao.toFixed(2)}
+            `;
+            
+            document.getElementById('resultado-conceitos').innerHTML = resultado;
+        }
+        
+        function demonstrarCondicionais() {
+            const idade = Number(prompt('Digite sua idade para o teste:', '18')) || 18;
+            let categoria;
+            let emoji;
+            
+            if (idade < 13) {
+                categoria = 'Criança';
+                emoji = '👶';
+            } else if (idade < 18) {
+                categoria = 'Adolescente';
+                emoji = '👦';
+            } else if (idade < 60) {
+                categoria = 'Adulto';
+                emoji = '👨';
+            } else {
+                categoria = 'Idoso';
+                emoji = '👴';
+            }
+            
+            const resultado = `
+                🎯 <strong>Teste de Condicionais:</strong><br>
+                • Idade informada: ${idade} anos<br>
+                • Categoria: ${emoji} ${categoria}<br>
+                • Pode dirigir: ${idade >= 18 ? '✅ Sim' : '❌ Não'}<br>
+                • Pode votar: ${idade >= 16 ? '✅ Sim' : '❌ Não'}
+            `;
+            
+            document.getElementById('resultado-conceitos').innerHTML = resultado;
+        }
+        
+        function demonstrarLacos() {
+            let contagem = '';
+            let soma = 0;
+            
+            // Laço for
+            for (let i = 1; i <= 10; i++) {
+                contagem += `${i}${i < 10 ? ', ' : ''}`;
+                soma += i;
+            }
+            
+            // Laço while para números pares
+            let pares = '';
+            let num = 2;
+            while (num <= 20) {
+                pares += `${num}${num < 20 ? ', ' : ''}`;
+                num += 2;
+            }
+            
+            const resultado = `
+                🔄 <strong>Laços de Repetição:</strong><br>
+                • Contagem 1-10: ${contagem}<br>
+                • Soma de 1 a 10: ${soma}<br>
+                • Números pares até 20: ${pares}
+            `;
+            
+            document.getElementById('resultado-conceitos').innerHTML = resultado;
+        }
+        
+        // ==========================================
+        // 🌟 INICIALIZAÇÃO DA PÁGINA
+        // ==========================================
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Definir data atual
+            document.getElementById('data-atual').textContent = 
+                new Date().toLocaleDateString('pt-BR');
+            
+            // Log de inicialização
+            console.log('🚀 Página JavaScript Fundamentals carregada!');
+            console.log('👨‍🎓 Estudante: Gabriel Malheiros de Castro');
+            console.log('🏫 FAESA - 2025-2');
+            console.log('📚 Disciplina: Desenvolvimento Web');
+            
+            // Animação de boas-vindas
+            setTimeout(() => {
+                console.log('💡 Dica: Explore todos os botões para aprender JavaScript!');
+                console.log('🔧 Use este Console para ver os resultados de console.log()');
+            }, 2000);
+        });
+        
+        // ==========================================
+        // 🎨 FUNÇÕES DE INTERATIVIDADE ADICIONAL
+        // ==========================================
+        
+        // Adicionar efeito de digitação no título
+        function efeitoDigitacao(elemento, texto, velocidade = 100) {
+            elemento.innerHTML = '';
+            let i = 0;
+            
+            function digitar() {
+                if (i < texto.length) {
+                    elemento.innerHTML += texto.charAt(i);
+                    i++;
+                    setTimeout(digitar, velocidade);
+                }
+            }
+            
+            digitar();
+        }
+        
+        // Easter egg: Konami Code
+        let konamiCode = [];
+        const konamiSequence = [
+            'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+            'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+            'KeyB', 'KeyA'
+        ];
+        
+        document.addEventListener('keydown', function(e) {
+            konamiCode.push(e.code);
+            
+            if (konamiCode.length > konamiSequence.length) {
+                konamiCode.shift();
+            }
+            
+            if (JSON.stringify(konamiCode) === JSON.stringify(konamiSequence)) {
+                console.log('🎊 KONAMI CODE ATIVADO!');
+                alert('🎊 Parabéns! Você descobriu o Easter Egg do Konami Code!\n\nVocê é um verdadeiro desenvolvedor! 🚀');
+                document.body.style.animation = 'rainbow 2s infinite';
+                
+                // Adicionar CSS para o efeito rainbow
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes rainbow {
+                        0% { filter: hue-rotate(0deg); }
+                        100% { filter: hue-rotate(360deg); }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        });
+        
+        // Log de estatísticas da sessão
+        let interacoes = 0;
+        function contarInteracao() {
+            interacoes++;
+            if (interacoes === 5) {
+                console.log('🎯 Você está explorando bem! Já fez 5 interações.');
+            } else if (interacoes === 10) {
+                console.log('🏆 Excelente! 10 interações completadas. Você está dominando!');
+            }
+        }
+        
+        // Adicionar contador a todos os botões
+        document.querySelectorAll('.demo-button').forEach(button => {
+            button.addEventListener('click', contarInteracao);
+        });
+    </script>
+</body>
+</html>

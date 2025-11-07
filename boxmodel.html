@@ -472,28 +472,391 @@
             document.getElementById('modal-overlay').addEventListener('click', closeStats);
         }
 
-        // ✅ Submeter resposta
+        // ✅ Submeter resposta - VERSÃO APRIMORADA
         function submitAnswer() {
             const answer = document.getElementById('answer-input').value.trim();
             
+            // 🔍 Validação de entrada aprimorada
             if (!answer) {
-                alert('Por favor, digite uma resposta!');
+                showInputError('Por favor, digite uma resposta antes de submeter!');
+                focusAnswerInput();
                 return;
             }
             
-            const isCorrect = checkAnswer(answer);
+            if (answer.length < 2) {
+                showInputError('A resposta deve ter pelo menos 2 caracteres!');
+                focusAnswerInput();
+                return;
+            }
+            
+            // 🛡️ Sanitização de entrada
+            const sanitizedAnswer = sanitizeInput(answer);
+            
+            // 🎯 Verificação de resposta com feedback detalhado
+            const validationResult = checkAnswerAdvanced(sanitizedAnswer);
             gameState.totalAttempts++;
             
-            if (isCorrect) {
+            if (validationResult.isCorrect) {
                 gameState.correctAnswers++;
                 gameState.score += calculateScore();
-                showFeedback(true, answer);
+                showFeedback(true, sanitizedAnswer, validationResult);
+                
+                // 🎊 Efeito visual de acerto
+                celebrateCorrectAnswer();
             } else {
-                showFeedback(false, answer);
+                showFeedback(false, sanitizedAnswer, validationResult);
+                
+                // 💡 Sugestões inteligentes
+                if (validationResult.suggestions.length > 0) {
+                    showSuggestions(validationResult.suggestions);
+                }
             }
             
             updateScoreDisplay();
             saveGameStats();
+            logUserActivity(sanitizedAnswer, validationResult.isCorrect);
+        }
+        
+        // 🛡️ Função de sanitização de entrada
+        function sanitizeInput(input) {
+            return input
+                .trim()
+                .replace(/[^\w\s-]/gi, '') // Remove caracteres especiais
+                .replace(/\s+/g, ' ')      // Remove espaços duplos
+                .toLowerCase();
+        }
+        
+        // 🔍 Verificação avançada de resposta
+        function checkAnswerAdvanced(answer) {
+            const correctName = gameState.currentShip.name.toLowerCase();
+            const result = {
+                isCorrect: false,
+                confidence: 0,
+                matchedWords: [],
+                suggestions: [],
+                feedbackType: 'exact'
+            };
+            
+            // 1️⃣ Verificação exata
+            if (answer === correctName) {
+                result.isCorrect = true;
+                result.confidence = 100;
+                result.feedbackType = 'exact';
+                return result;
+            }
+            
+            // 2️⃣ Verificação sem acentos e caracteres especiais
+            const normalizedCorrect = normalizeText(correctName);
+            const normalizedAnswer = normalizeText(answer);
+            
+            if (normalizedAnswer === normalizedCorrect) {
+                result.isCorrect = true;
+                result.confidence = 95;
+                result.feedbackType = 'normalized';
+                return result;
+            }
+            
+            // 3️⃣ Verificação de palavras-chave
+            const correctWords = correctName.split(' ').filter(word => word.length > 2);
+            const answerWords = answer.split(' ');
+            
+            let matchedWords = [];
+            let totalConfidence = 0;
+            
+            correctWords.forEach(correctWord => {
+                answerWords.forEach(answerWord => {
+                    const similarity = calculateSimilarity(correctWord, answerWord);
+                    if (similarity > 0.7) {
+                        matchedWords.push(correctWord);
+                        totalConfidence += similarity;
+                    }
+                });
+            });
+            
+            result.matchedWords = matchedWords;
+            result.confidence = (matchedWords.length / correctWords.length) * 100;
+            
+            // 4️⃣ Critério de acerto por palavras-chave
+            const requiredMatches = Math.ceil(correctWords.length * 0.6); // 60% das palavras
+            if (matchedWords.length >= requiredMatches && result.confidence >= 60) {
+                result.isCorrect = true;
+                result.feedbackType = 'partial';
+            }
+            
+            // 5️⃣ Gerar sugestões se não acertou
+            if (!result.isCorrect) {
+                result.suggestions = generateSmartSuggestions(answer, correctName);
+            }
+            
+            return result;
+        }
+        
+        // 🔧 Função auxiliar para normalizar texto
+        function normalizeText(text) {
+            return text
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "") // Remove acentos
+                .toLowerCase()
+                .replace(/[^\w\s]/g, ''); // Remove caracteres especiais
+        }
+        
+        // 📊 Calcular similaridade entre strings
+        function calculateSimilarity(str1, str2) {
+            const longer = str1.length > str2.length ? str1 : str2;
+            const shorter = str1.length > str2.length ? str2 : str1;
+            
+            if (longer.length === 0) return 1.0;
+            
+            const distance = levenshteinDistance(longer, shorter);
+            return (longer.length - distance) / longer.length;
+        }
+        
+        // 🔢 Algoritmo de Levenshtein Distance
+        function levenshteinDistance(str1, str2) {
+            const matrix = [];
+            
+            for (let i = 0; i <= str2.length; i++) {
+                matrix[i] = [i];
+            }
+            
+            for (let j = 0; j <= str1.length; j++) {
+                matrix[0][j] = j;
+            }
+            
+            for (let i = 1; i <= str2.length; i++) {
+                for (let j = 1; j <= str1.length; j++) {
+                    if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
+                        matrix[i][j] = matrix[i - 1][j - 1];
+                    } else {
+                        matrix[i][j] = Math.min(
+                            matrix[i - 1][j - 1] + 1,
+                            matrix[i][j - 1] + 1,
+                            matrix[i - 1][j] + 1
+                        );
+                    }
+                }
+            }
+            
+            return matrix[str2.length][str1.length];
+        }
+        
+        // 💡 Gerar sugestões inteligentes
+        function generateSmartSuggestions(userAnswer, correctAnswer) {
+            const suggestions = [];
+            const correctWords = correctAnswer.split(' ');
+            const userWords = userAnswer.split(' ');
+            
+            // Sugestão 1: Palavras que o usuário esqueceu
+            const missingWords = correctWords.filter(word => 
+                !userWords.some(userWord => 
+                    calculateSimilarity(word, userWord) > 0.5
+                )
+            );
+            
+            if (missingWords.length > 0) {
+                suggestions.push(`Tente incluir: "${missingWords[0]}"`);
+            }
+            
+            // Sugestão 2: Correção de grafia
+            correctWords.forEach(correctWord => {
+                userWords.forEach(userWord => {
+                    const similarity = calculateSimilarity(correctWord, userWord);
+                    if (similarity > 0.4 && similarity < 0.8) {
+                        suggestions.push(`"${userWord}" → "${correctWord}"?`);
+                    }
+                });
+            });
+            
+            // Sugestão 3: Categoria da nave
+            if (gameState.currentShip.category) {
+                suggestions.push(`É uma nave da categoria: ${gameState.currentShip.category}`);
+            }
+            
+            return suggestions.slice(0, 2); // Máximo 2 sugestões
+        }
+        
+        // 🎊 Efeito visual de comemoração
+        function celebrateCorrectAnswer() {
+            // Criar confetti visual
+            const confetti = document.createElement('div');
+            confetti.innerHTML = '🎉🎊✨🌟⭐';
+            confetti.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 3rem;
+                z-index: 9999;
+                pointer-events: none;
+                animation: celebrate 2s ease-out forwards;
+            `;
+            
+            document.body.appendChild(confetti);
+            
+            // Adicionar animação CSS dinamicamente
+            if (!document.querySelector('#celebrate-animation')) {
+                const style = document.createElement('style');
+                style.id = 'celebrate-animation';
+                style.textContent = `
+                    @keyframes celebrate {
+                        0% {
+                            transform: translate(-50%, -50%) scale(0) rotate(0deg);
+                            opacity: 1;
+                        }
+                        50% {
+                            transform: translate(-50%, -50%) scale(1.5) rotate(180deg);
+                            opacity: 1;
+                        }
+                        100% {
+                            transform: translate(-50%, -50%) scale(1) rotate(360deg);
+                            opacity: 0;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            setTimeout(() => {
+                if (confetti.parentNode) {
+                    confetti.parentNode.removeChild(confetti);
+                }
+            }, 2000);
+        }
+        
+        // ❌ Mostrar erro de entrada
+        function showInputError(message) {
+            const answerInput = document.getElementById('answer-input');
+            
+            // Remover classe de erro anterior
+            answerInput.classList.remove('input-error');
+            
+            // Adicionar classe de erro
+            answerInput.classList.add('input-error');
+            
+            // Criar tooltip de erro
+            const errorTooltip = document.createElement('div');
+            errorTooltip.className = 'error-tooltip';
+            errorTooltip.textContent = message;
+            errorTooltip.style.cssText = `
+                position: absolute;
+                background: #ef4444;
+                color: white;
+                padding: 8px 12px;
+                border-radius: 6px;
+                font-size: 14px;
+                z-index: 1000;
+                top: -45px;
+                left: 0;
+                white-space: nowrap;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                animation: errorShake 0.5s ease-in-out;
+            `;
+            
+            answerInput.parentNode.style.position = 'relative';
+            answerInput.parentNode.appendChild(errorTooltip);
+            
+            // Adicionar animação de shake
+            if (!document.querySelector('#error-animation')) {
+                const style = document.createElement('style');
+                style.id = 'error-animation';
+                style.textContent = `
+                    .input-error {
+                        border-color: #ef4444 !important;
+                        box-shadow: 0 0 10px rgba(239, 68, 68, 0.3) !important;
+                    }
+                    
+                    @keyframes errorShake {
+                        0%, 100% { transform: translateX(0); }
+                        25% { transform: translateX(-5px); }
+                        75% { transform: translateX(5px); }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            // Remover erro após 3 segundos
+            setTimeout(() => {
+                answerInput.classList.remove('input-error');
+                if (errorTooltip.parentNode) {
+                    errorTooltip.parentNode.removeChild(errorTooltip);
+                }
+            }, 3000);
+        }
+        
+        // 🎯 Focar no campo de resposta
+        function focusAnswerInput() {
+            const answerInput = document.getElementById('answer-input');
+            answerInput.focus();
+            answerInput.select();
+        }
+        
+        // 💡 Mostrar sugestões
+        function showSuggestions(suggestions) {
+            if (suggestions.length === 0) return;
+            
+            const suggestionsContainer = document.createElement('div');
+            suggestionsContainer.className = 'suggestions-container';
+            suggestionsContainer.innerHTML = `
+                <div class="suggestions-header">💡 Dicas:</div>
+                ${suggestions.map(suggestion => 
+                    `<div class="suggestion-item">${suggestion}</div>`
+                ).join('')}
+            `;
+            
+            suggestionsContainer.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: rgba(59, 130, 246, 0.9);
+                color: white;
+                padding: 15px;
+                border-radius: 10px;
+                max-width: 300px;
+                z-index: 1000;
+                font-size: 14px;
+                backdrop-filter: blur(5px);
+                animation: slideInRight 0.3s ease-out;
+            `;
+            
+            document.body.appendChild(suggestionsContainer);
+            
+            // Auto-remover após 5 segundos
+            setTimeout(() => {
+                if (suggestionsContainer.parentNode) {
+                    suggestionsContainer.style.animation = 'slideOutRight 0.3s ease-in';
+                    setTimeout(() => {
+                        if (suggestionsContainer.parentNode) {
+                            suggestionsContainer.parentNode.removeChild(suggestionsContainer);
+                        }
+                    }, 300);
+                }
+            }, 5000);
+        }
+        
+        // 📝 Log de atividade do usuário
+        function logUserActivity(answer, wasCorrect) {
+            const activity = {
+                timestamp: new Date().toISOString(),
+                question: gameState.currentShip.name,
+                userAnswer: answer,
+                correct: wasCorrect,
+                attempts: gameState.totalAttempts,
+                hintsUsed: gameState.hintsUsed,
+                score: gameState.score
+            };
+            
+            console.log('📊 Atividade do usuário:', activity);
+            
+            // Salvar histórico local (opcional)
+            const history = JSON.parse(localStorage.getItem('boxmodel-history') || '[]');
+            history.push(activity);
+            
+            // Manter apenas últimas 50 tentativas
+            if (history.length > 50) {
+                history.splice(0, history.length - 50);
+            }
+            
+            localStorage.setItem('boxmodel-history', JSON.stringify(history));
         }
 
         // 🔍 Verificar resposta
