@@ -534,6 +534,82 @@ let novo = sal + valor</pre>
             </div>
         </section>
 
+        <!-- 🎯 Seção 7: Desafios de Matemática -->
+        <section class="section">
+            <h2 class="section-title">🎯 Desafios de Matemática</h2>
+            <p>Agora vamos praticar com alguns desafios mais complexos! Resolva cada problema passo a passo.</p>
+            
+            <div class="exercicio-container">
+                <h3>🏪 DESAFIO 1: Loja de Games</h3>
+                <p>Um jogo custa <strong>R$120,00</strong>. Durante uma promoção, há 15% de desconto. Se você comprar 3 jogos, quanto economizará no total?</p>
+                <div class="exercicio-linha">
+                    <span>Economia total: R$ </span>
+                    <input type="number" class="exercicio-input" id="desafio1" data-resposta="54" step="0.01">
+                    <span id="feedback-d1"></span>
+                </div>
+            </div>
+
+            <div class="exercicio-container">
+                <h3>🏫 DESAFIO 2: Notas da Escola</h3>
+                <p>Um estudante tirou as seguintes notas: 8.5, 7.2, 9.1, 6.8. Qual é a média aritmética?</p>
+                <div class="exercicio-linha">
+                    <span>Média: </span>
+                    <input type="number" class="exercicio-input" id="desafio2" data-resposta="7.9" step="0.01">
+                    <span id="feedback-d2"></span>
+                </div>
+            </div>
+
+            <div class="exercicio-container">
+                <h3>⏰ DESAFIO 3: Tempo e Velocidade</h3>
+                <p>Um carro percorre 300km em 4 horas. Qual é a velocidade média em km/h?</p>
+                <div class="exercicio-linha">
+                    <span>Velocidade média: </span>
+                    <input type="number" class="exercicio-input" id="desafio3" data-resposta="75" step="0.01">
+                    <span> km/h</span>
+                    <span id="feedback-d3"></span>
+                </div>
+            </div>
+
+            <div class="exercicio-container">
+                <h3>💰 DESAFIO 4: Juros Simples</h3>
+                <p>Você investiu R$1000,00 a uma taxa de 2% ao mês por 6 meses. Quanto receberá de juros?</p>
+                <div class="exercicio-linha">
+                    <span>Juros: R$ </span>
+                    <input type="number" class="exercicio-input" id="desafio4" data-resposta="120" step="0.01">
+                    <span id="feedback-d4"></span>
+                </div>
+            </div>
+
+            <div class="exercicio-container">
+                <h3>🏠 DESAFIO 5: Área de um Retângulo</h3>
+                <p>Um terreno retangular tem 12 metros de largura e 18 metros de comprimento. Qual é sua área em metros quadrados?</p>
+                <div class="exercicio-linha">
+                    <span>Área: </span>
+                    <input type="number" class="exercicio-input" id="desafio5" data-resposta="216" step="0.01">
+                    <span> m²</span>
+                    <span id="feedback-d5"></span>
+                </div>
+            </div>
+
+            <div class="exercicio-container">
+                <h3>🚗 DESAFIO 6: Consumo de Combustível</h3>
+                <p>Um carro fez 420km com 35 litros de gasolina. Quantos quilômetros o carro faz por litro?</p>
+                <div class="exercicio-linha">
+                    <span>Consumo: </span>
+                    <input type="number" class="exercicio-input" id="desafio6" data-resposta="12" step="0.01">
+                    <span> km/l</span>
+                    <span id="feedback-d6"></span>
+                </div>
+            </div>
+
+            <button class="demo-button" onclick="verificarDesafios()">✅ Verificar Todos os Desafios</button>
+            <button class="demo-button" onclick="limparDesafios()">🔄 Limpar Desafios</button>
+            <button class="demo-button" onclick="mostrarDicas()">💡 Mostrar Dicas</button>
+            
+            <div id="resultado-desafios" class="resultado-geral" style="display: none;"></div>
+            <div id="dicas-desafios" class="resultado-geral" style="display: none; background: rgba(255, 215, 0, 0.1);"></div>
+        </section>
+
         <!-- 🧭 Navegação -->
         <nav class="navigation-footer">
             <h3>🧭 Navegação do Laboratório</h3>
@@ -598,6 +674,78 @@ let novo = sal + valor</pre>
                 resultado.innerHTML = `📊 Você acertou ${corretas} de ${total} questões. ${corretas >= 3 ? 'Bom trabalho!' : 'Continue praticando!'}`;
                 resultado.classList.remove('sucesso');
             }
+        }
+        
+        // 🎯 Verificar respostas dos desafios
+        function verificarDesafios() {
+            let corretas = 0;
+            let total = 6;
+            
+            for (let i = 1; i <= total; i++) {
+                const input = document.getElementById(`desafio${i}`);
+                const feedback = document.getElementById(`feedback-d${i}`);
+                const respostaCorreta = parseFloat(input.dataset.resposta);
+                const respostaUsuario = parseFloat(input.value);
+                
+                if (Math.abs(respostaUsuario - respostaCorreta) < 0.01) {
+                    input.classList.remove('incorreto');
+                    input.classList.add('correto');
+                    feedback.textContent = ' ✅';
+                    corretas++;
+                } else if (input.value.trim() !== '') {
+                    input.classList.remove('correto');
+                    input.classList.add('incorreto');
+                    feedback.textContent = ` ❌ (Resp: ${respostaCorreta})`;
+                } else {
+                    input.classList.remove('correto', 'incorreto');
+                    feedback.textContent = ' ⚪ Não respondido';
+                }
+            }
+            
+            // Mostrar resultado geral dos desafios
+            const resultado = document.getElementById('resultado-desafios');
+            resultado.style.display = 'block';
+            
+            if (corretas === total) {
+                resultado.innerHTML = `🏆 EXCELENTE! Você é um mestre da matemática! Acertou todos os ${corretas} desafios! 🏆`;
+                resultado.classList.add('sucesso');
+            } else if (corretas >= 4) {
+                resultado.innerHTML = `🎯 Muito bom! Você acertou ${corretas} de ${total} desafios. Quase um expert!`;
+                resultado.classList.remove('sucesso');
+            } else {
+                resultado.innerHTML = `📚 Você acertou ${corretas} de ${total} desafios. Continue praticando para melhorar!`;
+                resultado.classList.remove('sucesso');
+            }
+        }
+        
+        // 💡 Mostrar dicas para os desafios
+        function mostrarDicas() {
+            const dicas = document.getElementById('dicas-desafios');
+            dicas.style.display = 'block';
+            dicas.innerHTML = `
+                <h4>💡 Dicas para os Desafios:</h4>
+                <p><strong>Desafio 1:</strong> Desconto de 15% em R$120,00 = R$18,00 por jogo. Para 3 jogos = R$54,00</p>
+                <p><strong>Desafio 2:</strong> Média = (8.5 + 7.2 + 9.1 + 6.8) ÷ 4 = 7.9</p>
+                <p><strong>Desafio 3:</strong> Velocidade = Distância ÷ Tempo = 300km ÷ 4h = 75 km/h</p>
+                <p><strong>Desafio 4:</strong> Juros = Capital × Taxa × Tempo = 1000 × 0.02 × 6 = R$120,00</p>
+                <p><strong>Desafio 5:</strong> Área = Largura × Comprimento = 12m × 18m = 216m²</p>
+                <p><strong>Desafio 6:</strong> Consumo = Distância ÷ Combustível = 420km ÷ 35L = 12 km/l</p>
+            `;
+        }
+        
+        // 🔄 Limpar desafios
+        function limparDesafios() {
+            for (let i = 1; i <= 6; i++) {
+                const input = document.getElementById(`desafio${i}`);
+                const feedback = document.getElementById(`feedback-d${i}`);
+                
+                input.value = '';
+                input.classList.remove('correto', 'incorreto');
+                feedback.textContent = '';
+            }
+            
+            document.getElementById('resultado-desafios').style.display = 'none';
+            document.getElementById('dicas-desafios').style.display = 'none';
         }
         
         // 🔄 Limpar respostas
@@ -699,6 +847,29 @@ let novo = sal + valor</pre>
             });
         }
         
+        // 🎯 Verificação automática para os desafios
+        for (let i = 1; i <= 6; i++) {
+            document.getElementById(`desafio${i}`).addEventListener('input', function() {
+                const input = this;
+                const feedback = document.getElementById(`feedback-d${i}`);
+                const respostaCorreta = parseFloat(input.dataset.resposta);
+                const respostaUsuario = parseFloat(input.value);
+                
+                if (input.value.trim() === '') {
+                    input.classList.remove('correto', 'incorreto');
+                    feedback.textContent = '';
+                } else if (Math.abs(respostaUsuario - respostaCorreta) < 0.01) {
+                    input.classList.remove('incorreto');
+                    input.classList.add('correto');
+                    feedback.textContent = ' ✅';
+                } else {
+                    input.classList.remove('correto');
+                    input.classList.add('incorreto');
+                    feedback.textContent = ' ❌';
+                }
+            });
+        }
+        
         // 🎯 Console log para desenvolvimento
         console.log('🧮 Página de Matemática - Operadores Aritméticos carregada!');
         console.log('📚 Use o DevTools para experimentar os operadores matemáticos!');
@@ -717,11 +888,31 @@ let novo = sal + valor</pre>
         window.calcularAumento = function(valor, porcentagem) {
             return valor * (1 + porcentagem / 100);
         };
+        window.calcularMedia = function(...notas) {
+            return notas.reduce((a, b) => a + b) / notas.length;
+        };
+        window.calcularVelocidade = function(distancia, tempo) {
+            return distancia / tempo;
+        };
+        window.calcularJuros = function(capital, taxa, tempo) {
+            return capital * (taxa / 100) * tempo;
+        };
+        window.calcularArea = function(largura, comprimento) {
+            return largura * comprimento;
+        };
+        window.calcularConsumo = function(distancia, combustivel) {
+            return distancia / combustivel;
+        };
         
         console.log('🎮 Easter Eggs disponíveis:');
         console.log('fibonacci(10) - Calcula o 10º número da sequência de Fibonacci');
         console.log('calcularDesconto(1850, 20) - Calcula desconto');
         console.log('calcularAumento(3480, 13) - Calcula aumento');
+        console.log('calcularMedia(8.5, 7.2, 9.1, 6.8) - Calcula média aritmética');
+        console.log('calcularVelocidade(300, 4) - Calcula velocidade média');
+        console.log('calcularJuros(1000, 2, 6) - Calcula juros simples');
+        console.log('calcularArea(12, 18) - Calcula área retangular');
+        console.log('calcularConsumo(420, 35) - Calcula consumo de combustível');
     </script>
 </body>
 </html>
