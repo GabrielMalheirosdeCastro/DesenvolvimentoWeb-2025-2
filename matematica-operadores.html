@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operadores Aritméticos - Gabriel Malheiros</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 📱 Estilos específicos para a página de Matemática */
+        .matematica-page {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .matematica-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .matematica-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .matematica-title {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .matematica-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #ffd700;
+        }
+        
+        .operadores-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .operadores-table th,
+        .operadores-table td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .operadores-table th {
+            background: rgba(255, 255, 255, 0.2);
+            font-weight: bold;
+        }
+        
+        .exercicio-container {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .exercicio-linha {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            font-size: 1.2rem;
+        }
+        
+        .exercicio-input {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            padding: 8px 12px;
+            margin: 0 10px;
+            font-size: 1rem;
+            width: 80px;
+            text-align: center;
+            color: #333;
+        }
+        
+        .exercicio-input:focus {
+            outline: none;
+            border-color: #ffd700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+        
+        .exercicio-input.correto {
+            background: rgba(76, 175, 80, 0.3);
+            border-color: #4caf50;
+        }
+        
+        .exercicio-input.incorreto {
+            background: rgba(244, 67, 54, 0.3);
+            border-color: #f44336;
+        }
+        
+        .demo-button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .demo-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .console-output {
+            background: #1e1e1e;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            border: 1px solid #333;
+        }
+        
+        .navigation-footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+        }
+        
+        .nav-link {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            margin: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .resultado-geral {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 10px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        /* Animações */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .section {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .resultado-geral.sucesso {
+            animation: pulse 2s infinite;
+            background: rgba(76, 175, 80, 0.2);
+            border-color: #4caf50;
+        }
+    </style>
+</head>
+<body class="matematica-page">
+    <div class="matematica-container">
+        <!-- 🧮 Cabeçalho -->
+        <header class="matematica-header">
+            <h1 class="matematica-title">🧮 Operadores Aritméticos</h1>
+            <p class="matematica-subtitle">Aprenda e pratique operações matemáticas básicas</p>
+        </header>
+
+        <!-- 📊 Seção 1: Tabela de Operadores Aritméticos -->
+        <section class="section">
+            <h2 class="section-title">📊 Operadores Aritméticos</h2>
+            <p>Os operadores desse tipo servem para fazer as contas básicas que estamos acostumados no nosso dia-a-dia:</p>
+            
+            <table class="operadores-table">
+                <thead>
+                    <tr>
+                        <th>Operador</th>
+                        <th>Função</th>
+                        <th>Exemplo</th>
+                        <th>Resultado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>( )</td>
+                        <td>Agrupamento</td>
+                        <td>(5+3)/2</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>+</td>
+                        <td>Positivo unário</td>
+                        <td>+5</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>-</td>
+                        <td>Negativo inário</td>
+                        <td>-4</td>
+                        <td>-4</td>
+                    </tr>
+                    <tr>
+                        <td>**</td>
+                        <td>Exponenciação</td>
+                        <td>5 ** 2</td>
+                        <td>25</td>
+                    </tr>
+                    <tr>
+                        <td>*</td>
+                        <td>Multiplicação</td>
+                        <td>3 * 2</td>
+                        <td>6</td>
+                    </tr>
+                    <tr>
+                        <td>/</td>
+                        <td>Divisão</td>
+                        <td>10 / 2</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>%</td>
+                        <td>Resto da divisão</td>
+                        <td>5 % 2</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>+</td>
+                        <td>Adição Binária</td>
+                        <td>5 + 3</td>
+                        <td>8</td>
+                    </tr>
+                    <tr>
+                        <td>-</td>
+                        <td>Subtração Binária</td>
+                        <td>8 - 5</td>
+                        <td>3</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div style="margin-top: 20px; padding: 15px; background: rgba(255, 215, 0, 0.1); border-radius: 10px;">
+                <p><strong>💡 Ordem de Precedência:</strong> O primeiro operador (Agrupamento) não é exatamente um "operador aritmético", mas adicionei aqui na lista para efeitos práticos. Usamos muito eles para forçar a execução de uma operação antes de outra. No exemplo que demos, se resolvêssemos 5+3/2 o resultado seria 6.5, já que em uma expressão aritmética com soma binária e divisão, resolvemos primeiro a divisão. Chamamos isso de <strong>ordem de precedência</strong>.</p>
+            </div>
+        </section>
+
+        <!-- 🧮 Seção 2: Vamos praticar um pouquinho? -->
+        <section class="section">
+            <h2 class="section-title">🧮 Vamos praticar um pouquinho?</h2>
+            <p>Vamos ver se você entendeu o que é ordem de precedência. Fique sempre de olho na tabela da página anterior e marque quem vem primeiro em cada expressão antes de resolver de fato. Eu facilitei e já fiz o primeiro pra você. As próximas são contigo!</p>
+            
+            <div class="exercicio-container">
+                <div class="exercicio-linha">
+                    <span>8 * 3 + 2 / 2 = </span>
+                    <input type="number" class="exercicio-input" id="ex1" data-resposta="25">
+                    <span id="feedback1"></span>
+                </div>
+                
+                <div class="exercicio-linha">
+                    <span>1 + 3 ** 2 / 9 = </span>
+                    <input type="number" class="exercicio-input" id="ex2" data-resposta="2">
+                    <span id="feedback2"></span>
+                </div>
+                
+                <div class="exercicio-linha">
+                    <span>1 + 3 ** 2 / 9 = </span>
+                    <input type="number" class="exercicio-input" id="ex3" data-resposta="2">
+                    <span id="feedback3"></span>
+                </div>
+                
+                <div class="exercicio-linha">
+                    <span>-3 + 4 * ( 10 % 4 ) = </span>
+                    <input type="number" class="exercicio-input" id="ex4" data-resposta="5">
+                    <span id="feedback4"></span>
+                </div>
+                
+                <div class="exercicio-linha">
+                    <span>( 8 - 2 * 3 ) % 1 * 2 = </span>
+                    <input type="number" class="exercicio-input" id="ex5" data-resposta="0">
+                    <span id="feedback5"></span>
+                </div>
+            </div>
+            
+            <button class="demo-button" onclick="verificarRespostas()">✅ Verificar Todas as Respostas</button>
+            <button class="demo-button" onclick="limparRespostas()">🔄 Limpar Respostas</button>
+            
+            <div id="resultado-exercicios" class="resultado-geral" style="display: none;"></div>
+        </section>
+
+        <!-- 📚 Seção 3: Operadores de Atribuição -->
+        <section class="section">
+            <h2 class="section-title">📚 Operadores de Atribuição (parte 2)</h2>
+            <p>Agora que você já conhece os operadores aritméticos básicos, podemos combiná-los aos operadores de atribuição para realizar tarefas que são muito comuns. Por exemplo, uma expressão que faremos com muita frequência é a operação de acumulador. Algo como <code>soma = soma + num</code>. Podemos simplificá-la usando operadores de simplificação aritmética:</p>
+            
+            <table class="operadores-table">
+                <thead>
+                    <tr>
+                        <th>Operador</th>
+                        <th>Exemplo</th>
+                        <th>Equivale a...</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>+=</td>
+                        <td>a += b</td>
+                        <td>a = a + b</td>
+                    </tr>
+                    <tr>
+                        <td>-=</td>
+                        <td>a -= b</td>
+                        <td>a = a - b</td>
+                    </tr>
+                    <tr>
+                        <td>*=</td>
+                        <td>a *= b</td>
+                        <td>a = a * b</td>
+                    </tr>
+                    <tr>
+                        <td>/=</td>
+                        <td>a /= b</td>
+                        <td>a = a / b</td>
+                    </tr>
+                    <tr>
+                        <td>**=</td>
+                        <td>a **= b</td>
+                        <td>a = a ** b</td>
+                    </tr>
+                    <tr>
+                        <td>%=</td>
+                        <td>a %= b</td>
+                        <td>a = a % b</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div style="margin-top: 20px; padding: 15px; background: rgba(255, 215, 0, 0.1); border-radius: 10px;">
+                <p>Pode ser que você não tenha entendido muito bem esses operadores agora. Não se preocupe! Mais pra frente voltaremos neles e tudo ficará mais claro.</p>
+            </div>
+        </section>
+
+        <!-- 🎯 Seção 4: Operadores de incremento/decremento -->
+        <section class="section">
+            <h2 class="section-title">🎯 Operadores de incremento/decremento</h2>
+            <p>Ainda nos mantendo no mesmo assunto de simplificar expressões muito comuns usadas no dia-a-dia do programador. Outro tipo de expressão bastante usada é o incremento (somar uma unidade a uma variável) ou decremento (diminuir uma unidade a uma variável).</p>
+            
+            <table class="operadores-table">
+                <thead>
+                    <tr>
+                        <th>Operador</th>
+                        <th>Exemplo</th>
+                        <th>Equivale a...</th>
+                        <th>Poderia usar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>++</td>
+                        <td>x ++</td>
+                        <td>x = x + 1</td>
+                        <td>x += 1</td>
+                    </tr>
+                    <tr>
+                        <td>--</td>
+                        <td>x --</td>
+                        <td>x = x - 1</td>
+                        <td>x -= 1</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 🔬 Seção 5: E se eu precisar fazer umas contas mais complexas? -->
+        <section class="section">
+            <h2 class="section-title">🔬 E se eu precisar fazer umas contas mais complexas?</h2>
+            <p>Com o uso dos operadores aritméticos e um bom conhecimento de Matemática já é possível resolver quase tudo. Porém, nem sempre queremos ficar estudando teoremas e correndo atrás de resolver tudo manualmente.</p>
+            
+            <p>O JavaScript oferece uma biblioteca padrão chamada <strong>Math</strong>, usando alguns exemplos de comandos que você pode digitar no Console também, se quiser ver o resultado (só não se esqueça que o JS diferencia maiúsculas e minúsculas):</p>
+            
+            <table class="operadores-table">
+                <thead>
+                    <tr>
+                        <th>Digite isso...</th>
+                        <th>... o resultado será</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Math.PI</td>
+                        <td>O valor de Pi com precisão de 15 dígitos</td>
+                    </tr>
+                    <tr>
+                        <td>Math.abs(-200)</td>
+                        <td>O módulo ou valor absoluto do número</td>
+                    </tr>
+                    <tr>
+                        <td>Math.sqrt(81)</td>
+                        <td>A raiz quadrada do número informado</td>
+                    </tr>
+                    <tr>
+                        <td>Math.cbrt(27)</td>
+                        <td>A raiz cúbica do número informado</td>
+                    </tr>
+                    <tr>
+                        <td>Math.ceil(12.2)</td>
+                        <td>Arredonda pra cima o número informado</td>
+                    </tr>
+                    <tr>
+                        <td>Math.floor(15.7)</td>
+                        <td>Arredonda pra baixo o número</td>
+                    </tr>
+                    <tr>
+                        <td>Math.round(18.5)</td>
+                        <td>Faz o arredondamento aritmético tradicional</td>
+                    </tr>
+                    <tr>
+                        <td>Math.trunc(22.9234)</td>
+                        <td>Trunca o valor, eliminando toda a parte fracionária</td>
+                    </tr>
+                    <tr>
+                        <td>Math.min(5, 9, 2, 6, 1, 4)</td>
+                        <td>Indica qual foi o menor valor informado</td>
+                    </tr>
+                    <tr>
+                        <td>Math.max(5, 9, 2, 6, 1, 4)</td>
+                        <td>Indica qual foi o maior valor informado</td>
+                    </tr>
+                    <tr>
+                        <td>Math.random()</td>
+                        <td>Gera um número aleatório entre 0 e 1</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div style="margin-top: 20px; text-align: center;">
+                <button class="demo-button" onclick="demonstrarMath()">🎲 Demonstrar Funções Math</button>
+                <div class="console-output" id="math-output">Clique no botão para ver exemplos das funções Math!</div>
+            </div>
+            
+            <div style="margin-top: 20px; padding: 15px; background: rgba(255, 215, 0, 0.1); border-radius: 10px;">
+                <p><strong>📚 REFERÊNCIA COMPLETA:</strong> Para uma lista completa, consulte o manual oficial da <strong>Fundação Mozilla</strong> no endereço abaixo:</p>
+                <p style="font-family: monospace; word-break: break-all;">https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Math</p>
+            </div>
+        </section>
+
+        <!-- 💡 Seção 6: Exemplos práticos -->
+        <section class="section">
+            <h2 class="section-title">💡 Exemplos Práticos</h2>
+            <p>A maneira mais simples é resolver usando uma <strong>regra de três</strong> simples. Vamos ver dois exemplos:</p>
+            
+            <div class="exercicio-container">
+                <h3>EXEMPLO 01:</h3>
+                <p>Uma loja de tecnologia vende um computador por <strong>R$1850,00</strong>. Na época da Black Friday, o dono da loja autorizou um desconto de 20% no preço do PC para aumentar as vendas e liberar estoque. Qual será o valor do PC na Black Friday?</p>
+                
+                <h3>EXEMPLO 02:</h3>
+                <p>José é um ótimo funcionário. Chega sempre na hora certa e quase não falta ao trabalho. Seu salário é de <strong>R$3480,00</strong> há 2 anos. No próximo mês, o chefe do José resolveu dar um aumento a ele e disse que seu salário vai subir 13%. Qual será o valor do novo salário do José?</p>
+                
+                <div style="margin-top: 20px;">
+                    <h4>Exemplo em JavaScript - Desconto:</h4>
+                    <div class="console-output">
+                        <pre id="codigo-desconto">
+let preco = 1850
+let porc = 20
+let valor = (preco * porc) / 100
+let novo = preco - valor</pre>
+                    </div>
+                    
+                    <h4>Exemplo em JavaScript - Aumento:</h4>
+                    <div class="console-output">
+                        <pre id="codigo-aumento">
+let sal = 3480
+let porc = 13
+let valor = (sal * porc) / 100
+let novo = sal + valor</pre>
+                    </div>
+                </div>
+                
+                <button class="demo-button" onclick="calcularExemplos()">🧮 Calcular Exemplos</button>
+                <div class="console-output" id="exemplos-output">Clique no botão para ver os cálculos!</div>
+            </div>
+        </section>
+
+        <!-- 🧭 Navegação -->
+        <nav class="navigation-footer">
+            <h3>🧭 Navegação do Laboratório</h3>
+            <a href="index.html" class="nav-link">🏠 Portfolio Principal</a>
+            <a href="lab-fundamentos-css.html" class="nav-link">📚 Lab CSS Fundamentals</a>
+            <a href="javascript-fundamentals.html" class="nav-link">⚡ JavaScript Fundamentals</a>
+            <a href="tipografia.html" class="nav-link">📝 Tipografia</a>
+            <a href="posicionamento.html" class="nav-link">📐 Posicionamento</a>
+            <a href="boxmodel.html" class="nav-link">🚀 Jogo Box Model</a>
+            <a href="flexbox.html" class="nav-link">🔄 Flexbox</a>
+            <a href="galeria-lego-naves.html" class="nav-link">🖼️ Galeria LEGO</a>
+            
+            <!-- 📊 Informações do Estudante -->
+            <div style="margin-top: 30px; padding: 20px; background: rgba(0,0,0,0.2); border-radius: 10px;">
+                <p><strong>👨‍🎓 Estudante:</strong> Gabriel Malheiros de Castro</p>
+                <p><strong>🏫 Instituição:</strong> FAESA - 2025-2</p>
+                <p><strong>📚 Disciplina:</strong> Desenvolvimento Web</p>
+                <p><strong>📅 Data:</strong> <span id="data-atual"></span></p>
+            </div>
+        </nav>
+    </div>
+
+    <!-- 🚀 JavaScript -->
+    <script>
+        // 📅 Definir data atual
+        document.getElementById('data-atual').textContent = new Date().toLocaleDateString('pt-BR');
+        
+        // 🧮 Verificar respostas dos exercícios
+        function verificarRespostas() {
+            let corretas = 0;
+            let total = 5;
+            
+            for (let i = 1; i <= total; i++) {
+                const input = document.getElementById(`ex${i}`);
+                const feedback = document.getElementById(`feedback${i}`);
+                const respostaCorreta = parseInt(input.dataset.resposta);
+                const respostaUsuario = parseInt(input.value);
+                
+                if (respostaUsuario === respostaCorreta) {
+                    input.classList.remove('incorreto');
+                    input.classList.add('correto');
+                    feedback.textContent = ' ✅';
+                    corretas++;
+                } else if (input.value.trim() !== '') {
+                    input.classList.remove('correto');
+                    input.classList.add('incorreto');
+                    feedback.textContent = ` ❌ (Resp: ${respostaCorreta})`;
+                } else {
+                    input.classList.remove('correto', 'incorreto');
+                    feedback.textContent = ' ⚪ Não respondido';
+                }
+            }
+            
+            // Mostrar resultado geral
+            const resultado = document.getElementById('resultado-exercicios');
+            resultado.style.display = 'block';
+            
+            if (corretas === total) {
+                resultado.innerHTML = `🎉 Parabéns! Você acertou todas as ${corretas} questões! 🎉`;
+                resultado.classList.add('sucesso');
+            } else {
+                resultado.innerHTML = `📊 Você acertou ${corretas} de ${total} questões. ${corretas >= 3 ? 'Bom trabalho!' : 'Continue praticando!'}`;
+                resultado.classList.remove('sucesso');
+            }
+        }
+        
+        // 🔄 Limpar respostas
+        function limparRespostas() {
+            for (let i = 1; i <= 5; i++) {
+                const input = document.getElementById(`ex${i}`);
+                const feedback = document.getElementById(`feedback${i}`);
+                
+                input.value = '';
+                input.classList.remove('correto', 'incorreto');
+                feedback.textContent = '';
+            }
+            
+            document.getElementById('resultado-exercicios').style.display = 'none';
+        }
+        
+        // 🎲 Demonstrar funções Math
+        function demonstrarMath() {
+            const output = document.getElementById('math-output');
+            const exemplos = [
+                `Math.PI = ${Math.PI}`,
+                `Math.abs(-200) = ${Math.abs(-200)}`,
+                `Math.sqrt(81) = ${Math.sqrt(81)}`,
+                `Math.cbrt(27) = ${Math.cbrt(27)}`,
+                `Math.ceil(12.2) = ${Math.ceil(12.2)}`,
+                `Math.floor(15.7) = ${Math.floor(15.7)}`,
+                `Math.round(18.5) = ${Math.round(18.5)}`,
+                `Math.trunc(22.9234) = ${Math.trunc(22.9234)}`,
+                `Math.min(5, 9, 2, 6, 1, 4) = ${Math.min(5, 9, 2, 6, 1, 4)}`,
+                `Math.max(5, 9, 2, 6, 1, 4) = ${Math.max(5, 9, 2, 6, 1, 4)}`,
+                `Math.random() = ${Math.random()}`
+            ];
+            
+            let i = 0;
+            output.textContent = '';
+            
+            function mostrarProximo() {
+                if (i < exemplos.length) {
+                    output.textContent += exemplos[i] + '\n';
+                    i++;
+                    setTimeout(mostrarProximo, 500);
+                } else {
+                    output.textContent += '\n🎯 Todos os exemplos demonstrados!';
+                }
+            }
+            
+            mostrarProximo();
+        }
+        
+        // 🧮 Calcular exemplos práticos
+        function calcularExemplos() {
+            const output = document.getElementById('exemplos-output');
+            
+            // Exemplo 1 - Desconto
+            let preco = 1850;
+            let porc = 20;
+            let valor = (preco * porc) / 100;
+            let novo = preco - valor;
+            
+            // Exemplo 2 - Aumento
+            let sal = 3480;
+            let porc2 = 13;
+            let valor2 = (sal * porc2) / 100;
+            let novo2 = sal + valor2;
+            
+            output.innerHTML = `
+                <strong>EXEMPLO 1 - Desconto de 20%:</strong><br>
+                Preço original: R$ ${preco.toFixed(2)}<br>
+                Desconto (20%): R$ ${valor.toFixed(2)}<br>
+                Preço final: R$ ${novo.toFixed(2)}<br><br>
+                
+                <strong>EXEMPLO 2 - Aumento de 13%:</strong><br>
+                Salário original: R$ ${sal.toFixed(2)}<br>
+                Aumento (13%): R$ ${valor2.toFixed(2)}<br>
+                Novo salário: R$ ${novo2.toFixed(2)}
+            `;
+        }
+        
+        // 📊 Verificação automática quando o usuário digita
+        for (let i = 1; i <= 5; i++) {
+            document.getElementById(`ex${i}`).addEventListener('input', function() {
+                const input = this;
+                const feedback = document.getElementById(`feedback${i}`);
+                const respostaCorreta = parseInt(input.dataset.resposta);
+                const respostaUsuario = parseInt(input.value);
+                
+                if (input.value.trim() === '') {
+                    input.classList.remove('correto', 'incorreto');
+                    feedback.textContent = '';
+                } else if (respostaUsuario === respostaCorreta) {
+                    input.classList.remove('incorreto');
+                    input.classList.add('correto');
+                    feedback.textContent = ' ✅';
+                } else {
+                    input.classList.remove('correto');
+                    input.classList.add('incorreto');
+                    feedback.textContent = ' ❌';
+                }
+            });
+        }
+        
+        // 🎯 Console log para desenvolvimento
+        console.log('🧮 Página de Matemática - Operadores Aritméticos carregada!');
+        console.log('📚 Use o DevTools para experimentar os operadores matemáticos!');
+        
+        // 🎮 Easter egg: calcular sequência de Fibonacci
+        function fibonacci(n) {
+            if (n <= 1) return n;
+            return fibonacci(n - 1) + fibonacci(n - 2);
+        }
+        
+        // Adicionar função ao window para uso no console
+        window.fibonacci = fibonacci;
+        window.calcularDesconto = function(preco, porcentagem) {
+            return preco * (1 - porcentagem / 100);
+        };
+        window.calcularAumento = function(valor, porcentagem) {
+            return valor * (1 + porcentagem / 100);
+        };
+        
+        console.log('🎮 Easter Eggs disponíveis:');
+        console.log('fibonacci(10) - Calcula o 10º número da sequência de Fibonacci');
+        console.log('calcularDesconto(1850, 20) - Calcula desconto');
+        console.log('calcularAumento(3480, 13) - Calcula aumento');
+    </script>
+</body>
+</html>
