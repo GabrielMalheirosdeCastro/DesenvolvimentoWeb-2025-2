@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Monitor, Tablet, Smartphone, Globe, ExternalLink } from 'lucide-react';
+import { Monitor, Tablet, Smartphone, Globe } from 'lucide-react';
 import { cn } from './utils';
 import { PortfolioLink } from './portfolio-link';
 

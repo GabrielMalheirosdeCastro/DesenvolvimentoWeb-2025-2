@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ExternalLink, Globe, Monitor, AlertCircle, CheckCircle } from 'lucide-react';
+import { ExternalLink, Globe, AlertCircle, CheckCircle } from 'lucide-react';
 import { cn } from './utils';
 
 interface LocalhostLinkProps {
@@ -24,7 +24,6 @@ export const Localhost3000Link: React.FC<LocalhostLinkProps> = ({
     const detectEnvironment = () => {
       const hostname = window.location.hostname;
       const protocol = window.location.protocol;
-      const port = window.location.port;
 
       // 🚀 PRIORIDADE 1: Vercel Deploy Real
       if (hostname === 'desenvolvimento-web-2025-2.vercel.app' || hostname.includes('desenvolvimento-web-2025-2') || hostname.includes('vercel.app')) {
@@ -104,21 +103,6 @@ export const Localhost3000Link: React.FC<LocalhostLinkProps> = ({
       return isOnline ? <CheckCircle className="w-4 h-4 text-green-500" /> : <AlertCircle className="w-4 h-4 text-red-500" />;
     }
     return <Globe className="w-4 h-4 text-blue-500" />;
-  };
-
-  const getStatusText = () => {
-    switch (environment) {
-      case 'local':
-        return isOnline ? 'Local Online (desenvolvimento)' : 'Local Offline - Execute npm run dev';
-      case 'custom-domain':
-        return 'Vercel Online';
-      case 'github':
-        return 'GitHub Pages Online (backup)';
-      case 'production':
-        return 'Vercel Online';
-      default:
-        return 'Status Desconhecido';
-    }
   };
 
   const getDisplayUrl = () => {

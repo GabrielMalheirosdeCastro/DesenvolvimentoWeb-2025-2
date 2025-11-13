@@ -25,7 +25,6 @@ interface PortfolioLinkProps {
 export const PortfolioLink: React.FC<PortfolioLinkProps> = ({
   className,
   variant = 'button',
-  size = 'md',
   showDebugInfo = false
 }) => {
   const [config, setConfig] = useState<PortfolioConfig>({
@@ -43,7 +42,6 @@ export const PortfolioLink: React.FC<PortfolioLinkProps> = ({
 
   const [detectedProvider, setDetectedProvider] = useState<string>('Unknown');
   const [isValidUrl, setIsValidUrl] = useState(false);
-  const [isOnline, setIsOnline] = useState(false);
 
   // 🔍 Detectar provedor automaticamente pela URL
   const detectProvider = useCallback((url: string): string => {
@@ -154,7 +152,6 @@ export const PortfolioLink: React.FC<PortfolioLinkProps> = ({
       
       setDetectedProvider(provider);
       setIsValidUrl(isValid);
-      setIsOnline(isValid && cssConfig.status === 'deployed');
     };
 
     updateConfig();
@@ -297,13 +294,11 @@ export const PortfolioLink: React.FC<PortfolioLinkProps> = ({
 
   // 🎯 Detectar ambiente e renderizar adequadamente
   const [isMobile, setIsMobile] = useState(false);
-  const [isTablet, setIsTablet] = useState(false);
 
   useEffect(() => {
     const checkViewport = () => {
       const width = window.innerWidth;
       setIsMobile(width < 768);
-      setIsTablet(width >= 768 && width < 1024);
     };
 
     checkViewport();
