@@ -473,19 +473,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
                     Acessar Demo Posicionamento
                   </a>
                 </div>
-                <div className="bg-white/70 rounded-lg p-4 border border-blue-200">
-                  <div className="text-2xl mb-2">🧮</div>
-                  <h3 className="font-semibold text-blue-800 mb-1">Matemática Operadores</h3>
-                  <p className="text-sm text-blue-600 mb-3">Exercícios práticos de operadores aritméticos</p>
-                  <a 
-                    href="/matematica-operadores.html" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
-                  >
-                    Acessar Demo Matemática
-                  </a>
-                </div>
+
                 <div className="bg-white/70 rounded-lg p-4 border border-blue-200">
                   <div className="text-2xl mb-2">⚡</div>
                   <h3 className="font-semibold text-blue-800 mb-1">JavaScript Fundamentals</h3>
