@@ -95,7 +95,7 @@ const LegoNaves: React.FC<LegoNavesProps> = ({ className, enableHtmlImages = fal
                     )}
                     
                     <div className="mt-2 text-xs text-blue-600 font-medium">
-                      📷 Preview - <a href="galeria-lego-naves.html" className="underline hover:text-blue-800">Ver Galeria HTML</a>
+                      📷 Preview - Explore na seção "PÁGINAS INDIVIDUAIS" abaixo
                     </div>
                   </div>
                 </div>
@@ -186,44 +186,15 @@ const LegoNaves: React.FC<LegoNavesProps> = ({ className, enableHtmlImages = fal
         </div>
       </div>
 
-      {/* Links para Galeria HTML */}
+      {/* Link para Seção Principal */}
       <div className="mt-8 text-center">
-        <div className="inline-flex flex-col sm:flex-row gap-3 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl border border-blue-200">
-          <a 
-            href="galeria-lego-naves.html" 
-            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold shadow-lg hover:shadow-xl"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            🖼️ Ver Galeria HTML Completa
-          </a>
-          <a 
-            href="boxmodel.html" 
-            className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-semibold shadow-lg hover:shadow-xl"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            🚀 Jogo Box Model - Adivinha a Nave
-          </a>
-          <a 
-            href="flexbox.html" 
-            className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-semibold shadow-lg hover:shadow-xl"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            📐 Flexbox - Layout Responsivo
-          </a>
-          <a 
-            href="flexbox.html" 
-            className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-semibold shadow-lg hover:shadow-xl"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            📐 Flexbox - Layout Flexível
-          </a>
-          <span className="text-sm text-gray-600 self-center">
-            Página HTML separada com imagens em alta qualidade
-          </span>
+        <div className="inline-flex flex-col p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl border border-blue-200">
+          <p className="text-blue-800 font-semibold mb-2">
+            � Explore todas as páginas HTML na seção principal
+          </p>
+          <p className="text-sm text-blue-600">
+            Role para baixo para encontrar a seção "PÁGINAS INDIVIDUAIS OPCIONAIS PRA EXPLORAR"
+          </p>
         </div>
       </div>
 

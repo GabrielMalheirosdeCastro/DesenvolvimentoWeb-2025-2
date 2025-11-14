@@ -408,89 +408,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
 
         {/* Acesso direto apenas via navegação externa - sem botões localhost */}
 
-        {/* Seção de Páginas HTML Estáticas */}
-        <div className="max-w-4xl mx-auto mt-12">
-          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 border-2 border-blue-200 shadow-lg">
-            <div className="text-center mb-6">
-              <h2 className="text-3xl font-bold text-blue-800 mb-3 flex items-center justify-center gap-3">
-                <Monitor size={32} className="text-blue-600" />
-                📄 Demonstrações HTML + CSS
-              </h2>
-              <p className="text-lg text-blue-700 mb-4">
-                Explore nossas demonstrações de CSS fundamentais e design responsivo
-              </p>
-              
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                <div className="bg-white/70 rounded-lg p-4 border border-blue-200">
-                  <div className="text-2xl mb-2">📱</div>
-                  <h3 className="font-semibold text-blue-800 mb-1">Design Responsivo</h3>
-                  <p className="text-sm text-blue-600 mb-3">Demonstração com vídeos e imagens responsivas</p>
-                  <a 
-                    href="/responsivo.html" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
-                  >
-                    Acessar Demo Responsivo
-                  </a>
-                </div>
-                <div className="bg-white/70 rounded-lg p-4 border border-blue-200">
-                  <div className="text-2xl mb-2">📦</div>
-                  <h3 className="font-semibold text-blue-800 mb-1">Flexbox Layout</h3>
-                  <p className="text-sm text-blue-600 mb-3">Estudos avançados de layout flexível</p>
-                  <a 
-                    href="/flexbox.html" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
-                  >
-                    Acessar Demo Flexbox
-                  </a>
-                </div>
-                <div className="bg-white/70 rounded-lg p-4 border border-blue-200">
-                  <div className="text-2xl mb-2">📝</div>
-                  <h3 className="font-semibold text-blue-800 mb-1">Tipografia CSS</h3>
-                  <p className="text-sm text-blue-600 mb-3">Estudo de fontes e hierarquia visual</p>
-                  <a 
-                    href="/tipografia.html" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
-                  >
-                    Acessar Demo Tipografia
-                  </a>
-                </div>
-                <div className="bg-white/70 rounded-lg p-4 border border-blue-200">
-                  <div className="text-2xl mb-2">📍</div>
-                  <h3 className="font-semibold text-blue-800 mb-1">Posicionamento</h3>
-                  <p className="text-sm text-blue-600 mb-3">Técnicas avançadas de posicionamento CSS</p>
-                  <a 
-                    href="/posicionamento.html" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
-                  >
-                    Acessar Demo Posicionamento
-                  </a>
-                </div>
-
-                <div className="bg-white/70 rounded-lg p-4 border border-blue-200">
-                  <div className="text-2xl mb-2">⚡</div>
-                  <h3 className="font-semibold text-blue-800 mb-1">JavaScript Fundamentals</h3>
-                  <p className="text-sm text-blue-600 mb-3">Conceitos básicos de programação JavaScript</p>
-                  <a 
-                    href="/javascript-fundamentals.html" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
-                  >
-                    Acessar Demo JavaScript
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        {/* Seção de Demonstrações movida para o final */}
 
         {/* Seção Destacada - Galeria Figma */}
         <div className="max-w-4xl mx-auto mt-12">
@@ -548,6 +466,184 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
         {/* Seção do Desafio Morse */}
         <div className="max-w-4xl mx-auto mt-12">
           <MorseChallenge />
+        </div>
+
+        {/* PÁGINAS INDIVIDUAIS OPCIONAIS PRA EXPLORAR */}
+        <div className="max-w-7xl mx-auto mt-16">
+          <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-3xl p-8 border-3 border-orange-300 shadow-xl">
+            <div className="text-center mb-8">
+              <h2 className="text-4xl font-bold text-orange-800 mb-4 flex items-center justify-center gap-3">
+                <Monitor size={40} className="text-orange-600" />
+                📚 PÁGINAS INDIVIDUAIS OPCIONAIS PRA EXPLORAR
+              </h2>
+              <p className="text-xl text-orange-700 mb-6 font-semibold">
+                Explore nossa coleção completa de demonstrações e exercícios acadêmicos
+              </p>
+            </div>
+            
+            {/* Grid de todas as páginas organizadas por categoria */}
+            <div className="space-y-8">
+              
+              {/* Categoria 1: CSS Fundamentais */}
+              <div className="bg-white/80 rounded-2xl p-6 border-2 border-blue-200">
+                <h3 className="text-2xl font-bold text-blue-800 mb-4 flex items-center gap-3">
+                  🎨 CSS Fundamentais
+                </h3>
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div className="bg-blue-50 rounded-xl p-4 border border-blue-200 hover:shadow-md transition-all">
+                    <div className="text-3xl mb-2">📱</div>
+                    <h4 className="font-semibold text-blue-800 mb-2">Design Responsivo</h4>
+                    <p className="text-sm text-blue-600 mb-3">Demonstrações com vídeos e imagens responsivas</p>
+                    <a 
+                      href="/responsivo.html" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors w-full text-center"
+                    >
+                      Explorar Responsivo
+                    </a>
+                  </div>
+                  
+                  <div className="bg-blue-50 rounded-xl p-4 border border-blue-200 hover:shadow-md transition-all">
+                    <div className="text-3xl mb-2">📦</div>
+                    <h4 className="font-semibold text-blue-800 mb-2">Flexbox Layout</h4>
+                    <p className="text-sm text-blue-600 mb-3">Estudos avançados de layout flexível CSS</p>
+                    <a 
+                      href="/flexbox.html" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors w-full text-center"
+                    >
+                      Explorar Flexbox
+                    </a>
+                  </div>
+                  
+                  <div className="bg-blue-50 rounded-xl p-4 border border-blue-200 hover:shadow-md transition-all">
+                    <div className="text-3xl mb-2">📝</div>
+                    <h4 className="font-semibold text-blue-800 mb-2">Tipografia CSS</h4>
+                    <p className="text-sm text-blue-600 mb-3">Estudo de fontes e hierarquia visual</p>
+                    <a 
+                      href="/tipografia.html" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors w-full text-center"
+                    >
+                      Explorar Tipografia
+                    </a>
+                  </div>
+                  
+                  <div className="bg-blue-50 rounded-xl p-4 border border-blue-200 hover:shadow-md transition-all">
+                    <div className="text-3xl mb-2">📍</div>
+                    <h4 className="font-semibold text-blue-800 mb-2">Posicionamento CSS</h4>
+                    <p className="text-sm text-blue-600 mb-3">Técnicas avançadas de posicionamento</p>
+                    <a 
+                      href="/posicionamento.html" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors w-full text-center"
+                    >
+                      Explorar Posicionamento
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Categoria 2: Laboratórios e Exercícios */}
+              <div className="bg-white/80 rounded-2xl p-6 border-2 border-green-200">
+                <h3 className="text-2xl font-bold text-green-800 mb-4 flex items-center gap-3">
+                  🧪 Laboratórios e Exercícios
+                </h3>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <div className="bg-green-50 rounded-xl p-4 border border-green-200 hover:shadow-md transition-all">
+                    <div className="text-3xl mb-2">📚</div>
+                    <h4 className="font-semibold text-green-800 mb-2">Lab Fundamentos CSS</h4>
+                    <p className="text-sm text-green-600 mb-3">Exercícios fundamentais de CSS e HTML</p>
+                    <a 
+                      href="/lab-fundamentos-css.html" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition-colors w-full text-center"
+                    >
+                      Explorar Lab CSS
+                    </a>
+                  </div>
+                  
+                  <div className="bg-green-50 rounded-xl p-4 border border-green-200 hover:shadow-md transition-all">
+                    <div className="text-3xl mb-2">🎯</div>
+                    <h4 className="font-semibold text-green-800 mb-2">Box Model Game</h4>
+                    <p className="text-sm text-green-600 mb-3">Jogo de adivinhação de naves espaciais</p>
+                    <a 
+                      href="/boxmodel.html" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition-colors w-full text-center"
+                    >
+                      Jogar Box Model
+                    </a>
+                  </div>
+                  
+                  <div className="bg-green-50 rounded-xl p-4 border border-green-200 hover:shadow-md transition-all">
+                    <div className="text-3xl mb-2">🧮</div>
+                    <h4 className="font-semibold text-green-800 mb-2">Matemática & Operadores</h4>
+                    <p className="text-sm text-green-600 mb-3">Calculadora e operações matemáticas</p>
+                    <a 
+                      href="/matematica-operadores.html" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition-colors w-full text-center"
+                    >
+                      Explorar Matemática
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Categoria 3: Projetos e Galerias */}
+              <div className="bg-white/80 rounded-2xl p-6 border-2 border-purple-200">
+                <h3 className="text-2xl font-bold text-purple-800 mb-4 flex items-center gap-3">
+                  🚀 Projetos e Galerias
+                </h3>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="bg-purple-50 rounded-xl p-4 border border-purple-200 hover:shadow-md transition-all">
+                    <div className="text-3xl mb-2">🛸</div>
+                    <h4 className="font-semibold text-purple-800 mb-2">Galeria LEGO Naves</h4>
+                    <p className="text-sm text-purple-600 mb-3">Coleção interativa de naves LEGO espaciais</p>
+                    <a 
+                      href="/galeria-lego-naves.html" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-700 transition-colors w-full text-center"
+                    >
+                      Explorar Galeria LEGO
+                    </a>
+                  </div>
+                  
+                  <div className="bg-purple-50 rounded-xl p-4 border border-purple-200 hover:shadow-md transition-all">
+                    <div className="text-3xl mb-2">⚡</div>
+                    <h4 className="font-semibold text-purple-800 mb-2">JavaScript Fundamentals</h4>
+                    <p className="text-sm text-purple-600 mb-3">Conceitos básicos de programação JavaScript</p>
+                    <a 
+                      href="/javascript-fundamentals.html" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-700 transition-colors w-full text-center"
+                    >
+                      Explorar JavaScript
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            
+            {/* Nota informativa */}
+            <div className="mt-8 p-4 bg-orange-100 border-2 border-orange-300 rounded-xl text-center">
+              <p className="text-orange-800 font-medium">
+                💡 <strong>Dica:</strong> Todas essas páginas são independentes e podem ser exploradas em qualquer ordem. 
+                Use a navegação inferior para voltar ao portfólio principal.
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Navegação entre telas - REMOVIDA - Agora usa navegação fixa inferior */}

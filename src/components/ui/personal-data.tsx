@@ -160,78 +160,25 @@ export const PersonalData: React.FC<PersonalDataProps> = ({ className }) => {
         </div>
       </div>
 
-      {/* Links Acadêmicos */}
+      {/* Redirecionamento para Seção Principal */}
       <div className="bg-white rounded-lg p-6 shadow-lg border border-gray-200">
         <h3 className="text-xl font-semibold mb-4 flex items-center gap-2 text-gray-800">
           <GraduationCap size={20} />
           Links Acadêmicos - FAESA 2025-2
         </h3>
         
-        <div className="grid md:grid-cols-2 gap-3">
-          <a 
-            href="galeria-lego-naves.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 p-3 bg-gradient-to-r from-blue-50 to-blue-100 border border-blue-200 rounded-lg hover:from-blue-100 hover:to-blue-200 transition-all"
-          >
-            <span className="text-2xl">🖼️</span>
-            <div>
-              <div className="font-medium text-blue-800">Galeria LEGO Naves</div>
-              <div className="text-sm text-blue-600">HTML Puro + CSS</div>
-            </div>
-          </a>
-          
-          <a 
-            href="boxmodel.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 p-3 bg-gradient-to-r from-purple-50 to-purple-100 border border-purple-200 rounded-lg hover:from-purple-100 hover:to-purple-200 transition-all"
-          >
-            <span className="text-2xl">🚀</span>
-            <div>
-              <div className="font-medium text-purple-800">Jogo Box Model</div>
-              <div className="text-sm text-purple-600">Adivinha a Nave Espacial</div>
-            </div>
-          </a>
-          
-          <a 
-            href="lab-fundamentos-css.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 p-3 bg-gradient-to-r from-green-50 to-green-100 border border-green-200 rounded-lg hover:from-green-100 hover:to-green-200 transition-all"
-          >
-            <span className="text-2xl">🧪</span>
-            <div>
-              <div className="font-medium text-green-800">Lab Fundamentos CSS</div>
-              <div className="text-sm text-green-600">Exercícios Práticos</div>
-            </div>
-          </a>
-          
-          <a 
-            href="tipografia.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 p-3 bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 rounded-lg hover:from-orange-100 hover:to-orange-200 transition-all"
-          >
-            <span className="text-2xl">✏️</span>
-            <div>
-              <div className="font-medium text-orange-800">Tipografia</div>
-              <div className="text-sm text-orange-600">Estudo de Fontes</div>
-            </div>
-          </a>
-          
-          <a 
-            href="posicionamento.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 p-3 bg-gradient-to-r from-teal-50 to-teal-100 border border-teal-200 rounded-lg hover:from-teal-100 hover:to-teal-200 transition-all"
-          >
-            <span className="text-2xl">📐</span>
-            <div>
-              <div className="font-medium text-teal-800">Posicionamento CSS</div>
-              <div className="text-sm text-teal-600">Layout e Posição</div>
-            </div>
-          </a>
+        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200 text-center">
+          <div className="text-3xl mb-3">📚</div>
+          <h4 className="text-lg font-semibold text-blue-800 mb-2">
+            Todas as páginas HTML estão organizadas na seção principal!
+          </h4>
+          <p className="text-blue-600 mb-4">
+            Role para baixo para encontrar a seção <strong>"PÁGINAS INDIVIDUAIS OPCIONAIS PRA EXPLORAR"</strong> 
+            com todas as 9 páginas organizadas por categoria.
+          </p>
+          <div className="text-sm text-blue-500">
+            ✨ Melhor organização, sem duplicatas!
+          </div>
         </div>
       </div>
 
