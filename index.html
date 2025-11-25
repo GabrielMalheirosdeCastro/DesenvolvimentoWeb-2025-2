@@ -4,6 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
+    <!-- 🛡️ Headers de Segurança -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()" />
+    
+    <!-- 📈 Performance e Carregamento -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link rel="dns-prefetch" href="//unpkg.com" />
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
+    
     <!-- Informações básicas do projeto acadêmico FAESA -->
     <title>Gabriel Malheiros - Interface Gráfica Pessoal | FAESA 2025-2</title>
     <meta name="description" content="Projeto acadêmico de Interface Gráfica Pessoal - Gabriel Malheiros de Castro, estudante FAESA. Demonstração de React + TypeScript." />
@@ -22,11 +35,104 @@
     <meta property="og:url" content="https://desenvolvimento-web-2025-2.vercel.app" />
     <meta property="og:type" content="website" />
     
+    <!-- 🚀 CSS Crítico Inline para First Paint -->
+    <style>
+      /* Loading skeleton para melhor UX */
+      .loading-skeleton {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite;
+      }
+      @keyframes loading {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+      
+      /* Otimizações para Core Web Vitals */
+      body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+      #root { min-height: 100vh; }
+      .critical-content { visibility: visible !important; opacity: 1 !important; }
+      
+      /* Anti-FOUC */
+      .react-app { opacity: 0; transition: opacity 0.3s ease; }
+      .react-app.loaded { opacity: 1; }
+    </style>
+    
     <!-- Vite will inject development assets automatically -->
   </head>
   <body class="react-app">
     <!-- ⚡ Este é o React App Principal -->
-    <div id="root"></div>
+    <div id="root">
+      <!-- 💀 Loading skeleton enquanto React carrega -->
+      <div class="loading-skeleton" style="height: 100vh; display: flex; align-items: center; justify-content: center;">
+        <div style="text-align: center;">
+          <div style="width: 60px; height: 60px; border-radius: 50%; background: #e0e0e0; margin: 0 auto 20px;"></div>
+          <div style="width: 200px; height: 20px; background: #e0e0e0; border-radius: 10px; margin: 0 auto 10px;"></div>
+          <div style="width: 120px; height: 16px; background: #f0f0f0; border-radius: 8px; margin: 0 auto;"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 🛡️ Sistema de Segurança e Performance -->
+    <script>
+      // Carregar sistemas de segurança antes do React
+      function loadSecuritySystems() {
+        return Promise.all([
+          loadScript('/src/utils/error-handling-system.js'),
+          loadScript('/src/utils/security-performance-enhancer.js'),
+          loadScript('/src/utils/loading-optimizer.js')
+        ]).catch(error => {
+          console.warn('⚠️ Alguns sistemas de segurança não puderam ser carregados:', error);
+        });
+      }
+      
+      function loadScript(src) {
+        return new Promise((resolve, reject) => {
+          const script = document.createElement('script');
+          script.src = src;
+          script.type = 'module';
+          script.onload = resolve;
+          script.onerror = reject;
+          document.head.appendChild(script);
+        });
+      }
+      
+      // Inicializar sistemas antes do React
+      loadSecuritySystems().finally(() => {
+        // Marcar que sistemas estão carregados
+        window.securitySystemsLoaded = true;
+        
+        // Remover loading skeleton após sistemas carregarem
+        setTimeout(() => {
+          const skeleton = document.querySelector('.loading-skeleton');
+          if (skeleton) {
+            skeleton.style.opacity = '0';
+            setTimeout(() => skeleton.remove(), 300);
+          }
+          document.body.classList.add('loaded');
+        }, 500);
+      });
+      
+      // Performance monitoring básico
+      window.addEventListener('load', () => {
+        if (window.performance && window.performance.timing) {
+          const timing = window.performance.timing;
+          const loadTime = timing.loadEventEnd - timing.navigationStart;
+          console.log('📊 Tempo de carregamento:', loadTime + 'ms');
+        }
+      });
+      
+      // Anti-tampering básico
+      (function() {
+        if (typeof window !== 'undefined') {
+          const originalConsole = window.console;
+          Object.defineProperty(window, 'console', {
+            get() { return originalConsole; },
+            set() { /* Ignore attempts to override console */ }
+          });
+        }
+      })();
+    </script>
     
     <!-- Script de entrada do React (necessário para Vite) -->
     <script type="module" src="/src/main.tsx"></script>

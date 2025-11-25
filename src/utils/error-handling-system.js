@@ -686,8 +686,13 @@ class ErrorHandlingSystem {
 // 🚀 Inicializar sistema globalmente
 window.ErrorHandling = new ErrorHandlingSystem();
 
-// 🔧 Funções utilitárias globais
+// 🔧 Funções utilitárias globais aprimoradas
 window.safeExecute = function(fn, fallback = () => {}) {
+    if (typeof fn !== 'function') {
+        console.error('❌ safeExecute: fn deve ser uma função');
+        return fallback();
+    }
+    
     try {
         return fn();
     } catch (error) {
@@ -695,13 +700,19 @@ window.safeExecute = function(fn, fallback = () => {}) {
             type: 'safe_execute',
             message: error.message,
             stack: error.stack,
-            functionName: fn.name
+            functionName: fn.name || 'anonymous',
+            context: 'safeExecute'
         });
         return fallback();
     }
 };
 
 window.safeAsyncExecute = async function(fn, fallback = async () => {}) {
+    if (typeof fn !== 'function') {
+        console.error('❌ safeAsyncExecute: fn deve ser uma função');
+        return await fallback();
+    }
+    
     try {
         return await fn();
     } catch (error) {
@@ -709,10 +720,46 @@ window.safeAsyncExecute = async function(fn, fallback = async () => {}) {
             type: 'safe_async_execute',
             message: error.message,
             stack: error.stack,
-            functionName: fn.name
+            functionName: fn.name || 'anonymous',
+            context: 'safeAsyncExecute'
         });
         return await fallback();
     }
+};
+
+// 🛡️ Função para sanitizar entrada de dados
+window.sanitizeInput = function(input, type = 'text') {
+    if (typeof input !== 'string') {
+        return String(input);
+    }
+    
+    switch (type) {
+        case 'html':
+            return input
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#x27;')
+                .replace(/\//g, '&#x2F;');
+        case 'url':
+            try {
+                return new URL(input).href;
+            } catch {
+                return '';
+            }
+        case 'text':
+        default:
+            return input.replace(/[<>]/g, '');
+    }
+};
+
+// 🔒 Função para validar origem de eventos
+window.validateEventOrigin = function(event, allowedOrigins = [window.location.origin]) {
+    if (!event || !event.origin) {
+        return true; // Eventos locais
+    }
+    
+    return allowedOrigins.includes(event.origin);
 };
 
 console.log('🛡️ Sistema de Error Handling Global carregado');

@@ -5,6 +5,7 @@
  * Descrição: Implementação otimizada das funções de ação com boas práticas
  * Autor: Gabriel Malheiros de Castro
  * Curso: Desenvolvimento Web - FAESA 2025-2
+ * Versão: 2.0.0 - Melhorias de Segurança e Performance
  */
 
 // ========================================
@@ -14,10 +15,22 @@
 const CONFIG = {
     ELEMENTO_SAIDA: 'saida',
     DELAY_ANIMACAO: 300,
+    MAX_EXECUCOES_POR_MINUTO: 50, // Rate limiting
+    CACHE_SIZE: 100,
     MENSAGENS_ERRO: {
         ELEMENTO_NAO_ENCONTRADO: '❌ Erro: Elemento de saída não encontrado!',
-        FUNCAO_INVALIDA: '❌ Erro: Função inválida chamada!'
+        FUNCAO_INVALIDA: '❌ Erro: Função inválida chamada!',
+        RATE_LIMIT_EXCEDIDO: '⚠️ Muitas execuções! Aguarde um momento.',
+        ENTRADA_INVALIDA: '❌ Entrada inválida detectada!'
     }
+};
+
+// Estado global com proteção
+const STATE = {
+    execucoes: [],
+    cache: new Map(),
+    lastExecution: 0,
+    isInitialized: false
 };
 
 // ========================================
@@ -33,6 +46,12 @@ const CONFIG = {
  */
 function atualizarSaida(mensagem, emoji = '🎯', cor = '#22c55e') {
     try {
+        // Rate limiting
+        if (!checkRateLimit()) {
+            mostrarErro(CONFIG.MENSAGENS_ERRO.RATE_LIMIT_EXCEDIDO);
+            return false;
+        }
+
         const elementoSaida = document.getElementById(CONFIG.ELEMENTO_SAIDA);
         
         if (!elementoSaida) {
@@ -40,8 +59,17 @@ function atualizarSaida(mensagem, emoji = '🎯', cor = '#22c55e') {
             return false;
         }
 
+        // Sanitizar mensagem
+        const mensagemSegura = sanitizeInput(mensagem);
+        
+        if (!mensagemSegura || mensagemSegura.trim() === '') {
+            mostrarErro(CONFIG.MENSAGENS_ERRO.ENTRADA_INVALIDA);
+            return false;
+        }
+
         // Adicionar efeito de transição suave
         elementoSaida.style.opacity = '0.5';
+        elementoSaida.style.transition = 'all 0.3s ease';
         
         setTimeout(() => {
             const timestamp = new Date().toLocaleTimeString('pt-BR');
@@ -49,7 +77,7 @@ function atualizarSaida(mensagem, emoji = '🎯', cor = '#22c55e') {
             elementoSaida.innerHTML = `
                 <div style="border-left: 4px solid ${cor}; padding-left: 15px;">
                     <p style="font-size: 16px; margin-bottom: 5px;">
-                        ${emoji} ${mensagem}
+                        ${emoji} ${mensagemSegura}
                     </p>
                     <small style="opacity: 0.7; font-size: 12px;">
                         ⏰ Executado às ${timestamp}
@@ -58,12 +86,16 @@ function atualizarSaida(mensagem, emoji = '🎯', cor = '#22c55e') {
             `;
             
             elementoSaida.style.opacity = '1';
+            elementoSaida.style.transform = 'scale(1.02)';
             
             // Adicionar efeito visual temporário
-            elementoSaida.classList.add('pulse');
             setTimeout(() => {
-                elementoSaida.classList.remove('pulse');
-            }, 1000);
+                elementoSaida.style.transform = 'scale(1)';
+                elementoSaida.classList.add('pulse');
+                setTimeout(() => {
+                    elementoSaida.classList.remove('pulse');
+                }, 1000);
+            }, 200);
             
         }, CONFIG.DELAY_ANIMACAO);
 
@@ -71,7 +103,57 @@ function atualizarSaida(mensagem, emoji = '🎯', cor = '#22c55e') {
 
     } catch (erro) {
         console.error('❌ Erro ao atualizar saída:', erro);
+        mostrarErro('❌ Erro interno ao atualizar saída');
         return false;
+    }
+}
+
+/**
+ * 🔒 Verificar rate limiting
+ */
+function checkRateLimit() {
+    const now = Date.now();
+    const oneMinuteAgo = now - 60000;
+    
+    // Limpar execuções antigas
+    STATE.execucoes = STATE.execucoes.filter(time => time > oneMinuteAgo);
+    
+    if (STATE.execucoes.length >= CONFIG.MAX_EXECUCOES_POR_MINUTO) {
+        return false;
+    }
+    
+    STATE.execucoes.push(now);
+    return true;
+}
+
+/**
+ * 🛡️ Sanitizar entrada de dados
+ */
+function sanitizeInput(input) {
+    if (typeof input !== 'string') {
+        return String(input);
+    }
+    
+    return input
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#x27;')
+        .replace(/javascript:/gi, '')
+        .replace(/on\w+=/gi, '');
+}
+
+/**
+ * ❌ Mostrar erro de forma segura
+ */
+function mostrarErro(mensagem) {
+    const elementoSaida = document.getElementById(CONFIG.ELEMENTO_SAIDA);
+    if (elementoSaida) {
+        elementoSaida.innerHTML = `
+            <div style="border-left: 4px solid #ef4444; padding-left: 15px; color: #ef4444;">
+                ${sanitizeInput(mensagem)}
+            </div>
+        `;
     }
 }
 
