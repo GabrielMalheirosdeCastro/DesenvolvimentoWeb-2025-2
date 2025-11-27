@@ -4,12 +4,33 @@
 
 ## 📋 **Descrição do Projeto**
 
-Site pessoal profissional que demonstra competências em desenvolvimento web moderno, incluindo HTML5 semântico, CSS3 avançado, design responsivo e arquitetura de componentes React. O projeto converte assets do Figma para código funcional, implementando um sistema de galeria interativa, dados pessoais dinâmicos e desafio de código morse.
+Site pessoal profissional que demonstra competências em desenvolvimento web moderno, incluindo HTML5 semântico, CSS3 avançado, design responsivo e arquitetura de componentes React. O projeto inclui **sistema de segurança avançado** com ReferenceError e RangeError para proteção contra downloads ilegais e acessos não autorizados.
+
+## 🛡️ **SISTEMA DE SEGURANÇA AVANÇADO - NOVO!**
+
+Este portfólio implementa um **sistema completo de segurança** com as seguintes proteções:
+
+### 🚫 **Proteções Implementadas**
+- ✅ **ReferenceError customizado** para funções bloqueadas (eval, Function, etc.)
+- ✅ **RangeError customizado** para limites de segurança (arrays, strings)
+- ✅ **Anti-download** completo (right-click, drag & drop, print, save)
+- ✅ **Bloqueio de DevTools** (F12, Ctrl+Shift+I, View Source)
+- ✅ **Monitoramento comportamental** (detecção de bots e automação)
+- ✅ **Sistema de alertas** escalonados com ban automático
+- ✅ **Headers de segurança** avançados no Vercel
+
+### 🔧 **Scripts de Segurança**
+```bash
+npm run build:secure     # Build com proteção automática
+npm run security-test    # Testar injeção de segurança
+```
+
+**📖 Documentação completa**: [SECURITY-DOCUMENTATION.md](./SECURITY-DOCUMENTATION.md)
 
 ## 🔗 **Links Principais**
 
-### 🌐 **Acesso ao Site**
-- **🚀 Site Principal**: https://desenvolvimento-web-2025-2-2gwgg326v.vercel.app
+### 🌐 **Acesso ao Site Protegido**
+- **🚀 Site Principal**: https://desenvolvimento-web-2025-2.vercel.app
 
 ### 📂 **Repositório**
 - **📁 Código GitHub**: https://github.com/GabrielMalheirosdeCastro/DesenvolvimentoWeb-2025-2

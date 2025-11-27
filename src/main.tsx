@@ -6,7 +6,14 @@ import './styles/figma-gallery-fixes.css'
 import './styles/figma-visual-fixes.css'
 import './index.css'
 
-// 🚀 Importar utilitários de debug para desenvolvimento
+// 🛡️ Importar sistemas de segurança avançados
+import './utils/advanced-security-system.js'
+import './utils/anti-download-protection-simple.js'
+import './utils/security-monitor.js'
+import './utils/security-performance-enhancer.js'
+import './utils/error-handling-system.js'
+
+// �🚀 Importar utilitários de debug para desenvolvimento
 if (import.meta.env.DEV) {
   import('./utils/spaceship-debug');
   import('./utils/spaceship-tests');
