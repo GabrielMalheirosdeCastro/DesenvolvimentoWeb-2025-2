@@ -314,7 +314,116 @@
     <!-- 🚀 JavaScript -->
     <script>
         // ==========================================
-        // 🎯 FUNÇÕES DE DEMONSTRAÇÃO BÁSICAS
+        // 🛡️ SISTEMA DE VALIDAÇÃO COM MAX_VALUE e MIN_VALUE
+        // ==========================================
+        
+        // Constantes para validação numérica
+        const JS_MATH_CONSTANTS = {
+            MAX_VALUE: Number.MAX_VALUE,
+            MIN_VALUE: Number.MIN_VALUE,
+            MAX_SAFE_INTEGER: Number.MAX_SAFE_INTEGER,
+            MIN_SAFE_INTEGER: Number.MIN_SAFE_INTEGER
+        };
+        
+        // Função principal de validação numérica
+        function validarNumeroJS(valor, contexto = 'cálculo') {
+            const resultado = {
+                valido: true,
+                valor: valor,
+                avisos: [],
+                erros: []
+            };
+            
+            // Verificar tipo
+            if (typeof valor !== 'number') {
+                resultado.valido = false;
+                resultado.erros.push(`Tipo inválido em ${contexto}: esperado number, recebido ${typeof valor}`);
+                return resultado;
+            }
+            
+            // Verificar NaN
+            if (isNaN(valor)) {
+                resultado.valido = false;
+                resultado.erros.push(`NaN detectado em ${contexto}`);
+                return resultado;
+            }
+            
+            // Verificar infinito
+            if (!isFinite(valor)) {
+                resultado.valido = false;
+                resultado.erros.push(`Valor infinito detectado em ${contexto}: ${valor}`);
+                return resultado;
+            }
+            
+            // Verificar overflow
+            if (Math.abs(valor) > JS_MATH_CONSTANTS.MAX_VALUE) {
+                resultado.valido = false;
+                resultado.erros.push(`Overflow: |${valor}| > MAX_VALUE`);
+                return resultado;
+            }
+            
+            // Verificar underflow
+            if (valor !== 0 && Math.abs(valor) < JS_MATH_CONSTANTS.MIN_VALUE) {
+                resultado.valido = false;
+                resultado.erros.push(`Underflow: |${valor}| < MIN_VALUE`);
+                return resultado;
+            }
+            
+            // Verificar precisão de inteiros
+            if (Number.isInteger(valor)) {
+                if (valor > JS_MATH_CONSTANTS.MAX_SAFE_INTEGER) {
+                    resultado.avisos.push(`Inteiro ${valor} > MAX_SAFE_INTEGER - pode perder precisão`);
+                } else if (valor < JS_MATH_CONSTANTS.MIN_SAFE_INTEGER) {
+                    resultado.avisos.push(`Inteiro ${valor} < MIN_SAFE_INTEGER - pode perder precisão`);
+                }
+            }
+            
+            return resultado;
+        }
+        
+        // Operação segura genérica
+        function operacaoSeguraJS(operacao, operandos, nomeOperacao) {
+            // Validar operandos
+            for (let i = 0; i < operandos.length; i++) {
+                const validacao = validarNumeroJS(operandos[i], `operando ${i + 1} de ${nomeOperacao}`);
+                if (!validacao.valido) {
+                    return {
+                        sucesso: false,
+                        erro: validacao.erros.join('; '),
+                        operandos: operandos,
+                        operacao: nomeOperacao
+                    };
+                }
+            }
+            
+            // Executar operação
+            let resultado;
+            try {
+                resultado = operacao.apply(null, operandos);
+            } catch (error) {
+                return {
+                    sucesso: false,
+                    erro: `Erro durante ${nomeOperacao}: ${error.message}`,
+                    operandos: operandos,
+                    operacao: nomeOperacao
+                };
+            }
+            
+            // Validar resultado
+            const validacaoResultado = validarNumeroJS(resultado, `resultado de ${nomeOperacao}`);
+            
+            return {
+                sucesso: validacaoResultado.valido,
+                valor: resultado,
+                erro: validacaoResultado.valido ? null : validacaoResultado.erros.join('; '),
+                avisos: validacaoResultado.avisos,
+                operandos: operandos,
+                operacao: nomeOperacao
+            };
+        }
+        
+        // ==========================================
+        // 🎯 FUNÇÕES DE DEMONSTRAÇÃO BÁSICAS (MELHORADAS)
         // ==========================================
         
         // Função 1: Alert simples
@@ -473,26 +582,72 @@
             const num1 = Number(prompt('Digite o primeiro número:', '10')) || 10;
             const num2 = Number(prompt('Digite o segundo número:', '5')) || 5;
             
-            const soma = num1 + num2;
-            const subtracao = num1 - num2;
-            const multiplicacao = num1 * num2;
-            const divisao = num1 / num2;
+            // Validar entradas
+            const validacao1 = validarNumeroJS(num1, 'primeiro número');
+            const validacao2 = validarNumeroJS(num2, 'segundo número');
             
-            const resultado = `
-                🧮 <strong>Calculadora Simples:</strong><br>
-                • ${num1} + ${num2} = ${soma}<br>
-                • ${num1} - ${num2} = ${subtracao}<br>
-                • ${num1} × ${num2} = ${multiplicacao}<br>
-                • ${num1} ÷ ${num2} = ${divisao.toFixed(2)}
-            `;
+            if (!validacao1.valido || !validacao2.valido) {
+                document.getElementById('resultado-conceitos').innerHTML = 
+                    `❌ Erro na validação das entradas:<br>
+                     ${!validacao1.valido ? validacao1.erros.join('<br>') + '<br>' : ''}
+                     ${!validacao2.valido ? validacao2.erros.join('<br>') : ''}`;
+                return;
+            }
+            
+            // Operações seguras
+            const soma = operacaoSeguraJS((x, y) => x + y, [num1, num2], 'soma');
+            const subtracao = operacaoSeguraJS((x, y) => x - y, [num1, num2], 'subtração');
+            const multiplicacao = operacaoSeguraJS((x, y) => x * y, [num1, num2], 'multiplicação');
+            const divisao = num2 === 0 ? 
+                { sucesso: false, erro: 'Divisão por zero não é permitida' } :
+                operacaoSeguraJS((x, y) => x / y, [num1, num2], 'divisão');
+            
+            let resultado = `🧮 <strong>Calculadora Segura com Validações:</strong><br>`;
+            
+            const operacoes = [
+                { nome: 'Soma', op: soma, simbolo: '+' },
+                { nome: 'Subtração', op: subtracao, simbolo: '-' },
+                { nome: 'Multiplicação', op: multiplicacao, simbolo: '×' },
+                { nome: 'Divisão', op: divisao, simbolo: '÷' }
+            ];
+            
+            operacoes.forEach(({ nome, op, simbolo }) => {
+                resultado += `• ${num1} ${simbolo} ${num2} = `;
+                if (op.sucesso) {
+                    resultado += `${op.valor.toFixed(2)}`;
+                    if (op.avisos.length > 0) {
+                        resultado += ` <small>(⚠️ ${op.avisos.join(', ')})</small>`;
+                    }
+                } else {
+                    resultado += `<span style="color: #ff6b6b;">ERRO: ${op.erro}</span>`;
+                }
+                resultado += '<br>';
+            });
+            
+            resultado += `<br><small>🛡️ Todos os cálculos validados contra overflow/underflow usando MAX_VALUE/MIN_VALUE</small>`;
             
             document.getElementById('resultado-conceitos').innerHTML = resultado;
         }
         
         function demonstrarCondicionais() {
-            const idade = Number(prompt('Digite sua idade para o teste:', '18')) || 18;
-            let categoria;
-            let emoji;
+            const input = prompt('Digite sua idade para o teste:', '18');
+            const idade = Number(input);
+            
+            // Validar entrada
+            const validacao = validarNumeroJS(idade, 'idade');
+            
+            if (!validacao.valido || idade < 0 || idade > 150) {
+                let erro = `❌ Idade inválida: `;
+                if (!validacao.valido) {
+                    erro += validacao.erros.join(', ');
+                } else {
+                    erro += 'idade deve estar entre 0 e 150 anos';
+                }
+                document.getElementById('resultado-conceitos').innerHTML = erro;
+                return;
+            }
+            
+            let categoria, emoji;
             
             if (idade < 13) {
                 categoria = 'Criança';
@@ -508,13 +663,19 @@
                 emoji = '👴';
             }
             
-            const resultado = `
-                🎯 <strong>Teste de Condicionais:</strong><br>
-                • Idade informada: ${idade} anos<br>
+            let resultado = `
+                🎯 <strong>Teste de Condicionais com Validação:</strong><br>
+                • Idade informada: ${idade} anos ✅<br>
                 • Categoria: ${emoji} ${categoria}<br>
                 • Pode dirigir: ${idade >= 18 ? '✅ Sim' : '❌ Não'}<br>
-                • Pode votar: ${idade >= 16 ? '✅ Sim' : '❌ Não'}
+                • Pode votar: ${idade >= 16 ? '✅ Sim' : '❌ Não'}<br>
             `;
+            
+            if (validacao.avisos.length > 0) {
+                resultado += `<br><small>⚠️ Avisos: ${validacao.avisos.join(', ')}</small><br>`;
+            }
+            
+            resultado += `<small>🛡️ Entrada validada contra overflow/underflow</small>`;
             
             document.getElementById('resultado-conceitos').innerHTML = resultado;
         }
@@ -522,33 +683,69 @@
         function demonstrarLacos() {
             let contagem = '';
             let soma = 0;
+            const limite = 10;
             
-            // Laço for
-            for (let i = 1; i <= 10; i++) {
-                contagem += `${i}${i < 10 ? ', ' : ''}`;
-                soma += i;
+            // Validar limite
+            const validacaoLimite = validarNumeroJS(limite, 'limite do laço');
+            if (!validacaoLimite.valido) {
+                document.getElementById('resultado-conceitos').innerHTML = 
+                    `❌ Erro na validação do limite: ${validacaoLimite.erros.join(', ')}`;
+                return;
             }
             
-            // Laço while para números pares
+            // Laço for seguro
+            for (let i = 1; i <= limite; i++) {
+                // Validar cada iteração
+                const validacaoI = validarNumeroJS(i, `iteração ${i}`);
+                if (!validacaoI.valido) {
+                    document.getElementById('resultado-conceitos').innerHTML = 
+                        `❌ Erro na iteração ${i}: ${validacaoI.erros.join(', ')}`;
+                    return;
+                }
+                
+                contagem += `${i}${i < limite ? ', ' : ''}`;
+                
+                // Somar com validação
+                const somaResult = operacaoSeguraJS((s, n) => s + n, [soma, i], 'soma acumulativa');
+                if (!somaResult.sucesso) {
+                    document.getElementById('resultado-conceitos').innerHTML = 
+                        `❌ Erro na soma: ${somaResult.erro}`;
+                    return;
+                }
+                soma = somaResult.valor;
+            }
+            
+            // Laço while para números pares com validação
             let pares = '';
             let num = 2;
-            while (num <= 20) {
-                pares += `${num}${num < 20 ? ', ' : ''}`;
+            const limitePares = 20;
+            
+            while (num <= limitePares) {
+                const validacaoNum = validarNumeroJS(num, `número par ${num}`);
+                if (!validacaoNum.valido) {
+                    document.getElementById('resultado-conceitos').innerHTML = 
+                        `❌ Erro na validação: ${validacaoNum.erros.join(', ')}`;
+                    return;
+                }
+                
+                pares += `${num}${num < limitePares ? ', ' : ''}`;
                 num += 2;
             }
             
-            const resultado = `
-                🔄 <strong>Laços de Repetição:</strong><br>
-                • Contagem 1-10: ${contagem}<br>
-                • Soma de 1 a 10: ${soma}<br>
-                • Números pares até 20: ${pares}
+            let resultado = `
+                🔄 <strong>Laços de Repetição com Validação:</strong><br>
+                • Contagem 1-${limite}: ${contagem}<br>
+                • Soma validada de 1 a ${limite}: ${soma}<br>
+                • Números pares até ${limitePares}: ${pares}<br>
             `;
+            
+            resultado += `<small>🛡️ Todas as iterações validadas contra overflow/underflow</small>`;
             
             document.getElementById('resultado-conceitos').innerHTML = resultado;
         }
         
         // ==========================================
-        // 🌟 INICIALIZAÇÃO DA PÁGINA
+        // 🌟 INICIALIZAÇÃO SEGURA DA PÁGINA
         // ==========================================
         
         document.addEventListener('DOMContentLoaded', function() {
@@ -556,16 +753,32 @@
             document.getElementById('data-atual').textContent = 
                 new Date().toLocaleDateString('pt-BR');
             
-            // Log de inicialização
-            console.log('🚀 Página JavaScript Fundamentals carregada!');
+            // Log de inicialização com informações de validação
+            console.log('🚀 Página JavaScript Fundamentals carregada com validações!');
             console.log('👨‍🎓 Estudante: Gabriel Malheiros de Castro');
             console.log('🏫 FAESA - 2025-2');
             console.log('📚 Disciplina: Desenvolvimento Web');
+            console.log('🛡️ Sistema de validação ativo:');
+            console.log(`   MAX_VALUE: ${JS_MATH_CONSTANTS.MAX_VALUE}`);
+            console.log(`   MIN_VALUE: ${JS_MATH_CONSTANTS.MIN_VALUE}`);
+            console.log(`   MAX_SAFE_INTEGER: ${JS_MATH_CONSTANTS.MAX_SAFE_INTEGER}`);
+            console.log(`   MIN_SAFE_INTEGER: ${JS_MATH_CONSTANTS.MIN_SAFE_INTEGER}`);
             
-            // Animação de boas-vindas
+            // Animação de boas-vindas com teste automático
             setTimeout(() => {
-                console.log('💡 Dica: Explore todos os botões para aprender JavaScript!');
+                console.log('💡 Dica: Explore todos os botões para aprender JavaScript com validações!');
                 console.log('🔧 Use este Console para ver os resultados de console.log()');
+                
+                // Teste automático do sistema de validação
+                console.log('🧪 Executando teste automático de validação...');
+                const testResult = validarNumeroJS(42, 'teste automático');
+                console.log('✅ Teste de validação passou:', testResult.valido);
+                
+                if (testResult.valido) {
+                    console.log('🎯 Sistema de validação funcionando corretamente!');
+                } else {
+                    console.error('❌ Erro no sistema de validação:', testResult.erros);
+                }
             }, 2000);
         });
         
@@ -636,6 +849,27 @@
         document.querySelectorAll('.demo-button').forEach(button => {
             button.addEventListener('click', contarInteracao);
         });
+        
+        // ==========================================
+        // 🛡️ DISPONIBILIZAR FUNÇÕES PARA DEBUG
+        // ==========================================
+        
+        // Disponibilizar no console para debugging
+        window.validarNumeroJS = validarNumeroJS;
+        window.operacaoSeguraJS = operacaoSeguraJS;
+        window.JS_MATH_CONSTANTS = JS_MATH_CONSTANTS;
+        
+        console.log('🔧 Funções de debug disponíveis:');
+        console.log('   - validarNumeroJS(valor, contexto)');
+        console.log('   - operacaoSeguraJS(operacao, [operandos], nome)');
+        console.log('   - JS_MATH_CONSTANTS (constantes numéricas)');
+        console.log('');
+        console.log('🧪 Exemplos de uso:');
+        console.log('   validarNumeroJS(42, "teste")');
+        console.log('   operacaoSeguraJS((a,b) => a+b, [10, 20], "soma")');
+        console.log('   JS_MATH_CONSTANTS.MAX_VALUE');
+        console.log('');
+        console.log('🎯 Todas as operações agora incluem validação contra overflow/underflow!');
     </script>
 </body>
 </html>
