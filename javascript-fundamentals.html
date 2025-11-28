@@ -614,7 +614,15 @@
             operacoes.forEach(({ nome, op, simbolo }) => {
                 resultado += `• ${num1} ${simbolo} ${num2} = `;
                 if (op.sucesso) {
+                    // Resultado decimal normal
                     resultado += `${op.valor.toFixed(2)}`;
+                    
+                    // Adicionar representação binária de 3 casas se for número inteiro
+                    if (Number.isInteger(op.valor) && op.valor >= 0 && op.valor <= 7) {
+                        const binario = op.valor.toString(2).padStart(3, '0');
+                        resultado += ` <span style="color: #00a8ff; font-family: monospace;">(${binario}₂)</span>`;
+                    }
+                    
                     if (op.avisos.length > 0) {
                         resultado += ` <small>(⚠️ ${op.avisos.join(', ')})</small>`;
                     }

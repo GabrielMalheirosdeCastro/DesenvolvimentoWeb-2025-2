@@ -36,6 +36,10 @@
       "destination": "/lab-fundamentos-css.html"
     },
     {
+      "source": "/matematica-operadores.html",
+      "destination": "/matematica-operadores.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
