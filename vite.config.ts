@@ -29,6 +29,7 @@ export default defineConfig({
         galeria: path.resolve(__dirname, 'galeria-lego-naves.html'),
         lab: path.resolve(__dirname, 'lab-fundamentos-css.html'),
         javascript: path.resolve(__dirname, 'javascript-fundamentals.html'),
+        matematica: path.resolve(__dirname, 'matematica-operadores.html'),
         tipografia: path.resolve(__dirname, 'tipografia.html'),
         posicionamento: path.resolve(__dirname, 'posicionamento.html'),
         boxmodel: path.resolve(__dirname, 'boxmodel.html'),

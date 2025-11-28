@@ -588,8 +588,21 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
                     <p className="text-sm text-green-600 mb-3">Calculadora e operações matemáticas</p>
                     <a 
                       href="/matematica-operadores.html" 
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      onClick={(e) => {
+                        console.log('🧮 Clique no botão matemática detectado');
+                        console.log('🔗 URL de destino:', e.currentTarget.href);
+                        console.log('🕐 Timestamp:', new Date().toISOString());
+                        
+                        // Verificar se há algum loop infinito
+                        if (window.location.href.includes('matematica-operadores')) {
+                          console.warn('⚠️ ATENÇÃO: Já estamos na página de matemática!');
+                          e.preventDefault();
+                          return false;
+                        }
+                        
+                        // Navegação normal
+                        console.log('✅ Navegando para página de matemática...');
+                      }}
                       className="inline-block bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition-colors w-full text-center"
                     >
                       Explorar Matemática

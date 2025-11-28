@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Matemática - Debug</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            background: #f0f0f0;
+        }
+        .test-link {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+            font-weight: bold;
+        }
+        .test-link:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Teste de Debug - Matemática</h1>
+    
+    <p>Testando links para a página de matemática:</p>
+    
+    <a href="/matematica-operadores.html" class="test-link" target="_blank" rel="noopener noreferrer">
+        ➤ Matemática (Nova aba)
+    </a>
+    
+    <a href="/matematica-operadores.html" class="test-link">
+        ➤ Matemática (Mesma aba)
+    </a>
+    
+    <button class="test-link" onclick="window.location.href='/matematica-operadores.html'">
+        ➤ Matemática (Via JavaScript)
+    </button>
+    
+    <script>
+        console.log('🧪 Página de teste carregada');
+        
+        // Test de debug simples
+        document.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A') {
+                console.log('🔗 Link clicado:', e.target.href);
+            }
+        });
+        
+        // Verificar se a página de matemática existe
+        fetch('/matematica-operadores.html')
+            .then(response => {
+                console.log('📄 Status da página matemática:', response.status);
+                if (response.ok) {
+                    console.log('✅ Página matemática encontrada');
+                } else {
+                    console.log('❌ Página matemática não encontrada');
+                }
+            })
+            .catch(error => {
+                console.error('🚨 Erro ao verificar página matemática:', error);
+            });
+    </script>
+</body>
+</html>
