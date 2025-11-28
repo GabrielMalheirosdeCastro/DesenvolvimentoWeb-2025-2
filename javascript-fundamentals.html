@@ -617,10 +617,14 @@
                     // Resultado decimal normal
                     resultado += `${op.valor.toFixed(2)}`;
                     
-                    // Adicionar representação binária de 3 casas se for número inteiro
+                    // Adicionar representação binária de 3 casas se for número inteiro entre 0 e 7
                     if (Number.isInteger(op.valor) && op.valor >= 0 && op.valor <= 7) {
                         const binario = op.valor.toString(2).padStart(3, '0');
-                        resultado += ` <span style="color: #00a8ff; font-family: monospace;">(${binario}₂)</span>`;
+                        resultado += ` <span style="color: #00a8ff; font-family: monospace; font-weight: bold;">[${binario}₂]</span>`;
+                    } else if (Number.isInteger(op.valor) && op.valor > 7) {
+                        // Para números maiores que 7, mostrar binário completo mas destacar que é maior que 3 bits
+                        const binario = op.valor.toString(2);
+                        resultado += ` <span style="color: #ff6b47; font-family: monospace; font-size: 0.9em;">[${binario}₂]</span>`;
                     }
                     
                     if (op.avisos.length > 0) {
@@ -633,6 +637,7 @@
             });
             
             resultado += `<br><small>🛡️ Todos os cálculos validados contra overflow/underflow usando MAX_VALUE/MIN_VALUE</small>`;
+            resultado += `<br><small>🔢 Resultados inteiros 0-7 mostram representação binária de 3 casas: <span style="color: #00a8ff; font-family: monospace;">[xxx₂]</span></small>`;
             
             document.getElementById('resultado-conceitos').innerHTML = resultado;
         }
