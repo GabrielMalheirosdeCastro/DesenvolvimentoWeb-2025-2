@@ -212,7 +212,6 @@
             border-color: #4caf50;
         }
     </style>
-    <script src="security-init.js"></script>
   </head>
 <body class="matematica-page">
     <div class="matematica-container">
@@ -636,102 +635,35 @@ let novo = sal + valor</pre>
     <!-- 🚀 JavaScript -->
     <script>
         // ==========================================
-        // �️ SISTEMA DE VALIDAÇÃO COM MAX_VALUE e MIN_VALUE
+        // 🔧 SISTEMA DE VALIDAÇÃO SIMPLIFICADO
         // ==========================================
         
-        // Constantes para validação numérica
-        const MATH_CONSTANTS = {
-            MAX_VALUE: Number.MAX_VALUE,
-            MIN_VALUE: Number.MIN_VALUE,
-            MAX_SAFE_INTEGER: Number.MAX_SAFE_INTEGER,
-            MIN_SAFE_INTEGER: Number.MIN_SAFE_INTEGER
-        };
-        
-        // Função principal de validação numérica
-        function validarNumeroSeguro(valor, contexto = 'cálculo') {
-            const resultado = {
-                valido: true,
-                valor: valor,
-                aviso: '',
-                erro: ''
-            };
-            
-            // Verificar se é um número válido
-            if (typeof valor !== 'number' || isNaN(valor)) {
-                resultado.valido = false;
-                resultado.erro = `❌ Valor inválido em ${contexto}: não é um número`;
-                return resultado;
-            }
-            
-            // Verificar infinito
-            if (!isFinite(valor)) {
-                resultado.valido = false;
-                resultado.erro = `❌ Valor infinito detectado em ${contexto}: ${valor}`;
-                return resultado;
-            }
-            
-            // Verificar overflow (maior que MAX_VALUE)
-            if (Math.abs(valor) > MATH_CONSTANTS.MAX_VALUE) {
-                resultado.valido = false;
-                resultado.erro = `❌ Overflow detectado em ${contexto}: |${valor}| > MAX_VALUE`;
-                return resultado;
-            }
-            
-            // Verificar underflow (menor que MIN_VALUE, mas não zero)
-            if (valor !== 0 && Math.abs(valor) < MATH_CONSTANTS.MIN_VALUE) {
-                resultado.valido = false;
-                resultado.erro = `❌ Underflow detectado em ${contexto}: |${valor}| < MIN_VALUE`;
-                return resultado;
-            }
-            
-            // Verificar se está fora do range de inteiros seguros
-            if (Number.isInteger(valor)) {
-                if (valor > MATH_CONSTANTS.MAX_SAFE_INTEGER) {
-                    resultado.aviso = `⚠️ Aviso: ${valor} > MAX_SAFE_INTEGER - pode perder precisão`;
-                } else if (valor < MATH_CONSTANTS.MIN_SAFE_INTEGER) {
-                    resultado.aviso = `⚠️ Aviso: ${valor} < MIN_SAFE_INTEGER - pode perder precisão`;
-                }
-            }
-            
-            return resultado;
+        // Função simples de validação numérica
+        function validarNumero(valor) {
+            return typeof valor === 'number' && !isNaN(valor) && isFinite(valor);
         }
         
-        // Função de operação matemática segura
-        function operacaoMatematicaSegura(operacao, a, b, nomeOperacao) {
-            const validacaoA = validarNumeroSeguro(a, `operando A de ${nomeOperacao}`);
-            const validacaoB = validarNumeroSeguro(b, `operando B de ${nomeOperacao}`);
-            
-            // Se algum operando for inválido, retornar erro
-            if (!validacaoA.valido) return validacaoA;
-            if (!validacaoB.valido) return validacaoB;
-            
-            // Executar operação
-            let resultado;
-            try {
-                resultado = operacao(a, b);
-            } catch (error) {
-                return {
-                    valido: false,
-                    erro: `❌ Erro durante ${nomeOperacao}: ${error.message}`,
-                    valor: null
-                };
+        // Função de operação matemática simples
+        function operacaoSegura(operacao, a, b) {
+            if (!validarNumero(a) || !validarNumero(b)) {
+                return { valido: false, erro: 'Números inválidos' };
             }
             
-            // Validar resultado
-            const validacaoResultado = validarNumeroSeguro(resultado, `resultado de ${nomeOperacao}`);
-            
-            return {
-                valido: validacaoResultado.valido,
-                valor: resultado,
-                erro: validacaoResultado.erro,
-                aviso: validacaoResultado.aviso || validacaoA.aviso || validacaoB.aviso
-            };
+            try {
+                const resultado = operacao(a, b);
+                if (!validarNumero(resultado)) {
+                    return { valido: false, erro: 'Resultado inválido' };
+                }
+                return { valido: true, valor: resultado };
+            } catch (error) {
+                return { valido: false, erro: 'Erro no cálculo' };
+            }
         }
         
         // �📅 Definir data atual
         document.getElementById('data-atual').textContent = new Date().toLocaleDateString('pt-BR');
         
-        // 🧮 Verificar respostas dos exercícios (versão melhorada)
+        // 🧮 Verificar respostas dos exercícios (versão simplificada)
         function verificarRespostas() {
             let corretas = 0;
             let total = 5;
@@ -742,17 +674,10 @@ let novo = sal + valor</pre>
                 const respostaCorreta = parseInt(input.dataset.resposta);
                 const respostaUsuario = parseInt(input.value);
                 
-                // Validar a resposta do usuário
-                const validacao = validarNumeroSeguro(respostaUsuario, `exercício ${i}`);
-                
-                if (!validacao.valido && input.value.trim() !== '') {
-                    input.classList.remove('correto', 'incorreto');
-                    input.classList.add('incorreto');
-                    feedback.textContent = ` ❌ Número inválido`;
-                } else if (respostaUsuario === respostaCorreta) {
+                if (respostaUsuario === respostaCorreta) {
                     input.classList.remove('incorreto');
                     input.classList.add('correto');
-                    feedback.textContent = validacao.aviso ? ` ✅ (${validacao.aviso})` : ' ✅';
+                    feedback.textContent = ' ✅';
                     corretas++;
                 } else if (input.value.trim() !== '') {
                     input.classList.remove('correto');
@@ -769,15 +694,15 @@ let novo = sal + valor</pre>
             resultado.style.display = 'block';
             
             if (corretas === total) {
-                resultado.innerHTML = `🎉 Parabéns! Você acertou todas as ${corretas} questões! 🎉<br><small>✅ Todos os valores foram validados contra overflow/underflow</small>`;
+                resultado.innerHTML = `🎉 Parabéns! Você acertou todas as ${corretas} questões! 🎉`;
                 resultado.classList.add('sucesso');
             } else {
-                resultado.innerHTML = `📊 Você acertou ${corretas} de ${total} questões. ${corretas >= 3 ? 'Bom trabalho!' : 'Continue praticando!'}<br><small>🛡️ Respostas validadas com MAX_VALUE/MIN_VALUE</small>`;
+                resultado.innerHTML = `📊 Você acertou ${corretas} de ${total} questões. ${corretas >= 3 ? 'Bom trabalho!' : 'Continue praticando!'}`;
                 resultado.classList.remove('sucesso');
             }
         }
         
-        // 🎯 Verificar respostas dos desafios (versão melhorada)
+        // 🎯 Verificar respostas dos desafios (versão simplificada)
         function verificarDesafios() {
             let corretas = 0;
             let total = 6;
@@ -788,23 +713,10 @@ let novo = sal + valor</pre>
                 const respostaCorreta = parseFloat(input.dataset.resposta);
                 const respostaUsuario = parseFloat(input.value);
                 
-                // Validar a resposta do usuário
-                const validacaoUsuario = validarNumeroSeguro(respostaUsuario, `desafio ${i}`);
-                const validacaoCorreta = validarNumeroSeguro(respostaCorreta, `resposta correta do desafio ${i}`);
-                
-                if (!validacaoUsuario.valido && input.value.trim() !== '') {
-                    input.classList.remove('correto', 'incorreto');
-                    input.classList.add('incorreto');
-                    feedback.textContent = ` ❌ Número inválido`;
-                } else if (!validacaoCorreta.valido) {
-                    input.classList.remove('correto', 'incorreto');
-                    feedback.textContent = ` ⚠️ Erro na resposta esperada`;
-                } else if (Math.abs(respostaUsuario - respostaCorreta) < 0.01) {
+                if (Math.abs(respostaUsuario - respostaCorreta) < 0.01) {
                     input.classList.remove('incorreto');
                     input.classList.add('correto');
-                    let msgFeedback = ' ✅';
-                    if (validacaoUsuario.aviso) msgFeedback += ` (${validacaoUsuario.aviso})`;
-                    feedback.textContent = msgFeedback;
+                    feedback.textContent = ' ✅';
                     corretas++;
                 } else if (input.value.trim() !== '') {
                     input.classList.remove('correto');
@@ -821,13 +733,13 @@ let novo = sal + valor</pre>
             resultado.style.display = 'block';
             
             if (corretas === total) {
-                resultado.innerHTML = `🏆 EXCELENTE! Você é um mestre da matemática! Acertou todos os ${corretas} desafios! 🏆<br><small>✅ Todos os cálculos validados contra overflow/underflow</small>`;
+                resultado.innerHTML = `🏆 EXCELENTE! Você é um mestre da matemática! Acertou todos os ${corretas} desafios! 🏆`;
                 resultado.classList.add('sucesso');
             } else if (corretas >= 4) {
-                resultado.innerHTML = `🎯 Muito bom! Você acertou ${corretas} de ${total} desafios. Quase um expert!<br><small>🛡️ Validações MAX_VALUE/MIN_VALUE aplicadas</small>`;
+                resultado.innerHTML = `🎯 Muito bom! Você acertou ${corretas} de ${total} desafios. Quase um expert!`;
                 resultado.classList.remove('sucesso');
             } else {
-                resultado.innerHTML = `📚 Você acertou ${corretas} de ${total} desafios. Continue praticando para melhorar!<br><small>🔍 Sistema de validação numérica ativo</small>`;
+                resultado.innerHTML = `📚 Você acertou ${corretas} de ${total} desafios. Continue praticando para melhorar!`;
                 resultado.classList.remove('sucesso');
             }
         }
@@ -909,86 +821,36 @@ let novo = sal + valor</pre>
             mostrarProximo();
         }
         
-        // 🧮 Calcular exemplos práticos (versão melhorada)
+        // 🧮 Calcular exemplos práticos (versão simplificada)
         function calcularExemplos() {
             const output = document.getElementById('exemplos-output');
             
-            // Exemplo 1 - Desconto (com validações)
-            let preco = 1850;
-            let porc = 20;
+            // Exemplo 1 - Desconto
+            const preco = 1850;
+            const porc = 20;
+            const valor = (preco * porc) / 100;
+            const novo = preco - valor;
             
-            // Validar entradas
-            const validacaoPreco = validarNumeroSeguro(preco, 'preço');
-            const validacaoPorc = validarNumeroSeguro(porc, 'porcentagem');
-            
-            if (!validacaoPreco.valido || !validacaoPorc.valido) {
-                output.innerHTML = `❌ Erro na validação dos dados de entrada:<br>
-                    ${!validacaoPreco.valido ? validacaoPreco.erro + '<br>' : ''}
-                    ${!validacaoPorc.valido ? validacaoPorc.erro : ''}`;
-                return;
-            }
-            
-            // Calcular com validações
-            const operacaoValor = operacaoMatematicaSegura((p, pc) => (p * pc) / 100, preco, porc, 'cálculo do desconto');
-            if (!operacaoValor.valido) {
-                output.innerHTML = `❌ Erro no cálculo do desconto: ${operacaoValor.erro}`;
-                return;
-            }
-            const valor = operacaoValor.valor;
-            
-            const operacaoNovo = operacaoMatematicaSegura((p, v) => p - v, preco, valor, 'preço final');
-            if (!operacaoNovo.valido) {
-                output.innerHTML = `❌ Erro no cálculo do preço final: ${operacaoNovo.erro}`;
-                return;
-            }
-            const novo = operacaoNovo.valor;
-            
-            // Exemplo 2 - Aumento (com validações)
-            let sal = 3480;
-            let porc2 = 13;
-            
-            const validacaoSal = validarNumeroSeguro(sal, 'salário');
-            const validacaoPorc2 = validarNumeroSeguro(porc2, 'porcentagem de aumento');
-            
-            if (!validacaoSal.valido || !validacaoPorc2.valido) {
-                output.innerHTML += `<br>❌ Erro na validação do segundo exemplo:<br>
-                    ${!validacaoSal.valido ? validacaoSal.erro + '<br>' : ''}
-                    ${!validacaoPorc2.valido ? validacaoPorc2.erro : ''}`;
-                return;
-            }
-            
-            const operacaoValor2 = operacaoMatematicaSegura((s, pc) => (s * pc) / 100, sal, porc2, 'cálculo do aumento');
-            if (!operacaoValor2.valido) {
-                output.innerHTML += `<br>❌ Erro no cálculo do aumento: ${operacaoValor2.erro}`;
-                return;
-            }
-            const valor2 = operacaoValor2.valor;
-            
-            const operacaoNovo2 = operacaoMatematicaSegura((s, v) => s + v, sal, valor2, 'novo salário');
-            if (!operacaoNovo2.valido) {
-                output.innerHTML += `<br>❌ Erro no cálculo do novo salário: ${operacaoNovo2.erro}`;
-                return;
-            }
-            const novo2 = operacaoNovo2.valor;
+            // Exemplo 2 - Aumento
+            const sal = 3480;
+            const porc2 = 13;
+            const valor2 = (sal * porc2) / 100;
+            const novo2 = sal + valor2;
             
             output.innerHTML = `
-                <strong>EXEMPLO 1 - Desconto de 20% (✅ Validado):</strong><br>
+                <strong>EXEMPLO 1 - Desconto de 20%:</strong><br>
                 Preço original: R$ ${preco.toFixed(2)}<br>
                 Desconto (20%): R$ ${valor.toFixed(2)}<br>
-                Preço final: R$ ${novo.toFixed(2)}<br>
-                ${operacaoValor.aviso || operacaoNovo.aviso ? `<small>⚠️ ${operacaoValor.aviso || operacaoNovo.aviso}</small><br>` : ''}<br>
+                Preço final: R$ ${novo.toFixed(2)}<br><br>
                 
-                <strong>EXEMPLO 2 - Aumento de 13% (✅ Validado):</strong><br>
+                <strong>EXEMPLO 2 - Aumento de 13%:</strong><br>
                 Salário original: R$ ${sal.toFixed(2)}<br>
                 Aumento (13%): R$ ${valor2.toFixed(2)}<br>
-                Novo salário: R$ ${novo2.toFixed(2)}<br>
-                ${operacaoValor2.aviso || operacaoNovo2.aviso ? `<small>⚠️ ${operacaoValor2.aviso || operacaoNovo2.aviso}</small><br>` : ''}
-                
-                <small>🛡️ Todos os cálculos validados contra overflow/underflow usando MAX_VALUE/MIN_VALUE</small>
+                Novo salário: R$ ${novo2.toFixed(2)}
             `;
         }
         
-        // 📊 Verificação automática quando o usuário digita (versão melhorada)
+        // 📊 Verificação automática quando o usuário digita (versão simplificada)
         for (let i = 1; i <= 5; i++) {
             document.getElementById(`ex${i}`).addEventListener('input', function() {
                 const input = this;
@@ -999,28 +861,19 @@ let novo = sal + valor</pre>
                 if (input.value.trim() === '') {
                     input.classList.remove('correto', 'incorreto');
                     feedback.textContent = '';
+                } else if (respostaUsuario === respostaCorreta) {
+                    input.classList.remove('incorreto');
+                    input.classList.add('correto');
+                    feedback.textContent = ' ✅';
                 } else {
-                    // Validar entrada do usuário
-                    const validacao = validarNumeroSeguro(respostaUsuario, `exercício ${i}`);
-                    
-                    if (!validacao.valido) {
-                        input.classList.remove('correto', 'incorreto');
-                        input.classList.add('incorreto');
-                        feedback.textContent = ' ❌ Número inválido';
-                    } else if (respostaUsuario === respostaCorreta) {
-                        input.classList.remove('incorreto');
-                        input.classList.add('correto');
-                        feedback.textContent = validacao.aviso ? ` ✅ (${validacao.aviso})` : ' ✅';
-                    } else {
-                        input.classList.remove('correto');
-                        input.classList.add('incorreto');
-                        feedback.textContent = ' ❌';
-                    }
+                    input.classList.remove('correto');
+                    input.classList.add('incorreto');
+                    feedback.textContent = ' ❌';
                 }
             });
         }
         
-        // 🎯 Verificação automática para os desafios (versão melhorada)
+        // 🎯 Verificação automática para os desafios (versão simplificada)
         for (let i = 1; i <= 6; i++) {
             document.getElementById(`desafio${i}`).addEventListener('input', function() {
                 const input = this;
@@ -1031,23 +884,14 @@ let novo = sal + valor</pre>
                 if (input.value.trim() === '') {
                     input.classList.remove('correto', 'incorreto');
                     feedback.textContent = '';
+                } else if (Math.abs(respostaUsuario - respostaCorreta) < 0.01) {
+                    input.classList.remove('incorreto');
+                    input.classList.add('correto');
+                    feedback.textContent = ' ✅';
                 } else {
-                    // Validar entrada do usuário
-                    const validacao = validarNumeroSeguro(respostaUsuario, `desafio ${i}`);
-                    
-                    if (!validacao.valido) {
-                        input.classList.remove('correto', 'incorreto');
-                        input.classList.add('incorreto');
-                        feedback.textContent = ' ❌ Número inválido';
-                    } else if (Math.abs(respostaUsuario - respostaCorreta) < 0.01) {
-                        input.classList.remove('incorreto');
-                        input.classList.add('correto');
-                        feedback.textContent = validacao.aviso ? ` ✅ (${validacao.aviso})` : ' ✅';
-                    } else {
-                        input.classList.remove('correto');
-                        input.classList.add('incorreto');
-                        feedback.textContent = ' ❌';
-                    }
+                    input.classList.remove('correto');
+                    input.classList.add('incorreto');
+                    feedback.textContent = ' ❌';
                 }
             });
         }
@@ -1150,146 +994,25 @@ let novo = sal + valor</pre>
             return resultado.valor;
         };
         
-        window.calcularVelocidade = function(distancia, tempo) {
-            const validacaoDist = validarNumeroSeguro(distancia, 'distância');
-            const validacaoTempo = validarNumeroSeguro(tempo, 'tempo');
-            
-            if (!validacaoDist.valido) {
-                console.error('❌ Erro na distância:', validacaoDist.erro);
-                return null;
-            }
-            if (!validacaoTempo.valido) {
-                console.error('❌ Erro no tempo:', validacaoTempo.erro);
-                return null;
-            }
-            if (tempo === 0) {
-                console.error('❌ Erro: tempo não pode ser zero');
-                return null;
-            }
-            
-            const resultado = operacaoMatematicaSegura((d, t) => d / t, distancia, tempo, 'cálculo de velocidade');
-            if (!resultado.valido) {
-                console.error('❌ Erro no cálculo:', resultado.erro);
-                return null;
-            }
-            
-            if (resultado.aviso) console.warn('⚠️', resultado.aviso);
-            return resultado.valor;
+        // 🎲 Easter egg: calcular sequência de Fibonacci
+        function fibonacci(n) {
+            if (n <= 1) return n;
+            return fibonacci(n - 1) + fibonacci(n - 2);
+        }
+        
+        // Funções simples para uso no console
+        window.fibonacci = fibonacci;
+        window.calcularDesconto = function(preco, porcentagem) {
+            return preco * (1 - porcentagem / 100);
+        };
+        window.calcularAumento = function(valor, porcentagem) {
+            return valor * (1 + porcentagem / 100);
         };
         
-        window.calcularJuros = function(capital, taxa, tempo) {
-            const validacaoCapital = validarNumeroSeguro(capital, 'capital');
-            const validacaoTaxa = validarNumeroSeguro(taxa, 'taxa');
-            const validacaoTempo = validarNumeroSeguro(tempo, 'tempo');
-            
-            if (!validacaoCapital.valido) {
-                console.error('❌ Erro no capital:', validacaoCapital.erro);
-                return null;
-            }
-            if (!validacaoTaxa.valido) {
-                console.error('❌ Erro na taxa:', validacaoTaxa.erro);
-                return null;
-            }
-            if (!validacaoTempo.valido) {
-                console.error('❌ Erro no tempo:', validacaoTempo.erro);
-                return null;
-            }
-            
-            const resultado = operacaoMatematicaSegura((c, ta, te) => c * (ta / 100) * te, capital, taxa, tempo, 'cálculo de juros simples');
-            if (!resultado.valido) {
-                console.error('❌ Erro no cálculo:', resultado.erro);
-                return null;
-            }
-            
-            if (resultado.aviso) console.warn('⚠️', resultado.aviso);
-            return resultado.valor;
-        };
-        
-        window.calcularArea = function(largura, comprimento) {
-            const validacaoLarg = validarNumeroSeguro(largura, 'largura');
-            const validacaoComp = validarNumeroSeguro(comprimento, 'comprimento');
-            
-            if (!validacaoLarg.valido) {
-                console.error('❌ Erro na largura:', validacaoLarg.erro);
-                return null;
-            }
-            if (!validacaoComp.valido) {
-                console.error('❌ Erro no comprimento:', validacaoComp.erro);
-                return null;
-            }
-            
-            const resultado = operacaoMatematicaSegura((l, c) => l * c, largura, comprimento, 'cálculo de área');
-            if (!resultado.valido) {
-                console.error('❌ Erro no cálculo:', resultado.erro);
-                return null;
-            }
-            
-            if (resultado.aviso) console.warn('⚠️', resultado.aviso);
-            return resultado.valor;
-        };
-        
-        window.calcularConsumo = function(distancia, combustivel) {
-            const validacaoDist = validarNumeroSeguro(distancia, 'distância');
-            const validacaoCombus = validarNumeroSeguro(combustivel, 'combustível');
-            
-            if (!validacaoDist.valido) {
-                console.error('❌ Erro na distância:', validacaoDist.erro);
-                return null;
-            }
-            if (!validacaoCombus.valido) {
-                console.error('❌ Erro no combustível:', validacaoCombus.erro);
-                return null;
-            }
-            if (combustivel === 0) {
-                console.error('❌ Erro: combustível não pode ser zero');
-                return null;
-            }
-            
-            const resultado = operacaoMatematicaSegura((d, c) => d / c, distancia, combustivel, 'cálculo de consumo');
-            if (!resultado.valido) {
-                console.error('❌ Erro no cálculo:', resultado.erro);
-                return null;
-            }
-            
-            if (resultado.aviso) console.warn('⚠️', resultado.aviso);
-            return resultado.valor;
-        };
-        
-        // Disponibilizar funções de validação no console para debug
-        window.validarNumeroSeguro = validarNumeroSeguro;
-        window.operacaoMatematicaSegura = operacaoMatematicaSegura;
-        window.MATH_CONSTANTS = MATH_CONSTANTS;
-        
-        console.log('🎮 Easter Eggs disponíveis (versões melhoradas com validação):');
+        console.log('🎮 Easter Eggs disponíveis:');
         console.log('fibonacci(10) - Calcula o 10º número da sequência de Fibonacci');
-        console.log('calcularDesconto(1850, 20) - Calcula desconto com validação');
-        console.log('calcularAumento(3480, 13) - Calcula aumento com validação');
-        console.log('calcularMedia(8.5, 7.2, 9.1, 6.8) - Calcula média aritmética com validação');
-        console.log('calcularVelocidade(300, 4) - Calcula velocidade média com validação');
-        console.log('calcularJuros(1000, 2, 6) - Calcula juros simples com validação');
-        console.log('calcularArea(12, 18) - Calcula área retangular com validação');
-        console.log('calcularConsumo(420, 35) - Calcula consumo de combustível com validação');
-        console.log('🛡️ Todas as funções agora incluem validação contra overflow/underflow!');
-        console.log('🔧 Use validarNumeroSeguro(valor, contexto) para testar validações');
-        
-        // Teste automático do sistema
-        setTimeout(() => {
-            console.log('🧪 Executando teste automático do sistema de validação...');
-            
-            // Teste básico
-            const teste1 = validarNumeroSeguro(42, 'teste básico');
-            console.log(`✅ Teste básico: ${teste1.valido ? 'PASSOU' : 'FALHOU'}`);
-            
-            // Teste de overflow
-            const teste2 = validarNumeroSeguro(Number.MAX_VALUE * 2, 'teste overflow');
-            console.log(`✅ Teste overflow: ${!teste2.valido ? 'PASSOU' : 'FALHOU'} (esperado: falhar)`);
-            
-            // Teste de NaN
-            const teste3 = validarNumeroSeguro(NaN, 'teste NaN');
-            console.log(`✅ Teste NaN: ${!teste3.valido ? 'PASSOU' : 'FALHOU'} (esperado: falhar)`);
-            
-            console.log('🎯 Sistema de validação funcionando corretamente!');
-        }, 2000);
+        console.log('calcularDesconto(1850, 20) - Calcula desconto simples');
+        console.log('calcularAumento(3480, 13) - Calcula aumento simples');
     </script>
 </body>
 </html>

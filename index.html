@@ -4,17 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- 🛡️ Sistema de Segurança UNIVERSAL - Carrega PRIMEIRO -->
-    <script src="security-init.js"></script>
-    
-    <!-- 🛡️ Headers de Segurança -->
-    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <meta http-equiv="X-Frame-Options" content="DENY" />
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
-    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()" />
-    
-    <!-- 📈 Performance e Carregamento -->
+    <!--  Performance e Carregamento -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="anonymous" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
     <link rel="dns-prefetch" href="//unpkg.com" />
@@ -81,7 +71,6 @@
       // Carregar sistemas de segurança antes do React
       function loadSecuritySystems() {
         return Promise.all([
-          loadScript('/src/utils/error-handling-system.js'),
           loadScript('/src/utils/security-performance-enhancer.js'),
           loadScript('/src/utils/loading-optimizer.js')
         ]).catch(error => {
@@ -143,3 +132,4 @@
     <!-- 📝 Para páginas HTML estáticas, usar: <body class="html-page"> -->
   </body>
 </html>
+
