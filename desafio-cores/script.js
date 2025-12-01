@@ -1,7 +1,13 @@
 /**
- * 🎮 JOGO DE ADIVINHAÇÃO DE CORES
+ * 🎮 JOGO DE ADIVINHAÇÃO DE CORES - VERSÃO CORRIGIDA
  * Projeto Prático C3 - Gabriel Malheiros de Castro
  * FAESA 2025-2
+ * 
+ * CORREÇÕES APLICADAS:
+ * - Removido monitoramento automático de cor de fundo que causava loop infinito
+ * - Removida mudança automática de cor de fundo após 3 segundos
+ * - Simplificado o detector de cores para evitar recursão
+ * - Otimizada a performance removendo verificações desnecessárias
  * 
  * Este arquivo implementa toda a lógica do jogo seguindo as especificações:
  * - Sistema de 3 tentativas por rodada
@@ -9,7 +15,6 @@
  * - Sistema de pontuação e estatísticas
  * - Feedback inteligente com dicas
  * - LocalStorage para persistência de dados
- * - NOVA: Detecção da cor de fundo da página para aceitar como resposta
  */
 
 // ================================
@@ -45,108 +50,6 @@ const COLOR_FAMILIES = {
 };
 
 // ================================
-// UTILITÁRIOS DE DETECÇÃO DE COR
-// ================================
-
-class ColorDetector {
-    /**
-     * Converte valores RGB para nome de cor HTML quando possível
-     */
-    static rgbToColorName(r, g, b) {
-        const colorMap = {
-            '255,0,0': 'red',
-            '0,128,0': 'green',
-            '0,0,255': 'blue',
-            '255,255,0': 'yellow',
-            '128,0,128': 'purple',
-            '255,165,0': 'orange',
-            '255,192,203': 'pink',
-            '165,42,42': 'brown',
-            '128,128,128': 'gray',
-            '255,255,255': 'white',
-            '0,0,0': 'black',
-            '0,0,128': 'navy',
-            '0,128,128': 'teal',
-            '255,127,80': 'coral',
-            '220,20,60': 'crimson',
-            '75,0,130': 'indigo',
-            '0,255,0': 'lime',
-            '128,128,0': 'olive',
-            '0,255,255': 'cyan',
-            '255,215,0': 'gold',
-            '192,192,192': 'silver',
-            '72,61,139': 'darkslateblue',
-            '240,128,128': 'lightcoral',
-            '60,179,113': 'mediumseagreen',
-            '184,134,11': 'darkgoldenrod',
-            '176,196,222': 'lightsteelblue',
-            '219,112,147': 'palevioletred',
-            '186,85,211': 'mediumorchid',
-            '85,107,47': 'darkolivegreen',
-            '119,136,153': 'lightslategray',
-            '72,209,204': 'mediumturquoise'
-        };
-        
-        const key = `${r},${g},${b}`;
-        return colorMap[key] || null;
-    }
-
-    /**
-     * Detecta a cor de fundo atual da página
-     */
-    static detectBackgroundColor() {
-        const body = document.body;
-        const computedStyle = window.getComputedStyle(body);
-        const bgColor = computedStyle.backgroundColor;
-        
-        // Se for transparente ou inherit, usa branco como padrão
-        if (bgColor === 'transparent' || bgColor === 'inherit' || bgColor === 'rgba(0, 0, 0, 0)') {
-            return 'white';
-        }
-        
-        // Parse RGB/RGBA
-        const rgbMatch = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
-        const rgbaMatch = bgColor.match(/rgba\((\d+),\s*(\d+),\s*(\d+),\s*[\d.]+\)/);
-        
-        if (rgbMatch) {
-            const [, r, g, b] = rgbMatch.map(Number);
-            const colorName = this.rgbToColorName(r, g, b);
-            return colorName;
-        }
-        
-        if (rgbaMatch) {
-            const [, r, g, b] = rgbaMatch.map(Number);
-            const colorName = this.rgbToColorName(r, g, b);
-            return colorName;
-        }
-        
-        // Se não conseguir detectar, assume branco
-        return 'white';
-    }
-
-    /**
-     * Verifica se uma cor específica está atualmente sendo exibida como fundo
-     */
-    static isColorCurrentlyDisplayed(colorName) {
-        const currentBgColor = this.detectBackgroundColor();
-        return currentBgColor && currentBgColor.toLowerCase() === colorName.toLowerCase();
-    }
-
-    /**
-     * Lista todas as cores que podem ser detectadas como fundo da página
-     */
-    static getDetectableColors() {
-        const allGameColors = [
-            ...COLOR_SETS.easy,
-            ...COLOR_SETS.medium, 
-            ...COLOR_SETS.hard
-        ];
-        
-        return [...new Set(allGameColors)]; // Remove duplicatas
-    }
-}
-
-// ================================
 // ESTADO DO JOGO
 // ================================
 
@@ -163,9 +66,6 @@ class GameState {
         this.totalGames = 0;
         this.totalWins = 0;
         this.highScore = 0;
-        
-        // Nova propriedade para detectar se a cor está sendo exibida
-        this.colorDisplayedOnBackground = false;
         
         this.loadFromStorage();
     }
@@ -204,7 +104,6 @@ class GameState {
         this.attemptsLeft = GAME_CONFIG.ATTEMPTS_PER_GAME;
         this.isGameActive = true;
         this.usedColors = [this.targetColor];
-        this.colorDisplayedOnBackground = false;
     }
 
     generateNewColor() {
@@ -268,15 +167,6 @@ class GameState {
         if (this.totalGames === 0) return 0;
         return Math.round((this.totalWins / this.totalGames) * 100);
     }
-
-    /**
-     * Verifica se o jogador pode "ver" a cor através do fundo da página
-     */
-    checkBackgroundColorMatch() {
-        const isDisplayed = ColorDetector.isColorCurrentlyDisplayed(this.targetColor);
-        this.colorDisplayedOnBackground = isDisplayed;
-        return isDisplayed;
-    }
 }
 
 // ================================
@@ -313,7 +203,6 @@ class ColorGuessingGame {
     constructor() {
         this.gameState = new GameState();
         this.dom = new DOMElements();
-        this.backgroundColorCheckInterval = null;
         this.init();
     }
 
@@ -323,54 +212,8 @@ class ColorGuessingGame {
         this.updateLevelSelector();
         this.startNewGame();
         
-        // Inicia monitoramento da cor de fundo
-        this.startBackgroundColorMonitoring();
-        
         // Foco inicial no campo de entrada
         this.dom.colorInput.focus();
-    }
-
-    /**
-     * Inicia o monitoramento contínuo da cor de fundo da página
-     */
-    startBackgroundColorMonitoring() {
-        // Verifica a cor de fundo a cada 2 segundos
-        this.backgroundColorCheckInterval = setInterval(() => {
-            if (this.gameState.isGameActive) {
-                const wasDisplayed = this.gameState.colorDisplayedOnBackground;
-                const isNowDisplayed = this.gameState.checkBackgroundColorMatch();
-                
-                // Se a cor acabou de aparecer no fundo
-                if (!wasDisplayed && isNowDisplayed) {
-                    this.showBackgroundColorHint();
-                }
-            }
-        }, 2000);
-    }
-
-    /**
-     * Para o monitoramento da cor de fundo
-     */
-    stopBackgroundColorMonitoring() {
-        if (this.backgroundColorCheckInterval) {
-            clearInterval(this.backgroundColorCheckInterval);
-            this.backgroundColorCheckInterval = null;
-        }
-    }
-
-    /**
-     * Mostra dica quando a cor aparece no fundo da página
-     */
-    showBackgroundColorHint() {
-        const hintMessage = `🔍 Dica especial: Observe a cor de fundo desta página! Ela pode te ajudar...`;
-        this.dom.hintMessage.textContent = hintMessage;
-        this.dom.hintArea.style.display = 'block';
-        
-        // Adiciona animação especial para chamar atenção
-        this.dom.hintArea.classList.add('background-hint-pulse');
-        setTimeout(() => {
-            this.dom.hintArea.classList.remove('background-hint-pulse');
-        }, 2000);
     }
 
     setupEventListeners() {
@@ -393,14 +236,9 @@ class ColorGuessingGame {
             }
         });
 
-        // Validação em tempo real
+        // Validação em tempo real (SIMPLIFICADA)
         this.dom.colorInput.addEventListener('input', () => {
             this.validateInput();
-        });
-
-        // Limpar interval quando a página é fechada
-        window.addEventListener('beforeunload', () => {
-            this.stopBackgroundColorMonitoring();
         });
     }
 
@@ -409,21 +247,14 @@ class ColorGuessingGame {
         const availableColors = COLOR_SETS[this.gameState.currentLevel];
         
         // Remove classes de validação anteriores
-        this.dom.colorInput.classList.remove('valid', 'invalid', 'background-match');
+        this.dom.colorInput.classList.remove('valid', 'invalid');
         
         if (input.length > 0) {
             const isValid = availableColors.some(color => 
                 color.toLowerCase().includes(input) || input.includes(color.toLowerCase())
             );
             
-            // Verifica se a cor digitada corresponde à cor de fundo atual
-            const matchesBackground = ColorDetector.isColorCurrentlyDisplayed(input);
-            
-            if (matchesBackground) {
-                this.dom.colorInput.classList.add('background-match');
-            } else {
-                this.dom.colorInput.classList.add(isValid ? 'valid' : 'invalid');
-            }
+            this.dom.colorInput.classList.add(isValid ? 'valid' : 'invalid');
         }
     }
 
@@ -442,12 +273,11 @@ class ColorGuessingGame {
 
         this.gameState.attemptsLeft--;
         
-        // Verificar se acertou a cor alvo OU se digitou a cor do fundo da página
-        const isCorrectTarget = guess === this.gameState.targetColor.toLowerCase();
-        const isBackgroundColor = ColorDetector.isColorCurrentlyDisplayed(guess);
+        // Verificar se acertou a cor alvo
+        const isCorrect = guess === this.gameState.targetColor.toLowerCase();
         
-        if (isCorrectTarget || isBackgroundColor) {
-            this.handleCorrectGuess(isBackgroundColor);
+        if (isCorrect) {
+            this.handleCorrectGuess();
         } else {
             this.handleIncorrectGuess(guess);
         }
@@ -455,21 +285,15 @@ class ColorGuessingGame {
         this.updateUI();
     }
 
-    handleCorrectGuess(wasBackgroundGuess = false) {
+    handleCorrectGuess() {
         this.gameState.isGameActive = false;
         this.gameState.addWin();
         this.gameState.addGame();
         
-        // Mudança visual de fundo para a cor alvo
+        // Mudança visual de fundo para a cor alvo (APENAS QUANDO ACERTA)
         this.changeBackgroundColor(this.gameState.targetColor);
         
-        // Feedback diferenciado baseado no tipo de acerto
-        let feedbackMessage;
-        if (wasBackgroundGuess) {
-            feedbackMessage = `� Excelente! Você observou a cor de fundo! A cor era "${this.gameState.targetColor}". +${GAME_CONFIG.SCORES[this.gameState.currentLevel]} pontos!`;
-        } else {
-            feedbackMessage = `🎉 Parabéns! Você acertou! A cor era "${this.gameState.targetColor}". +${GAME_CONFIG.SCORES[this.gameState.currentLevel]} pontos!`;
-        }
+        const feedbackMessage = `🎉 Parabéns! Você acertou! A cor era "${this.gameState.targetColor}". +${GAME_CONFIG.SCORES[this.gameState.currentLevel]} pontos!`;
         
         this.showFeedback(feedbackMessage, 'success');
         
@@ -549,11 +373,6 @@ class ColorGuessingGame {
         const commonLetters = this.getCommonLetters(targetColor, guess);
         if (commonLetters > 0) {
             hint += ` Tem ${commonLetters} letra(s) em comum!`;
-        }
-
-        // Verifica se a cor alvo está atualmente no fundo da página
-        if (ColorDetector.isColorCurrentlyDisplayed(targetColor)) {
-            hint += ` 👀 Dica extra: Olhe ao redor da página...`;
         }
         
         this.dom.hintMessage.textContent = hint;
@@ -636,7 +455,7 @@ class ColorGuessingGame {
     startNewGame() {
         this.gameState.resetGame();
         
-        // Reset visual
+        // Reset visual (sem mudança automática de cor)
         document.body.className = '';
         this.dom.colorInput.value = '';
         this.dom.colorInput.disabled = false;
@@ -646,21 +465,13 @@ class ColorGuessingGame {
         this.dom.hintArea.style.display = 'none';
         
         // Feedback inicial
-        this.showFeedback('Boa sorte! Uma nova cor foi sorteada. Observe a página atentamente...', 'info');
+        this.showFeedback('Boa sorte! Uma nova cor foi sorteada...', 'info');
         
         this.updateUI();
         this.dom.colorInput.focus();
         
         // Debug info (remover em produção)
         console.log(`🎯 Cor sorteada: ${this.gameState.targetColor}`);
-        
-        // Força a mudança de cor de fundo após 3 segundos para o jogador poder "ver" a cor
-        setTimeout(() => {
-            if (this.gameState.isGameActive) {
-                this.changeBackgroundColor(this.gameState.targetColor);
-                console.log(`🎨 Cor de fundo alterada para: ${this.gameState.targetColor}`);
-            }
-        }, 3000);
     }
 
     updateUI() {
@@ -698,9 +509,6 @@ class ColorGuessingGame {
 
     goHome() {
         if (confirm('Tem certeza que deseja voltar à página principal? O progresso atual será salvo.')) {
-            // Parar monitoramento antes de sair
-            this.stopBackgroundColorMonitoring();
-            
             // Salvar estado antes de sair
             this.gameState.saveToStorage();
             
@@ -716,7 +524,7 @@ class ColorGuessingGame {
 
 // Aguardar carregamento completo da página
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🎮 Iniciando Jogo de Adivinhação de Cores com Detecção de Fundo...');
+    console.log('🎮 Iniciando Jogo de Adivinhação de Cores - Versão Corrigida...');
     
     // Verificar se todos os elementos necessários estão presentes
     const requiredElements = [
@@ -731,11 +539,6 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('Erro: Alguns elementos da interface não foram encontrados. Recarregue a página.');
         return;
     }
-    
-    // Testar detector de cores
-    console.log('🧪 Testando detector de cores...');
-    const detectableColors = ColorDetector.getDetectableColors();
-    console.log(`📊 Cores detectáveis: ${detectableColors.length}`, detectableColors);
     
     // Inicializar o jogo
     try {
@@ -779,16 +582,7 @@ document.addEventListener('keydown', (e) => {
                   '• Use as dicas após cada erro\n' +
                   '• Cores quentes: red, orange, yellow...\n' +
                   '• Cores frias: blue, green, purple...\n' +
-                  '• 👀 NOVO: Observe a cor de fundo da página!\n' +
-                  '• Pressione ESC para reiniciar\n' +
-                  '• Pressione F2 para debug de cor de fundo');
-            break;
-
-        case 'F2':
-            e.preventDefault();
-            // Atalho secreto para mostrar cor de fundo atual
-            const currentBg = ColorDetector.detectBackgroundColor();
-            alert(`🔍 Debug: Cor de fundo atual = ${currentBg || 'não detectada'}`);
+                  '• Pressione ESC para reiniciar');
             break;
     }
 });
@@ -820,7 +614,6 @@ function resetInactivityTimer() {
 // Salvar automaticamente antes de fechar a página
 window.addEventListener('beforeunload', () => {
     if (window.colorGame) {
-        window.colorGame.stopBackgroundColorMonitoring();
         window.colorGame.gameState.saveToStorage();
     }
 });
@@ -828,30 +621,13 @@ window.addEventListener('beforeunload', () => {
 // Sistema de debug (apenas em desenvolvimento)
 if (location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.hostname.includes('vercel')) {
     console.log('🔧 Modo de desenvolvimento ativo');
-    console.log('🎯 Use colorGame.gameState.targetColor para ver a cor atual');
-    console.log('🏆 Use colorGame.gameState.score para ver a pontuação');
-    console.log('🎨 Use ColorDetector.detectBackgroundColor() para ver cor de fundo');
+    console.log('🎯 Use window.colorGame.gameState.targetColor para ver a cor atual');
     
     // Comando de desenvolvedor para revelar cor
     window.revealColor = () => {
         if (window.colorGame) {
             console.log(`🎯 Cor atual: ${window.colorGame.gameState.targetColor}`);
             return window.colorGame.gameState.targetColor;
-        }
-    };
-
-    // Comando para testar detector de cores
-    window.testColorDetector = () => {
-        const currentBg = ColorDetector.detectBackgroundColor();
-        console.log(`🎨 Cor de fundo: ${currentBg}`);
-        return currentBg;
-    };
-
-    // Comando para forçar mudança de cor de fundo
-    window.setBackgroundColor = (color) => {
-        if (window.colorGame) {
-            window.colorGame.changeBackgroundColor(color);
-            console.log(`🎨 Cor de fundo alterada para: ${color}`);
         }
     };
 }
