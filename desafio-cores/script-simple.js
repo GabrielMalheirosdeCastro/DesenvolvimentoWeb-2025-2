@@ -126,7 +126,13 @@ function showFeedback(message, type) {
 
 // Atualizar interface
 function updateUI() {
-    if (elements.attemptsCount) elements.attemptsCount.textContent = gameState.attemptsLeft;
+    if (elements.attemptsCount) {
+        elements.attemptsCount.textContent = gameState.attemptsLeft;
+        // Forçar repaint
+        elements.attemptsCount.style.display = 'none';
+        elements.attemptsCount.offsetHeight; // trigger reflow
+        elements.attemptsCount.style.display = '';
+    }
     if (elements.scoreCount) elements.scoreCount.textContent = gameState.score;
     if (elements.levelProgress) {
         elements.levelProgress.textContent = 
@@ -205,6 +211,11 @@ function handleIncorrectGuess(guess) {
             'error'
         );
         
+        // Atualizar UI imediatamente
+        if (elements.attemptsCount) {
+            elements.attemptsCount.textContent = gameState.attemptsLeft;
+        }
+        
         showHint(guess);
         elements.colorInput.value = '';
         elements.colorInput.focus();
@@ -217,6 +228,11 @@ function handleIncorrectGuess(guess) {
             `💀 Fim de jogo! A cor era "${gameState.targetColor}". Tente novamente!`, 
             'error'
         );
+        
+        // Atualizar UI imediatamente
+        if (elements.attemptsCount) {
+            elements.attemptsCount.textContent = gameState.attemptsLeft;
+        }
         
         elements.guessBtn.style.display = 'none';
         elements.restartBtn.style.display = 'inline-flex';
