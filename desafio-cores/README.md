@@ -22,6 +22,7 @@ Este é um jogo interativo onde o jogador deve adivinhar cores aleatórias usand
 - **Design responsivo** para todos os dispositivos
 - **Validação em tempo real** de entrada
 - **Atalhos de teclado** para melhor UX
+- **🆕 DETECÇÃO DE COR DE FUNDO** - O jogo aceita a cor quando ela está visível no fundo da página!
 
 ### 🎨 Cores por Nível
 
@@ -40,13 +41,15 @@ Este é um jogo interativo onde o jogador deve adivinhar cores aleatórias usand
 2. **Digite o nome** de uma cor em inglês no campo de texto
 3. **Clique em "Adivinhar"** ou pressione Enter
 4. **Use as dicas** exibidas após cada erro
-5. **Acerte 3 cores** em um nível para desbloquear o próximo
+5. **👀 NOVA FUNCIONALIDADE:** Observe a cor de fundo da página - após alguns segundos ela mostrará a cor sorteada!
+6. **Acerte 3 cores** em um nível para desbloquear o próximo
 
 ### ⌨️ Atalhos de Teclado
 
 - **Enter**: Submeter resposta
 - **Escape**: Reiniciar jogo (com confirmação)
 - **F1**: Mostrar dicas do jogo
+- **F2**: Debug da cor de fundo atual (desenvolvedor)
 
 ## 🏗️ Estrutura Técnica
 

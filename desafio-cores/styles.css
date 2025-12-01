@@ -601,3 +601,126 @@ body.color-silver { background: #f8fafc; }
         font-size: var(--font-size-xl);
     }
 }
+
+/* ================================
+   ESTILOS PARA DETECÇÃO DE COR DE FUNDO
+   ================================ */
+
+/* Indicador visual para input quando combina com fundo */
+.color-input.background-match {
+    border-color: #8b5cf6 !important;
+    background: linear-gradient(45deg, #f3e8ff, #e9d5ff) !important;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2) !important;
+    animation: backgroundMatchGlow 1s ease-in-out infinite alternate;
+}
+
+@keyframes backgroundMatchGlow {
+    from { box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2); }
+    to { box-shadow: 0 0 0 5px rgba(139, 92, 246, 0.4); }
+}
+
+/* Animação especial para dica de cor de fundo */
+.background-hint-pulse {
+    animation: backgroundHintPulse 2s ease-in-out;
+    border: 2px solid #8b5cf6;
+    background: linear-gradient(135deg, #f3e8ff, #e9d5ff);
+}
+
+@keyframes backgroundHintPulse {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7);
+    }
+    50% { 
+        transform: scale(1.02);
+        box-shadow: 0 0 0 10px rgba(139, 92, 246, 0);
+    }
+}
+
+/* Classes de cores dinâmicas para o body */
+.color-red { background-color: red !important; color: white; }
+.color-blue { background-color: blue !important; color: white; }
+.color-green { background-color: green !important; color: white; }
+.color-yellow { background-color: yellow !important; color: black; }
+.color-purple { background-color: purple !important; color: white; }
+.color-orange { background-color: orange !important; color: black; }
+.color-pink { background-color: pink !important; color: black; }
+.color-brown { background-color: brown !important; color: white; }
+.color-gray { background-color: gray !important; color: white; }
+.color-white { background-color: white !important; color: black; }
+.color-black { background-color: black !important; color: white; }
+
+/* Cores do nível médio */
+.color-navy { background-color: navy !important; color: white; }
+.color-teal { background-color: teal !important; color: white; }
+.color-coral { background-color: coral !important; color: black; }
+.color-crimson { background-color: crimson !important; color: white; }
+.color-indigo { background-color: indigo !important; color: white; }
+.color-lime { background-color: lime !important; color: black; }
+.color-olive { background-color: olive !important; color: white; }
+.color-cyan { background-color: cyan !important; color: black; }
+.color-gold { background-color: gold !important; color: black; }
+.color-silver { background-color: silver !important; color: black; }
+
+/* Cores do nível difícil */
+.color-darkslateblue { background-color: darkslateblue !important; color: white; }
+.color-lightcoral { background-color: lightcoral !important; color: black; }
+.color-mediumseagreen { background-color: mediumseagreen !important; color: white; }
+.color-darkgoldenrod { background-color: darkgoldenrod !important; color: white; }
+.color-lightsteelblue { background-color: lightsteelblue !important; color: black; }
+.color-palevioletred { background-color: palevioletred !important; color: white; }
+.color-mediumorchid { background-color: mediumorchid !important; color: white; }
+.color-darkolivegreen { background-color: darkolivegreen !important; color: white; }
+.color-lightslategray { background-color: lightslategray !important; color: white; }
+.color-mediumturquoise { background-color: mediumturquoise !important; color: black; }
+
+/* Indicador visual quando a cor está sendo exibida no fundo */
+.color-feedback-active {
+    position: relative;
+}
+
+.color-feedback-active::before {
+    content: "👀 Cor visível no fundo da página!";
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: rgba(139, 92, 246, 0.9);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 1000;
+    animation: colorVisibleNotification 3s ease-in-out;
+}
+
+@keyframes colorVisibleNotification {
+    0%, 100% { opacity: 0; transform: translateX(100%); }
+    10%, 90% { opacity: 1; transform: translateX(0); }
+}
+
+/* Melhorias na transição de cor de fundo */
+body {
+    transition: background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                color 0.5s ease;
+}
+
+/* Debug info apenas em desenvolvimento */
+.debug-info {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 12px;
+    z-index: 9999;
+    max-width: 300px;
+    opacity: 0.7;
+}
+
+.debug-info.hidden {
+    display: none;
+}

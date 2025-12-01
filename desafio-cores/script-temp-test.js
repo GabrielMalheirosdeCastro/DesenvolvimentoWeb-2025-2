@@ -1,5 +1,5 @@
 /**
- * 🎮 JOGO DE ADIVINHAÇÃO DE CORES
+ * 🎮 JOGO DE ADIVINHAÇÃO DE CORES - VERSÃO TESTE COM DETECÇÃO DE FUNDO
  * Projeto Prático C3 - Gabriel Malheiros de Castro
  * FAESA 2025-2
  * 
@@ -111,16 +111,19 @@ class ColorDetector {
         if (rgbMatch) {
             const [, r, g, b] = rgbMatch.map(Number);
             const colorName = this.rgbToColorName(r, g, b);
+            console.log(`🎨 Cor de fundo detectada: rgb(${r}, ${g}, ${b}) = ${colorName || 'desconhecida'}`);
             return colorName;
         }
         
         if (rgbaMatch) {
             const [, r, g, b] = rgbaMatch.map(Number);
             const colorName = this.rgbToColorName(r, g, b);
+            console.log(`🎨 Cor de fundo detectada: rgba(${r}, ${g}, ${b}, a) = ${colorName || 'desconhecida'}`);
             return colorName;
         }
         
         // Se não conseguir detectar, assume branco
+        console.log('🎨 Cor de fundo não detectada, assumindo branco');
         return 'white';
     }
 
@@ -147,7 +150,7 @@ class ColorDetector {
 }
 
 // ================================
-// ESTADO DO JOGO
+// ESTADO DO JOGO (MODIFICADO)
 // ================================
 
 class GameState {
@@ -306,7 +309,7 @@ class DOMElements {
 }
 
 // ================================
-// CLASSE PRINCIPAL DO JOGO
+// CLASSE PRINCIPAL DO JOGO (MODIFICADA)
 // ================================
 
 class ColorGuessingGame {
@@ -334,7 +337,7 @@ class ColorGuessingGame {
      * Inicia o monitoramento contínuo da cor de fundo da página
      */
     startBackgroundColorMonitoring() {
-        // Verifica a cor de fundo a cada 2 segundos
+        // Verifica a cor de fundo a cada 1 segundo
         this.backgroundColorCheckInterval = setInterval(() => {
             if (this.gameState.isGameActive) {
                 const wasDisplayed = this.gameState.colorDisplayedOnBackground;
@@ -345,7 +348,7 @@ class ColorGuessingGame {
                     this.showBackgroundColorHint();
                 }
             }
-        }, 2000);
+        }, 1000);
     }
 
     /**
@@ -466,7 +469,7 @@ class ColorGuessingGame {
         // Feedback diferenciado baseado no tipo de acerto
         let feedbackMessage;
         if (wasBackgroundGuess) {
-            feedbackMessage = `� Excelente! Você observou a cor de fundo! A cor era "${this.gameState.targetColor}". +${GAME_CONFIG.SCORES[this.gameState.currentLevel]} pontos!`;
+            feedbackMessage = `🎨 Excelente! Você observou a cor de fundo! A cor era "${this.gameState.targetColor}". +${GAME_CONFIG.SCORES[this.gameState.currentLevel]} pontos!`;
         } else {
             feedbackMessage = `🎉 Parabéns! Você acertou! A cor era "${this.gameState.targetColor}". +${GAME_CONFIG.SCORES[this.gameState.currentLevel]} pontos!`;
         }
@@ -654,13 +657,11 @@ class ColorGuessingGame {
         // Debug info (remover em produção)
         console.log(`🎯 Cor sorteada: ${this.gameState.targetColor}`);
         
-        // Força a mudança de cor de fundo após 3 segundos para o jogador poder "ver" a cor
+        // Força a mudança de cor de fundo após 2 segundos para o jogador poder "ver" a cor
         setTimeout(() => {
-            if (this.gameState.isGameActive) {
-                this.changeBackgroundColor(this.gameState.targetColor);
-                console.log(`🎨 Cor de fundo alterada para: ${this.gameState.targetColor}`);
-            }
-        }, 3000);
+            this.changeBackgroundColor(this.gameState.targetColor);
+            console.log(`🎨 Cor de fundo alterada para: ${this.gameState.targetColor}`);
+        }, 2000);
     }
 
     updateUI() {
@@ -711,7 +712,7 @@ class ColorGuessingGame {
 }
 
 // ================================
-// INICIALIZAÇÃO DO JOGO
+// INICIALIZAÇÃO DO JOGO (MODIFICADA)
 // ================================
 
 // Aguardar carregamento completo da página
@@ -757,7 +758,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ================================
-// FUNCIONALIDADES EXTRAS
+// FUNCIONALIDADES EXTRAS (MODIFICADAS)
 // ================================
 
 // Sistema de atalhos de teclado
@@ -780,8 +781,7 @@ document.addEventListener('keydown', (e) => {
                   '• Cores quentes: red, orange, yellow...\n' +
                   '• Cores frias: blue, green, purple...\n' +
                   '• 👀 NOVO: Observe a cor de fundo da página!\n' +
-                  '• Pressione ESC para reiniciar\n' +
-                  '• Pressione F2 para debug de cor de fundo');
+                  '• Pressione ESC para reiniciar');
             break;
 
         case 'F2':

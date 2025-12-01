@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎮 Jogo de Adivinhação de Cores | FAESA 2025-2</title>
+    <title>🎮 Jogo de Adivinhação de Cores - TESTE | FAESA 2025-2</title>
     <meta name="description" content="Jogo interativo de adivinhação de cores - Projeto Prático C3 Gabriel Malheiros">
     <meta name="author" content="Gabriel Malheiros de Castro">
     
@@ -12,17 +12,75 @@
     
     <!-- CSS -->
     <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* Debug styles específicos para teste */
+        .test-indicator {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: #ff6b6b;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            z-index: 9999;
+            animation: testPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes testPulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .debug-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 12px;
+            max-width: 300px;
+            z-index: 9998;
+        }
+
+        .debug-panel h4 {
+            margin: 0 0 10px 0;
+            color: #4ade80;
+        }
+
+        .debug-panel button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            margin: 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .debug-panel button:hover {
+            background: #2563eb;
+        }
+    </style>
 </head>
 <body>
+    <!-- Indicador de versão teste -->
+    <div class="test-indicator">🧪 VERSÃO TESTE - DETECÇÃO DE FUNDO</div>
+
     <!-- Container principal do jogo -->
     <div class="game-container">
         <!-- Cabeçalho do jogo -->
         <header class="game-header">
             <h1 class="game-title">🎮 Jogo de Adivinhação de Cores</h1>
             <p class="game-instructions">
-                Adivinhe a cor sorteada! Você tem <strong>3 tentativas</strong> para acertar.
+                <strong>NOVA FUNCIONALIDADE:</strong> Observe a cor de fundo da página! 
+                Você pode adivinhar a cor olhando para o fundo que aparece após alguns segundos.
                 Digite o nome da cor em inglês (ex: red, blue, green).
-                <br><strong>🎨 NOVA FUNCIONALIDADE:</strong> Observe a cor de fundo da página - ela pode te ajudar!
             </p>
         </header>
 
@@ -65,7 +123,7 @@
                         type="text" 
                         id="color-guess" 
                         class="color-input"
-                        placeholder="Ex: red, blue, green..."
+                        placeholder="Ex: red, blue, green... ou observe o fundo!"
                         autocomplete="off"
                         maxlength="30"
                     >
@@ -79,7 +137,7 @@
             <!-- Área de feedback -->
             <div id="feedback-area" class="feedback-area">
                 <p id="feedback-message" class="feedback-message">
-                    Boa sorte! A cor foi sorteada...
+                    Boa sorte! A cor foi sorteada e aparecerá no fundo em alguns segundos...
                 </p>
             </div>
 
@@ -128,7 +186,61 @@
         </aside>
     </div>
 
+    <!-- Painel de debug para testes -->
+    <div class="debug-panel">
+        <h4>🔧 Painel de Teste</h4>
+        <div>
+            <button onclick="testColorDetector()">Detectar Cor Fundo</button>
+            <button onclick="revealColor()">Revelar Cor Alvo</button>
+        </div>
+        <div style="margin-top: 10px;">
+            <button onclick="setBackgroundColor('red')">Red</button>
+            <button onclick="setBackgroundColor('blue')">Blue</button>
+            <button onclick="setBackgroundColor('green')">Green</button>
+        </div>
+        <div style="margin-top: 10px;">
+            <button onclick="window.colorGame.startNewGame()">Novo Jogo</button>
+            <button onclick="window.location.reload()">Reload</button>
+        </div>
+        <div style="margin-top: 10px; font-size: 10px;">
+            <div id="debug-current-bg">Fundo: detectando...</div>
+            <div id="debug-target-color">Alvo: carregando...</div>
+        </div>
+    </div>
+
     <!-- Scripts -->
-    <script src="script.js"></script>
+    <script src="script-temp-test.js"></script>
+
+    <script>
+        // Script adicional para atualizar informações de debug
+        function updateDebugInfo() {
+            const debugBg = document.getElementById('debug-current-bg');
+            const debugTarget = document.getElementById('debug-target-color');
+            
+            if (window.ColorDetector && debugBg) {
+                const currentBg = window.ColorDetector.detectBackgroundColor();
+                debugBg.textContent = `Fundo: ${currentBg || 'não detectada'}`;
+            }
+            
+            if (window.colorGame && debugTarget) {
+                const target = window.colorGame.gameState.targetColor;
+                debugTarget.textContent = `Alvo: ${target || 'não definida'}`;
+            }
+        }
+
+        // Atualiza debug info a cada 2 segundos
+        setInterval(updateDebugInfo, 2000);
+
+        // Atualiza quando a página carrega
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(updateDebugInfo, 1000);
+        });
+
+        // Log de teste no console
+        console.log('🧪 VERSÃO TESTE CARREGADA');
+        console.log('🔧 Use as funções do painel de debug para testar');
+        console.log('👀 Observe as mudanças de cor de fundo');
+        console.log('⚡ Pressione F2 para debug de cor de fundo');
+    </script>
 </body>
 </html>
