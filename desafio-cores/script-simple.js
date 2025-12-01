@@ -163,7 +163,10 @@ function handleGuess() {
         handleIncorrectGuess(guess);
     }
     
-    updateUI();
+    // Garantir que a UI seja atualizada após mudanças no estado
+    setTimeout(() => {
+        updateUI();
+    }, 50);
 }
 
 // Palpite correto
