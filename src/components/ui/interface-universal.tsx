@@ -553,7 +553,7 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
                 <h3 className="text-2xl font-bold text-green-800 mb-4 flex items-center gap-3">
                   🧪 Laboratórios e Exercícios
                 </h3>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid md:grid-cols-2 gap-4">
                   <div className="bg-green-50 rounded-xl p-4 border border-green-200 hover:shadow-md transition-all">
                     <div className="text-3xl mb-2">📚</div>
                     <h4 className="font-semibold text-green-800 mb-2">Lab Fundamentos CSS</h4>
@@ -565,20 +565,6 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
                       className="inline-block bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition-colors w-full text-center"
                     >
                       Explorar Lab CSS
-                    </a>
-                  </div>
-                  
-                  <div className="bg-green-50 rounded-xl p-4 border border-green-200 hover:shadow-md transition-all">
-                    <div className="text-3xl mb-2">🎯</div>
-                    <h4 className="font-semibold text-green-800 mb-2">Box Model Game</h4>
-                    <p className="text-sm text-green-600 mb-3">Jogo de adivinhação de naves espaciais</p>
-                    <a 
-                      href="/boxmodel.html" 
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition-colors w-full text-center"
-                    >
-                      Jogar Box Model
                     </a>
                   </div>
                   
@@ -611,7 +597,43 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
                 </div>
               </div>
 
-              {/* Categoria 3: Projetos e Galerias */}
+              {/* Categoria 3: Jogos Interativos */}
+              <div className="bg-white/80 rounded-2xl p-6 border-2 border-red-200">
+                <h3 className="text-2xl font-bold text-red-800 mb-4 flex items-center gap-3">
+                  🎮 Jogos Interativos
+                </h3>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="bg-red-50 rounded-xl p-4 border border-red-200 hover:shadow-md transition-all">
+                    <div className="text-3xl mb-2">🎯</div>
+                    <h4 className="font-semibold text-red-800 mb-2">Jogo de Adivinhação de Cores</h4>
+                    <p className="text-sm text-red-600 mb-3">🌈 Adivinhe cores com 3 níveis de dificuldade | Projeto Prático C3</p>
+                    <a 
+                      href="/desafio-cores/index.html" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block bg-gradient-to-r from-red-600 to-pink-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-red-700 hover:to-pink-700 transition-all transform hover:scale-105 w-full text-center shadow-md"
+                    >
+                      🎨 JOGAR DESAFIO DAS CORES
+                    </a>
+                  </div>
+                  
+                  <div className="bg-red-50 rounded-xl p-4 border border-red-200 hover:shadow-md transition-all">
+                    <div className="text-3xl mb-2">🎯</div>
+                    <h4 className="font-semibold text-red-800 mb-2">Box Model Game</h4>
+                    <p className="text-sm text-red-600 mb-3">Jogo de adivinhação de naves espaciais CSS</p>
+                    <a 
+                      href="/boxmodel.html" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors w-full text-center"
+                    >
+                      Jogar Box Model
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Categoria 4: Projetos e Galerias */}
               <div className="bg-white/80 rounded-2xl p-6 border-2 border-purple-200">
                 <h3 className="text-2xl font-bold text-purple-800 mb-4 flex items-center gap-3">
                   🚀 Projetos e Galerias
