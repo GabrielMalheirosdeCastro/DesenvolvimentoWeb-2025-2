@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧪 DEBUG - Jogo de Cores</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .debug-info {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+            z-index: 1000;
+        }
+        .debug-controls {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .debug-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="debug-info" id="debug-info">
+        Debug Mode: ON<br>
+        Estado: <span id="debug-state">Carregando...</span><br>
+        Cor: <span id="debug-color">-</span><br>
+        Tentativas: <span id="debug-attempts">-</span>
+    </div>
+
+    <div class="game-container">
+        <header class="game-header">
+            <h1 class="game-title">🧪 DEBUG - Jogo de Adivinhação de Cores</h1>
+            <p class="game-instructions">
+                Versão de debug para identificar problemas. Adivinhe a cor sorteada! Você tem <strong>3 tentativas</strong> para acertar.
+            </p>
+        </header>
+
+        <main class="game-main">
+            <div class="debug-controls">
+                <button class="debug-btn" onclick="debugRevealColor()">🔍 Revelar Cor</button>
+                <button class="debug-btn" onclick="console.clear()">🧹 Limpar Console</button>
+                <button class="debug-btn" onclick="location.reload()">🔄 Recarregar</button>
+            </div>
+
+            <div class="game-stats">
+                <div class="attempts-counter">
+                    <span class="label">Tentativas restantes:</span>
+                    <span id="attempts-count" class="count">3</span>
+                </div>
+            </div>
+
+            <div class="game-input">
+                <div class="input-group">
+                    <label for="color-guess" class="input-label">Digite sua cor:</label>
+                    <input 
+                        type="text" 
+                        id="color-guess" 
+                        class="color-input"
+                        placeholder="Ex: red, blue, green..."
+                        autocomplete="off"
+                        maxlength="30"
+                    >
+                </div>
+                
+                <button id="guess-btn" class="btn btn-primary">
+                    🎯 Adivinhar
+                </button>
+            </div>
+
+            <div id="feedback-area" class="feedback-area">
+                <p id="feedback-message" class="feedback-message">
+                    Debug mode: Acompanhe o console do navegador...
+                </p>
+            </div>
+
+            <div class="game-controls">
+                <button id="restart-btn" class="btn btn-secondary" style="display: none;">
+                    🔄 Jogar Novamente
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Script de debug -->
+    <script src="debug-test.js"></script>
+    
+    <script>
+        // Atualizar debug info em tempo real
+        function updateDebugInfo() {
+            if (typeof debugGame !== 'undefined') {
+                document.getElementById('debug-state').textContent = debugGame.isGameActive ? 'ATIVO' : 'INATIVO';
+                document.getElementById('debug-color').textContent = debugGame.targetColor || '-';
+                document.getElementById('debug-attempts').textContent = debugGame.attemptsLeft || '-';
+            }
+        }
+        
+        setInterval(updateDebugInfo, 1000);
+    </script>
+</body>
+</html>
