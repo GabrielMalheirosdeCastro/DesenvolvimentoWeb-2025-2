@@ -175,23 +175,60 @@ class GameState {
 
 class DOMElements {
     constructor() {
+        console.log('🔍 Buscando elementos DOM...');
+        
         this.difficultySelect = document.getElementById('difficulty-select');
+        console.log('difficultySelect:', this.difficultySelect ? '✅' : '❌');
+        
         this.attemptsCount = document.getElementById('attempts-count');
+        console.log('attemptsCount:', this.attemptsCount ? '✅' : '❌');
+        
         this.scoreCount = document.getElementById('score-count');
+        console.log('scoreCount:', this.scoreCount ? '✅' : '❌');
+        
         this.levelProgress = document.getElementById('level-progress');
+        console.log('levelProgress:', this.levelProgress ? '✅' : '❌');
+        
         this.colorInput = document.getElementById('color-guess');
+        console.log('colorInput:', this.colorInput ? '✅' : '❌');
+        
         this.guessBtn = document.getElementById('guess-btn');
+        console.log('guessBtn:', this.guessBtn ? '✅' : '❌');
+        
         this.feedbackArea = document.getElementById('feedback-area');
+        console.log('feedbackArea:', this.feedbackArea ? '✅' : '❌');
+        
         this.feedbackMessage = document.getElementById('feedback-message');
+        console.log('feedbackMessage:', this.feedbackMessage ? '✅' : '❌');
+        
         this.hintArea = document.getElementById('hint-area');
+        console.log('hintArea:', this.hintArea ? '✅' : '❌');
+        
         this.hintMessage = document.getElementById('hint-message');
+        console.log('hintMessage:', this.hintMessage ? '✅' : '❌');
+        
         this.restartBtn = document.getElementById('restart-btn');
+        console.log('restartBtn:', this.restartBtn ? '✅' : '❌');
+        
         this.nextLevelBtn = document.getElementById('next-level-btn');
+        console.log('nextLevelBtn:', this.nextLevelBtn ? '✅' : '❌');
+        
         this.homeBtn = document.getElementById('home-btn');
+        console.log('homeBtn:', this.homeBtn ? '✅' : '❌');
+        
         this.totalGames = document.getElementById('total-games');
+        console.log('totalGames:', this.totalGames ? '✅' : '❌');
+        
         this.totalWins = document.getElementById('total-wins');
+        console.log('totalWins:', this.totalWins ? '✅' : '❌');
+        
         this.winRate = document.getElementById('win-rate');
+        console.log('winRate:', this.winRate ? '✅' : '❌');
+        
         this.highScore = document.getElementById('high-score');
+        console.log('highScore:', this.highScore ? '✅' : '❌');
+        
+        console.log('✅ Busca de elementos DOM concluída');
     }
 }
 
@@ -207,39 +244,142 @@ class ColorGuessingGame {
     }
 
     init() {
-        this.setupEventListeners();
-        this.updateUI();
-        this.updateLevelSelector();
-        this.startNewGame();
+        console.log('🚀 Iniciando configuração da classe ColorGuessingGame...');
         
-        // Foco inicial no campo de entrada
-        this.dom.colorInput.focus();
+        try {
+            console.log('🎧 Configurando event listeners...');
+            this.setupEventListeners();
+            
+            console.log('🎨 Atualizando UI...');
+            this.updateUI();
+            
+            console.log('📊 Atualizando seletor de nível...');
+            this.updateLevelSelector();
+            
+            console.log('🆕 Iniciando novo jogo...');
+            this.startNewGame();
+            
+            console.log('🎯 Focando no campo de entrada...');
+            // Foco inicial no campo de entrada com delay para garantir renderização
+            setTimeout(() => {
+                if (this.dom.colorInput) {
+                    this.dom.colorInput.focus();
+                    console.log('✅ Foco definido no campo de entrada');
+                } else {
+                    console.error('❌ Campo de entrada não encontrado para focar');
+                }
+            }, 100);
+            
+            console.log('✅ Inicialização da classe concluída com sucesso');
+            
+        } catch (error) {
+            console.error('❌ Erro durante inicialização da classe:', error);
+            throw error;
+        }
     }
 
     setupEventListeners() {
-        // Eventos principais
-        this.dom.guessBtn.addEventListener('click', () => this.handleGuess());
-        this.dom.restartBtn.addEventListener('click', () => this.startNewGame());
-        this.dom.nextLevelBtn.addEventListener('click', () => this.nextLevel());
-        this.dom.homeBtn.addEventListener('click', () => this.goHome());
+        console.log('🎧 Configurando event listeners...');
         
-        // Mudança de nível de dificuldade
-        this.dom.difficultySelect.addEventListener('change', (e) => {
-            this.gameState.currentLevel = e.target.value;
-            this.startNewGame();
-        });
-        
-        // Enter para adivinhar
-        this.dom.colorInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && this.gameState.isGameActive) {
-                this.handleGuess();
+        try {
+            // Eventos principais
+            if (this.dom.guessBtn) {
+                this.dom.guessBtn.addEventListener('click', () => {
+                    console.log('🔘 Botão Adivinhar clicado');
+                    this.handleGuess();
+                });
+                console.log('✅ Listener do botão adivinhar configurado');
+            } else {
+                console.error('❌ Botão adivinhar não encontrado');
             }
-        });
+            
+            if (this.dom.restartBtn) {
+                this.dom.restartBtn.addEventListener('click', () => {
+                    console.log('🔄 Botão Reiniciar clicado');
+                    this.startNewGame();
+                });
+                console.log('✅ Listener do botão reiniciar configurado');
+            }
+            
+            if (this.dom.nextLevelBtn) {
+                this.dom.nextLevelBtn.addEventListener('click', () => {
+                    console.log('⬆️ Botão Próximo Nível clicado');
+                    this.nextLevel();
+                });
+                console.log('✅ Listener do próximo nível configurado');
+            }
+            
+            if (this.dom.homeBtn) {
+                this.dom.homeBtn.addEventListener('click', () => {
+                    console.log('🏠 Botão Home clicado');
+                    this.goHome();
+                });
+                console.log('✅ Listener do botão home configurado');
+            }
+            
+            // Botão de teste temporário
+            const testBtn = document.getElementById('test-btn');
+            if (testBtn) {
+                testBtn.addEventListener('click', () => {
+                    console.log('🧪 TESTE DEBUG EXECUTADO');
+                    console.log('🎮 Estado do jogo:', {
+                        isActive: this.gameState.isGameActive,
+                        targetColor: this.gameState.targetColor,
+                        attemptsLeft: this.gameState.attemptsLeft,
+                        currentLevel: this.gameState.currentLevel
+                    });
+                    console.log('🎯 Elementos DOM:', {
+                        input: !!this.dom.colorInput,
+                        button: !!this.dom.guessBtn,
+                        feedback: !!this.dom.feedbackMessage
+                    });
+                    
+                    // Teste forçado de palpite
+                    if (this.dom.colorInput) {
+                        this.dom.colorInput.value = this.gameState.targetColor;
+                        console.log('🎯 Cor inserida no campo:', this.gameState.targetColor);
+                    }
+                    
+                    alert(`🧪 DEBUG INFO:\n\nJogo Ativo: ${this.gameState.isGameActive}\nCor Alvo: ${this.gameState.targetColor}\nTentativas: ${this.gameState.attemptsLeft}\n\nCor foi inserida no campo automaticamente!`);
+                });
+                console.log('✅ Listener do botão teste configurado');
+            }
+            
+            // Mudança de nível de dificuldade
+            if (this.dom.difficultySelect) {
+                this.dom.difficultySelect.addEventListener('change', (e) => {
+                    console.log('📊 Nível alterado para:', e.target.value);
+                    this.gameState.currentLevel = e.target.value;
+                    this.startNewGame();
+                });
+                console.log('✅ Listener do seletor de dificuldade configurado');
+            }
+            
+            // Enter para adivinhar
+            if (this.dom.colorInput) {
+                this.dom.colorInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' && this.gameState.isGameActive) {
+                        console.log('⌨️ Enter pressionado');
+                        this.handleGuess();
+                    }
+                });
+                console.log('✅ Listener de Enter configurado');
 
-        // Validação em tempo real (SIMPLIFICADA)
-        this.dom.colorInput.addEventListener('input', () => {
-            this.validateInput();
-        });
+                // Validação em tempo real (SIMPLIFICADA)
+                this.dom.colorInput.addEventListener('input', () => {
+                    this.validateInput();
+                });
+                console.log('✅ Listener de validação configurado');
+            } else {
+                console.error('❌ Campo de entrada não encontrado');
+            }
+            
+            console.log('✅ Todos os event listeners configurados com sucesso');
+            
+        } catch (error) {
+            console.error('❌ Erro ao configurar event listeners:', error);
+            throw error;
+        }
     }
 
     validateInput() {
@@ -259,29 +399,44 @@ class ColorGuessingGame {
     }
 
     handleGuess() {
-        if (!this.gameState.isGameActive) return;
+        console.log('🎯 HandleGuess chamado');
+        console.log('🕹️ Estado do jogo ativo:', this.gameState.isGameActive);
+        
+        if (!this.gameState.isGameActive) {
+            console.log('❌ Jogo não está ativo');
+            return;
+        }
 
         const guess = this.dom.colorInput.value.trim().toLowerCase();
+        console.log('💭 Palpite do usuário:', guess);
+        console.log('🎨 Cor alvo:', this.gameState.targetColor);
         
         // Validação de entrada
         if (!guess) {
+            console.log('⚠️ Entrada vazia');
             this.showFeedback('Digite uma cor!', 'error');
             this.dom.colorInput.classList.add('shake');
             setTimeout(() => this.dom.colorInput.classList.remove('shake'), 500);
             return;
         }
 
+        // Decrementar tentativas
         this.gameState.attemptsLeft--;
+        console.log('📊 Tentativas restantes:', this.gameState.attemptsLeft);
         
         // Verificar se acertou a cor alvo
         const isCorrect = guess === this.gameState.targetColor.toLowerCase();
+        console.log('✅ Acertou?', isCorrect);
         
         if (isCorrect) {
+            console.log('🎉 Resposta correta!');
             this.handleCorrectGuess();
         } else {
+            console.log('❌ Resposta incorreta');
             this.handleIncorrectGuess(guess);
         }
         
+        console.log('🔄 Atualizando UI...');
         this.updateUI();
     }
 
@@ -453,25 +608,53 @@ class ColorGuessingGame {
     }
 
     startNewGame() {
-        this.gameState.resetGame();
+        console.log('🆕 Iniciando novo jogo...');
         
-        // Reset visual (sem mudança automática de cor)
-        document.body.className = '';
-        this.dom.colorInput.value = '';
-        this.dom.colorInput.disabled = false;
-        this.dom.guessBtn.style.display = 'inline-flex';
-        this.dom.restartBtn.style.display = 'none';
-        this.dom.nextLevelBtn.style.display = 'none';
-        this.dom.hintArea.style.display = 'none';
-        
-        // Feedback inicial
-        this.showFeedback('Boa sorte! Uma nova cor foi sorteada...', 'info');
-        
-        this.updateUI();
-        this.dom.colorInput.focus();
-        
-        // Debug info (remover em produção)
-        console.log(`🎯 Cor sorteada: ${this.gameState.targetColor}`);
+        try {
+            console.log('🔄 Resetando estado do jogo...');
+            this.gameState.resetGame();
+            
+            console.log('🎨 Resetando visual...');
+            // Reset visual (sem mudança automática de cor)
+            document.body.className = '';
+            
+            console.log('🎯 Resetando campos de entrada...');
+            this.dom.colorInput.value = '';
+            this.dom.colorInput.disabled = false;
+            this.dom.colorInput.classList.remove('valid', 'invalid', 'shake');
+            
+            console.log('🔘 Configurando botões...');
+            this.dom.guessBtn.style.display = 'inline-flex';
+            this.dom.restartBtn.style.display = 'none';
+            this.dom.nextLevelBtn.style.display = 'none';
+            this.dom.hintArea.style.display = 'none';
+            
+            console.log('💬 Configurando feedback inicial...');
+            // Feedback inicial
+            this.showFeedback('Boa sorte! Uma nova cor foi sorteada...', 'info');
+            
+            console.log('🎨 Cor sorteada:', this.gameState.targetColor);
+            console.log('📊 Tentativas disponíveis:', this.gameState.attemptsLeft);
+            console.log('🕹️ Jogo ativo:', this.gameState.isGameActive);
+            
+            console.log('🔄 Atualizando UI...');
+            this.updateUI();
+            
+            console.log('🎯 Focando campo de entrada...');
+            setTimeout(() => {
+                if (this.dom.colorInput) {
+                    this.dom.colorInput.focus();
+                }
+            }, 100);
+            
+            // Debug info (remover em produção)
+            console.log(`🎯 Cor sorteada: ${this.gameState.targetColor}`);
+            console.log('✅ Novo jogo iniciado com sucesso');
+            
+        } catch (error) {
+            console.error('❌ Erro ao iniciar novo jogo:', error);
+            throw error;
+        }
     }
 
     updateUI() {
@@ -522,8 +705,8 @@ class ColorGuessingGame {
 // INICIALIZAÇÃO DO JOGO
 // ================================
 
-// Aguardar carregamento completo da página
-document.addEventListener('DOMContentLoaded', () => {
+// Função de inicialização com fallback
+function initializeGame() {
     console.log('🎮 Iniciando Jogo de Adivinhação de Cores - Versão Corrigida...');
     
     // Verificar se todos os elementos necessários estão presentes
@@ -532,18 +715,32 @@ document.addEventListener('DOMContentLoaded', () => {
         'color-guess', 'guess-btn', 'feedback-message'
     ];
     
-    const missingElements = requiredElements.filter(id => !document.getElementById(id));
+    console.log('🔍 Verificando elementos DOM...');
+    const missingElements = requiredElements.filter(id => {
+        const element = document.getElementById(id);
+        console.log(`Element ${id}:`, element ? '✅ Found' : '❌ Missing');
+        return !element;
+    });
     
     if (missingElements.length > 0) {
         console.error('❌ Elementos DOM ausentes:', missingElements);
         alert('Erro: Alguns elementos da interface não foram encontrados. Recarregue a página.');
-        return;
+        return false;
     }
     
     // Inicializar o jogo
     try {
+        console.log('🚀 Criando instância do jogo...');
         window.colorGame = new ColorGuessingGame();
         console.log('✅ Jogo inicializado com sucesso!');
+        
+        // Verificar se o jogo está funcionando
+        if (window.colorGame && window.colorGame.gameState && window.colorGame.gameState.isGameActive) {
+            console.log('✅ Estado do jogo ativo confirmado');
+            console.log(`🎯 Cor alvo: ${window.colorGame.gameState.targetColor}`);
+        } else {
+            console.error('❌ Estado do jogo não está ativo');
+        }
         
         // Mensagem de boas-vindas
         setTimeout(() => {
@@ -553,9 +750,46 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, 1000);
         
+        return true;
+        
     } catch (error) {
         console.error('❌ Erro ao inicializar o jogo:', error);
-        alert('Erro ao inicializar o jogo. Recarregue a página e tente novamente.');
+        console.error('Stack trace:', error.stack);
+        alert('Erro ao inicializar o jogo. Verifique o console e recarregue a página.');
+        return false;
+    }
+}
+
+// Múltiplas tentativas de inicialização
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('📄 DOM Content Loaded');
+    
+    // Tentativa imediata
+    if (!initializeGame()) {
+        console.log('⏳ Primeira tentativa falhou, tentando novamente em 500ms...');
+        
+        // Segunda tentativa
+        setTimeout(() => {
+            if (!initializeGame()) {
+                console.log('⏳ Segunda tentativa falhou, tentativa final em 1s...');
+                
+                // Terceira tentativa
+                setTimeout(() => {
+                    initializeGame();
+                }, 1000);
+            }
+        }, 500);
+    }
+});
+
+// Fallback adicional para window.onload
+window.addEventListener('load', () => {
+    console.log('🪟 Window Load Event');
+    
+    // Se o jogo ainda não foi inicializado
+    if (!window.colorGame) {
+        console.log('🔄 Jogo não encontrado, tentando inicializar via window.onload...');
+        initializeGame();
     }
 });
 
