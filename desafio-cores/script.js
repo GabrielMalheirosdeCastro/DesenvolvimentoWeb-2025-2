@@ -100,10 +100,27 @@ class GameState {
     }
 
     resetGame() {
-        this.targetColor = this.generateNewColor();
-        this.attemptsLeft = GAME_CONFIG.ATTEMPTS_PER_GAME;
-        this.isGameActive = true;
-        this.usedColors = [this.targetColor];
+        console.log('🔄 Resetando estado do jogo...');
+        try {
+            this.targetColor = this.generateNewColor();
+            this.attemptsLeft = GAME_CONFIG.ATTEMPTS_PER_GAME;
+            this.isGameActive = true;
+            this.usedColors = [this.targetColor];
+            
+            console.log('✅ Estado resetado:', {
+                targetColor: this.targetColor,
+                attemptsLeft: this.attemptsLeft,
+                isGameActive: this.isGameActive
+            });
+        } catch (error) {
+            console.error('❌ Erro ao resetar jogo:', error);
+            // Fallback manual
+            this.targetColor = COLOR_SETS[this.currentLevel][0]; // Primeira cor como fallback
+            this.attemptsLeft = 3;
+            this.isGameActive = true;
+            this.usedColors = [this.targetColor];
+            console.log('🚨 Fallback aplicado, cor:', this.targetColor);
+        }
     }
 
     generateNewColor() {
@@ -345,6 +362,33 @@ class ColorGuessingGame {
                 console.log('✅ Listener do botão teste configurado');
             }
             
+            // Botão de força start
+            const forceStartBtn = document.getElementById('force-start-btn');
+            if (forceStartBtn) {
+                forceStartBtn.addEventListener('click', () => {
+                    console.log('🚀 FORÇA START EXECUTADO');
+                    
+                    // Resetar completamente o jogo
+                    this.gameState.isGameActive = true;
+                    this.gameState.attemptsLeft = 3;
+                    this.gameState.targetColor = this.gameState.generateNewColor();
+                    
+                    // Habilitar interface
+                    this.dom.colorInput.disabled = false;
+                    this.dom.colorInput.value = '';
+                    this.dom.guessBtn.style.display = 'inline-flex';
+                    
+                    // Feedback
+                    this.showFeedback(`🚀 Jogo reiniciado! Cor sorteada: ${this.gameState.targetColor}`, 'success');
+                    this.updateUI();
+                    
+                    console.log('✅ Jogo forçado a iniciar com cor:', this.gameState.targetColor);
+                    
+                    alert(`🚀 JOGO FORÇA-INICIADO!\n\nCor alvo: ${this.gameState.targetColor}\nTentativas: ${this.gameState.attemptsLeft}\nAtivo: ${this.gameState.isGameActive}`);
+                });
+                console.log('✅ Listener do força start configurado');
+            }
+            
             // Mudança de nível de dificuldade
             if (this.dom.difficultySelect) {
                 this.dom.difficultySelect.addEventListener('change', (e) => {
@@ -383,18 +427,23 @@ class ColorGuessingGame {
     }
 
     validateInput() {
-        const input = this.dom.colorInput.value.trim().toLowerCase();
-        const availableColors = COLOR_SETS[this.gameState.currentLevel];
-        
-        // Remove classes de validação anteriores
-        this.dom.colorInput.classList.remove('valid', 'invalid');
-        
-        if (input.length > 0) {
-            const isValid = availableColors.some(color => 
-                color.toLowerCase().includes(input) || input.includes(color.toLowerCase())
-            );
+        try {
+            const input = this.dom.colorInput.value.trim().toLowerCase();
+            const availableColors = COLOR_SETS[this.gameState.currentLevel];
             
-            this.dom.colorInput.classList.add(isValid ? 'valid' : 'invalid');
+            // Remove classes de validação anteriores
+            this.dom.colorInput.classList.remove('valid', 'invalid');
+            
+            if (input.length > 0) {
+                const isValid = availableColors.some(color => 
+                    color.toLowerCase().includes(input) || input.includes(color.toLowerCase())
+                );
+                
+                this.dom.colorInput.classList.add(isValid ? 'valid' : 'invalid');
+            }
+        } catch (error) {
+            console.warn('Erro na validação de entrada:', error);
+            // Não bloqueia o jogo se houver erro na validação
         }
     }
 
@@ -402,21 +451,25 @@ class ColorGuessingGame {
         console.log('🎯 HandleGuess chamado');
         console.log('🕹️ Estado do jogo ativo:', this.gameState.isGameActive);
         
+        // Verificação crítica - se jogo não está ativo, forçar ativação
         if (!this.gameState.isGameActive) {
-            console.log('❌ Jogo não está ativo');
-            return;
+            console.log('⚠️ Jogo não estava ativo, forçando ativação...');
+            this.gameState.isGameActive = true;
+            this.gameState.attemptsLeft = 3;
+            if (!this.gameState.targetColor) {
+                this.gameState.targetColor = this.gameState.generateNewColor();
+                console.log('🎨 Cor alvo gerada:', this.gameState.targetColor);
+            }
         }
 
         const guess = this.dom.colorInput.value.trim().toLowerCase();
         console.log('💭 Palpite do usuário:', guess);
         console.log('🎨 Cor alvo:', this.gameState.targetColor);
         
-        // Validação de entrada
+        // Validação básica
         if (!guess) {
             console.log('⚠️ Entrada vazia');
             this.showFeedback('Digite uma cor!', 'error');
-            this.dom.colorInput.classList.add('shake');
-            setTimeout(() => this.dom.colorInput.classList.remove('shake'), 500);
             return;
         }
 
@@ -437,7 +490,11 @@ class ColorGuessingGame {
         }
         
         console.log('🔄 Atualizando UI...');
-        this.updateUI();
+        try {
+            this.updateUI();
+        } catch (error) {
+            console.error('Erro ao atualizar UI:', error);
+        }
     }
 
     handleCorrectGuess() {
