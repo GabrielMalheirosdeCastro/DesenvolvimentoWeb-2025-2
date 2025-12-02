@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔧 Teste Debug - Jogo de Cores</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test { margin: 10px 0; padding: 10px; border: 1px solid #ccc; }
+        .success { background: #d4edda; }
+        .error { background: #f8d7da; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>🔧 Teste de Debug do Jogo de Cores</h1>
+    
+    <div class="test">
+        <h2>1. Teste de Elementos DOM</h2>
+        <div id="dom-test">Verificando...</div>
+    </div>
+    
+    <div class="test">
+        <h2>2. Teste de JavaScript</h2>
+        <button id="test-btn">Clique para testar</button>
+        <div id="js-test">Aguardando clique...</div>
+    </div>
+    
+    <div class="test">
+        <h2>3. Teste do Console</h2>
+        <div id="console-test">Verifique o console do navegador para logs detalhados</div>
+    </div>
+    
+    <script>
+        console.log('🔧 DEBUG: Iniciando testes...');
+        
+        // Teste 1: Elementos DOM
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔧 DEBUG: DOM carregado');
+            
+            const domTest = document.getElementById('dom-test');
+            const jsTest = document.getElementById('js-test');
+            const testBtn = document.getElementById('test-btn');
+            
+            if (domTest && jsTest && testBtn) {
+                domTest.innerHTML = '✅ Todos os elementos de teste encontrados';
+                domTest.className = 'success';
+                console.log('🔧 DEBUG: Elementos DOM OK');
+            } else {
+                domTest.innerHTML = '❌ Alguns elementos de teste não foram encontrados';
+                domTest.className = 'error';
+                console.log('🔧 DEBUG: Erro nos elementos DOM');
+            }
+            
+            // Teste 2: Event Listeners
+            if (testBtn) {
+                testBtn.addEventListener('click', function() {
+                    console.log('🔧 DEBUG: Botão clicado');
+                    jsTest.innerHTML = '✅ JavaScript e eventos funcionando corretamente';
+                    jsTest.className = 'success';
+                });
+                console.log('🔧 DEBUG: Event listener adicionado');
+            }
+        });
+        
+        // Teste específico dos elementos do jogo
+        setTimeout(() => {
+            console.log('🔧 DEBUG: Testando elementos específicos do jogo...');
+            
+            const gameElements = [
+                'difficulty-select',
+                'attempts-count',
+                'score-count', 
+                'level-progress',
+                'color-guess',
+                'guess-btn',
+                'feedback-area',
+                'feedback-message',
+                'home-btn'
+            ];
+            
+            let found = 0;
+            gameElements.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    found++;
+                    console.log(`✅ ${id}: Encontrado`);
+                } else {
+                    console.log(`❌ ${id}: NÃO encontrado`);
+                }
+            });
+            
+            console.log(`🔧 DEBUG: ${found}/${gameElements.length} elementos do jogo encontrados`);
+        }, 1000);
+    </script>
+</body>
+</html>

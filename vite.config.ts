@@ -36,7 +36,8 @@ export default defineConfig({
         flexbox: path.resolve(__dirname, 'flexbox.html'),
         responsivo: path.resolve(__dirname, 'responsivo.html'),
         ex010: path.resolve(__dirname, 'ex010/index.html'),
-        'desafio-cores': path.resolve(__dirname, 'desafio-cores/index.html')
+        'desafio-cores': path.resolve(__dirname, 'desafio-cores/index.html'),
+        'desafio-cores-debug': path.resolve(__dirname, 'desafio-cores/test-debug.html')
       },
       output: {
         manualChunks: {
