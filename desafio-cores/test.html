@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧪 TESTE AUTOMATIZADO - Jogo de Cores</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .test-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        body {
+            margin-top: 60px;
+        }
+        
+        .test-info {
+            background: rgba(255,107,107,0.1);
+            border: 2px solid #ff6b6b;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-banner">
+        🧪 MODO TESTE AUTOMATIZADO - Acompanhe o console do navegador
+    </div>
+
+    <div class="test-info">
+        <h2>🧪 Teste Automatizado em Andamento</h2>
+        <p><strong>O que está sendo testado:</strong></p>
+        <ul style="text-align: left; display: inline-block;">
+            <li>✅ Presença de todos os elementos DOM</li>
+            <li>🔢 Contador inicial = 3</li>
+            <li>❌ Primeira tentativa incorreta (3 → 2)</li>
+            <li>❌ Segunda tentativa incorreta (2 → 1)</li>
+            <li>❌ Terceira tentativa incorreta (1 → 0)</li>
+            <li>💀 Fim de jogo</li>
+        </ul>
+        <p><strong>📊 Acompanhe os resultados no console do navegador (F12)</strong></p>
+        <p><em>Os testes serão executados automaticamente em 2 segundos após o carregamento.</em></p>
+    </div>
+
+    <div class="game-container">
+        <header class="game-header">
+            <h1 class="game-title">🎮 Jogo de Adivinhação de Cores</h1>
+            <p class="game-instructions">
+                Adivinhe a cor sorteada! Você tem <strong>3 tentativas</strong> para acertar.
+                Digite o nome da cor em inglês (ex: red, blue, green).
+            </p>
+        </header>
+
+        <main class="game-main">
+            <div class="game-info">
+                <div class="level-selector">
+                    <label for="difficulty-select">Nível de Dificuldade:</label>
+                    <select id="difficulty-select" class="difficulty-select">
+                        <option value="easy">🟢 Fácil (10 cores)</option>
+                        <option value="medium" disabled>🟡 Médio (10 cores) - Desbloqueie acertando 3 no fácil</option>
+                        <option value="hard" disabled>🔴 Difícil (10 cores) - Desbloqueie acertando 3 no médio</option>
+                    </select>
+                </div>
+
+                <div class="game-stats">
+                    <div class="attempts-counter">
+                        <span class="label">Tentativas restantes:</span>
+                        <span id="attempts-count" class="count">3</span>
+                    </div>
+                    
+                    <div class="score-display">
+                        <span class="label">Pontuação:</span>
+                        <span id="score-count" class="count">0</span>
+                    </div>
+
+                    <div class="level-progress">
+                        <span class="label">Acertos no nível:</span>
+                        <span id="level-progress" class="count">0/3</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-input">
+                <div class="input-group">
+                    <label for="color-guess" class="input-label">Digite sua cor:</label>
+                    <input 
+                        type="text" 
+                        id="color-guess" 
+                        class="color-input"
+                        placeholder="Ex: red, blue, green..."
+                        autocomplete="off"
+                        maxlength="30"
+                    >
+                </div>
+                
+                <button id="guess-btn" class="btn btn-primary">
+                    🎯 Adivinhar
+                </button>
+            </div>
+
+            <div id="feedback-area" class="feedback-area">
+                <p id="feedback-message" class="feedback-message">
+                    Boa sorte! A cor foi sorteada...
+                </p>
+            </div>
+
+            <div id="hint-area" class="hint-area" style="display: none;">
+                <p id="hint-message" class="hint-message"></p>
+            </div>
+
+            <div class="game-controls">
+                <button id="restart-btn" class="btn btn-secondary" style="display: none;">
+                    🔄 Jogar Novamente
+                </button>
+                
+                <button id="next-level-btn" class="btn btn-success" style="display: none;">
+                    ⬆️ Próximo Nível
+                </button>
+
+                <button id="home-btn" class="btn btn-outline">
+                    🏠 Voltar ao Início
+                </button>
+            </div>
+        </main>
+
+        <aside class="game-history">
+            <h3>📊 Estatísticas</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-label">Jogos:</span>
+                    <span id="total-games" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Vitórias:</span>
+                    <span id="total-wins" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Taxa:</span>
+                    <span id="win-rate" class="stat-value">0%</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Recorde:</span>
+                    <span id="high-score" class="stat-value">0</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script-simple.js"></script>
+    <script src="test-auto.js"></script>
+</body>
+</html>
