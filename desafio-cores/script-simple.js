@@ -151,26 +151,40 @@ function updateUI() {
 
 // Processar palpite
 function handleGuess() {
-    if (!gameState.isGameActive) return;
+    console.log('🎯 Processando palpite...');
+    
+    if (!gameState.isGameActive) {
+        console.log('❌ Jogo não está ativo');
+        return;
+    }
     
     const guess = elements.colorInput.value.trim().toLowerCase();
+    console.log('💭 Palpite do usuário:', guess);
+    console.log('🎨 Cor alvo:', gameState.targetColor);
     
     if (!guess) {
+        console.log('❌ Palpite vazio');
         showFeedback('Digite uma cor!', 'error');
         return;
     }
     
     gameState.attemptsLeft--;
+    console.log('🔢 Tentativas restantes:', gameState.attemptsLeft);
+    
     const isCorrect = guess === gameState.targetColor.toLowerCase();
+    console.log('🎯 Palpite correto?', isCorrect);
     
     if (isCorrect) {
+        console.log('🎉 Palpite correto! Processando vitória...');
         handleCorrectGuess();
     } else {
+        console.log('❌ Palpite incorreto. Processando erro...');
         handleIncorrectGuess(guess);
     }
     
     // Garantir que a UI seja atualizada após mudanças no estado
     setTimeout(() => {
+        console.log('🔄 Atualizando UI após palpite...');
         updateUI();
     }, 50);
 }
@@ -307,6 +321,8 @@ function updateLevelSelector() {
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('🎮 Iniciando jogo de adivinhação de cores...');
+    
     // Capturar elementos DOM
     elements = {
         difficultySelect: document.getElementById('difficulty-select'),
@@ -333,15 +349,29 @@ document.addEventListener('DOMContentLoaded', function() {
     const missing = criticalElements.filter(key => !elements[key]);
     
     if (missing.length > 0) {
-        console.error('Elementos críticos ausentes:', missing);
+        console.error('❌ Elementos críticos ausentes:', missing);
+        console.log('🔍 Elementos disponíveis no DOM:');
+        criticalElements.forEach(key => {
+            const element = document.getElementById(key === 'colorInput' ? 'color-guess' : key === 'guessBtn' ? 'guess-btn' : 'feedback-message');
+            console.log(`${key}: ${element ? '✅ Encontrado' : '❌ Não encontrado'}`);
+        });
         return;
     }
     
+    console.log('✅ Todos os elementos DOM foram encontrados!');
+    
     // Configurar eventos
-    elements.guessBtn.addEventListener('click', handleGuess);
+    if (elements.guessBtn) {
+        elements.guessBtn.addEventListener('click', () => {
+            console.log('🎯 Botão adivinhar clicado');
+            handleGuess();
+        });
+        console.log('✅ Event listener do botão adivinhar configurado');
+    }
     
     if (elements.restartBtn) {
         elements.restartBtn.addEventListener('click', () => {
+            console.log('🔄 Botão jogar novamente clicado');
             startNewGame();
         });
     }
@@ -349,13 +379,16 @@ document.addEventListener('DOMContentLoaded', function() {
     if (elements.colorInput) {
         elements.colorInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter' && gameState.isGameActive) {
+                console.log('⌨️ Enter pressionado na área de input');
                 handleGuess();
             }
         });
+        console.log('✅ Event listener do input configurado');
     }
     
     if (elements.difficultySelect) {
         elements.difficultySelect.addEventListener('change', (e) => {
+            console.log('🎚️ Nível alterado para:', e.target.value);
             gameState.currentLevel = e.target.value;
             startNewGame();
         });
@@ -363,17 +396,23 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (elements.homeBtn) {
         elements.homeBtn.addEventListener('click', () => {
+            console.log('🏠 Botão voltar ao início clicado');
             if (confirm('Tem certeza que deseja voltar à página principal? O progresso será salvo.')) {
                 saveToStorage();
                 window.location.href = '../index.html';
             }
         });
+        console.log('✅ Event listener do botão home configurado');
     }
     
     // Carregar dados salvos e inicializar
+    console.log('💾 Carregando dados salvos...');
     loadFromStorage();
+    console.log('🎚️ Atualizando seletor de nível...');
     updateLevelSelector();
+    console.log('🔄 Atualizando UI...');
     updateUI();
+    console.log('🎮 Iniciando novo jogo...');
     startNewGame();
     
     console.log('✅ Jogo de cores inicializado com sucesso!');
