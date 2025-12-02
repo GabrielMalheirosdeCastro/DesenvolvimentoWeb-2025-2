@@ -40,6 +40,14 @@
       "destination": "/matematica-operadores.html"
     },
     {
+      "source": "/desafio-cores/index.html",
+      "destination": "/desafio-cores/index.html"
+    },
+    {
+      "source": "/desafio-cores",
+      "destination": "/desafio-cores/index.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
