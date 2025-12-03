@@ -130,6 +130,15 @@
 
     <!-- Scripts -->
     <script type="module" src="script-fixed-visibility.js"></script>
+    <!-- Script de teste (apenas em desenvolvimento) -->
+    <script>
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            const testScript = document.createElement('script');
+            testScript.src = 'auto-test.js';
+            testScript.defer = true;
+            document.head.appendChild(testScript);
+        }
+    </script>
     <!-- Script anterior: <script type="module" src="script-simple-color-preview-visible-target.js"></script> -->
     <!-- Script com cor visível: <script src="script-simple-color-preview.js"></script> -->
     <!-- Script ultra-simples: <script src="script-ultra-simple.js"></script> -->

@@ -513,7 +513,11 @@ function startNewGame() {
     gameState.attemptsLeft = GAME_CONFIG.ATTEMPTS_PER_GAME;
     gameState.isGameActive = false; // Inicialmente inativo para mostrar a cor
     gameState.gamePhase = 'pre-game';
-    gameState.usedColors = [gameState.targetColor];
+    
+    // Adicionar cor atual à lista de usadas, mas manter histórico se existir
+    if (!gameState.usedColors.includes(gameState.targetColor)) {
+        gameState.usedColors.push(gameState.targetColor);
+    }
     
     // Reset visual e preview
     resetBackgroundPreview();
@@ -533,19 +537,21 @@ function startNewGame() {
     console.log(`🎨 Mostrando cor alvo por ${GAME_CONFIG.TARGET_COLOR_DISPLAY_TIME}ms: ${gameState.targetColor}`);
     
     setTimeout(() => {
-        // Após mostrar a cor, ocultar e permitir que o jogo comece
-        console.log('⏰ Timeout executado - ocultando cor e iniciando jogo');
-        hideTargetColorFromBackground();
-        gameState.isGameActive = true;
-        gameState.gamePhase = 'playing';
-        elements.colorInput.disabled = false;
-        elements.guessBtn.style.display = 'inline-flex';
-        
-        showFeedback('🎨 Agora adivinhe! Digite o nome da cor e use o preview para ajudar.', 'info');
-        elements.colorInput.focus();
-        
-        console.log('✅ Jogo ativo - jogador pode adivinhar');
-        
+        // Verificar se o jogo ainda está no estado correto (não foi interrompido)
+        if (gameState.gamePhase === 'pre-game') {
+            // Após mostrar a cor, ocultar e permitir que o jogo comece
+            console.log('⏰ Timeout executado - ocultando cor e iniciando jogo');
+            hideTargetColorFromBackground();
+            gameState.isGameActive = true;
+            gameState.gamePhase = 'playing';
+            elements.colorInput.disabled = false;
+            elements.guessBtn.style.display = 'inline-flex';
+            
+            showFeedback('🎨 Agora adivinhe! Digite o nome da cor e use o preview para ajudar.', 'info');
+            elements.colorInput.focus();
+            
+            console.log('✅ Jogo ativo - jogador pode adivinhar');
+        }
     }, GAME_CONFIG.TARGET_COLOR_DISPLAY_TIME);
     
     updateUI();
@@ -653,11 +659,87 @@ function handleCorrectGuess() {
     );
     
     elements.guessBtn.style.display = 'none';
-    elements.restartBtn.style.display = 'inline-flex';
     elements.colorInput.disabled = true;
+    
+    // ⭐ NOVA FUNCIONALIDADE: Verificar se completou 3 acertos seguidos
+    const consecutiveWins = gameState.levelProgress[gameState.currentLevel];
+    
+    if (consecutiveWins >= 3 && consecutiveWins % 3 === 0) {
+        // Após 3 acertos consecutivos, dar opções ao jogador
+        setTimeout(() => {
+            hideTargetColorFromBackground();
+            const shouldContinue = confirm(
+                `🎉 Parabéns! Você acertou 3 cores seguidas!\n\n` +
+                `🔄 Deseja continuar no mesmo nível?\n` +
+                `✅ OK = Continuar\n` +
+                `❌ Cancelar = Recomeçar do zero`
+            );
+            
+            if (shouldContinue) {
+                // Continuar no mesmo nível
+                console.log('🎮 Jogador escolheu continuar no mesmo nível');
+                startNewGame();
+            } else {
+                // Recomeçar do zero
+                console.log('🔄 Jogador escolheu recomeçar do zero');
+                resetGameToStart();
+            }
+        }, 2000);
+        
+        elements.restartBtn.style.display = 'none'; // Ocultar botão pois será automático
+    } else {
+        // Acerto normal, mostrar botão de restart
+        elements.restartBtn.style.display = 'inline-flex';
+    }
     
     checkLevelUnlock();
     saveToStorage();
+}
+
+// ⭐ NOVA FUNÇÃO: Resetar jogo completamente do zero
+function resetGameToStart() {
+    console.log('🔄 Resetando jogo completamente do zero...');
+    
+    // Reset completo do estado do jogo, mas preservar estatísticas
+    const preservedStats = {
+        totalGames: gameState.totalGames,
+        totalWins: gameState.totalWins,
+        highScore: gameState.highScore
+    };
+    
+    gameState.currentLevel = 'easy';
+    gameState.score = 0;
+    gameState.usedColors = [];
+    gameState.isGameActive = false;
+    gameState.gamePhase = 'pre-game';
+    gameState.levelProgress = { easy: 0, medium: 0, hard: 0 }; // Reset progresso dos níveis
+    
+    // Restaurar estatísticas gerais
+    gameState.totalGames = preservedStats.totalGames;
+    gameState.totalWins = preservedStats.totalWins;
+    gameState.highScore = preservedStats.highScore;
+    
+    // Reset visual completo
+    hideTargetColorFromBackground();
+    resetBackgroundPreview();
+    document.body.className = '';
+    
+    // Reset UI
+    if (elements.difficultySelect) {
+        elements.difficultySelect.value = 'easy';
+    }
+    elements.colorInput.value = '';
+    elements.restartBtn.style.display = 'none';
+    if (elements.nextLevelBtn) elements.nextLevelBtn.style.display = 'none';
+    if (elements.hintArea) elements.hintArea.style.display = 'none';
+    
+    updateUI();
+    saveToStorage();
+    
+    // Iniciar novo jogo após um breve delay
+    setTimeout(() => {
+        startNewGame();
+    }, 500);
 }
 
 // ⭐ FUNCIONALIDADE CORRIGIDA: Palpite incorreto
@@ -681,7 +763,7 @@ function handleIncorrectGuess(guess) {
         elements.colorInput.focus();
         
     } else {
-        // ⭐ FUNCIONALIDADE NOVA: Fim de jogo - mostrar cor alvo no fundo
+        // ⭐ FUNCIONALIDADE NOVA: Fim de jogo - mostrar cor alvo no fundo e reiniciar automaticamente
         gameState.isGameActive = false;
         gameState.gamePhase = 'post-game';
         gameState.totalGames++;
@@ -690,7 +772,7 @@ function handleIncorrectGuess(guess) {
         showTargetColorInBackground();
         
         showFeedback(
-            `💀 Fim de jogo! Veja a cor sorteada no fundo da tela. Tente novamente!`, 
+            `💀 Fim de jogo! Veja a cor sorteada no fundo. O jogo reiniciará automaticamente em alguns segundos...`, 
             'error'
         );
         
@@ -700,10 +782,17 @@ function handleIncorrectGuess(guess) {
         }
         
         elements.guessBtn.style.display = 'none';
-        elements.restartBtn.style.display = 'inline-flex';
+        elements.restartBtn.style.display = 'none'; // Ocultar botão pois será automático
         elements.colorInput.disabled = true;
         
         saveToStorage();
+        
+        // ⭐ NOVA FUNCIONALIDADE: Reiniciar automaticamente após 3 segundos
+        setTimeout(() => {
+            console.log('🔄 Reiniciando jogo automaticamente após 3 tentativas falhadas...');
+            hideTargetColorFromBackground();
+            startNewGame();
+        }, 3000);
     }
 }
 
