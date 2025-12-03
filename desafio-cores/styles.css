@@ -603,20 +603,49 @@ body.color-silver { background: #f8fafc; }
 }
 
 /* ================================
-   ESTILOS PARA DETECÇÃO DE COR DE FUNDO
+   ESTILOS PARA PREVIEW DE CORES EM TEMPO REAL
    ================================ */
+
+/* Classe para indicar que o preview está ativo */
+.color-preview-active {
+    transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+                color 0.4s ease !important;
+}
+
+/* Indicador visual para input quando o preview está ativo */
+.color-input.preview-active {
+    border-color: #8b5cf6 !important;
+    background: linear-gradient(45deg, #f3e8ff, #e9d5ff) !important;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3) !important;
+    animation: previewActiveGlow 1.5s ease-in-out infinite alternate;
+}
 
 /* Indicador visual para input quando combina com fundo */
 .color-input.background-match {
-    border-color: #8b5cf6 !important;
-    background: linear-gradient(45deg, #f3e8ff, #e9d5ff) !important;
-    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2) !important;
+    border-color: #10b981 !important;
+    background: linear-gradient(45deg, #ecfdf5, #d1fae5) !important;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2) !important;
     animation: backgroundMatchGlow 1s ease-in-out infinite alternate;
 }
 
+@keyframes previewActiveGlow {
+    from { 
+        box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3);
+        transform: scale(1);
+    }
+    to { 
+        box-shadow: 0 0 0 5px rgba(139, 92, 246, 0.5);
+        transform: scale(1.01);
+    }
+}
+
 @keyframes backgroundMatchGlow {
-    from { box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2); }
-    to { box-shadow: 0 0 0 5px rgba(139, 92, 246, 0.4); }
+    from { 
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+    }
+    to { 
+        box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.4);
+    }
 }
 
 /* Animação especial para dica de cor de fundo */
@@ -674,17 +703,35 @@ body.color-silver { background: #f8fafc; }
 .color-lightslategray { background-color: lightslategray !important; color: white; }
 .color-mediumturquoise { background-color: mediumturquoise !important; color: black; }
 
+/* Indicador visual quando o preview está ativo */
+.color-preview-active::after {
+    content: "🎨 Preview ativo - Digite para ver as cores!";
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(139, 92, 246, 0.95);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: 600;
+    z-index: 1000;
+    animation: previewIndicator 2s ease-in-out infinite;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
 /* Indicador visual quando a cor está sendo exibida no fundo */
 .color-feedback-active {
     position: relative;
 }
 
 .color-feedback-active::before {
-    content: "👀 Cor visível no fundo da página!";
+    content: "✅ Você acertou! Cor exibida no fundo!";
     position: fixed;
     top: 10px;
     right: 10px;
-    background: rgba(139, 92, 246, 0.9);
+    background: rgba(16, 185, 129, 0.95);
     color: white;
     padding: 8px 16px;
     border-radius: 20px;
@@ -692,6 +739,17 @@ body.color-silver { background: #f8fafc; }
     font-weight: bold;
     z-index: 1000;
     animation: colorVisibleNotification 3s ease-in-out;
+}
+
+@keyframes previewIndicator {
+    0%, 100% { 
+        opacity: 0.8; 
+        transform: translateX(-50%) scale(1);
+    }
+    50% { 
+        opacity: 1; 
+        transform: translateX(-50%) scale(1.05);
+    }
 }
 
 @keyframes colorVisibleNotification {

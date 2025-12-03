@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧪 TESTE: Jogo de Adivinhação de Cores com Preview | FAESA 2025-2</title>
+    <meta name="description" content="Teste da nova funcionalidade de preview de cores - Projeto Prático C3 Gabriel Malheiros">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Estilo adicional para indicar que é teste -->
+    <style>
+        .test-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            text-align: center;
+            padding: 8px;
+            font-weight: bold;
+            z-index: 10000;
+            font-size: 14px;
+            animation: testBlink 2s infinite alternate;
+        }
+        
+        @keyframes testBlink {
+            from { opacity: 0.8; }
+            to { opacity: 1; }
+        }
+        
+        .test-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 12px;
+            max-width: 300px;
+            z-index: 9999;
+        }
+        
+        .test-controls h4 {
+            margin: 0 0 10px 0;
+            color: #4ecdc4;
+        }
+        
+        .test-controls button {
+            background: #4ecdc4;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            margin: 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+        
+        .test-controls button:hover {
+            background: #45b7b8;
+        }
+        
+        .color-test-input {
+            width: 100%;
+            padding: 5px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Indicador de que é uma versão de teste -->
+    <div class="test-indicator">
+        🧪 VERSÃO DE TESTE - Funcionalidade de Preview de Cores Ativa 🎨
+    </div>
+
+    <!-- Container principal do jogo -->
+    <div class="game-container" style="margin-top: 50px;">
+        <!-- Cabeçalho do jogo -->
+        <header class="game-header">
+            <h1 class="game-title">🎮 Jogo de Adivinhação de Cores (TESTE)</h1>
+            <p class="game-instructions">
+                <strong>🆕 NOVA FUNCIONALIDADE:</strong> Agora conforme você digita, a cor de fundo muda para dar uma ideia da cor!<br>
+                Adivinhe a cor sorteada! Você tem <strong>3 tentativas</strong> para acertar.
+                Digite o nome da cor em inglês (ex: red, blue, green).
+            </p>
+        </header>
+
+        <!-- Interface principal do jogo -->
+        <main class="game-main">
+            <!-- Área de informações do jogo -->
+            <div class="game-info">
+                <div class="level-selector">
+                    <label for="difficulty-select">Nível de Dificuldade:</label>
+                    <select id="difficulty-select" class="difficulty-select">
+                        <option value="easy">🟢 Fácil (10 cores)</option>
+                        <option value="medium" disabled>🟡 Médio (10 cores) - Desbloqueie acertando 3 no fácil</option>
+                        <option value="hard" disabled>🔴 Difícil (10 cores) - Desbloqueie acertando 3 no médio</option>
+                    </select>
+                </div>
+
+                <div class="game-stats">
+                    <div class="attempts-counter">
+                        <span class="label">Tentativas restantes:</span>
+                        <span id="attempts-count" class="count">3</span>
+                    </div>
+                    
+                    <div class="score-display">
+                        <span class="label">Pontuação:</span>
+                        <span id="score-count" class="count">0</span>
+                    </div>
+
+                    <div class="level-progress">
+                        <span class="label">Acertos no nível:</span>
+                        <span id="level-progress" class="count">0/3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Área de entrada do jogador -->
+            <div class="game-input">
+                <div class="input-group">
+                    <label for="color-guess" class="input-label">🎨 Digite sua cor (veja o fundo mudar!):</label>
+                    <input 
+                        type="text" 
+                        id="color-guess" 
+                        class="color-input"
+                        placeholder="Ex: red, blue, green... (veja a mágica acontecer!)"
+                        autocomplete="off"
+                        maxlength="30"
+                    >
+                </div>
+                
+                <button id="guess-btn" class="btn btn-primary">
+                    🎯 Adivinhar
+                </button>
+            </div>
+
+            <!-- Área de feedback -->
+            <div id="feedback-area" class="feedback-area">
+                <p id="feedback-message" class="feedback-message">
+                    Boa sorte! A cor foi sorteada... 🎨 Comece a digitar e veja a mágica!
+                </p>
+            </div>
+
+            <!-- Dica inteligente -->
+            <div id="hint-area" class="hint-area" style="display: none;">
+                <p id="hint-message" class="hint-message"></p>
+            </div>
+
+            <!-- Botões de controle -->
+            <div class="game-controls">
+                <button id="restart-btn" class="btn btn-secondary" style="display: none;">
+                    🔄 Jogar Novamente
+                </button>
+                
+                <button id="next-level-btn" class="btn btn-success" style="display: none;">
+                    ⬆️ Próximo Nível
+                </button>
+
+                <button id="home-btn" class="btn btn-outline">
+                    🏠 Voltar ao Início
+                </button>
+            </div>
+        </main>
+
+        <!-- Histórico de partidas -->
+        <aside class="game-history">
+            <h3>📊 Estatísticas</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-label">Jogos:</span>
+                    <span id="total-games" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Vitórias:</span>
+                    <span id="total-wins" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Taxa:</span>
+                    <span id="win-rate" class="stat-value">0%</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Recorde:</span>
+                    <span id="high-score" class="stat-value">0</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Controles de teste -->
+    <div class="test-controls">
+        <h4>🔧 Controles de Teste</h4>
+        <p>Teste a funcionalidade de preview:</p>
+        <input type="text" class="color-test-input" id="test-color-input" placeholder="Digite uma cor para testar">
+        <br>
+        <button onclick="testSpecificColor('red')">Red</button>
+        <button onclick="testSpecificColor('blue')">Blue</button>
+        <button onclick="testSpecificColor('green')">Green</button>
+        <button onclick="testSpecificColor('yellow')">Yellow</button>
+        <br>
+        <button onclick="testSpecificColor('purple')">Purple</button>
+        <button onclick="testSpecificColor('orange')">Orange</button>
+        <button onclick="testSpecificColor('pink')">Pink</button>
+        <br>
+        <button onclick="resetTestPreview()">🔄 Reset</button>
+        <button onclick="enableTestDebug()">🐛 Debug</button>
+        <br>
+        <div id="test-status" style="margin-top: 10px; color: #4ecdc4;"></div>
+    </div>
+
+    <!-- Script principal com funcionalidade de preview -->
+    <script type="module" src="script-simple-color-preview.js"></script>
+    
+    <!-- Scripts de teste -->
+    <script>
+        // Funções de teste específicas para esta página
+        function testSpecificColor(color) {
+            const gameInput = document.getElementById('color-guess');
+            const testInput = document.getElementById('test-color-input');
+            const status = document.getElementById('test-status');
+            
+            if (gameInput) {
+                gameInput.value = color;
+                // Simula evento de input
+                gameInput.dispatchEvent(new Event('input', { bubbles: true }));
+                status.textContent = `Testando cor: ${color}`;
+            }
+            
+            if (testInput) {
+                testInput.value = color;
+            }
+        }
+        
+        function resetTestPreview() {
+            const status = document.getElementById('test-status');
+            if (window.gameDebug && window.gameDebug.resetPreview) {
+                window.gameDebug.resetPreview();
+                status.textContent = 'Preview resetado';
+            } else {
+                document.body.style.backgroundColor = '';
+                document.body.style.color = '';
+                status.textContent = 'Reset manual aplicado';
+            }
+        }
+        
+        function enableTestDebug() {
+            if (window.gameDebug && window.gameDebug.enableDebug) {
+                window.gameDebug.enableDebug();
+                document.getElementById('test-status').textContent = 'Debug mode ativado';
+            } else {
+                document.getElementById('test-status').textContent = 'Debug não disponível';
+            }
+        }
+        
+        // Event listener para teste manual de cores
+        document.addEventListener('DOMContentLoaded', function() {
+            const testInput = document.getElementById('test-color-input');
+            if (testInput) {
+                testInput.addEventListener('input', function(e) {
+                    const color = e.target.value.trim();
+                    const status = document.getElementById('test-status');
+                    
+                    if (color && window.gameDebug && window.gameDebug.testColorPreview) {
+                        window.gameDebug.testColorPreview(color);
+                        status.textContent = `Preview manual: ${color}`;
+                    } else if (color) {
+                        // Fallback manual
+                        try {
+                            document.body.style.backgroundColor = color;
+                            status.textContent = `Testando: ${color}`;
+                        } catch (err) {
+                            status.textContent = `Erro: ${color}`;
+                        }
+                    }
+                });
+            }
+        });
+        
+        // Log de inicialização do teste
+        console.log('🧪 Página de teste carregada! Funcionalidade de preview ativa.');
+        console.log('💡 Dica: Digite cores no campo de entrada e veja o fundo mudar!');
+        console.log('🎯 Cores sugeridas para teste: red, blue, green, yellow, purple, orange, pink, brown, gray, white');
+    </script>
+</body>
+</html>

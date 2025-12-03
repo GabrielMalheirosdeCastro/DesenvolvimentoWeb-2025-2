@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧪 TESTE FINAL: Preview de Cores | FAESA 2025-2</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Estilos específicos para teste -->
+    <style>
+        .final-test-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(45deg, #10b981, #3b82f6);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            z-index: 10000;
+            font-size: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .test-console {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 400px;
+            height: 200px;
+            background: #1a1a1a;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            padding: 10px;
+            border-radius: 8px;
+            overflow-y: auto;
+            border: 2px solid #00ff00;
+            z-index: 9998;
+        }
+        
+        .status-panel {
+            position: fixed;
+            top: 60px;
+            right: 20px;
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            z-index: 9999;
+            font-family: monospace;
+            border: 2px solid #10b981;
+        }
+    </style>
+</head>
+<body>
+    <!-- Indicador de teste final -->
+    <div class="final-test-indicator">
+        🧪 TESTE FINAL - Validação da Funcionalidade de Preview de Cores 🎨
+    </div>
+
+    <!-- Painel de status -->
+    <div class="status-panel">
+        <h4>📊 Status do Teste</h4>
+        <div>Estado: <span id="test-status">Inicializando...</span></div>
+        <div>Cor alvo: <span id="target-color">-</span></div>
+        <div>Preview ativo: <span id="preview-status">-</span></div>
+        <div>Última cor testada: <span id="last-color">-</span></div>
+        <div>Cache: <span id="cache-info">-</span></div>
+    </div>
+
+    <!-- Console de teste -->
+    <div class="test-console" id="test-console">
+        <div>🧪 CONSOLE DE TESTES AUTOMATIZADOS</div>
+        <div>Aguardando inicialização...</div>
+    </div>
+
+    <!-- Container principal do jogo -->
+    <div class="game-container" style="margin-top: 70px; margin-bottom: 240px;">
+        <!-- Cabeçalho do jogo -->
+        <header class="game-header">
+            <h1 class="game-title">🎮 Teste Final - Preview de Cores</h1>
+            <p class="game-instructions">
+                <strong>🔥 TESTE AUTOMÁTICO EM ANDAMENTO</strong><br>
+                Este é o teste final da nova funcionalidade. O sistema irá:<br>
+                ✅ Testar todas as cores automaticamente<br>
+                ✅ Validar o preview em tempo real<br>
+                ✅ Verificar performance e cache<br>
+                ✅ Simular interação do usuário
+            </p>
+        </header>
+
+        <!-- Interface principal do jogo -->
+        <main class="game-main">
+            <!-- Área de informações do jogo -->
+            <div class="game-info">
+                <div class="level-selector">
+                    <label for="difficulty-select">Nível de Dificuldade:</label>
+                    <select id="difficulty-select" class="difficulty-select">
+                        <option value="easy">🟢 Fácil (10 cores)</option>
+                        <option value="medium" disabled>🟡 Médio (10 cores)</option>
+                        <option value="hard" disabled>🔴 Difícil (10 cores)</option>
+                    </select>
+                </div>
+
+                <div class="game-stats">
+                    <div class="attempts-counter">
+                        <span class="label">Tentativas restantes:</span>
+                        <span id="attempts-count" class="count">3</span>
+                    </div>
+                    
+                    <div class="score-display">
+                        <span class="label">Pontuação:</span>
+                        <span id="score-count" class="count">0</span>
+                    </div>
+
+                    <div class="level-progress">
+                        <span class="label">Acertos no nível:</span>
+                        <span id="level-progress" class="count">0/3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Área de entrada do jogador -->
+            <div class="game-input">
+                <div class="input-group">
+                    <label for="color-guess" class="input-label">🧪 Campo de teste automático:</label>
+                    <input 
+                        type="text" 
+                        id="color-guess" 
+                        class="color-input"
+                        placeholder="Aguardando teste automático..."
+                        autocomplete="off"
+                        maxlength="30"
+                    >
+                </div>
+                
+                <button id="guess-btn" class="btn btn-primary">
+                    🎯 Adivinhar (Teste)
+                </button>
+            </div>
+
+            <!-- Área de feedback -->
+            <div id="feedback-area" class="feedback-area">
+                <p id="feedback-message" class="feedback-message">
+                    🧪 Teste automático em andamento... Aguarde os resultados!
+                </p>
+            </div>
+
+            <!-- Dica inteligente -->
+            <div id="hint-area" class="hint-area" style="display: none;">
+                <p id="hint-message" class="hint-message"></p>
+            </div>
+
+            <!-- Botões de controle -->
+            <div class="game-controls">
+                <button id="restart-btn" class="btn btn-secondary" style="display: none;">
+                    🔄 Reiniciar Teste
+                </button>
+                
+                <button id="manual-test-btn" class="btn btn-success">
+                    🎮 Teste Manual
+                </button>
+
+                <button id="home-btn" class="btn btn-outline">
+                    🏠 Voltar ao Jogo
+                </button>
+            </div>
+        </main>
+
+        <!-- Histórico de partidas -->
+        <aside class="game-history">
+            <h3>🧪 Resultados dos Testes</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-label">Cores Testadas:</span>
+                    <span id="colors-tested" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Sucessos:</span>
+                    <span id="test-successes" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Falhas:</span>
+                    <span id="test-failures" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Taxa:</span>
+                    <span id="success-rate" class="stat-value">0%</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="script-simple-color-preview.js"></script>
+    <script src="test-auto-color-preview.js"></script>
+    
+    <!-- Script específico para esta página -->
+    <script>
+        // Controle de teste específico desta página
+        let testState = {
+            isRunning: false,
+            colorsTestadas: 0,
+            sucessos: 0,
+            falhas: 0
+        };
+        
+        // Função para atualizar console de teste
+        function updateTestConsole(message) {
+            const console = document.getElementById('test-console');
+            if (console) {
+                console.innerHTML += `<div>${new Date().toLocaleTimeString()}: ${message}</div>`;
+                console.scrollTop = console.scrollHeight;
+            }
+        }
+        
+        // Função para atualizar painel de status
+        function updateStatusPanel() {
+            const gameState = window.gameDebug ? window.gameDebug.getGameState() : null;
+            
+            if (gameState) {
+                document.getElementById('target-color').textContent = gameState.targetColor || '-';
+                document.getElementById('preview-status').textContent = gameState.isPreviewActive ? 'Ativo' : 'Inativo';
+                document.getElementById('last-color').textContent = gameState.lastPreviewedColor || '-';
+            }
+            
+            const cacheInfo = window.gameDebug ? window.gameDebug.getCacheInfo() : null;
+            if (cacheInfo) {
+                document.getElementById('cache-info').textContent = `${cacheInfo.colorValidation}/${cacheInfo.contrast}`;
+            }
+            
+            document.getElementById('colors-tested').textContent = testState.colorsTestadas;
+            document.getElementById('test-successes').textContent = testState.sucessos;
+            document.getElementById('test-failures').textContent = testState.falhas;
+            
+            const rate = testState.colorsTestadas > 0 ? 
+                Math.round((testState.sucessos / testState.colorsTestadas) * 100) : 0;
+            document.getElementById('success-rate').textContent = `${rate}%`;
+        }
+        
+        // Intercepta mensagens de console do teste
+        const originalConsoleLog = console.log;
+        console.log = function(...args) {
+            originalConsoleLog.apply(console, args);
+            updateTestConsole(args.join(' '));
+        };
+        
+        // Atualiza status a cada segundo
+        setInterval(updateStatusPanel, 1000);
+        
+        // Configurar eventos específicos
+        document.addEventListener('DOMContentLoaded', function() {
+            updateTestConsole('🚀 Sistema de testes carregado!');
+            
+            const manualTestBtn = document.getElementById('manual-test-btn');
+            if (manualTestBtn) {
+                manualTestBtn.addEventListener('click', function() {
+                    updateTestConsole('🎮 Iniciando teste manual...');
+                    if (window.colorPreviewTests) {
+                        window.colorPreviewTests.testInteraction();
+                    }
+                });
+            }
+            
+            const homeBtn = document.getElementById('home-btn');
+            if (homeBtn) {
+                homeBtn.addEventListener('click', function() {
+                    window.location.href = 'index.html';
+                });
+            }
+            
+            // Inicia teste após 3 segundos
+            setTimeout(() => {
+                updateTestConsole('▶️ Iniciando testes automatizados em 3 segundos...');
+                document.getElementById('test-status').textContent = 'Aguardando...';
+                
+                setTimeout(() => {
+                    document.getElementById('test-status').textContent = 'Executando testes...';
+                    updateTestConsole('🧪 Executando bateria completa de testes!');
+                }, 3000);
+            }, 1000);
+        });
+        
+        console.log('🧪 Sistema de teste final inicializado!');
+    </script>
+</body>
+</html>

@@ -20,6 +20,7 @@
         <header class="game-header">
             <h1 class="game-title">🎮 Jogo de Adivinhação de Cores</h1>
             <p class="game-instructions">
+                <strong>🆕 NOVA FUNCIONALIDADE:</strong> Agora conforme você digita, a cor de fundo muda para dar uma prévia da cor!<br>
                 Adivinhe a cor sorteada! Você tem <strong>3 tentativas</strong> para acertar.
                 Digite o nome da cor em inglês (ex: red, blue, green).
             </p>
@@ -59,12 +60,12 @@
             <!-- Área de entrada do jogador -->
             <div class="game-input">
                 <div class="input-group">
-                    <label for="color-guess" class="input-label">Digite sua cor:</label>
+                    <label for="color-guess" class="input-label">🎨 Digite sua cor (o fundo mostra preview!):</label>
                     <input 
                         type="text" 
                         id="color-guess" 
                         class="color-input"
-                        placeholder="Ex: red, blue, green..."
+                        placeholder="Ex: red, blue, green... (veja a prévia da cor no fundo!)"
                         autocomplete="off"
                         maxlength="30"
                     >
@@ -78,7 +79,7 @@
             <!-- Área de feedback -->
             <div id="feedback-area" class="feedback-area">
                 <p id="feedback-message" class="feedback-message">
-                    Boa sorte! A cor foi sorteada...
+                    🎨 Boa sorte! A cor foi sorteada... Comece a digitar e veja o fundo mudar!
                 </p>
             </div>
 
@@ -128,8 +129,9 @@
     </div>
 
     <!-- Scripts -->
-    <script type="module" src="script-simple.js"></script>
+    <script type="module" src="script-simple-color-preview.js"></script>
     <!-- Script ultra-simples: <script src="script-ultra-simple.js"></script> -->
+    <!-- Script original: <script src="script-simple.js"></script> -->
     <!-- Script completo: <script src="script.js"></script> -->
 </body>
 </html>
