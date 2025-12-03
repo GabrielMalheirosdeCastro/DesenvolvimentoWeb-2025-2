@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧪 TESTE FINAL - Jogo de Adivinhação de Cores com Cor Visível</title>
+    <meta name="description" content="Teste final das funcionalidades implementadas">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        .test-header {
+            background: #fbbf24;
+            color: #1f2937;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        
+        .test-instructions {
+            background: #dbeafe;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho de teste -->
+    <div class="test-header">
+        🧪 TESTE FINAL - FUNCIONALIDADES IMPLEMENTADAS
+        <br>Verificando se cor sorteada está claramente visível
+    </div>
+    
+    <div class="test-instructions">
+        <h3>📋 O que deve funcionar:</h3>
+        <ul>
+            <li>✅ Cor sorteada deve aparecer no canto superior direito</li>
+            <li>✅ Preview de cores deve funcionar ao digitar</li>
+            <li>✅ Após 3 erros, cor deve permanecer visível</li>
+            <li>✅ Após acerto, cor deve ser ocultada</li>
+        </ul>
+        <p><strong>🔍 Testes automatizados serão executados em 2 segundos...</strong></p>
+    </div>
+
+    <!-- Container principal do jogo -->
+    <div class="game-container">
+        <!-- Cabeçalho do jogo -->
+        <header class="game-header">
+            <h1 class="game-title">🎮 Jogo de Adivinhação de Cores (Cor Visível)</h1>
+            <p class="game-instructions">
+                <strong>🆕 FUNCIONALIDADE:</strong> A cor sorteada agora é CLARAMENTE VISÍVEL no canto superior direito!<br>
+                <strong>✨ PREVIEW:</strong> Conforme você digita, a cor de fundo muda para dar uma prévia da cor!<br>
+                Adivinhe a cor sorteada! Você tem <strong>3 tentativas</strong> para acertar.
+            </p>
+        </header>
+
+        <!-- Interface principal do jogo -->
+        <main class="game-main">
+            <!-- Área de informações do jogo -->
+            <div class="game-info">
+                <div class="level-selector">
+                    <label for="difficulty-select">Nível de Dificuldade:</label>
+                    <select id="difficulty-select" class="difficulty-select">
+                        <option value="easy">🟢 Fácil (10 cores)</option>
+                        <option value="medium" disabled>🟡 Médio (10 cores)</option>
+                        <option value="hard" disabled>🔴 Difícil (10 cores)</option>
+                    </select>
+                </div>
+
+                <div class="game-stats">
+                    <div class="attempts-counter">
+                        <span class="label">Tentativas restantes:</span>
+                        <span id="attempts-count" class="count">3</span>
+                    </div>
+                    
+                    <div class="score-display">
+                        <span class="label">Pontuação:</span>
+                        <span id="score-count" class="count">0</span>
+                    </div>
+
+                    <div class="level-progress">
+                        <span class="label">Acertos no nível:</span>
+                        <span id="level-progress" class="count">0/3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Área de entrada do jogador -->
+            <div class="game-input">
+                <div class="input-group">
+                    <label for="color-guess" class="input-label">🎨 Digite a cor mostrada no canto direito:</label>
+                    <input 
+                        type="text" 
+                        id="color-guess" 
+                        class="color-input"
+                        placeholder="Digite o nome exato da cor sorteada..."
+                        autocomplete="off"
+                        maxlength="30"
+                    >
+                </div>
+                
+                <button id="guess-btn" class="btn btn-primary">
+                    🎯 Adivinhar
+                </button>
+            </div>
+
+            <!-- Área de feedback -->
+            <div id="feedback-area" class="feedback-area">
+                <p id="feedback-message" class="feedback-message">
+                    🎯 A cor foi sorteada e está VISÍVEL no canto superior direito! Digite o nome exato.
+                </p>
+            </div>
+
+            <!-- Dica inteligente -->
+            <div id="hint-area" class="hint-area" style="display: none;">
+                <p id="hint-message" class="hint-message"></p>
+            </div>
+
+            <!-- Botões de controle -->
+            <div class="game-controls">
+                <button id="restart-btn" class="btn btn-secondary" style="display: none;">
+                    🔄 Jogar Novamente
+                </button>
+
+                <button id="home-btn" class="btn btn-outline">
+                    🏠 Voltar ao Início
+                </button>
+            </div>
+        </main>
+
+        <!-- Histórico de partidas -->
+        <aside class="game-history">
+            <h3>📊 Estatísticas</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-label">Jogos:</span>
+                    <span id="total-games" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Vitórias:</span>
+                    <span id="total-wins" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Taxa:</span>
+                    <span id="win-rate" class="stat-value">0%</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Recorde:</span>
+                    <span id="high-score" class="stat-value">0</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="script-simple-color-preview-visible-target.js"></script>
+    <script src="test-automation.js"></script>
+</body>
+</html>
