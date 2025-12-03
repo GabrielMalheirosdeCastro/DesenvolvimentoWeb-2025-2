@@ -145,120 +145,47 @@ function getTextColorForBackground(backgroundColor) {
     return textColor;
 }
 
-// ⭐ NOVA FUNCIONALIDADE: Mostrar a cor sorteada de forma visível
+// ⭐ FUNCIONALIDADE REMOVIDA: Mostrar a cor sorteada de forma visível
+// Esta funcionalidade foi desativada para aumentar a dificuldade do jogo
 function displayTargetColor() {
-    if (!gameState.targetColor) return;
+    // Função desativada - não mostra mais a cor sorteada visualmente
+    gameState.targetColorDisplayed = false;
     
-    try {
-        // Criar ou encontrar elemento para mostrar a cor alvo
-        let targetDisplay = document.getElementById('target-color-display');
-        
-        if (!targetDisplay) {
-            targetDisplay = document.createElement('div');
-            targetDisplay.id = 'target-color-display';
-            targetDisplay.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: rgba(255, 255, 255, 0.95);
-                border: 3px solid #333;
-                border-radius: 15px;
-                padding: 15px;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-                z-index: 1000;
-                font-family: 'Arial', sans-serif;
-                font-size: 16px;
-                font-weight: bold;
-                text-align: center;
-                min-width: 200px;
-                backdrop-filter: blur(10px);
-                animation: targetColorPulse 2s ease-in-out infinite;
-            `;
-            
-            // Adicionar CSS da animação se não existir
-            if (!document.getElementById('target-color-animation-style')) {
-                const style = document.createElement('style');
-                style.id = 'target-color-animation-style';
-                style.textContent = `
-                    @keyframes targetColorPulse {
-                        0%, 100% { transform: scale(1); opacity: 0.9; }
-                        50% { transform: scale(1.05); opacity: 1; }
-                    }
-                    
-                    .target-color-visible {
-                        display: block !important;
-                        visibility: visible !important;
-                    }
-                    
-                    .target-color-hidden {
-                        display: none !important;
-                        visibility: hidden !important;
-                    }
-                `;
-                document.head.appendChild(style);
-            }
-            
-            document.body.appendChild(targetDisplay);
-        }
-        
-        // Mostrar a cor e criar amostra visual
-        targetDisplay.innerHTML = `
-            <div style="margin-bottom: 10px; color: #333;">
-                🎯 <strong>COR SORTEADA:</strong>
-            </div>
-            <div style="
-                background-color: ${gameState.targetColor}; 
-                color: ${getTextColorForBackground(gameState.targetColor)};
-                padding: 10px;
-                border-radius: 8px;
-                border: 2px solid #333;
-                font-size: 18px;
-                font-weight: bold;
-                text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-                margin-bottom: 8px;
-            ">
-                ${gameState.targetColor.toUpperCase()}
-            </div>
-            <div style="font-size: 12px; color: #666;">
-                Digite exatamente este nome!
-            </div>
-        `;
-        
-        targetDisplay.className = 'target-color-visible';
-        gameState.targetColorDisplayed = true;
-        
-        if (debugMode) {
-            console.log(`🎯 Cor alvo exibida: ${gameState.targetColor}`);
-        }
-        
-    } catch (error) {
-        console.error('Erro ao exibir cor alvo:', error);
+    if (debugMode) {
+        console.log(`🎯 Cor alvo sorteada (não exibida): ${gameState.targetColor}`);
     }
 }
 
-// ⭐ NOVA FUNCIONALIDADE: Ocultar a cor sorteada
+// ⭐ FUNCIONALIDADE REMOVIDA: Ocultar a cor sorteada
+// Esta funcionalidade foi desativada junto com o display da cor
 function hideTargetColor() {
-    const targetDisplay = document.getElementById('target-color-display');
-    if (targetDisplay) {
-        targetDisplay.className = 'target-color-hidden';
-        gameState.targetColorDisplayed = false;
-        
-        if (debugMode) {
-            console.log('🙈 Cor alvo ocultada');
-        }
+    // Função desativada - não há mais display para ocultar
+    gameState.targetColorDisplayed = false;
+    
+    if (debugMode) {
+        console.log('🙈 Função de ocultar cor desativada');
     }
 }
 
-// ⭐ NOVA FUNCIONALIDADE: Remover completamente o display da cor
+// ⭐ FUNCIONALIDADE REMOVIDA: Remover completamente o display da cor
+// Esta funcionalidade foi desativada junto com o display da cor
 function removeTargetColorDisplay() {
+    // Remove qualquer display existente (limpeza)
     const targetDisplay = document.getElementById('target-color-display');
     if (targetDisplay) {
         targetDisplay.remove();
-        gameState.targetColorDisplayed = false;
-        
-        if (debugMode) {
-            console.log('🗑️ Display da cor alvo removido');
-        }
+    }
+    
+    // Remove estilos de animação se existirem
+    const animationStyle = document.getElementById('target-color-animation-style');
+    if (animationStyle) {
+        animationStyle.remove();
+    }
+    
+    gameState.targetColorDisplayed = false;
+    
+    if (debugMode) {
+        console.log('🗑️ Display da cor alvo removido (limpeza)');
     }
 }
 
@@ -512,7 +439,7 @@ function getRandomColor(colorArray) {
     return colorArray[Math.floor(Math.random() * colorArray.length)];
 }
 
-// ⭐ MODIFICADO: Iniciar novo jogo com cor visível
+// ⭐ MODIFICADO: Iniciar novo jogo sem mostrar cor alvo visualmente
 function startNewGame() {
     gameState.targetColor = generateNewColor();
     gameState.attemptsLeft = GAME_CONFIG.ATTEMPTS_PER_GAME;
@@ -529,10 +456,10 @@ function startNewGame() {
     if (elements.nextLevelBtn) elements.nextLevelBtn.style.display = 'none';
     if (elements.hintArea) elements.hintArea.style.display = 'none';
     
-    // ⭐ NOVA FUNCIONALIDADE: Mostrar a cor sorteada
-    displayTargetColor();
+    // ⭐ FUNCIONALIDADE REMOVIDA: Não mostra mais a cor sorteada
+    // displayTargetColor(); // DESATIVADO
     
-    showFeedback('🎯 A cor foi sorteada e está visível! Digite o nome exato da cor mostrada.', 'info');
+    showFeedback('🎨 Uma nova cor foi sorteada! Comece a digitar e use o preview do fundo para ajudar.', 'info');
     updateUI();
     elements.colorInput.focus();
     
@@ -614,7 +541,7 @@ function handleGuess() {
     }, 50);
 }
 
-// ⭐ MODIFICADO: Palpite correto - oculta cor alvo
+// ⭐ MODIFICADO: Palpite correto - funcionalidade de ocultar removida
 function handleCorrectGuess() {
     gameState.isGameActive = false;
     gameState.totalWins++;
@@ -626,8 +553,8 @@ function handleCorrectGuess() {
         gameState.highScore = gameState.score;
     }
     
-    // ⭐ NOVA FUNCIONALIDADE: Ocultar cor alvo quando acertar
-    hideTargetColor();
+    // ⭐ FUNCIONALIDADE REMOVIDA: Não há mais cor alvo para ocultar
+    // hideTargetColor(); // DESATIVADO
     
     // Reset do preview e aplicação da cor final
     resetBackgroundPreview();
@@ -661,7 +588,7 @@ function handleCorrectGuess() {
     saveToStorage();
 }
 
-// ⭐ MODIFICADO: Palpite incorreto - mostra cor alvo quando acabam as tentativas
+// ⭐ MODIFICADO: Palpite incorreto - funcionalidade de mostrar cor removida
 function handleIncorrectGuess(guess) {
     // Reset do preview após palpite incorreto
     resetBackgroundPreview();
@@ -685,13 +612,11 @@ function handleIncorrectGuess(guess) {
         gameState.isGameActive = false;
         gameState.totalGames++;
         
-        // ⭐ NOVA FUNCIONALIDADE: Garantir que cor alvo esteja visível após 3 tentativas falhadas
-        if (!gameState.targetColorDisplayed) {
-            displayTargetColor();
-        }
+        // ⭐ FUNCIONALIDADE REMOVIDA: Não mostra mais a cor alvo ao final
+        // displayTargetColor(); // DESATIVADO
         
         showFeedback(
-            `💀 Fim de jogo! A cor era "${gameState.targetColor}". Veja a cor mostrada acima!`, 
+            `💀 Fim de jogo! A cor era "${gameState.targetColor}". Tente novamente!`, 
             'error'
         );
         
@@ -869,8 +794,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (elements.restartBtn) {
         elements.restartBtn.addEventListener('click', () => {
             console.log('🔄 Botão jogar novamente clicado');
-            // ⭐ NOVA FUNCIONALIDADE: Remover display anterior antes de iniciar novo jogo
-            removeTargetColorDisplay();
+            // ⭐ FUNCIONALIDADE REMOVIDA: Limpeza de display não é mais necessária
+            removeTargetColorDisplay(); // Apenas para limpeza de possíveis elementos existentes
             startNewGame();
         });
     }
@@ -889,8 +814,8 @@ document.addEventListener('DOMContentLoaded', function() {
         elements.difficultySelect.addEventListener('change', (e) => {
             console.log('🎚️ Nível alterado para:', e.target.value);
             gameState.currentLevel = e.target.value;
-            // ⭐ NOVA FUNCIONALIDADE: Remover display anterior antes de iniciar novo jogo
-            removeTargetColorDisplay();
+            // ⭐ FUNCIONALIDADE REMOVIDA: Limpeza de display não é mais necessária
+            removeTargetColorDisplay(); // Apenas para limpeza de possíveis elementos existentes
             startNewGame();
         });
     }
@@ -899,7 +824,7 @@ document.addEventListener('DOMContentLoaded', function() {
         elements.homeBtn.addEventListener('click', () => {
             console.log('🏠 Botão voltar ao início clicado');
             if (confirm('Tem certeza que deseja voltar à página principal? O progresso será salvo.')) {
-                // ⭐ NOVA FUNCIONALIDADE: Limpar display antes de sair
+                // ⭐ FUNCIONALIDADE REMOVIDA: Limpar display antes de sair (apenas limpeza)
                 removeTargetColorDisplay();
                 resetBackgroundPreview();
                 saveToStorage();
@@ -945,6 +870,7 @@ if (typeof window !== 'undefined') {
         enableDebug: () => enableDebugMode(),
         showTargetColor: () => displayTargetColor(),
         hideTargetColor: () => hideTargetColor(),
-        removeTargetColor: () => removeTargetColorDisplay()
+        removeTargetColor: () => removeTargetColorDisplay(),
+        info: 'Funções de display de cor alvo foram desativadas para aumentar dificuldade'
     };
 }
