@@ -741,6 +741,46 @@ body.color-silver { background: #f8fafc; }
     animation: colorVisibleNotification 3s ease-in-out;
 }
 
+/* ⭐ NOVO: Estilo para quando a cor alvo está sendo mostrada */
+.showing-target-color {
+    transition: background-color 1s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative;
+}
+
+/* Indicador visual quando a cor alvo está sendo mostrada */
+.showing-target-color::after {
+    content: "🎯 Esta é a cor sorteada - Memorize!";
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(37, 99, 235, 0.95);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    z-index: 1000;
+    animation: targetColorDisplay 3s ease-in-out;
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+@keyframes targetColorDisplay {
+    0% { 
+        opacity: 0; 
+        transform: translateX(-50%) translateY(-20px) scale(0.8);
+    }
+    15%, 85% { 
+        opacity: 1; 
+        transform: translateX(-50%) translateY(0) scale(1);
+    }
+    100% { 
+        opacity: 0; 
+        transform: translateX(-50%) translateY(-20px) scale(0.8);
+    }
+}
+
 @keyframes previewIndicator {
     0%, 100% { 
         opacity: 0.8; 
