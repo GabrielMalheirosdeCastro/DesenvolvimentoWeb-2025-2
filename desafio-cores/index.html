@@ -141,6 +141,18 @@
             testScript.src = 'auto-test.js';
             testScript.defer = true;
             document.head.appendChild(testScript);
+            
+            // ⭐ NOVO: Script de verificação das correções
+            const verificarScript = document.createElement('script');
+            verificarScript.src = 'verificar-correcoes.js';
+            verificarScript.defer = true;
+            document.head.appendChild(verificarScript);
+            
+            // ⭐ NOVO: Script de teste das correções
+            const testCorrecoes = document.createElement('script');
+            testCorrecoes.src = 'test-correcoes-automatico.js';
+            testCorrecoes.defer = true;
+            document.head.appendChild(testCorrecoes);
         }
     </script>
     <!-- Script anterior: <script type="module" src="script-simple-color-preview-visible-target.js"></script> -->

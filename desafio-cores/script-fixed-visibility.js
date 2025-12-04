@@ -293,6 +293,12 @@ function showTargetColorInBackground() {
     
     console.log(`🎯 Exibindo cor alvo no fundo: ${gameState.targetColor}`);
     
+    // ⭐ CORREÇÃO CRÍTICA: Reset preview ANTES de mostrar cor alvo
+    if (gameState.isPreviewActive) {
+        gameState.isPreviewActive = false;
+        gameState.lastPreviewedColor = '';
+    }
+    
     gameState.isShowingTargetColor = true;
     
     try {
@@ -300,6 +306,10 @@ function showTargetColorInBackground() {
         const body = document.body;
         const targetColor = gameState.targetColor;
         const textColor = getTextColorForBackground(targetColor);
+        
+        // ⭐ CORREÇÃO CRÍTICA: Limpar TODOS os estilos anteriores primeiro
+        body.className = '';
+        body.style.cssText = '';
         
         // Aplicar cor de fundo diretamente com prioridade máxima
         body.style.cssText = `
@@ -310,6 +320,12 @@ function showTargetColorInBackground() {
         
         // Adicionar classe especial para indicar que é a cor alvo
         body.classList.add('showing-target-color');
+        
+        // ⭐ FORÇA MÚLTIPLA: Aplicar de várias formas para garantir
+        setTimeout(() => {
+            body.style.backgroundColor = targetColor;
+            body.style.color = textColor;
+        }, 100);
         
         // Força um repaint
         body.offsetHeight;
@@ -322,6 +338,7 @@ function showTargetColorInBackground() {
         try {
             document.body.style.backgroundColor = gameState.targetColor;
             document.body.style.color = getTextColorForBackground(gameState.targetColor);
+            gameState.isShowingTargetColor = true;
         } catch (fallbackError) {
             console.error('❌ Fallback também falhou:', fallbackError);
         }
@@ -368,8 +385,9 @@ function hideTargetColorFromBackground() {
 
 // Função principal otimizada para aplicar preview da cor (durante digitação)
 function applyColorPreview(colorName) {
-    // NÃO aplicar preview se estiver mostrando a cor alvo
+    // ⭐ CORREÇÃO CRÍTICA: NÃO aplicar preview se estiver mostrando a cor alvo
     if (gameState.isShowingTargetColor) {
+        console.log('⚠️ Bloqueando preview - cor alvo sendo exibida');
         return;
     }
     
@@ -430,8 +448,9 @@ function applyColorPreview(colorName) {
 function resetBackgroundPreview() {
     if (!gameState.isPreviewActive) return;
     
-    // NÃO resetar se estiver mostrando a cor alvo
+    // ⭐ CORREÇÃO CRÍTICA: NÃO resetar se estiver mostrando a cor alvo
     if (gameState.isShowingTargetColor) {
+        console.log('⚠️ Bloqueando reset do preview - cor alvo sendo exibida');
         return;
     }
     
@@ -1276,6 +1295,9 @@ document.addEventListener('DOMContentLoaded', function() {
         elements.difficultySelect.addEventListener('change', (e) => {
             console.log('🎚️ Nível alterado para:', e.target.value);
             gameState.currentLevel = e.target.value;
+            // ⭐ CORREÇÃO CRÍTICA: Reset da pontuação ao mudar nível
+            gameState.score = 0;
+            console.log('💰 Pontuação resetada para 0 ao mudar nível');
             gameState.hasShownLevel3Congratulations = false; // ⭐ Reset congratulações para novo nível
             hideTargetColorFromBackground(); // Limpar cor atual
             startNewGame();
