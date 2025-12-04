@@ -511,26 +511,44 @@ function getRandomColor(colorArray) {
 function startNewGame() {
     console.log('🎮 Iniciando novo jogo...');
     
-    // Gerar nova cor e configurar estado
+    // ⭐ CORREÇÃO CRÍTICA: Reset completo de TODAS as variáveis necessárias
     gameState.targetColor = generateNewColor();
-    gameState.attemptsLeft = GAME_CONFIG.ATTEMPTS_PER_GAME;
+    gameState.attemptsLeft = GAME_CONFIG.ATTEMPTS_PER_GAME; // Garante que sempre volta para 3
     gameState.isGameActive = false; // Inicialmente inativo para mostrar a cor
     gameState.gamePhase = 'pre-game';
+    
+    // ⭐ CRÍTICO: Resetar flags de controle para garantir funcionamento correto
+    gameState.isShowingTargetColor = false;
+    gameState.isPreviewActive = false;
+    gameState.lastPreviewedColor = '';
     
     // Adicionar cor atual à lista de usadas, mas manter histórico se existir
     if (!gameState.usedColors.includes(gameState.targetColor)) {
         gameState.usedColors.push(gameState.targetColor);
     }
     
-    // Reset visual e preview
+    // ⭐ CORREÇÃO CRÍTICA: Reset visual e preview COMPLETO
     resetBackgroundPreview();
+    hideTargetColorFromBackground(); // Garante que qualquer cor anterior seja removida
     document.body.className = '';
+    
+    // ⭐ CORREÇÃO CRÍTICA: Reset da interface garantindo estado inicial correto
     elements.colorInput.value = '';
     elements.colorInput.disabled = true; // Desabilitar input durante preview
+    elements.colorInput.classList.remove('preview-active', 'background-match'); // Reset classes CSS
     elements.guessBtn.style.display = 'none'; // Ocultar botão durante preview
     elements.restartBtn.style.display = 'none';
     if (elements.nextLevelBtn) elements.nextLevelBtn.style.display = 'none';
-    if (elements.hintArea) elements.hintArea.style.display = 'none';
+    if (elements.hintArea) {
+        elements.hintArea.style.display = 'none';
+        if (elements.hintMessage) elements.hintMessage.textContent = '';
+    }
+    
+    // ⭐ CRÍTICO: Garantir que o feedback é limpo antes de mostrar novo
+    if (elements.feedbackArea) {
+        elements.feedbackArea.className = 'feedback-area';
+        if (elements.feedbackMessage) elements.feedbackMessage.textContent = '';
+    }
     
     // ⭐ NOVA FUNCIONALIDADE: Mostrar a cor sorteada no fundo por alguns segundos
     showFeedback('🎯 Uma nova cor foi sorteada! Observe o fundo e memorize a cor...', 'info');
@@ -540,20 +558,31 @@ function startNewGame() {
     console.log(`🎨 Mostrando cor alvo por ${GAME_CONFIG.TARGET_COLOR_DISPLAY_TIME}ms: ${gameState.targetColor}`);
     
     setTimeout(() => {
-        // Verificar se o jogo ainda está no estado correto (não foi interrompido)
-        if (gameState.gamePhase === 'pre-game') {
+        // ⭐ CRÍTICO: Verificar se o jogo ainda está no estado correto (não foi interrompido)
+        if (gameState.gamePhase === 'pre-game' && gameState.targetColor) {
             // Após mostrar a cor, ocultar e permitir que o jogo comece
             console.log('⏰ Timeout executado - ocultando cor e iniciando jogo');
             hideTargetColorFromBackground();
+            
+            // ⭐ CORREÇÃO CRÍTICA: Reset completo do estado para garantir jogo limpo
             gameState.isGameActive = true;
             gameState.gamePhase = 'playing';
+            gameState.attemptsLeft = GAME_CONFIG.ATTEMPTS_PER_GAME; // Garantia extra
+            
+            // ⭐ CRÍTICO: Garantir interface completamente resetada
             elements.colorInput.disabled = false;
+            elements.colorInput.value = '';
+            elements.colorInput.classList.remove('preview-active', 'background-match');
             elements.guessBtn.style.display = 'inline-flex';
+            
+            // ⭐ Forçar atualização da UI para garantir que valores são exibidos corretamente
+            updateUI();
             
             showFeedback('🎨 Agora adivinhe! Digite o nome da cor e use o preview para ajudar.', 'info');
             elements.colorInput.focus();
             
             console.log('✅ Jogo ativo - jogador pode adivinhar');
+            console.log('🔢 Estado das tentativas após reset:', gameState.attemptsLeft);
         }
     }, GAME_CONFIG.TARGET_COLOR_DISPLAY_TIME);
     
@@ -574,14 +603,30 @@ function showFeedback(message, type) {
 
 // Atualizar interface
 function updateUI() {
+    console.log('🔄 Atualizando UI com estado atual:', {
+        attempts: gameState.attemptsLeft,
+        score: gameState.score,
+        active: gameState.isGameActive,
+        phase: gameState.gamePhase
+    });
+    
     if (elements.attemptsCount) {
         elements.attemptsCount.textContent = gameState.attemptsLeft;
-        // Forçar repaint
+        // ⭐ CRÍTICO: Forçar repaint para garantir atualização visual
         elements.attemptsCount.style.display = 'none';
         elements.attemptsCount.offsetHeight; // trigger reflow
         elements.attemptsCount.style.display = '';
+        
+        // Reset cor se não for erro (0 tentativas)
+        if (gameState.attemptsLeft > 0) {
+            elements.attemptsCount.style.color = '';
+        }
     }
-    if (elements.scoreCount) elements.scoreCount.textContent = gameState.score;
+    if (elements.scoreCount) {
+        elements.scoreCount.textContent = gameState.score;
+        // Forçar repaint
+        elements.scoreCount.offsetHeight;
+    }
     if (elements.levelProgress) {
         // ⭐ CORREÇÃO: Sempre mostrar máximo 3 no contador de acertos do nível
         const currentProgress = Math.min(gameState.levelProgress[gameState.currentLevel], 3);
@@ -589,18 +634,35 @@ function updateUI() {
     }
     
     // Estatísticas
-    if (elements.totalGames) elements.totalGames.textContent = gameState.totalGames;
-    if (elements.totalWins) elements.totalWins.textContent = gameState.totalWins;
+    if (elements.totalGames) {
+        elements.totalGames.textContent = gameState.totalGames;
+        elements.totalGames.offsetHeight; // Forçar repaint
+    }
+    if (elements.totalWins) {
+        elements.totalWins.textContent = gameState.totalWins;
+        elements.totalWins.offsetHeight; // Forçar repaint
+    }
     if (elements.winRate) {
         const rate = gameState.totalGames > 0 ? Math.round((gameState.totalWins / gameState.totalGames) * 100) : 0;
         elements.winRate.textContent = `${rate}%`;
     }
-    if (elements.highScore) elements.highScore.textContent = gameState.highScore;
+    if (elements.highScore) {
+        elements.highScore.textContent = gameState.highScore;
+        elements.highScore.offsetHeight; // Forçar repaint
+    }
+    
+    console.log('✅ UI atualizada com sucesso');
 }
 
 // Processar palpite
 function handleGuess() {
     console.log('🎯 Processando palpite...');
+    console.log('📊 Estado atual antes do palpite:', {
+        attempts: gameState.attemptsLeft,
+        active: gameState.isGameActive,
+        phase: gameState.gamePhase,
+        target: gameState.targetColor
+    });
     
     if (!gameState.isGameActive || gameState.gamePhase !== 'playing') {
         console.log('❌ Jogo não está ativo ou não está na fase de jogar');
@@ -617,8 +679,9 @@ function handleGuess() {
         return;
     }
     
+    // ⭐ CRÍTICO: Decrementar tentativas ANTES de verificar resultado
     gameState.attemptsLeft--;
-    console.log('🔢 Tentativas restantes:', gameState.attemptsLeft);
+    console.log('🔢 Tentativas restantes após decremento:', gameState.attemptsLeft);
     
     const isCorrect = guess === gameState.targetColor.toLowerCase();
     console.log('🎯 Palpite correto?', isCorrect);
@@ -631,9 +694,14 @@ function handleGuess() {
         handleIncorrectGuess(guess);
     }
     
-    // Garantir que a UI seja atualizada após mudanças no estado
+    // ⭐ CRÍTICO: Garantir que a UI seja atualizada após mudanças no estado
     setTimeout(() => {
         console.log('🔄 Atualizando UI após palpite...');
+        console.log('📊 Estado final após palpite:', {
+            attempts: gameState.attemptsLeft,
+            active: gameState.isGameActive,
+            phase: gameState.gamePhase
+        });
         updateUI();
     }, 50);
 }
@@ -785,6 +853,9 @@ function handleIncorrectGuess(guess) {
         gameState.gamePhase = 'post-game';
         gameState.totalGames++;
         
+        // ⭐ CRÍTICO: Garantir que tentativas seja 0 na UI
+        gameState.attemptsLeft = 0;
+        
         // Mostrar a cor sorteada no fundo (sem mostrar nome)
         showTargetColorInBackground();
         
@@ -793,21 +864,50 @@ function handleIncorrectGuess(guess) {
             'error'
         );
         
-        // Atualizar UI imediatamente
+        // ⭐ CORREÇÃO CRÍTICA: Atualizar UI imediatamente para mostrar 0 tentativas
         if (elements.attemptsCount) {
-            elements.attemptsCount.textContent = gameState.attemptsLeft;
+            elements.attemptsCount.textContent = '0';
+            // Forçar repaint
+            elements.attemptsCount.style.color = '#ef4444'; // Vermelho para indicar fim
+            elements.attemptsCount.offsetHeight; // trigger reflow
         }
         
         elements.guessBtn.style.display = 'none';
         elements.restartBtn.style.display = 'none'; // Ocultar botão pois será automático
         elements.colorInput.disabled = true;
+        elements.colorInput.value = '';
+        elements.colorInput.classList.remove('preview-active', 'background-match');
+        
+        // ⭐ CRÍTICO: Garantir que o feedback area mostre o erro
+        if (elements.feedbackArea) {
+            elements.feedbackArea.className = 'feedback-area error';
+        }
         
         saveToStorage();
         
         // ⭐ NOVA FUNCIONALIDADE: Reiniciar automaticamente após 3 segundos
         setTimeout(() => {
             console.log('🔄 Reiniciando jogo automaticamente após 3 tentativas falhadas...');
+            console.log('📊 Estado antes do reset automático:', {
+                attempts: gameState.attemptsLeft,
+                active: gameState.isGameActive,
+                phase: gameState.gamePhase
+            });
+            
             hideTargetColorFromBackground();
+            
+            // ⭐ CRÍTICO: Garantir reset completo antes de chamar startNewGame
+            gameState.attemptsLeft = GAME_CONFIG.ATTEMPTS_PER_GAME;
+            gameState.isGameActive = false;
+            gameState.gamePhase = 'pre-game';
+            gameState.isShowingTargetColor = false;
+            gameState.isPreviewActive = false;
+            gameState.lastPreviewedColor = '';
+            
+            if (elements.attemptsCount) {
+                elements.attemptsCount.style.color = ''; // Reset cor para padrão
+            }
+            
             startNewGame();
         }, 3000);
     }
@@ -972,7 +1072,33 @@ document.addEventListener('DOMContentLoaded', function() {
     if (elements.restartBtn) {
         elements.restartBtn.addEventListener('click', () => {
             console.log('🔄 Botão jogar novamente clicado');
+            console.log('📊 Estado antes do reset manual:', {
+                attempts: gameState.attemptsLeft,
+                active: gameState.isGameActive,
+                phase: gameState.gamePhase,
+                score: gameState.score
+            });
+            
+            // ⭐ CORREÇÃO CRÍTICA: Reset completo antes de iniciar novo jogo
             hideTargetColorFromBackground(); // Limpar cor atual
+            resetBackgroundPreview(); // Limpar preview
+            
+            // ⭐ CRÍTICO: Reset manual de todas as variáveis importantes
+            gameState.attemptsLeft = GAME_CONFIG.ATTEMPTS_PER_GAME;
+            gameState.isGameActive = false;
+            gameState.gamePhase = 'pre-game';
+            gameState.isShowingTargetColor = false;
+            gameState.isPreviewActive = false;
+            gameState.lastPreviewedColor = '';
+            
+            // ⭐ Reset visual da UI
+            if (elements.attemptsCount) {
+                elements.attemptsCount.style.color = ''; // Reset cor para padrão
+            }
+            elements.colorInput.value = '';
+            elements.colorInput.classList.remove('preview-active', 'background-match');
+            
+            console.log('✅ Reset manual concluído, iniciando novo jogo...');
             startNewGame();
         });
     }
