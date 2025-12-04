@@ -1,20 +1,23 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import path from 'path';
-import fs from 'fs';
+import { fileURLToPath, URL } from 'node:url';
 
-export default defineConfig({
-  plugins: [react()],
-  resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-      // 🌐 Aliases universais - independentes de qualquer plataforma
-      'components': path.resolve(__dirname, './src/components'),
-      'styles': path.resolve(__dirname, './src/styles'),
-      'utils': path.resolve(__dirname, './src/utils'),
+export default defineConfig(({ command, mode }) => {
+  const isGithubPages = process.env.GITHUB_PAGES === 'true';
+  
+  return {
+    plugins: [react()],
+    resolve: {
+      extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+      alias: {
+        '@': fileURLToPath(new URL('./src', import.meta.url)),
+        // 🌐 Aliases universais - independentes de qualquer plataforma
+        'components': fileURLToPath(new URL('./src/components', import.meta.url)),
+        'styles': fileURLToPath(new URL('./src/styles', import.meta.url)),
+        'utils': fileURLToPath(new URL('./src/utils', import.meta.url)),
+      },
     },
-  },
   build: {
     target: 'esnext',
     outDir: 'dist',
@@ -26,17 +29,17 @@ export default defineConfig({
     // Otimizações para Vercel - apenas arquivos principais por segurança
     rollupOptions: {
       input: {
-        main: path.resolve(__dirname, 'index.html'),
-        galeria: path.resolve(__dirname, 'galeria-lego-naves.html'),
-        lab: path.resolve(__dirname, 'lab-fundamentos-css.html'),
-        javascript: path.resolve(__dirname, 'javascript-fundamentals.html'),
-        matematica: path.resolve(__dirname, 'matematica-operadores.html'),
-        tipografia: path.resolve(__dirname, 'tipografia.html'),
-        posicionamento: path.resolve(__dirname, 'posicionamento.html'),
-        boxmodel: path.resolve(__dirname, 'boxmodel.html'),
-        flexbox: path.resolve(__dirname, 'flexbox.html'),
-        responsivo: path.resolve(__dirname, 'responsivo.html'),
-        'desafio-cores': path.resolve(__dirname, 'desafio-cores/index.html')
+        main: fileURLToPath(new URL('./index.html', import.meta.url)),
+        galeria: fileURLToPath(new URL('./galeria-lego-naves.html', import.meta.url)),
+        lab: fileURLToPath(new URL('./lab-fundamentos-css.html', import.meta.url)),
+        javascript: fileURLToPath(new URL('./javascript-fundamentals.html', import.meta.url)),
+        matematica: fileURLToPath(new URL('./matematica-operadores.html', import.meta.url)),
+        tipografia: fileURLToPath(new URL('./tipografia.html', import.meta.url)),
+        posicionamento: fileURLToPath(new URL('./posicionamento.html', import.meta.url)),
+        boxmodel: fileURLToPath(new URL('./boxmodel.html', import.meta.url)),
+        flexbox: fileURLToPath(new URL('./flexbox.html', import.meta.url)),
+        responsivo: fileURLToPath(new URL('./responsivo.html', import.meta.url)),
+        'desafio-cores': fileURLToPath(new URL('./desafio-cores/index.html', import.meta.url))
       },
       output: {
         manualChunks: {
@@ -62,7 +65,7 @@ export default defineConfig({
     port: 4173
   },
   // 🚀 Configuração de base path inteligente
-  base: process.env.GITHUB_PAGES === 'true' ? '/DesenvolvimentoWeb-2025-2/' : '/',
+  base: isGithubPages ? '/DesenvolvimentoWeb-2025-2/' : '/',
   // 🔧 Otimizações específicas para Windows + Google
   define: {
     __PORTFOLIO_VERSION__: JSON.stringify('1.0.0'),
@@ -73,4 +76,5 @@ export default defineConfig({
     include: ['react', 'react-dom', 'lucide-react', 'clsx', 'tailwind-merge'],
     exclude: []
   }
+  };
 });
