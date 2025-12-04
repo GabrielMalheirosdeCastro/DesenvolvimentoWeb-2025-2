@@ -76,6 +76,139 @@ let gameState = {
 // Elementos DOM
 let elements = {};
 
+// ⭐ NOVA FUNÇÃO: Reset completo de todas as pontuações e progresso
+function resetAllGameData() {
+    console.log('🔄 Executando reset completo de todas as pontuações...');
+    
+    const shouldReset = confirm(
+        '⚠️ ATENÇÃO: Esta ação irá ZERAR TUDO!\n\n' +
+        '• Todas as pontuações serão zeradas\n' +
+        '• Todo o progresso será perdido\n' +
+        '• Todas as estatísticas serão resetadas\n' +
+        '• O jogo voltará ao estado inicial\n\n' +
+        '🔄 Tem certeza que deseja continuar?'
+    );
+    
+    if (!shouldReset) {
+        console.log('❌ Reset cancelado pelo usuário');
+        return;
+    }
+    
+    // Reset COMPLETO de TODOS os dados
+    gameState = {
+        currentLevel: 'easy',
+        targetColor: '',
+        attemptsLeft: GAME_CONFIG.ATTEMPTS_PER_GAME,
+        score: 0, // ⭐ CRÍTICO: Zerar pontuação atual
+        usedColors: [],
+        levelProgress: { easy: 0, medium: 0, hard: 0 }, // ⭐ Reset progresso dos níveis
+        unlockedLevels: ['easy'], // ⭐ Reset níveis desbloqueados
+        isGameActive: false,
+        totalGames: 0, // ⭐ CRÍTICO: Zerar estatísticas
+        totalWins: 0, // ⭐ CRÍTICO: Zerar vitórias
+        highScore: 0, // ⭐ CRÍTICO: Zerar recorde
+        originalBackgroundColor: '',
+        isPreviewActive: false,
+        lastPreviewedColor: '',
+        isShowingTargetColor: false,
+        gamePhase: 'pre-game',
+        hasShownLevel3Congratulations: false
+    };
+    
+    // ⭐ CRÍTICO: Limpar localStorage completamente
+    try {
+        localStorage.removeItem('colorGameData');
+        console.log('✅ Dados salvos removidos do localStorage');
+    } catch (error) {
+        console.warn('⚠️ Erro ao limpar localStorage:', error);
+    }
+    
+    // Reset visual completo
+    hideTargetColorFromBackground();
+    resetBackgroundPreview();
+    document.body.className = '';
+    
+    // Reset seletor de dificuldade
+    if (elements.difficultySelect) {
+        elements.difficultySelect.value = 'easy';
+        // Reset opções de nível para estado bloqueado
+        const options = elements.difficultySelect.querySelectorAll('option');
+        options.forEach(option => {
+            const level = option.value;
+            if (level !== 'easy') {
+                option.disabled = true;
+                option.textContent = option.textContent.includes('Desbloqueie') ? 
+                    option.textContent : 
+                    (level === 'medium' ? 
+                        '🟡 Médio (10 cores) - Desbloqueie acertando 3 no fácil' : 
+                        '🔴 Difícil (10 cores) - Desbloqueie acertando 3 no médio');
+            }
+        });
+    }
+    
+    // Reset completo da interface
+    elements.colorInput.value = '';
+    elements.colorInput.disabled = false;
+    elements.colorInput.classList.remove('preview-active', 'background-match');
+    elements.restartBtn.style.display = 'none';
+    if (elements.nextLevelBtn) elements.nextLevelBtn.style.display = 'none';
+    if (elements.hintArea) {
+        elements.hintArea.style.display = 'none';
+        if (elements.hintMessage) elements.hintMessage.textContent = '';
+    }
+    if (elements.feedbackArea) {
+        elements.feedbackArea.className = 'feedback-area';
+        if (elements.feedbackMessage) elements.feedbackMessage.textContent = '';
+    }
+    
+    // ⭐ CRÍTICO: Forçar atualização da UI para refletir os zeros
+    updateUI();
+    
+    // Feedback visual do reset
+    showFeedback('🔄 Tudo foi zerado! Começando um novo jogo...', 'info');
+    
+    console.log('✅ Reset completo executado com sucesso');
+    console.log('📊 Estado após reset:', {
+        score: gameState.score,
+        totalGames: gameState.totalGames,
+        totalWins: gameState.totalWins,
+        highScore: gameState.highScore,
+        levelProgress: gameState.levelProgress
+    });
+    
+    // Iniciar novo jogo após reset
+    setTimeout(() => {
+        startNewGame();
+    }, 1000);
+}
+
+// ⭐ FUNÇÃO MELHORADA: Reset apenas da pontuação atual (mantendo estatísticas)
+function resetCurrentGameScore() {
+    console.log('🔄 Resetando apenas pontuação atual...');
+    
+    // Reset apenas da pontuação atual e progresso de nível, mantendo estatísticas gerais
+    const preservedStats = {
+        totalGames: gameState.totalGames,
+        totalWins: gameState.totalWins,
+        highScore: gameState.highScore
+    };
+    
+    gameState.score = 0; // ⭐ Zerar apenas pontuação atual
+    gameState.levelProgress[gameState.currentLevel] = 0; // Reset progresso do nível atual
+    gameState.hasShownLevel3Congratulations = false;
+    
+    // Restaurar estatísticas preservadas
+    gameState.totalGames = preservedStats.totalGames;
+    gameState.totalWins = preservedStats.totalWins;
+    gameState.highScore = preservedStats.highScore;
+    
+    // Salvar apenas dados necessários
+    saveToStorage();
+    updateUI();
+    
+    console.log('✅ Pontuação atual resetada, estatísticas preservadas');
+}
+
 // Debug e testes
 let debugMode = false;
 
@@ -467,11 +600,26 @@ function loadFromStorage() {
             gameState.totalGames = data.totalGames || 0;
             gameState.totalWins = data.totalWins || 0;
             gameState.highScore = data.highScore || 0;
-            gameState.score = data.score || 0;
+            // ⭐ CORREÇÃO: Não carregar pontuação da sessão anterior, sempre começar zerado
+            gameState.score = 0; 
             gameState.hasShownLevel3Congratulations = data.hasShownLevel3Congratulations || false;
+            
+            console.log('📁 Dados carregados:', {
+                totalGames: gameState.totalGames,
+                totalWins: gameState.totalWins,
+                highScore: gameState.highScore,
+                scoreAtual: gameState.score
+            });
         }
     } catch (error) {
         console.warn('Erro ao carregar dados salvos:', error);
+        // Reset para estado padrão em caso de erro
+        gameState.score = 0;
+        gameState.totalGames = 0;
+        gameState.totalWins = 0;
+        gameState.highScore = 0;
+        gameState.levelProgress = { easy: 0, medium: 0, hard: 0 };
+        gameState.unlockedLevels = ['easy'];
     }
 }
 
@@ -483,10 +631,15 @@ function saveToStorage() {
         totalGames: gameState.totalGames,
         totalWins: gameState.totalWins,
         highScore: gameState.highScore,
-        score: gameState.score,
+        // ⭐ CORREÇÃO: Não salvar pontuação atual, apenas estatísticas permanentes
+        // score: gameState.score, // Removido para sempre começar zerado
         hasShownLevel3Congratulations: gameState.hasShownLevel3Congratulations
     };
     localStorage.setItem('colorGameData', JSON.stringify(data));
+    
+    if (debugMode) {
+        console.log('💾 Dados salvos (sem pontuação atual):', data);
+    }
 }
 
 // Gerar nova cor
@@ -516,6 +669,9 @@ function startNewGame() {
     gameState.attemptsLeft = GAME_CONFIG.ATTEMPTS_PER_GAME; // Garante que sempre volta para 3
     gameState.isGameActive = false; // Inicialmente inativo para mostrar a cor
     gameState.gamePhase = 'pre-game';
+    
+    // ⭐ IMPORTANTE: NÃO resetar score aqui, pois pode ser uma continuação de jogos
+    // A pontuação só deve ser resetada explicitamente pelo usuário
     
     // ⭐ CRÍTICO: Resetar flags de controle para garantir funcionamento correto
     gameState.isShowingTargetColor = false;
@@ -590,6 +746,7 @@ function startNewGame() {
     
     if (debugMode) {
         console.log(`🎮 Novo jogo iniciado. Cor alvo: ${gameState.targetColor}`);
+        console.log(`💰 Pontuação atual: ${gameState.score}`);
     }
 }
 
@@ -780,11 +937,11 @@ function handleCorrectGuess() {
     saveToStorage();
 }
 
-// ⭐ NOVA FUNÇÃO: Resetar jogo completamente do zero
+// ⭐ FUNÇÃO MELHORADA: Resetar jogo completamente do zero (mantendo estatísticas)
 function resetGameToStart() {
     console.log('🔄 Resetando jogo completamente do zero...');
     
-    // Reset completo do estado do jogo, mas preservar estatísticas
+    // ⭐ CORREÇÃO: Reset do progresso do jogo, mas preservar estatísticas gerais
     const preservedStats = {
         totalGames: gameState.totalGames,
         totalWins: gameState.totalWins,
@@ -792,14 +949,14 @@ function resetGameToStart() {
     };
     
     gameState.currentLevel = 'easy';
-    gameState.score = 0;
+    gameState.score = 0; // ⭐ CRÍTICO: Zerar pontuação atual
     gameState.usedColors = [];
     gameState.isGameActive = false;
     gameState.gamePhase = 'pre-game';
     gameState.levelProgress = { easy: 0, medium: 0, hard: 0 }; // Reset progresso dos níveis
     gameState.hasShownLevel3Congratulations = false; // ⭐ Reset flag de congratulações
     
-    // Restaurar estatísticas gerais
+    // Restaurar estatísticas gerais (não resetar histórico total)
     gameState.totalGames = preservedStats.totalGames;
     gameState.totalWins = preservedStats.totalWins;
     gameState.highScore = preservedStats.highScore;
@@ -820,6 +977,8 @@ function resetGameToStart() {
     
     updateUI();
     saveToStorage();
+    
+    console.log('✅ Reset do jogo concluído, estatísticas preservadas');
     
     // Iniciar novo jogo após um breve delay
     setTimeout(() => {
@@ -1040,6 +1199,7 @@ document.addEventListener('DOMContentLoaded', function() {
         hintMessage: document.getElementById('hint-message'),
         restartBtn: document.getElementById('restart-btn'),
         nextLevelBtn: document.getElementById('next-level-btn'),
+        resetAllBtn: document.getElementById('reset-all-btn'), // ⭐ NOVO ELEMENTO
         homeBtn: document.getElementById('home-btn'),
         totalGames: document.getElementById('total-games'),
         totalWins: document.getElementById('total-wins'),
@@ -1134,9 +1294,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // ⭐ NOVO: Event listener para botão "Zerar Tudo"
+    if (elements.resetAllBtn) {
+        elements.resetAllBtn.addEventListener('click', () => {
+            console.log('🔄 Botão zerar tudo clicado');
+            resetAllGameData(); // Chama a função de reset completo
+        });
+    }
+    
     // Carregar dados salvos e inicializar
     console.log('💾 Carregando dados salvos...');
     loadFromStorage();
+    
+    // ⭐ CORREÇÃO CRÍTICA: Garantir que a pontuação sempre comece em 0 ao carregar página
+    gameState.score = 0;
+    console.log('🔄 Pontuação resetada para 0 ao carregar a página');
+    
     console.log('🎚️ Atualizando seletor de nível...');
     updateLevelSelector();
     console.log('🔄 Atualizando UI...');

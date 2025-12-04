@@ -324,6 +324,15 @@ body {
     color: white;
 }
 
+.btn-danger {
+    background: var(--danger-color);
+    color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+    background: #dc2626;
+}
+
 /* ================================
    ÁREA DE FEEDBACK
    ================================ */
