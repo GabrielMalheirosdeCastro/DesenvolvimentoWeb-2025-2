@@ -463,55 +463,42 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
         {/* Nova Seção: Sou um autista mas faço meu melhor */}
         <AutismSection />
 
-        {/* NOVA SEÇÃO: DESAFIO DAS CORES */}
-        <div className="max-w-5xl mx-auto mt-16">
-          <div className="bg-gradient-to-br from-red-50 via-pink-50 to-purple-50 rounded-3xl p-8 md:p-12 shadow-2xl border-2 border-gradient-to-r from-red-300 to-purple-300 relative overflow-hidden">
-            
-            {/* Elementos decorativos de fundo animados */}
-            <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-              <div className="absolute top-8 left-8 text-6xl opacity-10 transform rotate-12 animate-bounce" style={{ animationDelay: '0s', animationDuration: '3s' }}>🎨</div>
-              <div className="absolute top-12 right-12 text-5xl opacity-10 transform -rotate-12 animate-bounce" style={{ animationDelay: '0.5s', animationDuration: '3s' }}>🌈</div>
-              <div className="absolute bottom-8 left-12 text-4xl opacity-10 animate-bounce" style={{ animationDelay: '1s', animationDuration: '3s' }}>🎯</div>
-              <div className="absolute bottom-12 right-8 text-5xl opacity-10 animate-bounce" style={{ animationDelay: '1.5s', animationDuration: '3s' }}>✨</div>
-            </div>
-            
-            {/* Header da seção de desafio */}
-            <div className="text-center mb-8 relative z-10">
-              <h2 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-red-600 via-pink-600 to-purple-600 bg-clip-text text-transparent mb-6 leading-tight animate-pulse">
-                EU TE DESAFIO A RECONHECER SUAS CORES
+        {/* NOVA SEÇÃO: DESAFIO DAS CORES - Versão compacta */}
+        <div className="max-w-4xl mx-auto mt-12">
+          <div className="bg-gradient-to-br from-red-50 to-purple-50 rounded-xl p-6 shadow-lg border border-red-200">
+            {/* Header da seção de desafio - simplificado */}
+            <div className="text-center mb-6">
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-red-600 to-purple-600 bg-clip-text text-transparent mb-4 leading-tight">
+                Desafio das Cores
               </h2>
-              <p className="text-lg md:text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed mb-6">
-                🔥 <strong>Prove sua expertise em cores!</strong> 🔥<br/>
-                Teste suas habilidades de reconhecimento de cores em um jogo interativo desenvolvido especialmente para este portfólio. 
-                Três níveis de dificuldade aguardam por você - do iniciante ao expert em design!
+              <p className="text-gray-700 max-w-2xl mx-auto leading-relaxed mb-4">
+                🔥 Teste suas habilidades de reconhecimento de cores em um jogo interativo com três níveis de dificuldade!
               </p>
             </div>
 
             {/* Container do botão de desafio com efeitos especiais */}
             <div className="flex justify-center relative z-10">
-              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-xl border-2 border-red-200 hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:rotate-1">
-                <div className="text-center mb-6">
-                  <div className="text-6xl mb-4 animate-bounce" style={{ animationDuration: '2s' }}>🎮</div>
-                  <h3 className="text-2xl font-bold text-red-800 mb-3">
+              <div className="bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-red-200 hover:shadow-xl transition-all duration-300 max-w-2xl w-full">
+                <div className="text-center mb-4">
+                  <div className="text-3xl mb-2">🎮</div>
+                  <h3 className="text-xl font-bold text-red-800 mb-2">
                     Jogo de Adivinhação de Cores
                   </h3>
-                  <p className="text-red-600 mb-4 leading-relaxed">
+                  <p className="text-red-600 mb-4 text-sm leading-relaxed">
                     🌈 <strong>Adivinhe cores com 3 níveis de dificuldade</strong><br/>
-                    💡 Projeto Prático C3 - FAESA 2025-2<br/>
-                    🎯 Teste sua percepção visual e conhecimento de cores<br/>
-                    🏆 <em>Será que você consegue dominar todos os níveis?</em>
+                    🎯 Teste sua percepção visual e conhecimento de cores
                   </p>
                   
-                  {/* Indicadores de dificuldade com animação */}
-                  <div className="flex justify-center gap-3 mb-6">
-                    <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-bold border-2 border-green-300 transform hover:scale-110 transition-all cursor-default">
-                      😊 Fácil • 10 cores básicas
+                  {/* Indicadores de dificuldade com animação - versão compacta */}
+                  <div className="flex justify-center gap-2 mb-4 flex-wrap">
+                    <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium border border-green-300">
+                      😊 Fácil
                     </span>
-                    <span className="px-4 py-2 bg-yellow-100 text-yellow-700 rounded-full text-sm font-bold border-2 border-yellow-300 transform hover:scale-110 transition-all cursor-default">
-                      😐 Médio • 10 cores intermediárias  
+                    <span className="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-medium border border-yellow-300">
+                      😐 Médio
                     </span>
-                    <span className="px-4 py-2 bg-red-100 text-red-700 rounded-full text-sm font-bold border-2 border-red-300 transform hover:scale-110 transition-all cursor-default">
-                      😤 Difícil • 10 cores complexas
+                    <span className="px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs font-medium border border-red-300">
+                      😤 Difícil
                     </span>
                   </div>
                 </div>
@@ -520,19 +507,15 @@ export const InterfaceUniversal: React.FC<InterfaceUniversalProps> = ({
                   href="/desafio-cores/index.html" 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block bg-gradient-to-r from-red-600 via-pink-600 to-purple-600 text-white px-8 py-4 rounded-2xl text-xl font-bold hover:from-red-700 hover:via-pink-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-110 hover:rotate-1 w-full text-center shadow-lg hover:shadow-2xl"
-                  style={{
-                    textShadow: '0 2px 4px rgba(0,0,0,0.3)',
-                    boxShadow: '0 8px 25px rgba(236, 72, 153, 0.4), 0 0 20px rgba(147, 51, 234, 0.3)'
-                  }}
+                  className="inline-block bg-gradient-to-r from-red-600 via-pink-600 to-purple-600 text-white px-6 py-3 rounded-lg text-base font-semibold hover:from-red-700 hover:via-pink-700 hover:to-purple-700 transition-all duration-200 w-full text-center shadow-md hover:shadow-lg hover:scale-105"
                 >
-                  <span className="animate-pulse">🎨</span> ACEITAR O DESAFIO DAS CORES <span className="animate-pulse">🎨</span>
+                  🎨 Aceitar Desafio das Cores 🎨
                 </a>
 
-                {/* Nota adicional motivacional */}
-                <div className="mt-4 text-center">
-                  <p className="text-sm text-gray-600 italic">
-                    ⚡ <strong>Desafio especial:</strong> Criado por um desenvolvedor autista que vê o mundo em cores únicas! ⚡
+                {/* Nota adicional motivacional - versão compacta */}
+                <div className="mt-3 text-center">
+                  <p className="text-xs text-gray-600">
+                    💡 Projeto Prático C3 - FAESA 2025-2
                   </p>
                 </div>
               </div>

@@ -218,7 +218,7 @@ body {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: var(--space-3) !important;
+  gap: var(--space-2) !important;
   
   /* Cores que se adaptam ao tema atual */
   background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-secondary) 50%, var(--brand-accent) 100%) !important;
@@ -233,10 +233,10 @@ body {
     0 4px 6px -2px rgba(59, 130, 246, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
   
-  /* Padding GRANDE para facilitar clique */
-  padding: var(--space-6) var(--space-10) !important;
-  min-height: 64px !important;
-  min-width: 280px !important;
+  /* Padding otimizado para boa usabilidade */
+  padding: var(--space-4) var(--space-6) !important;
+  min-height: 56px !important;
+  min-width: 240px !important;
   
   /* Tipografia SUPER legível */
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif !important;
@@ -257,8 +257,8 @@ body {
   transform: translateZ(0) !important;
   will-change: transform, box-shadow, background !important;
   
-  /* Z-index alto para ficar sempre visível */
-  z-index: 100 !important;
+  /* Z-index moderado para boa visibilidade */
+  z-index: 10 !important;
 }
 
 /* 🔥 Hover que se adapta ao tema */
@@ -1732,42 +1732,42 @@ a:not(.portfolio-link-universal):hover {
   background-color: var(--color-bg-secondary) !important;
 }
 
-/* Container principal da navegação com padding maior */
+/* Container principal da navegação com padding reduzido */
 .fixed-bottom-navigation .nav-container {
   max-width: 1024px;
   margin: 0 auto;
-  padding: 16px 24px;
+  padding: 12px 20px;
 }
 
-/* Grid responsivo dos botões com espaçamento aumentado */
+/* Grid responsivo dos botões com espaçamento reduzido */
 .fixed-bottom-navigation .nav-grid {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 @media (min-width: 768px) {
   .fixed-bottom-navigation .nav-grid {
-    gap: 32px;
+    gap: 24px;
   }
 }
 
-/* Botões individuais da navegação com tamanhos maiores */
+/* Botões individuais da navegação com tamanhos reduzidos */
 .fixed-bottom-navigation .nav-button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   
-  padding: 12px 16px;
-  border-radius: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
   
   font-weight: 600;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.2;
   
-  min-width: 80px;
+  min-width: 70px;
   
   background: transparent;
   color: var(--brand-primary);
@@ -1777,13 +1777,13 @@ a:not(.portfolio-link-universal):hover {
   cursor: pointer;
 }
 
-/* Versão desktop dos botões */
+/* Versão desktop dos botões - mais compacta */
 @media (min-width: 768px) {
   .fixed-bottom-navigation .nav-button {
-    padding: 16px 24px;
-    border-radius: 16px;
-    font-size: 16px;
-    min-width: 100px;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-size: 14px;
+    min-width: 85px;
     gap: 8px;
   }
 }
@@ -1851,13 +1851,28 @@ a:not(.portfolio-link-universal):hover {
 
 /* Ajuste de espaçamento para conteúdo quando navegação está ativa */
 .interface-universal.has-fixed-navigation {
-  padding-bottom: 100px;
+  padding-bottom: 120px;
+}
+
+.interface-universal.has-fixed-navigation .interface-main {
+  margin-bottom: 120px;
 }
 
 @media (min-width: 768px) {
   .interface-universal.has-fixed-navigation {
-    padding-bottom: 120px;
+    padding-bottom: 140px;
   }
+  
+  .interface-universal.has-fixed-navigation .interface-main {
+    margin-bottom: 140px;
+  }
+}
+
+/* Garantir que seções não sobreponham a navegação */
+.interface-universal.has-fixed-navigation .max-w-5xl,
+.interface-universal.has-fixed-navigation .max-w-4xl,
+.interface-universal.has-fixed-navigation .max-w-7xl {
+  margin-bottom: var(--space-16);
 }
 
 /* Animação de entrada */

@@ -62,10 +62,10 @@ export const FixedBottomNavigation: React.FC<FixedBottomNavigationProps> = ({
         className
       )}
     >
-      {/* Container principal com padding responsivo aumentado */}
-      <div className="max-w-screen-lg mx-auto px-6 py-4">
-        {/* Grid responsivo dos botões com espaçamento maior */}
-        <div className="flex justify-center items-center gap-4 md:gap-8">
+      {/* Container principal com padding responsivo reduzido */}
+      <div className="max-w-screen-lg mx-auto px-4 py-3">
+        {/* Grid responsivo dos botões com espaçamento reduzido */}
+        <div className="flex justify-center items-center gap-3 md:gap-6">
           {navigationItems.map((item) => {
             const Icon = item.icon;
             const isActive = currentScreen === item.id;
@@ -75,11 +75,11 @@ export const FixedBottomNavigation: React.FC<FixedBottomNavigationProps> = ({
                 key={item.id}
                 onClick={() => onNavigate(item.id)}
                 className={cn(
-                  // Layout base com espaçamento maior
-                  "flex flex-col items-center gap-2",
-                  "px-4 py-3 md:px-6 md:py-4 rounded-xl",
-                  "transition-all duration-300 font-medium",
-                  "min-w-[80px] md:min-w-[100px]",
+                  // Layout base com espaçamento reduzido
+                  "flex flex-col items-center gap-1",
+                  "px-3 py-2 md:px-4 md:py-3 rounded-lg",
+                  "transition-all duration-200 font-medium",
+                  "min-w-[70px] md:min-w-[85px]",
                   // Estados ativo/inativo
                   isActive
                     ? "bg-brand-primary text-white shadow-lg scale-105"
@@ -94,14 +94,14 @@ export const FixedBottomNavigation: React.FC<FixedBottomNavigationProps> = ({
                 title={`${item.label} - ${item.description}`}
               >
                 <Icon 
-                  size={24} 
+                  size={20} 
                   className={cn(
-                    "transition-transform duration-300",
+                    "transition-transform duration-200",
                     isActive && "drop-shadow-sm"
                   )} 
                 />
-                {/* Um único label responsivo */}
-                <span className="font-semibold leading-tight text-center">
+                {/* Label mais compacto */}
+                <span className="font-medium leading-tight text-center text-xs md:text-sm">
                   {item.label}
                 </span>
               </button>
