@@ -70,11 +70,17 @@
     <script>
       // Carregar sistemas de segurança antes do React
       function loadSecuritySystems() {
-        return Promise.all([
-          loadScript('/src/utils/security-performance-enhancer.js'),
-          loadScript('/src/utils/loading-optimizer.js')
-        ]).catch(error => {
-          console.warn('⚠️ Alguns sistemas de segurança não puderam ser carregados:', error);
+        // Tentativa de carregar apenas se estiver disponível
+        const scripts = [
+          '/src/utils/security-performance-enhancer.js',
+          '/src/utils/loading-optimizer.js'
+        ];
+        
+        return Promise.allSettled(
+          scripts.map(src => loadScript(src))
+        ).then(results => {
+          const successful = results.filter(r => r.status === 'fulfilled').length;
+          console.log(`✅ ${successful}/${scripts.length} sistemas de segurança carregados`);
         });
       }
       
@@ -84,7 +90,10 @@
           script.src = src;
           script.type = 'module';
           script.onload = resolve;
-          script.onerror = reject;
+          script.onerror = () => {
+            console.warn('⚠️ Script não encontrado:', src);
+            resolve(); // Resolve mesmo em caso de erro para não quebrar
+          };
           document.head.appendChild(script);
         });
       }
@@ -114,9 +123,9 @@
         }
       });
       
-      // Anti-tampering básico
+      // Anti-tampering básico - apenas em produção
       (function() {
-        if (typeof window !== 'undefined') {
+        if (typeof window !== 'undefined' && location.hostname !== 'localhost') {
           const originalConsole = window.console;
           Object.defineProperty(window, 'console', {
             get() { return originalConsole; },

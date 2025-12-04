@@ -41,11 +41,11 @@
     },
     {
       "source": "/desafio-cores/index.html",
-      "destination": "/desafio-cores/index.html"
+      "destination": "/desafio-cores.html"
     },
     {
       "source": "/desafio-cores",
-      "destination": "/desafio-cores/index.html"
+      "destination": "/desafio-cores.html"
     },
     {
       "source": "/(.*)",
@@ -57,8 +57,25 @@
       "source": "/(.*)",
       "headers": [
         {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        },
+        {
           "key": "X-Content-Type-Options",
           "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
         }
       ]
     }

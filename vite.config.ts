@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import path from 'path';
+import fs from 'fs';
 
 export default defineConfig({
   plugins: [react()],
@@ -22,7 +23,7 @@ export default defineConfig({
     minify: 'terser',
     // Copia arquivos estáticos para o build
     copyPublicDir: true,
-    // Otimizações para Vercel
+    // Otimizações para Vercel - apenas arquivos principais por segurança
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, 'index.html'),
@@ -35,9 +36,7 @@ export default defineConfig({
         boxmodel: path.resolve(__dirname, 'boxmodel.html'),
         flexbox: path.resolve(__dirname, 'flexbox.html'),
         responsivo: path.resolve(__dirname, 'responsivo.html'),
-        ex010: path.resolve(__dirname, 'ex010/index.html'),
-        'desafio-cores': path.resolve(__dirname, 'desafio-cores/index.html'),
-        'desafio-cores-debug': path.resolve(__dirname, 'desafio-cores/test-debug.html')
+        'desafio-cores': path.resolve(__dirname, 'desafio-cores/index.html')
       },
       output: {
         manualChunks: {
