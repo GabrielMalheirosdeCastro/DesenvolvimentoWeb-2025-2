@@ -69,7 +69,8 @@ let gameState = {
     isPreviewActive: false,
     lastPreviewedColor: '',
     isShowingTargetColor: false, // Flag para controlar quando está mostrando cor alvo
-    gamePhase: 'pre-game' // 'pre-game', 'playing', 'post-game'
+    gamePhase: 'pre-game', // 'pre-game', 'playing', 'post-game'
+    hasShownLevel3Congratulations: false // Flag para controlar se já mostrou parabéns dos 3 acertos
 };
 
 // Elementos DOM
@@ -467,6 +468,7 @@ function loadFromStorage() {
             gameState.totalWins = data.totalWins || 0;
             gameState.highScore = data.highScore || 0;
             gameState.score = data.score || 0;
+            gameState.hasShownLevel3Congratulations = data.hasShownLevel3Congratulations || false;
         }
     } catch (error) {
         console.warn('Erro ao carregar dados salvos:', error);
@@ -481,7 +483,8 @@ function saveToStorage() {
         totalGames: gameState.totalGames,
         totalWins: gameState.totalWins,
         highScore: gameState.highScore,
-        score: gameState.score
+        score: gameState.score,
+        hasShownLevel3Congratulations: gameState.hasShownLevel3Congratulations
     };
     localStorage.setItem('colorGameData', JSON.stringify(data));
 }
@@ -580,8 +583,9 @@ function updateUI() {
     }
     if (elements.scoreCount) elements.scoreCount.textContent = gameState.score;
     if (elements.levelProgress) {
-        elements.levelProgress.textContent = 
-            `${gameState.levelProgress[gameState.currentLevel]}/${GAME_CONFIG.WINS_TO_UNLOCK_NEXT}`;
+        // ⭐ CORREÇÃO: Sempre mostrar máximo 3 no contador de acertos do nível
+        const currentProgress = Math.min(gameState.levelProgress[gameState.currentLevel], 3);
+        elements.levelProgress.textContent = `${currentProgress}/${GAME_CONFIG.WINS_TO_UNLOCK_NEXT}`;
     }
     
     // Estatísticas
@@ -639,7 +643,12 @@ function handleCorrectGuess() {
     gameState.isGameActive = false;
     gameState.gamePhase = 'post-game';
     gameState.totalWins++;
-    gameState.levelProgress[gameState.currentLevel]++;
+    
+    // ⭐ CORREÇÃO: Limitar contador de acertos no nível a máximo 3
+    if (gameState.levelProgress[gameState.currentLevel] < 3) {
+        gameState.levelProgress[gameState.currentLevel]++;
+    }
+    
     gameState.score += GAME_CONFIG.SCORES[gameState.currentLevel];
     gameState.totalGames++;
     
@@ -664,29 +673,36 @@ function handleCorrectGuess() {
     // ⭐ NOVA FUNCIONALIDADE: Verificar se completou 3 acertos seguidos
     const consecutiveWins = gameState.levelProgress[gameState.currentLevel];
     
-    if (consecutiveWins >= 3 && consecutiveWins % 3 === 0) {
-        // Após 3 acertos consecutivos, dar opções ao jogador
-        setTimeout(() => {
-            hideTargetColorFromBackground();
-            const shouldContinue = confirm(
-                `🎉 Parabéns! Você acertou 3 cores seguidas!\n\n` +
-                `🔄 Deseja continuar no mesmo nível?\n` +
-                `✅ OK = Continuar\n` +
-                `❌ Cancelar = Recomeçar do zero`
-            );
+    if (consecutiveWins >= 3) {
+        // ⭐ PRIMEIRA VEZ atingindo 3 acertos - mostrar parabéns e opções
+        if (consecutiveWins === 3 && !gameState.hasShownLevel3Congratulations) {
+            gameState.hasShownLevel3Congratulations = true;
             
-            if (shouldContinue) {
-                // Continuar no mesmo nível
-                console.log('🎮 Jogador escolheu continuar no mesmo nível');
-                startNewGame();
-            } else {
-                // Recomeçar do zero
-                console.log('🔄 Jogador escolheu recomeçar do zero');
-                resetGameToStart();
-            }
-        }, 2000);
-        
-        elements.restartBtn.style.display = 'none'; // Ocultar botão pois será automático
+            setTimeout(() => {
+                hideTargetColorFromBackground();
+                const shouldContinue = confirm(
+                    `🎉 Parabéns! Você acertou 3 cores seguidas!\n\n` +
+                    `🔄 Deseja continuar no mesmo nível?\n` +
+                    `✅ OK = Continuar\n` +
+                    `❌ Cancelar = Recomeçar do zero`
+                );
+                
+                if (shouldContinue) {
+                    // Continuar no mesmo nível
+                    console.log('🎮 Jogador escolheu continuar no mesmo nível');
+                    startNewGame();
+                } else {
+                    // Recomeçar do zero
+                    console.log('🔄 Jogador escolheu recomeçar do zero');
+                    resetGameToStart();
+                }
+            }, 2000);
+            
+            elements.restartBtn.style.display = 'none'; // Ocultar botão pois será automático
+        } else {
+            // ⭐ JÁ ATINGIU 3 - apenas continuar o jogo sem mostrar mensagem especial
+            elements.restartBtn.style.display = 'inline-flex';
+        }
     } else {
         // Acerto normal, mostrar botão de restart
         elements.restartBtn.style.display = 'inline-flex';
@@ -713,6 +729,7 @@ function resetGameToStart() {
     gameState.isGameActive = false;
     gameState.gamePhase = 'pre-game';
     gameState.levelProgress = { easy: 0, medium: 0, hard: 0 }; // Reset progresso dos níveis
+    gameState.hasShownLevel3Congratulations = false; // ⭐ Reset flag de congratulações
     
     // Restaurar estatísticas gerais
     gameState.totalGames = preservedStats.totalGames;
@@ -973,6 +990,7 @@ document.addEventListener('DOMContentLoaded', function() {
         elements.difficultySelect.addEventListener('change', (e) => {
             console.log('🎚️ Nível alterado para:', e.target.value);
             gameState.currentLevel = e.target.value;
+            gameState.hasShownLevel3Congratulations = false; // ⭐ Reset congratulações para novo nível
             hideTargetColorFromBackground(); // Limpar cor atual
             startNewGame();
         });
