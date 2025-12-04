@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧪 TESTE: Correções de Reset - Jogo de Adivinhação de Cores</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .test-indicator {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #1e293b;
+            color: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 12px;
+            max-width: 300px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .test-status {
+            margin: 5px 0;
+            padding: 3px 6px;
+            border-radius: 3px;
+        }
+        .status-running { background: #fbbf24; color: #1e293b; }
+        .status-pass { background: #10b981; color: white; }
+        .status-fail { background: #ef4444; color: white; }
+        .status-waiting { background: #6b7280; color: white; }
+    </style>
+</head>
+<body>
+    <div class="test-indicator">
+        <strong>🧪 TESTE DE CORREÇÕES</strong><br>
+        <div id="test-status-1" class="test-status status-waiting">Teste 1: Estado Inicial</div>
+        <div id="test-status-2" class="test-status status-waiting">Teste 2: Reinício Automático</div>
+        <div id="test-status-3" class="test-status status-waiting">Teste 3: Botão Restart</div>
+        <div id="test-overall" class="test-status status-waiting">Status Geral: Aguardando</div>
+    </div>
+
+    <!-- Container principal do jogo -->
+    <div class="game-container">
+        <!-- Cabeçalho do jogo -->
+        <header class="game-header">
+            <h1 class="game-title">🧪 TESTE: Jogo de Adivinhação de Cores - Correções de Reset</h1>
+            <p class="game-instructions">
+                <strong>🧪 MODO TESTE:</strong> Este teste verificará se os problemas de reset foram corrigidos:<br>
+                ✅ Reinício automático após 3 tentativas falhadas<br>
+                ✅ Botão "Jogar Novamente"<br>
+                ✅ Reset correto das variáveis (tentativas, pontuação, etc.)<br><br>
+                <em>Acompanhe os testes no console (F12) e no indicador no canto superior direito.</em>
+            </p>
+        </header>
+
+        <!-- Interface principal do jogo -->
+        <main class="game-main">
+            <!-- Área de informações do jogo -->
+            <div class="game-info">
+                <div class="level-selector">
+                    <label for="difficulty-select">Nível de Dificuldade:</label>
+                    <select id="difficulty-select" class="difficulty-select">
+                        <option value="easy">🟢 Fácil (10 cores)</option>
+                        <option value="medium" disabled>🟡 Médio (10 cores) - Desbloqueie acertando 3 no fácil</option>
+                        <option value="hard" disabled>🔴 Difícil (10 cores) - Desbloqueie acertando 3 no médio</option>
+                    </select>
+                </div>
+
+                <div class="game-stats">
+                    <div class="attempts-counter">
+                        <span class="label">Tentativas restantes:</span>
+                        <span id="attempts-count" class="count">3</span>
+                    </div>
+                    
+                    <div class="score-display">
+                        <span class="label">Pontuação:</span>
+                        <span id="score-count" class="count">0</span>
+                    </div>
+
+                    <div class="level-progress">
+                        <span class="label">Acertos no nível:</span>
+                        <span id="level-progress" class="count">0/3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Área de entrada do jogador -->
+            <div class="game-input">
+                <div class="input-group">
+                    <label for="color-guess" class="input-label">🎨 Digite sua cor (o fundo mostra preview!):</label>
+                    <input 
+                        type="text" 
+                        id="color-guess" 
+                        class="color-input"
+                        placeholder="Ex: red, blue, green... (veja a prévia da cor no fundo!)"
+                        autocomplete="off"
+                        maxlength="30"
+                    >
+                </div>
+                
+                <button id="guess-btn" class="btn btn-primary">
+                    🎯 Adivinhar
+                </button>
+            </div>
+
+            <!-- Área de feedback -->
+            <div id="feedback-area" class="feedback-area">
+                <p id="feedback-message" class="feedback-message">
+                    🧪 Modo teste ativo! Acompanhe o console para detalhes dos testes.
+                </p>
+            </div>
+
+            <!-- Dica inteligente -->
+            <div id="hint-area" class="hint-area" style="display: none;">
+                <p id="hint-message" class="hint-message"></p>
+            </div>
+
+            <!-- Botões de controle -->
+            <div class="game-controls">
+                <button id="restart-btn" class="btn btn-secondary" style="display: none;">
+                    🔄 Jogar Novamente
+                </button>
+                
+                <button id="next-level-btn" class="btn btn-success" style="display: none;">
+                    ⬆️ Próximo Nível
+                </button>
+
+                <button id="home-btn" class="btn btn-outline">
+                    🏠 Voltar ao Início
+                </button>
+
+                <button id="manual-test-btn" class="btn btn-primary" style="margin-top: 10px;">
+                    🧪 Executar Teste Manual
+                </button>
+            </div>
+        </main>
+
+        <!-- Histórico de partidas -->
+        <aside class="game-history">
+            <h3>📊 Estatísticas</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-label">Jogos:</span>
+                    <span id="total-games" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Vitórias:</span>
+                    <span id="total-wins" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Taxa:</span>
+                    <span id="win-rate" class="stat-value">0%</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Recorde:</span>
+                    <span id="high-score" class="stat-value">0</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="script-fixed-visibility.js"></script>
+    <script src="test-reset-fixes.js"></script>
+
+    <script>
+        // Sistema de atualização de status dos testes na UI
+        window.updateTestStatus = function(testId, status, message) {
+            const element = document.getElementById(`test-status-${testId}`);
+            if (element) {
+                element.className = `test-status status-${status}`;
+                element.textContent = message;
+            }
+        };
+
+        window.updateOverallStatus = function(status, message) {
+            const element = document.getElementById('test-overall');
+            if (element) {
+                element.className = `test-status status-${status}`;
+                element.textContent = `Status Geral: ${message}`;
+            }
+        };
+
+        // Botão para executar teste manual
+        document.addEventListener('DOMContentLoaded', function() {
+            const manualTestBtn = document.getElementById('manual-test-btn');
+            if (manualTestBtn) {
+                manualTestBtn.addEventListener('click', function() {
+                    console.log('🧪 Executando teste manual...');
+                    
+                    // Reset status
+                    updateTestStatus(1, 'waiting', 'Teste 1: Estado Inicial');
+                    updateTestStatus(2, 'waiting', 'Teste 2: Reinício Automático');
+                    updateTestStatus(3, 'waiting', 'Teste 3: Botão Restart');
+                    updateOverallStatus('running', 'Executando testes...');
+                    
+                    // Executar testes após breve delay
+                    setTimeout(() => {
+                        // Recarregar o script de teste
+                        const script = document.createElement('script');
+                        script.src = 'test-reset-fixes.js?t=' + Date.now();
+                        document.body.appendChild(script);
+                    }, 1000);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
