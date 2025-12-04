@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Tradução de Cores</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 800px; 
+            margin: 50px auto; 
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+        .color-preview {
+            width: 100px;
+            height: 50px;
+            border: 1px solid #000;
+            display: inline-block;
+            margin: 10px;
+        }
+        input {
+            padding: 8px;
+            margin: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 8px 16px;
+            margin: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .result {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f0f0f0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Teste de Sistema de Tradução de Cores</h1>
+    
+    <div class="test-section">
+        <h2>🎨 Teste de Tradução Português → CSS</h2>
+        <input type="text" id="pt-input" placeholder="Digite uma cor em português (ex: vermelho)" style="width: 300px;">
+        <button onclick="testPortugueseTranslation()">Testar Tradução</button>
+        <div id="pt-result" class="result"></div>
+        <div id="color-preview-pt" class="color-preview"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>📊 Cores Disponíveis por Nível</h2>
+        
+        <h3>🟢 Fácil:</h3>
+        <div id="easy-colors"></div>
+        
+        <h3>🟡 Médio:</h3>
+        <div id="medium-colors"></div>
+        
+        <h3>🔴 Difícil:</h3>
+        <div id="hard-colors"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>⚡ Teste de Validação de Cores</h2>
+        <input type="text" id="validation-input" placeholder="Digite qualquer cor para validar" style="width: 300px;">
+        <button onclick="testValidation()">Validar</button>
+        <div id="validation-result" class="result"></div>
+    </div>
+
+    <!-- Incluir o script do jogo (apenas as funções necessárias) -->
+    <script>
+        // Copiar as definições necessárias do script principal
+        const COLOR_TRANSLATION = {
+            // Nível Fácil (básicas)
+            'vermelho': 'red',
+            'azul': 'blue', 
+            'verde': 'green',
+            'amarelo': 'yellow',
+            'roxo': 'purple',
+            'laranja': 'orange',
+            'rosa': 'pink',
+            'marrom': 'brown',
+            'cinza': 'gray',
+            'branco': 'white',
+            // Nível Médio
+            'marinho': 'navy',
+            'azul-petróleo': 'teal',
+            'coral': 'coral',
+            'carmesim': 'crimson',
+            'anil': 'indigo',
+            'lima': 'lime',
+            'oliva': 'olive',
+            'ciano': 'cyan',
+            'dourado': 'gold',
+            'prateado': 'silver',
+            // Nível Difícil
+            'azul-ardósia-escuro': 'darkslateblue',
+            'coral-claro': 'lightcoral',
+            'verde-mar-médio': 'mediumseagreen',
+            'dourado-escuro': 'darkgoldenrod',
+            'azul-aço-claro': 'lightsteelblue',
+            'rosa-violeta-pálido': 'palevioletred',
+            'orquídea-médio': 'mediumorchid',
+            'verde-oliva-escuro': 'darkolivegreen',
+            'cinza-ardósia-claro': 'lightslategray',
+            'turquesa-médio': 'mediumturquoise'
+        };
+
+        const COLOR_SETS = {
+            easy: ['vermelho', 'azul', 'verde', 'amarelo', 'roxo', 'laranja', 'rosa', 'marrom', 'cinza', 'branco'],
+            medium: ['marinho', 'azul-petróleo', 'coral', 'carmesim', 'anil', 'lima', 'oliva', 'ciano', 'dourado', 'prateado'],
+            hard: ['azul-ardósia-escuro', 'coral-claro', 'verde-mar-médio', 'dourado-escuro', 'azul-aço-claro', 
+                   'rosa-violeta-pálido', 'orquídea-médio', 'verde-oliva-escuro', 'cinza-ardósia-claro', 'turquesa-médio']
+        };
+
+        // Função de tradução
+        function translateColorToCss(portugueseColor) {
+            const normalizedColor = portugueseColor.toLowerCase().trim();
+            return COLOR_TRANSLATION[normalizedColor] || normalizedColor;
+        }
+
+        // Função de validação CSS simples
+        function isValidCSSColor(color) {
+            if (!color || typeof color !== 'string') return false;
+            
+            const lowerColor = color.toLowerCase().trim();
+            
+            // Verifica se é uma cor em português válida
+            if (COLOR_TRANSLATION[lowerColor]) {
+                return true;
+            }
+            
+            // Testa com elemento temporário
+            try {
+                const testElement = document.createElement('div');
+                const cssColor = translateColorToCss(lowerColor);
+                testElement.style.color = cssColor;
+                return testElement.style.color !== '';
+            } catch (error) {
+                return false;
+            }
+        }
+
+        // Função de teste para tradução português
+        function testPortugueseTranslation() {
+            const input = document.getElementById('pt-input').value.trim();
+            const result = document.getElementById('pt-result');
+            const preview = document.getElementById('color-preview-pt');
+            
+            if (!input) {
+                result.innerHTML = '❌ Digite uma cor!';
+                return;
+            }
+            
+            const cssColor = translateColorToCss(input);
+            const isValid = isValidCSSColor(input);
+            
+            result.innerHTML = `
+                <strong>Entrada:</strong> ${input}<br>
+                <strong>CSS:</strong> ${cssColor}<br>
+                <strong>Válida:</strong> ${isValid ? '✅ Sim' : '❌ Não'}<br>
+                <strong>Tradução:</strong> ${COLOR_TRANSLATION[input.toLowerCase()] ? 'Encontrada' : 'Não encontrada'}
+            `;
+            
+            if (isValid) {
+                try {
+                    preview.style.backgroundColor = cssColor;
+                    preview.innerHTML = `<div style="color: white; text-align: center; line-height: 48px; font-size: 12px;">${cssColor}</div>`;
+                } catch (e) {
+                    preview.style.backgroundColor = '';
+                    preview.innerHTML = 'Erro';
+                }
+            } else {
+                preview.style.backgroundColor = '';
+                preview.innerHTML = 'Inválida';
+            }
+        }
+
+        // Função de teste para validação
+        function testValidation() {
+            const input = document.getElementById('validation-input').value.trim();
+            const result = document.getElementById('validation-result');
+            
+            if (!input) {
+                result.innerHTML = '❌ Digite uma cor!';
+                return;
+            }
+            
+            const isValid = isValidCSSColor(input);
+            const cssColor = translateColorToCss(input);
+            
+            result.innerHTML = `
+                <strong>Entrada:</strong> ${input}<br>
+                <strong>Válida:</strong> ${isValid ? '✅ Sim' : '❌ Não'}<br>
+                <strong>CSS Resultante:</strong> ${cssColor}
+            `;
+        }
+
+        // Exibir cores por nível
+        function displayColorsByLevel() {
+            ['easy', 'medium', 'hard'].forEach(level => {
+                const container = document.getElementById(`${level}-colors`);
+                const colors = COLOR_SETS[level];
+                
+                container.innerHTML = colors.map(color => {
+                    const cssColor = translateColorToCss(color);
+                    return `
+                        <span style="
+                            display: inline-block; 
+                            margin: 2px 5px; 
+                            padding: 5px 10px; 
+                            background: ${cssColor}; 
+                            color: ${cssColor === 'white' || cssColor === 'yellow' || cssColor === 'lime' ? 'black' : 'white'}; 
+                            border: 1px solid #ccc; 
+                            border-radius: 4px;
+                            font-size: 12px;
+                        ">
+                            ${color} (${cssColor})
+                        </span>
+                    `;
+                }).join('');
+            });
+        }
+
+        // Permitir teste com Enter
+        document.getElementById('pt-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                testPortugueseTranslation();
+            }
+        });
+
+        document.getElementById('validation-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                testValidation();
+            }
+        });
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            displayColorsByLevel();
+            
+            // Mostrar contagem de cores
+            console.log('🎨 Sistema de Tradução Carregado!');
+            console.log('📊 Total de cores traduzidas:', Object.keys(COLOR_TRANSLATION).length);
+            console.log('🟢 Nível Fácil:', COLOR_SETS.easy.length, 'cores');
+            console.log('🟡 Nível Médio:', COLOR_SETS.medium.length, 'cores');
+            console.log('🔴 Nível Difícil:', COLOR_SETS.hard.length, 'cores');
+        });
+    </script>
+
+    <div style="margin-top: 40px; padding: 20px; background: #e8f4f8; border-radius: 8px;">
+        <h3>📋 Como Usar Este Teste:</h3>
+        <ol>
+            <li><strong>Teste de Tradução:</strong> Digite cores em português como "vermelho", "azul-petróleo", etc.</li>
+            <li><strong>Visualização:</strong> Veja todas as cores disponíveis por nível</li>
+            <li><strong>Validação:</strong> Teste se qualquer cor é reconhecida pelo sistema</li>
+        </ol>
+        <p><strong>Objetivo:</strong> Garantir que o sistema de tradução está funcionando antes de aplicar ao jogo principal.</p>
+    </div>
+</body>
+</html>

@@ -18,38 +18,95 @@ const GAME_CONFIG = {
     TARGET_COLOR_DISPLAY_TIME: 3000 // 3 segundos para mostrar cor antes/depois
 };
 
-// Arrays de cores por nível
+// ⭐ NOVO: Mapeamento Português -> Inglês para tradução
+const COLOR_TRANSLATION = {
+    // Nível Fácil (básicas)
+    'vermelho': 'red',
+    'azul': 'blue', 
+    'verde': 'green',
+    'amarelo': 'yellow',
+    'roxo': 'purple',
+    'laranja': 'orange',
+    'rosa': 'pink',
+    'marrom': 'brown',
+    'cinza': 'gray',
+    'branco': 'white',
+    // Nível Médio
+    'marinho': 'navy',
+    'azul-petróleo': 'teal',
+    'coral': 'coral',
+    'carmesim': 'crimson',
+    'anil': 'indigo',
+    'lima': 'lime',
+    'oliva': 'olive',
+    'ciano': 'cyan',
+    'dourado': 'gold',
+    'prateado': 'silver',
+    // Nível Difícil
+    'azul-ardósia-escuro': 'darkslateblue',
+    'coral-claro': 'lightcoral',
+    'verde-mar-médio': 'mediumseagreen',
+    'dourado-escuro': 'darkgoldenrod',
+    'azul-aço-claro': 'lightsteelblue',
+    'rosa-violeta-pálido': 'palevioletred',
+    'orquídea-médio': 'mediumorchid',
+    'verde-oliva-escuro': 'darkolivegreen',
+    'cinza-ardósia-claro': 'lightslategray',
+    'turquesa-médio': 'mediumturquoise'
+};
+
+// ⭐ NOVO: Mapeamento Inglês -> Português para exibição
+const ENGLISH_TO_PORTUGUESE = {};
+Object.keys(COLOR_TRANSLATION).forEach(pt => {
+    ENGLISH_TO_PORTUGUESE[COLOR_TRANSLATION[pt]] = pt;
+});
+
+// Arrays de cores por nível (AGORA EM PORTUGUÊS)
 const COLOR_SETS = {
-    easy: ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink', 'brown', 'gray', 'white'],
-    medium: ['navy', 'teal', 'coral', 'crimson', 'indigo', 'lime', 'olive', 'cyan', 'gold', 'silver'],
-    hard: ['darkslateblue', 'lightcoral', 'mediumseagreen', 'darkgoldenrod', 'lightsteelblue', 
-           'palevioletred', 'mediumorchid', 'darkolivegreen', 'lightslategray', 'mediumturquoise']
+    easy: ['vermelho', 'azul', 'verde', 'amarelo', 'roxo', 'laranja', 'rosa', 'marrom', 'cinza', 'branco'],
+    medium: ['marinho', 'azul-petróleo', 'coral', 'carmesim', 'anil', 'lima', 'oliva', 'ciano', 'dourado', 'prateado'],
+    hard: ['azul-ardósia-escuro', 'coral-claro', 'verde-mar-médio', 'dourado-escuro', 'azul-aço-claro', 
+           'rosa-violeta-pálido', 'orquídea-médio', 'verde-oliva-escuro', 'cinza-ardósia-claro', 'turquesa-médio']
 };
 
-// Famílias de cores para dicas
+// ⭐ FUNÇÃO AUXILIAR: Traduzir cor português -> inglês para CSS
+function translateColorToCss(portugueseColor) {
+    const normalizedColor = portugueseColor.toLowerCase().trim();
+    return COLOR_TRANSLATION[normalizedColor] || normalizedColor;
+}
+
+// ⭐ FUNÇÃO AUXILIAR: Traduzir cor inglês -> português para exibição
+function translateColorToPortuguese(englishColor) {
+    const normalizedColor = englishColor.toLowerCase().trim();
+    return ENGLISH_TO_PORTUGUESE[normalizedColor] || normalizedColor;
+}
+
+// Famílias de cores para dicas (AGORA EM PORTUGUÊS)
 const COLOR_FAMILIES = {
-    warm: ['red', 'orange', 'yellow', 'pink', 'coral', 'crimson', 'gold'],
-    cool: ['blue', 'green', 'purple', 'navy', 'teal', 'indigo', 'cyan'],
-    neutral: ['brown', 'gray', 'white', 'silver', 'olive']
+    warm: ['vermelho', 'laranja', 'amarelo', 'rosa', 'coral', 'carmesim', 'dourado'],
+    cool: ['azul', 'verde', 'roxo', 'marinho', 'azul-petróleo', 'anil', 'ciano'],
+    neutral: ['marrom', 'cinza', 'branco', 'prateado', 'oliva']
 };
 
-// Lista de cores válidas para CSS (expandida)
+// Lista de cores válidas para CSS (expandida) - AGORA INCLUI PORTUGUÊS
 const VALID_CSS_COLORS = [
-    // Cores básicas
+    // Cores básicas em inglês
     'red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink', 'brown', 'gray', 'grey', 
     'white', 'black', 'cyan', 'magenta', 'lime', 'maroon', 'navy', 'olive', 'teal', 'silver',
-    // Cores médias
+    // Cores médias em inglês
     'aqua', 'fuchsia', 'gold', 'indigo', 'coral', 'crimson', 'violet', 'turquoise', 'salmon',
     'khaki', 'lavender', 'plum', 'orchid', 'tan', 'ivory', 'beige', 'azure', 'snow',
-    // Cores avançadas
+    // Cores avançadas em inglês
     'darkslateblue', 'lightcoral', 'mediumseagreen', 'darkgoldenrod', 'lightsteelblue',
     'palevioletred', 'mediumorchid', 'darkolivegreen', 'lightslategray', 'mediumturquoise',
     'darkred', 'darkblue', 'darkgreen', 'darkgray', 'lightgray', 'lightgreen', 'lightblue',
     'darkviolet', 'lightviolet', 'darkkhaki', 'lightpink', 'darkorange', 'lightyellow',
     'darkmagenta', 'lightcyan', 'darkcyan', 'lightgoldenrodyellow', 'darkseagreen',
-    // Variações comuns
+    // Variações comuns em inglês
     'skyblue', 'forestgreen', 'orangered', 'royalblue', 'mediumpurple', 'springgreen',
-    'deeppink', 'hotpink', 'darkturquoise', 'lightseagreen', 'mediumblue', 'darkslategray'
+    'deeppink', 'hotpink', 'darkturquoise', 'lightseagreen', 'mediumblue', 'darkslategray',
+    // ⭐ CORES EM PORTUGUÊS (traduzidas)
+    ...Object.keys(COLOR_TRANSLATION)
 ];
 
 // Estado global do jogo
@@ -215,7 +272,7 @@ let debugMode = false;
 // Cache para cores validadas (melhora performance)
 const colorValidationCache = new Map();
 
-// Função otimizada para detectar se uma cor é válida no CSS
+// Função otimizada para detectar se uma cor é válida no CSS (AGORA SUPORTA PORTUGUÊS)
 function isValidCSSColor(color) {
     if (!color || typeof color !== 'string') return false;
     
@@ -228,20 +285,26 @@ function isValidCSSColor(color) {
     
     let isValid = false;
     
+    // ⭐ VERIFICA SE É UMA COR EM PORTUGUÊS VÁLIDA
+    if (COLOR_TRANSLATION[lowerColor]) {
+        isValid = true;
+    }
     // Verifica se está na lista de cores válidas conhecidas (mais rápido)
-    if (VALID_CSS_COLORS.includes(lowerColor)) {
+    else if (VALID_CSS_COLORS.includes(lowerColor)) {
         isValid = true;
     } else {
         // Testa com elemento temporário (mais lento, usado como fallback)
+        // ⭐ TRADUZ PARA INGLÊS ANTES DE TESTAR
+        const cssColor = translateColorToCss(lowerColor);
         try {
             const testElement = document.createElement('div');
             const originalColor = testElement.style.color;
-            testElement.style.color = lowerColor;
+            testElement.style.color = cssColor;
             isValid = testElement.style.color !== originalColor;
             
             // Se ainda não foi validado, testa como background
             if (!isValid) {
-                testElement.style.backgroundColor = lowerColor;
+                testElement.style.backgroundColor = cssColor;
                 isValid = testElement.style.backgroundColor !== '';
             }
         } catch (error) {
@@ -253,7 +316,7 @@ function isValidCSSColor(color) {
     colorValidationCache.set(lowerColor, isValid);
     
     if (debugMode && isValid) {
-        console.log(`🎨 Cor validada: ${lowerColor}`);
+        console.log(`🎨 Cor validada: ${lowerColor} ${COLOR_TRANSLATION[lowerColor] ? `(traduzida para: ${COLOR_TRANSLATION[lowerColor]})` : ''}`);
     }
     
     return isValid;
@@ -305,7 +368,9 @@ function showTargetColorInBackground() {
         // Forçar aplicação da cor com !important via estilo inline
         const body = document.body;
         const targetColor = gameState.targetColor;
-        const textColor = getTextColorForBackground(targetColor);
+        // ⭐ TRADUZIR COR PARA CSS ANTES DE APLICAR
+        const cssTargetColor = translateColorToCss(targetColor);
+        const textColor = getTextColorForBackground(cssTargetColor);
         
         // ⭐ CORREÇÃO CRÍTICA: Limpar TODOS os estilos anteriores primeiro
         body.className = '';
@@ -313,7 +378,7 @@ function showTargetColorInBackground() {
         
         // Aplicar cor de fundo diretamente com prioridade máxima
         body.style.cssText = `
-            background-color: ${targetColor} !important;
+            background-color: ${cssTargetColor} !important;
             color: ${textColor} !important;
             transition: all 1s ease !important;
         `;
@@ -323,21 +388,22 @@ function showTargetColorInBackground() {
         
         // ⭐ FORÇA MÚLTIPLA: Aplicar de várias formas para garantir
         setTimeout(() => {
-            body.style.backgroundColor = targetColor;
+            body.style.backgroundColor = cssTargetColor;
             body.style.color = textColor;
         }, 100);
         
         // Força um repaint
         body.offsetHeight;
         
-        console.log(`✅ Cor alvo aplicada ao fundo: ${targetColor} com texto: ${textColor}`);
+        console.log(`✅ Cor alvo aplicada ao fundo: ${targetColor} (CSS: ${cssTargetColor}) com texto: ${textColor}`);
         
     } catch (error) {
         console.error('❌ Erro ao aplicar cor alvo:', error);
         // Fallback mais simples
         try {
-            document.body.style.backgroundColor = gameState.targetColor;
-            document.body.style.color = getTextColorForBackground(gameState.targetColor);
+            const cssTargetColor = translateColorToCss(gameState.targetColor);
+            document.body.style.backgroundColor = cssTargetColor;
+            document.body.style.color = getTextColorForBackground(cssTargetColor);
             gameState.isShowingTargetColor = true;
         } catch (fallbackError) {
             console.error('❌ Fallback também falhou:', fallbackError);
@@ -383,7 +449,7 @@ function hideTargetColorFromBackground() {
     }
 }
 
-// Função principal otimizada para aplicar preview da cor (durante digitação)
+// Função principal otimizada para aplicar preview da cor (durante digitação) - AGORA COM TRADUÇÃO
 function applyColorPreview(colorName) {
     // ⭐ CORREÇÃO CRÍTICA: NÃO aplicar preview se estiver mostrando a cor alvo
     if (gameState.isShowingTargetColor) {
@@ -416,13 +482,16 @@ function applyColorPreview(colorName) {
             gameState.isPreviewActive = true;
         }
         
+        // ⭐ TRADUZ COR PARA CSS (INGLÊS) ANTES DE APLICAR
+        const cssColorName = translateColorToCss(cleanColor);
+        
         // Aplica a nova cor com verificação
         const beforeColor = document.body.style.backgroundColor;
-        document.body.style.backgroundColor = cleanColor;
+        document.body.style.backgroundColor = cssColorName;
         
         // Verifica se a cor foi realmente aplicada
         if (document.body.style.backgroundColor !== beforeColor) {
-            document.body.style.color = getTextColorForBackground(cleanColor);
+            document.body.style.color = getTextColorForBackground(cssColorName);
             
             // Adiciona classe para indicar que o preview está ativo
             document.body.classList.add('color-preview-active');
@@ -430,10 +499,10 @@ function applyColorPreview(colorName) {
             gameState.lastPreviewedColor = cleanColor;
             
             if (debugMode) {
-                console.log(`🎨 Preview aplicado: ${cleanColor}`);
+                console.log(`🎨 Preview aplicado: ${cleanColor} (CSS: ${cssColorName})`);
             }
         } else {
-            throw new Error(`Cor ${cleanColor} não pôde ser aplicada`);
+            throw new Error(`Cor ${cssColorName} não pôde ser aplicada`);
         }
         
     } catch (error) {
@@ -753,7 +822,7 @@ function startNewGame() {
             // ⭐ Forçar atualização da UI para garantir que valores são exibidos corretamente
             updateUI();
             
-            showFeedback('🎨 Agora adivinhe! Digite o nome da cor e use o preview para ajudar.', 'info');
+            showFeedback('🎨 Agora adivinhe! Digite o nome da cor em português e use o preview para ajudar.', 'info');
             elements.colorInput.focus();
             
             console.log('✅ Jogo ativo - jogador pode adivinhar');
@@ -859,6 +928,7 @@ function handleGuess() {
     gameState.attemptsLeft--;
     console.log('🔢 Tentativas restantes após decremento:', gameState.attemptsLeft);
     
+    // ⭐ COMPARAÇÃO AGORA É EM PORTUGUÊS
     const isCorrect = guess === gameState.targetColor.toLowerCase();
     console.log('🎯 Palpite correto?', isCorrect);
     
