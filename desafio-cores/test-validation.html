@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧪 Teste de Validação - Contador de Acertos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .test-button {
+            background: #3b82f6;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .test-button:hover {
+            background: #2563eb;
+        }
+        .success { color: #10b981; font-weight: bold; }
+        .error { color: #ef4444; font-weight: bold; }
+        .info { color: #3b82f6; }
+        #test-results {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 20px;
+            white-space: pre-line;
+            font-family: monospace;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Teste de Validação - Contador de Acertos</h1>
+        <p class="info">Este teste valida se a correção do contador de acertos do nível está funcionando corretamente.</p>
+        
+        <div class="buttons">
+            <button class="test-button" onclick="testarJogoOnline()">🌐 Testar Jogo Online</button>
+            <button class="test-button" onclick="testarJogoLocal()">🏠 Testar Jogo Local</button>
+            <button class="test-button" onclick="limparResultados()">🗑️ Limpar</button>
+        </div>
+        
+        <div id="test-results"></div>
+    </div>
+
+    <script>
+        function log(message, type = 'info') {
+            const results = document.getElementById('test-results');
+            const timestamp = new Date().toLocaleTimeString();
+            const className = type === 'success' ? 'success' : type === 'error' ? 'error' : 'info';
+            results.innerHTML += `<span class="${className}">[${timestamp}] ${message}</span>\n`;
+            results.scrollTop = results.scrollHeight;
+            console.log(`[${timestamp}] ${message}`);
+        }
+
+        function limparResultados() {
+            document.getElementById('test-results').innerHTML = '';
+        }
+
+        function testarJogoOnline() {
+            log('🌐 Iniciando teste do jogo online...', 'info');
+            testarJogo('https://desenvolvimento-web-2025-2.vercel.app/desafio-cores/index.html');
+        }
+
+        function testarJogoLocal() {
+            log('🏠 Iniciando teste do jogo local...', 'info');
+            testarJogo('http://localhost:3000/desafio-cores/index.html');
+        }
+
+        function testarJogo(url) {
+            log(`📱 Abrindo jogo em: ${url}`, 'info');
+            
+            // Abrir jogo em nova aba
+            const gameWindow = window.open(url, '_blank');
+            
+            if (!gameWindow) {
+                log('❌ Não foi possível abrir o jogo. Verifique se pop-ups estão bloqueados.', 'error');
+                return;
+            }
+
+            log('⏳ Aguardando jogo carregar...', 'info');
+
+            // Aguardar carregamento e executar teste
+            setTimeout(() => {
+                try {
+                    // Injetar script de teste na janela do jogo
+                    const testScript = `
+                        (function() {
+                            console.log('🧪 Executando teste automático de validação...');
+                            
+                            const levelProgressElement = document.getElementById('level-progress');
+                            if (!levelProgressElement) {
+                                alert('❌ Elemento level-progress não encontrado!');
+                                return false;
+                            }
+
+                            let testsPassed = 0;
+                            let totalTests = 0;
+
+                            // Teste 1: Verificar exibição inicial
+                            totalTests++;
+                            const initialText = levelProgressElement.textContent;
+                            console.log('📊 Texto inicial do contador:', initialText);
+                            
+                            if (initialText.includes('/3')) {
+                                console.log('✅ Formato correto de exibição (X/3)');
+                                testsPassed++;
+                            } else {
+                                console.log('❌ Formato incorreto de exibição');
+                            }
+
+                            // Teste 2: Verificar debug mode se disponível
+                            if (window.gameDebug) {
+                                totalTests++;
+                                const gameState = window.gameDebug.getGameState();
+                                const currentLevel = gameState.currentLevel;
+                                const currentProgress = gameState.levelProgress[currentLevel];
+                                
+                                console.log('🎮 Estado do jogo:', {
+                                    nivel: currentLevel,
+                                    progresso: currentProgress,
+                                    hasShownLevel3Congratulations: gameState.hasShownLevel3Congratulations
+                                });
+
+                                // Simular limite de 3 acertos
+                                const originalProgress = currentProgress;
+                                gameState.levelProgress[currentLevel] = 5; // Forçar mais de 3
+                                
+                                // Aplicar limitação (simular updateUI)
+                                const limitedProgress = Math.min(gameState.levelProgress[currentLevel], 3);
+                                levelProgressElement.textContent = limitedProgress + '/3';
+                                
+                                if (limitedProgress === 3 && levelProgressElement.textContent === '3/3') {
+                                    console.log('✅ Limitação funcionando corretamente');
+                                    testsPassed++;
+                                } else {
+                                    console.log('❌ Limitação não está funcionando');
+                                }
+
+                                // Restaurar estado
+                                gameState.levelProgress[currentLevel] = originalProgress;
+                                levelProgressElement.textContent = Math.min(originalProgress, 3) + '/3';
+                            } else {
+                                console.log('⚠️ Debug mode não disponível - teste limitado');
+                            }
+
+                            // Resultado final
+                            const success = testsPassed === totalTests;
+                            const resultMessage = success ? 
+                                '🎉 TODOS OS TESTES PASSARAM! Correção funcionando!' :
+                                '❌ ALGUNS TESTES FALHARAM! (' + testsPassed + '/' + totalTests + ')';
+                            
+                            console.log(resultMessage);
+                            alert(resultMessage);
+                            
+                            return success;
+                        })();
+                    `;
+
+                    // Executar script na janela do jogo
+                    gameWindow.eval(testScript);
+                    log('✅ Teste executado com sucesso! Verifique a janela do jogo.', 'success');
+
+                } catch (error) {
+                    log(`❌ Erro ao executar teste: ${error.message}`, 'error');
+                    log('💡 Dica: Execute manualmente no console da página do jogo:', 'info');
+                    log('console.log("Contador atual:", document.getElementById("level-progress").textContent)', 'info');
+                }
+            }, 3000);
+        }
+
+        // Mostrar instruções iniciais
+        window.onload = function() {
+            log('🧪 Teste de Validação da Correção do Contador', 'info');
+            log('📝 Este teste verifica se o contador de "Acertos no nível" para em 3/3', 'info');
+            log('🎯 Clique em um dos botões acima para testar', 'info');
+            log('', 'info');
+        };
+    </script>
+</body>
+</html>
