@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧪 Teste: Mostrar Nome da Cor após 3 Tentativas</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .test-info {
+            background: #e3f2fd;
+            border: 2px solid #2196f3;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #0d47a1;
+        }
+        .test-controls {
+            background: #f3e5f5;
+            border: 2px solid #9c27b0;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .auto-fail-btn {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Informações do teste -->
+    <div class="test-info">
+        <h2>🧪 Teste: Exibição do Nome da Cor após 3 Tentativas Falhadas</h2>
+        <p><strong>Objetivo:</strong> Verificar se o nome da cor sorteada aparece na mensagem após esgotar as 3 tentativas.</p>
+        
+        <h3>📋 Passos do Teste:</h3>
+        <ol>
+            <li>🎯 Uma nova cor será sorteada e exibida no fundo</li>
+            <li>⚠️ Digite cores DIFERENTES da mostrada para falhar propositalmente</li>
+            <li>🔢 Repita até esgotar as 3 tentativas</li>
+            <li>✅ Verifique se o NOME da cor aparece na mensagem de fim de jogo</li>
+            <li>🔄 O jogo deve reiniciar automaticamente após alguns segundos</li>
+        </ol>
+        
+        <p><strong>🔍 O que observar:</strong> Na mensagem "💀 Fim de jogo! A cor era [NOME_DA_COR]..."</p>
+    </div>
+
+    <!-- Controles automáticos de teste -->
+    <div class="test-controls">
+        <h3>🤖 Testes Automáticos:</h3>
+        <button class="auto-fail-btn" onclick="autoFailThreeTimes()">⚡ Auto-Falhar 3 Vezes</button>
+        <button class="auto-fail-btn" onclick="resetTest()">🔄 Resetar Teste</button>
+        <div id="test-status" style="margin-top: 10px; font-weight: bold;"></div>
+    </div>
+
+    <!-- Container principal do jogo (copiado do index.html) -->
+    <div class="game-container">
+        <header class="game-header">
+            <h1 class="game-title">🎮 Jogo de Adivinhação de Cores - TESTE</h1>
+            <p class="game-instructions">
+                <strong>🧪 MODO TESTE:</strong> Digite cores DIFERENTES da exibida para testar o fim de jogo!<br>
+                Adivinhe a cor sorteada! Você tem <strong>3 tentativas</strong> para acertar.
+            </p>
+        </header>
+
+        <main class="game-main">
+            <div class="game-info">
+                <div class="level-selector">
+                    <label for="difficulty-select">Nível de Dificuldade:</label>
+                    <select id="difficulty-select" class="difficulty-select">
+                        <option value="easy">🟢 Fácil (10 cores)</option>
+                        <option value="medium" disabled>🟡 Médio (10 cores)</option>
+                        <option value="hard" disabled>🔴 Difícil (10 cores)</option>
+                    </select>
+                </div>
+
+                <div class="game-stats">
+                    <div class="attempts-counter">
+                        <span class="label">Tentativas restantes:</span>
+                        <span id="attempts-count" class="count">3</span>
+                    </div>
+                    
+                    <div class="score-display">
+                        <span class="label">Pontuação:</span>
+                        <span id="score-count" class="count">0</span>
+                    </div>
+
+                    <div class="level-progress">
+                        <span class="label">Acertos no nível:</span>
+                        <span id="level-progress" class="count">0/3</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-input">
+                <div class="input-group">
+                    <label for="color-guess" class="input-label">🎨 Digite sua cor:</label>
+                    <input 
+                        type="text" 
+                        id="color-guess" 
+                        class="color-input"
+                        placeholder="Digite uma cor DIFERENTE da exibida para testar!"
+                        autocomplete="off"
+                        maxlength="30"
+                    >
+                </div>
+                
+                <button id="guess-btn" class="btn btn-primary">
+                    🎯 Adivinhar
+                </button>
+            </div>
+
+            <div id="feedback-area" class="feedback-area">
+                <p id="feedback-message" class="feedback-message">
+                    🎨 Teste iniciado! Falhe propositalmente 3 vezes para testar...
+                </p>
+            </div>
+
+            <div id="hint-area" class="hint-area" style="display: none;">
+                <p id="hint-message" class="hint-message"></p>
+            </div>
+
+            <div class="game-controls">
+                <button id="restart-btn" class="btn btn-secondary" style="display: none;">
+                    🔄 Jogar Novamente
+                </button>
+                
+                <button id="home-btn" class="btn btn-outline">
+                    🏠 Voltar ao Jogo Principal
+                </button>
+            </div>
+        </main>
+
+        <aside class="game-history">
+            <h3>📊 Estatísticas de Teste</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-label">Jogos:</span>
+                    <span id="total-games" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Vitórias:</span>
+                    <span id="total-wins" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Taxa:</span>
+                    <span id="win-rate" class="stat-value">0%</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Recorde:</span>
+                    <span id="high-score" class="stat-value">0</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="script-fixed-visibility.js"></script>
+    <script src="test-show-color-name-automatic.js"></script>
+    
+    <script>
+        // Script de teste automático
+        function autoFailThreeTimes() {
+            const statusDiv = document.getElementById('test-status');
+            const colorInput = document.getElementById('color-guess');
+            const guessBtn = document.getElementById('guess-btn');
+            
+            if (!window.gameDebug) {
+                statusDiv.innerHTML = '❌ Jogo não carregado ainda. Aguarde...';
+                return;
+            }
+            
+            const gameState = window.gameDebug.getGameState();
+            if (!gameState.isGameActive) {
+                statusDiv.innerHTML = '⚠️ Aguardando jogo ficar ativo...';
+                setTimeout(autoFailThreeTimes, 1000);
+                return;
+            }
+            
+            statusDiv.innerHTML = '🤖 Executando teste automático...';
+            
+            const wrongColors = ['wrong1', 'wrong2', 'wrong3'];
+            let currentAttempt = 0;
+            
+            function failAttempt() {
+                if (currentAttempt < 3) {
+                    const wrongColor = wrongColors[currentAttempt];
+                    colorInput.value = wrongColor;
+                    
+                    setTimeout(() => {
+                        guessBtn.click();
+                        currentAttempt++;
+                        
+                        if (currentAttempt < 3) {
+                            setTimeout(failAttempt, 1500);
+                        } else {
+                            statusDiv.innerHTML = '✅ Teste concluído! Verifique se o nome da cor aparece na mensagem.';
+                        }
+                    }, 500);
+                }
+            }
+            
+            failAttempt();
+        }
+        
+        function resetTest() {
+            location.reload();
+        }
+        
+        // Modificar o botão home para voltar ao jogo principal
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                const homeBtn = document.getElementById('home-btn');
+                if (homeBtn) {
+                    homeBtn.onclick = function() {
+                        window.location.href = 'index.html';
+                    };
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
