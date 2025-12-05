@@ -1104,11 +1104,11 @@ function handleIncorrectGuess(guess) {
         // ⭐ CRÍTICO: Garantir que tentativas seja 0 na UI
         gameState.attemptsLeft = 0;
         
-        // Mostrar a cor sorteada no fundo (sem mostrar nome)
+        // Mostrar a cor sorteada no fundo e o nome da cor
         showTargetColorInBackground();
         
         showFeedback(
-            `💀 Fim de jogo! Veja a cor sorteada no fundo. O jogo reiniciará automaticamente em alguns segundos...`, 
+            `💀 Fim de jogo! A cor era "${gameState.targetColor}". Veja a cor no fundo. O jogo reiniciará automaticamente em alguns segundos...`, 
             'error'
         );
         
